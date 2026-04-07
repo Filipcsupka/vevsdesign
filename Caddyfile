@@ -1,0 +1,17 @@
+http://localhost {
+    root * /srv
+    file_server
+
+    # SPA fallback
+    try_files {path} /preview.html
+
+    encode gzip
+
+    # Long cache for images folder
+    @images path /images/*
+    header @images Cache-Control "public, max-age=7776000, immutable"
+
+    # Long cache for static assets
+    @static path *.png *.jpg *.jpeg *.gif *.svg *.ico *.webp *.woff *.woff2 *.ttf
+    header @static Cache-Control "public, max-age=2592000, immutable"
+}
