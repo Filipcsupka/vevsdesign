@@ -524,6 +524,16 @@ h2 em{font-style:italic;color:var(--rose)}
   clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
 }
 .btn-submit:hover{background:var(--dark-mid);transform:translateY(-2px);box-shadow:0 24px 50px rgba(30,22,16,0.2)}
+.btn-submit:disabled{opacity:0.62;cursor:wait;transform:none;box-shadow:0 10px 24px rgba(30,22,16,0.1)}
+.form-status{
+  min-height:1.4rem;
+  margin-top:0.9rem;
+  font-size:0.78rem;
+  line-height:1.7;
+  color:var(--ink-m);
+}
+.form-status.success{color:#5d6f4d}
+.form-status.error{color:#9b4d42}
 
 /* ── FOOTER ── */
 footer{
@@ -811,7 +821,7 @@ body.modal-open{overflow:hidden}
         </div>
         <div class="kontakt-item">
           <span class="k-label">Email</span>
-          <span class="k-val"><a href="mailto:veronika.csupkova@gmail.com">veronika.csupkova@gmail.com</a></span>
+          <span class="k-val"><a href="mailto:csupka.filip@gmail.com">csupka.filip@gmail.com</a></span>
         </div>
         <div class="kontakt-item">
           <span class="k-label">Pôsobnosť</span>
@@ -826,7 +836,11 @@ body.modal-open{overflow:hidden}
     <div class="kontakt-form-wrap reveal reveal-d2">
       <p class="sec-label">Formulár</p>
       <h2>Napíšte <em>nám</em></h2>
-      <form id="contact-form" novalidate>
+      <form id="contact-form" action="https://formsubmit.co/csupka.filip@gmail.com" method="POST" data-ajax-endpoint="https://formsubmit.co/ajax/csupka.filip@gmail.com" novalidate>
+        <input type="hidden" name="_subject" value="Nová správa z webu Vevsdesign">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
         <div class="form-row">
           <div class="form-group"><label>Vaše meno</label><input type="text" name="meno" placeholder="Jana &amp; Tomáš" required></div>
           <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="vas@email.sk" required></div>
@@ -846,6 +860,7 @@ body.modal-open{overflow:hidden}
         </div>
         <div class="form-group"><label>Vaša správa</label><textarea name="sprava" placeholder="Opíšte nám svoju predstavu — miesto, počet hostí, téma…"></textarea></div>
         <button type="submit" class="btn-submit">Odoslať správu →</button>
+        <p class="form-status" id="contact-form-status" aria-live="polite"></p>
       </form>
     </div>
   </div>
@@ -1091,6 +1106,54 @@ const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); } });
 }, {threshold:0.1});
 reveals.forEach(el => observer.observe(el));
+
+// ── Contact form ──
+const contactForm = document.getElementById('contact-form');
+const contactFormStatus = document.getElementById('contact-form-status');
+
+if(contactForm){
+  contactForm.addEventListener('submit', async e => {
+    e.preventDefault();
+
+    if(!contactForm.checkValidity()){
+      contactForm.reportValidity();
+      return;
+    }
+
+    const submitButton = contactForm.querySelector('.btn-submit');
+    const formData = new FormData(contactForm);
+
+    if(formData.get('_honey')){
+      contactForm.reset();
+      return;
+    }
+
+    contactFormStatus.className = 'form-status';
+    contactFormStatus.textContent = 'Správu odosielame...';
+    submitButton.disabled = true;
+    submitButton.textContent = 'Odosielame...';
+
+    try{
+      const response = await fetch(contactForm.dataset.ajaxEndpoint, {
+        method:'POST',
+        body:formData,
+        headers:{'Accept':'application/json'}
+      });
+
+      if(!response.ok) throw new Error('Form submission failed');
+
+      contactForm.reset();
+      contactFormStatus.className = 'form-status success';
+      contactFormStatus.textContent = 'Ďakujeme, správa bola odoslaná. Ozveme sa vám čo najskôr.';
+    } catch(error){
+      contactFormStatus.className = 'form-status error';
+      contactFormStatus.textContent = 'Správu sa nepodarilo odoslať. Skúste to prosím znova alebo nám napíšte priamo na email.';
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = 'Odoslať správu →';
+    }
+  });
+}
 
 // ── Package modal ──
 const packageCards = document.querySelectorAll('.balik-card[data-detail]');

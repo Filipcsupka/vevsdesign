@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  static-site:
+    name: Build and smoke test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify required files
+        run: |
+          set -euo pipefail
+
+          test -f preview.html
+          test -f Dockerfile
+          test -f Caddyfile
+          test -f "Feminine Floral wedding studio logo.png"
+          test -f images/gallery/placeholder.png
+
+      - name: Build Docker image
+        run: docker build -t vevsdesign:ci .
+
+      - name: Validate Caddy config
+        run: docker run --rm --entrypoint caddy vevsdesign:ci validate --config /etc/caddy/Caddyfile
+
+      - name: Smoke test served site
+        run: |
+          set -euo pipefail
+
+          cleanup() {
+            status=$?
+            if [ "$status" -ne 0 ]; then
+              docker logs vevsdesign-ci || true
+            fi
+            docker rm -f vevsdesign-ci || true
+            exit "$status"
+          }
+          trap cleanup EXIT
+
+          docker run --rm -d --name vevsdesign-ci -p 8080:80 vevsdesign:ci
+
+          for attempt in $(seq 1 20); do
+            if curl -fsS http://localhost:8080/preview.html -o /tmp/preview.html; then
+              break
+            fi
+
+            if [ "$attempt" -eq 20 ]; then
+              echo "Site did not become ready in time."
+              exit 1
+            fi
+
+            sleep 1
+          done
+
+          grep -F "Vevsdesign" /tmp/preview.html
+          grep -F "contact-form" /tmp/preview.html
+          grep -F "formsubmit.co" /tmp/preview.html
+
+          curl -fsSI "http://localhost:8080/Feminine%20Floral%20wedding%20studio%20logo.png"
+          curl -fsSI http://localhost:8080/images/gallery/placeholder.png
