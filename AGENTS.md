@@ -52,9 +52,12 @@ Ak sa robi len vizualna uprava, preferuj menit priamo `preview.html`, pokial nev
 
 ## Prevadzka a nasadenie
 
-- Produkcne nasadenie je riesene cez `Dockerfile`, `docker-compose.yml`, `nginx.conf` a helper skripty.
-- Domena v dokumentacii: `vevsdesign.sk`
-- SSL je riesene cez Let's Encrypt a Certbot.
+- Produkcny container je buildovany cez `Dockerfile` a servirovany cez `Caddyfile` na porte `8080`.
+- Produkcne nasadenie ide cez GitHub Actions -> GHCR image -> `infra` GitOps repo -> Argo CD.
+- Kubernetes manifesty su v `/Users/filipcsupka/moje/infra/gitops/apps/vevsdesign/`.
+- Domena: `vevsdesign.sk`
+- Ingress je rieseny cez Traefik v k3s/Hetzner clustri.
+- Verejne HTTPS ma byt riesene cez Cloudflare proxy pred Traefikom; origin zacina cez HTTP, bez cert-managera.
 
 ## Pracovne pravidla pre AI
 

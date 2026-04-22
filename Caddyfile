@@ -1,9 +1,13 @@
-http://localhost {
+:8080 {
     root * /srv
-    file_server
+
+    handle /healthz {
+        respond "ok" 200
+    }
 
     # SPA fallback
     try_files {path} /preview.html
+    file_server
 
     encode gzip
 
