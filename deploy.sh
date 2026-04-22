@@ -13,7 +13,7 @@ echo ">>> Uploading files to $SERVER_IP..."
 ssh root@$SERVER_IP "mkdir -p $REMOTE_DIR"
 scp -r \
   preview.html \
-  "Feminine Floral wedding studio logo.png" \
+  logo.png \
   Dockerfile \
   docker-compose.yml \
   nginx.conf \

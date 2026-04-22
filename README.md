@@ -13,7 +13,7 @@ Wedding decoration studio website for Veronika Csupková, Košice.
 ```
 vevsdesign/
 ├── preview.html                          # The website (single page)
-├── Feminine Floral wedding studio logo.png  # Logo
+├── logo.png                                # Logo
 ├── images/
 │   └── gallery/                          # Drop wedding photos here (see Photos section)
 ├── nginx.conf                            # Web server config (HTTP/2, SSL, caching)

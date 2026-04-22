@@ -25,7 +25,7 @@ Ak je nieco v konflikte medzi tymto suborom a starsim obsahom inde v projekte, p
 - Styly su vlozene priamo v `preview.html`.
 - JavaScript sa prakticky nepouziva.
 - Obrazky galerie su v `images/gallery/`.
-- Logo je subor `Feminine Floral wedding studio logo.png`.
+- Logo je subor `logo.png`.
 
 ## Ako projekt lokalne otvorit
 

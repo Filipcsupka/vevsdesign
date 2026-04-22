@@ -36,7 +36,7 @@ jobs:
           test -f preview.html
           test -f Dockerfile
           test -f Caddyfile
-          test -f "Feminine Floral wedding studio logo.png"
+          test -f logo.png
           test -f images/gallery/placeholder.png
 
       - name: Build Docker image
@@ -82,7 +82,7 @@ jobs:
           grep -F "contact-form" /tmp/preview.html
           grep -F "formsubmit.co" /tmp/preview.html
 
-          curl -fsSI "http://localhost:8080/Feminine%20Floral%20wedding%20studio%20logo.png"
+          curl -fsSI http://localhost:8080/logo.png
           curl -fsSI http://localhost:8080/images/gallery/placeholder.png
 
       - name: Log in to GHCR
