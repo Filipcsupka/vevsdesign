@@ -2,10 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "vite-dev",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
-      "port": 5173
+      "name": "serve-out",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "out", "-p", "3000", "--no-clipboard"],
+      "port": 3000
     }
   ]
 }

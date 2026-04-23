@@ -48,13 +48,12 @@ jobs:
         run: |
           set -euo pipefail
 
-          test -f index.html
           test -f package.json
           test -f Dockerfile
-          test -f Caddyfile
+          test -f nginx/nginx.conf
           test -f public/logo.png
           test -f public/images/gallery/placeholder.png
-          test -d dist
+          test -d out
 
       - name: Build Docker image
         uses: docker/build-push-action@v6
@@ -62,9 +61,6 @@ jobs:
           context: .
           load: true
           tags: vevsdesign:ci
-
-      - name: Validate Caddy config
-        run: docker run --rm --entrypoint caddy vevsdesign:ci validate --config /etc/caddy/Caddyfile
 
       - name: Smoke test served site
         run: |
@@ -96,8 +92,8 @@ jobs:
           done
 
           grep -F "Vevsdesign" /tmp/index.html
-          grep -F "contact-form" /tmp/index.html
-          grep -F "formsubmit.co" /tmp/index.html
+          grep -F "id=\"kontakt\"" /tmp/index.html
+          grep -F "Veronika" /tmp/index.html
 
           curl -fsSI http://localhost:8080/logo.png
           curl -fsSI http://localhost:8080/images/gallery/placeholder.png
