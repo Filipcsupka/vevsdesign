@@ -1,18 +1,33 @@
-FROM node:22-alpine AS build
+FROM node:20-alpine AS builder
+
 WORKDIR /app
-COPY package*.json ./
-RUN npm ci
+
+COPY package.json package-lock.json ./
+RUN npm ci --prefer-offline
+
 COPY . .
+
 RUN npm run build
 
-FROM caddy:alpine
+FROM nginx:1.27-alpine AS runner
 
-# The upstream image grants caddy cap_net_bind_service so it can bind low ports.
-# Kubernetes runs this container with no privilege escalation, so remove the
-# file capability and serve on 8080 instead.
-RUN setcap -r /usr/bin/caddy
+RUN rm /etc/nginx/conf.d/default.conf
 
-COPY --from=build /app/dist /srv
-COPY Caddyfile /etc/caddy/Caddyfile
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
+
+COPY --from=builder /app/out /usr/share/nginx/html
+
+RUN addgroup -g 1001 -S appgroup && \
+    adduser  -u 1001 -S appuser -G appgroup && \
+    chown -R appuser:appgroup /var/cache/nginx /var/log/nginx /usr/share/nginx/html && \
+    touch /var/run/nginx.pid && \
+    chown appuser:appgroup /var/run/nginx.pid
+
+USER appuser
 
 EXPOSE 8080
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+  CMD wget -qO- http://localhost:8080/ || exit 1
+
+CMD ["nginx", "-g", "daemon off;"]
