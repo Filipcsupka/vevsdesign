@@ -735,6 +735,8 @@ body.modal-open{overflow:hidden}
   .about-quote-mark{font-size:8rem}
   .baliky-grid{grid-template-columns:1fr}
   .balik-card.featured{transform:none}
+  .btn-pair{width:22rem;max-width:calc(100vw - 3rem);flex-direction:column;align-items:stretch;align-self:center;margin-left:auto;margin-right:auto}
+  .btn-p,.btn-o{width:100%;text-align:center}
   .doplnkove-grid{grid-template-columns:1fr 1fr}
   .doplnkove-item:nth-child(3n){border-right:1px solid rgba(193,166,120,0.1)}
   .doplnkove-item:nth-child(2n){border-right:none}
@@ -760,20 +762,26 @@ body.modal-open{overflow:hidden}
   #hero{
     min-height:100svh;
     justify-content:flex-start;
-    padding:5.2rem max(1rem,env(safe-area-inset-right,0px)) 4rem max(1rem,env(safe-area-inset-left,0px));
+    padding:4.5rem max(1rem,env(safe-area-inset-right,0px)) 3.5rem max(1rem,env(safe-area-inset-left,0px));
   }
-  .hero-logo-img{width:min(240px,66vw)}
-  .hero-logo-wrap{margin:-2.7rem 0 -1.1rem}
+  .hero-logo-img{width:min(210px,58vw)}
+  .hero-logo-wrap{margin:-2.7rem 0 -1.35rem}
+  .hero-logo-wrap,.hero-eyebrow,#hero h1,.hero-sub,.btn-pair{
+    animation:none;
+    opacity:1;
+    left:auto;
+    transform:none;
+  }
   .hero-eyebrow{
     width:100%;gap:0.8rem;font-size:0.54rem;letter-spacing:0.2em;
   }
   .hero-eyebrow::before,.hero-eyebrow::after{width:28px;flex:0 1 28px}
-  h1{font-size:clamp(2.35rem,13vw,3.2rem);max-width:100%}
+  h1{font-size:clamp(2.2rem,12vw,2.95rem);max-width:100%}
   h1 em{display:block}
   h1 .h1-line2{font-size:0.95em}
-  h1{margin-bottom:1.25rem}
-  .hero-sub{font-size:1.06rem;max-width:min(100%,17rem);padding:0 0.25rem;margin-bottom:2rem}
-  .btn-pair{width:100%;max-width:21rem;flex-direction:column;align-items:stretch}
+  h1{margin-bottom:0.95rem}
+  .hero-sub{font-size:1rem;max-width:min(100%,17rem);padding:0 0.25rem;margin-bottom:1.35rem}
+  .btn-pair{width:18.25rem;max-width:calc(100vw - 3rem)}
   .btn-p,.btn-o,.btn-submit{
     width:100%;padding:0.95rem 1.1rem;text-align:center;
     letter-spacing:0.15em;white-space:normal;
@@ -1300,7 +1308,9 @@ onScroll();
 // ── Hero parallax ──
 (function(){
   const hero = document.getElementById('hero');
-  if(!hero || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const compactViewport = window.matchMedia('(max-width: 900px)');
+  if(!hero || reduceMotion.matches || compactViewport.matches) return;
 
   let ticking = false;
   function updateHeroParallax(){
