@@ -1,3 +1,10 @@
+FROM node:22-alpine AS build
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
 FROM caddy:alpine
 
 # The upstream image grants caddy cap_net_bind_service so it can bind low ports.
@@ -5,12 +12,7 @@ FROM caddy:alpine
 # file capability and serve on 8080 instead.
 RUN setcap -r /usr/bin/caddy
 
-# Copy site files
-COPY preview.html /srv/preview.html
-COPY logo.png /srv/logo.png
-COPY images/ /srv/images/
-
-# Copy Caddy config
+COPY --from=build /app/dist /srv
 COPY Caddyfile /etc/caddy/Caddyfile
 
 EXPOSE 8080

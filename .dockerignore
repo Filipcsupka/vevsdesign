@@ -1,3 +1,6 @@
 certs/
 *.md
 .git
+node_modules/
+dist/
+.vite/

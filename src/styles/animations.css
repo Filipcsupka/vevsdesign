@@ -1,0 +1,10 @@
+@keyframes heroFade{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scrollPulse{0%,100%{opacity:0.3;transform:scaleY(0.7)}50%{opacity:1;transform:scaleY(1)}}
+@keyframes glowPulse{0%,100%{opacity:0.6;transform:translate(-50%,-50%) scale(0.95)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.05)}}
+@keyframes circleFloat{
+  0%,100%{opacity:0.56;transform:translate(-50%,-50%) translate3d(0,4px,0) scale(0.985)}
+  50%{opacity:0.9;transform:translate(-50%,-50%) translate3d(0,-7px,0) scale(1.012)}
+}
+@keyframes circleSweep{to{transform:rotate(360deg)}}
+@keyframes circleHalo{0%,100%{opacity:0.35;transform:scale(0.985)}50%{opacity:0.75;transform:scale(1.018)}}
+@keyframes lineFade{0%,100%{opacity:0.3}50%{opacity:1}}
