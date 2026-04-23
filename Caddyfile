@@ -6,7 +6,7 @@
     }
 
     # SPA fallback
-    try_files {path} /preview.html
+    try_files {path} /index.html
     file_server
 
     encode gzip

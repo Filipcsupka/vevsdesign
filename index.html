@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vevsdesign — Svadobná Výzdoba &amp; Dizajn</title>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;1,6..96,300;1,6..96,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Raleway:wght@200;300;400;500&display=swap" rel="stylesheet">
+<script type="module" src="/src/main.js"></script>
+</head>
+<body>
+<canvas id="site-canvas" aria-hidden="true"></canvas>
+
+<nav id="main-nav">
+  <a href="#hero" class="nav-logo">Vevs<em>design</em></a>
+  <ul>
+    <li><a href="#about">O nás</a></li>
+    <li><a href="#baliky">Balíky</a></li>
+    <li><a href="#services">Služby</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-glow hero-glow-1"></div>
+  <div class="hero-glow hero-glow-2"></div>
+  <div class="hero-glow hero-glow-3"></div>
+  <div class="hero-deco-line left"></div>
+  <div class="hero-deco-line right"></div>
+  <div class="hero-deco-circle c1"></div>
+  <div class="hero-deco-circle c2"></div>
+
+  <div class="hero-logo-wrap">
+    <img src="/logo.png" alt="Vevsdesign logo" class="hero-logo-img" width="340" height="auto">
+  </div>
+  <div class="hero-eyebrow">Svadobná výzdoba &amp; dizajn</div>
+  <h1>Váš deň,<br><em>naša vášeň</em><span class="h1-line2">Výzdoba, ktorú si zapamätáte</span></h1>
+  <p class="hero-sub">Tvoríme svadobnú výzdobu s dušou — personalizovanú, elegantnú a plnú detailov.</p>
+  <div class="btn-pair">
+    <a href="#baliky" class="btn-p">Pozrieť balíky</a>
+    <a href="#kontakt" class="btn-o">Kontaktujte nás</a>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- O NÁS -->
+<section id="about">
+  <p class="sec-label reveal">Kto sme</p>
+  <div class="rule reveal reveal-d1"><div class="rule-diamond"></div></div>
+  <div class="about-inner">
+    <div class="about-quote-block reveal reveal-d1">
+      <div class="about-quote-mark">&ldquo;</div>
+      <div class="about-quote-text">Detaily robia svadbu nezabudnuteľnou.</div>
+      <div class="about-quote-by">Vevsdesign · Košice &amp; východné Slovensko</div>
+    </div>
+    <div class="about-text reveal reveal-d2">
+      <h3>Vaša svadba, naša vášeň</h3>
+      <p>Kreativita je našou silnou stránkou a veríme, že práve detaily robia svadbu nezabudnuteľnou. Vašu svadbu nevnímame ako zákazku, ale ako jedinečný príbeh, pri ktorom záleží na každom prvku, každej emócii aj na atmosfére, ktorú spolu vytvárame.</p>
+      <p>Naším cieľom je, aby si hostia aj po rokoch povedali: „Táto svadba bola úžasná." Všetko tvoríme srdcom a s dôrazom na to, aby bol váš deň výnimočný presne tak, ako vy.</p>
+      <div class="about-stats">
+        <div><div class="stat-n">Desiatky+</div><div class="stat-l">Návrhov</div></div>
+        <div><div class="stat-n">3</div><div class="stat-l">Hlavné balíky</div></div>
+        <div><div class="stat-n">Na mieru</div><div class="stat-l">Balíky návrhov</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BALÍKY -->
+<section id="baliky">
+  <p class="sec-label reveal">Čo ponúkame</p>
+  <h2 class="reveal reveal-d1">Naše <em>balíky</em></h2>
+  <div class="rule reveal reveal-d1"><div class="rule-diamond"></div></div>
+  <p class="sec-intro reveal reveal-d2">Vyberte si balík, ktorý vám najlepšie vyhovuje, alebo si ho vyskladajte na mieru.</p>
+  <div class="baliky-grid">
+    <div class="balik-card reveal reveal-d1" role="button" tabindex="0" data-detail="balik-detail-s" data-package="Balík S — 350 €">
+      <div class="balik-num">01</div>
+      <div class="balik-badge">Základný</div>
+      <div class="balik-name">Balík S</div>
+      <div class="balik-price">350 €</div>
+      <div class="balik-divider"></div>
+      <ul class="balik-list">
+        <li>Výzdoba stolov navrhnutá individuálne podľa farieb a témy svadby</li>
+        <li>Menu, čísla stolov, menovky, personalizované servítky</li>
+        <li>Uvítacia tabuľa a zasadací poriadok</li>
+        <li>Informačné karty (sladký bar, kniha hostí, …)</li>
+      </ul>
+      <div class="balik-hint">Kliknite pre detail →</div>
+    </div>
+    <div class="balik-card featured reveal reveal-d2" role="button" tabindex="0" data-detail="balik-detail-m" data-package="Balík M — 500 €">
+      <div class="balik-num">02</div>
+      <div class="balik-badge">Najpopulárnejší</div>
+      <div class="balik-name">Balík M</div>
+      <div class="balik-price">500 €</div>
+      <div class="balik-divider"></div>
+      <ul class="balik-list">
+        <li>Obsahuje Balík S</li>
+        <li>Personalizovaná kniha hostí + perá</li>
+        <li>Harmonogram svadby</li>
+        <li>Rekvizity do fotokútika (tabuľky, okuliare, led tyče, vejáre…)</li>
+        <li>Pripravený detský kútik</li>
+      </ul>
+      <div class="balik-hint">Kliknite pre detail →</div>
+    </div>
+    <div class="balik-card reveal reveal-d3" role="button" tabindex="0" data-detail="balik-detail-l" data-package="Balík L — 650 €">
+      <div class="balik-num">03</div>
+      <div class="balik-badge">Premium</div>
+      <div class="balik-name">Balík L</div>
+      <div class="balik-price">650 €</div>
+      <div class="balik-divider"></div>
+      <ul class="balik-list">
+        <li>Obsahuje Balík S, M</li>
+        <li>Veľký stojan v tvare srdca s kvetinovou výzdobou</li>
+        <li>Veľký stojan v tvare oválu s vlastným bannerom</li>
+        <li>Zrkadlo s menami</li>
+      </ul>
+      <div class="balik-hint">Kliknite pre detail →</div>
+    </div>
+  </div>
+  <p class="baliky-note reveal">Uvedené ceny sú orientačne nastavené pre výzdobu svadby do 8 stolov. Konečná cena sa odvíja od rozsahu vašej výzdoby.</p>
+</section>
+
+<!-- DOPLNKOVÉ SLUŽBY -->
+<section id="services">
+  <div class="services-bg-lines"></div>
+  <div class="services-glow"></div>
+  <p class="sec-label reveal">Rozšírte svadbu</p>
+  <h2 class="reveal reveal-d1">Doplnkové <em>služby</em></h2>
+  <div class="rule reveal reveal-d1"><div class="rule-diamond"></div></div>
+  <p class="sec-intro reveal reveal-d2">Ku každému balíku si môžete pridať ďalšie služby podľa vašich predstáv. Cena závisí od počtu hostí a použitého materiálu.</p>
+  <div class="doplnkove-inner reveal reveal-d2">
+    <div class="doplnkove-title">Doplnkové služby</div>
+    <div class="doplnkove-grid">
+      <div class="doplnkove-item"><span class="doplnkove-dot"></span>Živé kvety od 50 €</div>
+      <div class="doplnkove-item"><span class="doplnkove-dot"></span>Ikebany od 20 €</div>
+      <div class="doplnkove-item"><span class="doplnkove-dot"></span>Pierka od 0,25 €</div>
+      <div class="doplnkove-item"><span class="doplnkove-dot"></span>Svadobné pozvánky od 0,50 €</div>
+      <div class="doplnkove-item"><span class="doplnkove-dot"></span>Výslužkové krabice od 0,30 €</div>
+      <div class="doplnkove-item"><span class="doplnkove-dot"></span>Instax fotoaparát od 20 €</div>
+      <div class="doplnkove-item"><span class="doplnkove-dot"></span>Obrusy od 10 €</div>
+      <div class="doplnkove-item"><span class="doplnkove-dot"></span>Výzdoba obradu od 20 €</div>
+      <div class="doplnkove-item"><span class="doplnkove-dot"></span>Cigar bar od 30 €</div>
+      <div class="doplnkove-item"><span class="doplnkove-dot"></span>Iné (vaša predstava)</div>
+    </div>
+    <p class="price-note">Taktiež vieme zaobstarať candy bar, koláče a tortu.</p>
+  </div>
+</section>
+
+<!-- GALÉRIA -->
+<section id="galeria">
+  <p class="sec-label reveal">Naša práca</p>
+  <h2 class="reveal reveal-d1">Momenty, ktoré sme <em>vytvorili</em></h2>
+  <div class="rule reveal reveal-d1"><div class="rule-diamond"></div></div>
+  <div class="gallery-grid reveal reveal-d2">
+    <div class="gal-item"><img src="/images/gallery/01.webp" alt="Svadobná výzdoba" class="gal-img" loading="lazy" onerror="this.hidden=true"><div class="gal-overlay"></div></div>
+    <div class="gal-item"><img src="/images/gallery/02.webp" alt="Detail výzdoby" class="gal-img" loading="lazy" onerror="this.hidden=true"><div class="gal-overlay"></div></div>
+    <div class="gal-item"><img src="/images/gallery/03.webp" alt="Svadobný stôl" class="gal-img" loading="lazy" onerror="this.hidden=true"><div class="gal-overlay"></div></div>
+    <div class="gal-item"><img src="/images/gallery/04.webp" alt="Srdcový stojan" class="gal-img" loading="lazy" onerror="this.hidden=true"><div class="gal-overlay"></div></div>
+    <div class="gal-item"><img src="/images/gallery/05.webp" alt="Výzdoba obradu" class="gal-img" loading="lazy" onerror="this.hidden=true"><div class="gal-overlay"></div></div>
+    <div class="gal-item"><img src="/images/gallery/06.webp" alt="Kvety &amp; ikebany" class="gal-img" loading="lazy" onerror="this.hidden=true"><div class="gal-overlay"></div></div>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section id="kontakt">
+  <div class="kontakt-wrap">
+    <div class="kontakt-info reveal">
+      <p class="sec-label">Spojte sa s nami</p>
+      <h2>Začnime <em>plánovať</em></h2>
+      <p class="lead">Kontaktujte nás a spoločne vytvoríme váš vysnívaný deň. Odpovedáme do 24 hodín.</p>
+      <div class="kontakt-person-name">Veronika Csupková</div>
+      <div class="kontakt-person-role">Manažérka &amp; Kontaktná osoba</div>
+      <div class="kontakt-details">
+        <div class="kontakt-item">
+          <span class="k-label">Telefón</span>
+          <span class="k-val"><a href="tel:+421910091009">0910 091 009</a></span>
+        </div>
+        <div class="kontakt-item">
+          <span class="k-label">Email</span>
+          <span class="k-val"><a href="mailto:veronika.csupkova@gmail.com">veronika.csupkova@gmail.com</a></span>
+        </div>
+        <div class="kontakt-item">
+          <span class="k-label">Pôsobnosť</span>
+          <span class="k-val">Košice &amp; Východné Slovensko</span>
+        </div>
+        <div class="kontakt-item">
+          <span class="k-label">Instagram</span>
+          <span class="k-val"><a href="https://instagram.com/vevsdesign" target="_blank">@Vevsdesign</a></span>
+        </div>
+      </div>
+    </div>
+    <div class="kontakt-form-wrap reveal reveal-d2">
+      <p class="sec-label">Formulár</p>
+      <h2>Napíšte <em>nám</em></h2>
+      <form id="contact-form" action="https://formsubmit.co/veronika.csupkova@gmail.com" method="POST" data-ajax-endpoint="https://formsubmit.co/ajax/veronika.csupkova@gmail.com" novalidate>
+        <input type="hidden" name="_subject" value="Nová správa z webu Vevsdesign">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+        <div class="form-row">
+          <div class="form-group"><label>Vaše meno</label><input type="text" name="meno" placeholder="Jana &amp; Tomáš" required></div>
+          <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="vas@email.sk" required></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Dátum svadby</label><input type="date" name="datum_svadby"></div>
+          <div class="form-group"><label>Záujem o balík</label>
+            <select name="balik">
+              <option value="">Vyberte balík…</option>
+              <option>Balík S — 350 €</option>
+              <option>Balík M — 500 €</option>
+              <option>Balík L — 650 €</option>
+              <option>Doplnkové služby</option>
+              <option>Individuálne (vyskladať)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group"><label>Vaša správa</label><textarea name="sprava" placeholder="Opíšte nám svoju predstavu — miesto, počet hostí, téma…"></textarea></div>
+        <button type="submit" class="btn-submit">Odoslať správu →</button>
+        <p class="form-status" id="contact-form-status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div class="balik-modal" id="balik-modal" hidden>
+  <div class="balik-modal-backdrop" data-close-modal></div>
+  <div class="balik-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="balik-modal-name">
+    <button type="button" class="balik-modal-close" aria-label="Zavrieť detail balíka" data-close-modal>&times;</button>
+    <div id="balik-modal-content"></div>
+    <div class="balik-modal-actions">
+      <span class="balik-modal-note">Máte inú predstavu? Balík vieme vyskladať aj na mieru.</span>
+      <a href="#kontakt" class="btn-p" id="balik-modal-cta">Mám záujem</a>
+    </div>
+  </div>
+</div>
+
+<!-- DETAIL DATA (skryté) -->
+<div hidden>
+  <div id="balik-detail-s">
+    <div class="balik-modal-badge">Základný</div>
+    <div class="balik-modal-head">
+      <div class="balik-modal-name">Balík S</div>
+      <div class="balik-modal-price">350 €</div>
+    </div>
+    <p class="balik-modal-lead">Jemný základ pre svadbu, kde chcete mať všetko vizuálne zladené a premyslené do detailu už od prvého pohľadu hostí.</p>
+    <div class="balik-modal-body">
+      <div class="balik-modal-section">
+        <h3>Čo balík zahŕňa</h3>
+        <ul class="balik-modal-list">
+          <li>Výzdoba stolov je navrhnutá podľa vašich farieb, štýlu a celkovej témy svadby. Na mieru preto vytvárame menu, čísla stolov, menovky, personalizované servítky aj vtipné fakty o novomanželoch.</li>
+          <li>Stred stola je vyzdobený veľkou vázou, viacerými malými vázami a sviečkami. V cene sú aj umelé kvety, ktoré tvoria ikebanu stola. Živé kvety sú za príplatok.</li>
+          <li>Uvítacia tabuľa a zasadací poriadok sú navrhnuté podľa želania. V cene sú aj dôležité označenia ako informačné karty pre sladký bar, knihu hostí a iné.</li>
+        </ul>
+      </div>
+      <div class="balik-modal-section">
+        <h3>Pre koho je vhodný</h3>
+        <p>Pre páry, ktoré chcú elegantný a zladený svadobný základ bez zbytočností, ale s dôrazom na estetiku a detail.</p>
+      </div>
+    </div>
+  </div>
+  <div id="balik-detail-m">
+    <div class="balik-modal-badge">Najpopulárnejší</div>
+    <div class="balik-modal-head">
+      <div class="balik-modal-name">Balík M</div>
+      <div class="balik-modal-price">500 €</div>
+    </div>
+    <p class="balik-modal-lead">Rozšírený balík pre svadbu, kde chcete okrem výzdoby aj viac osobných prvkov, programu a zábavných detailov pre hostí.</p>
+    <div class="balik-modal-body">
+      <div class="balik-modal-section">
+        <h3>Čo balík zahŕňa</h3>
+        <ul class="balik-modal-list">
+          <li>K Balíku S sa pripájajú ďalšie dôležité prvky, ktoré svadbu obohatia o osobnejší charakter.</li>
+          <li>Personalizovaná kniha hostí s perami vytvára krásny priestor na odkazy a priania od vašich blízkych.</li>
+          <li>Harmonogram svadby je navrhnutý podľa vašich želaní, aby hostia mali lepší prehľad o priebehu dňa.</li>
+          <li>Vlastné rekvizity do fotokútika — tabuľky, papučky, vejáre, svetielkujúce tyče, okuliare s vtipnými hláškami.</li>
+          <li>Pripravený detský kútik so šmýkalkou, autíčkami, bábikmi, hračkami, farbičkami aj omaľovánkami.</li>
+        </ul>
+      </div>
+      <div class="balik-modal-section">
+        <h3>Pre koho je vhodný</h3>
+        <p>Pre páry, ktoré chcú svadbu obohatiť o ďalšie premyslené prvky a vytvoriť príjemnú atmosféru nielen vizuálne, ale aj prakticky pre hostí.</p>
+      </div>
+    </div>
+  </div>
+  <div id="balik-detail-l">
+    <div class="balik-modal-badge">Premium</div>
+    <div class="balik-modal-head">
+      <div class="balik-modal-name">Balík L</div>
+      <div class="balik-modal-price">650 €</div>
+    </div>
+    <p class="balik-modal-lead">Výraznejší balík pre svadbu, kde chcete dominantné dekorácie, fotogenické prvky a silný vizuálny dojem počas celého dňa.</p>
+    <div class="balik-modal-body">
+      <div class="balik-modal-section">
+        <h3>Čo balík zahŕňa</h3>
+        <ul class="balik-modal-list">
+          <li>Balík L zahŕňa celý Balík S aj Balík M, takže spája výzdobu, personalizované prvky aj doplnky pre hostí do jedného celku.</li>
+          <li>Veľký stojan v tvare srdca s kvetinovou výzdobou a štólami vytvára výrazný romantický prvok, ktorý krásne vynikne na fotografiách.</li>
+          <li>Veľký stojan v tvare oválu s vlastným bannerom s menami dodá svadbe osobitý charakter.</li>
+          <li>Zrkadlo s menami dopĺňa celkový vizuál o elegantný personalizovaný detail.</li>
+        </ul>
+      </div>
+      <div class="balik-modal-section">
+        <h3>Pre koho je vhodný</h3>
+        <p>Pre páry, ktoré chcú reprezentatívnejší vizuál, dominantné dekorácie a prvky, ktoré vytvoria silný dojem na hostí aj na fotografiách.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="foot-brand">Vevs<em>design</em></span>
+  <span>© 2026 Vevsdesign · Košice, Slovensko</span>
+  <div class="foot-social">
+    <a href="https://instagram.com/vevsdesign" target="_blank">Instagram</a>
+    <a href="#">Facebook</a>
+  </div>
+</footer>
+</body>
+</html>

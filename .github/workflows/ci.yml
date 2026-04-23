@@ -23,6 +23,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -30,11 +42,13 @@ jobs:
         run: |
           set -euo pipefail
 
-          test -f preview.html
+          test -f index.html
+          test -f package.json
           test -f Dockerfile
           test -f Caddyfile
-          test -f logo.png
-          test -f images/gallery/placeholder.png
+          test -f public/logo.png
+          test -f public/images/gallery/placeholder.png
+          test -d dist
 
       - name: Build Docker image
         uses: docker/build-push-action@v6
@@ -63,7 +77,7 @@ jobs:
           docker run --rm -d --name vevsdesign-ci -p 8080:8080 vevsdesign:ci
 
           for attempt in $(seq 1 20); do
-            if curl -fsS http://localhost:8080/healthz && curl -fsS http://localhost:8080/preview.html -o /tmp/preview.html; then
+            if curl -fsS http://localhost:8080/healthz && curl -fsS http://localhost:8080/ -o /tmp/index.html; then
               break
             fi
 
@@ -75,9 +89,9 @@ jobs:
             sleep 1
           done
 
-          grep -F "Vevsdesign" /tmp/preview.html
-          grep -F "contact-form" /tmp/preview.html
-          grep -F "formsubmit.co" /tmp/preview.html
+          grep -F "Vevsdesign" /tmp/index.html
+          grep -F "contact-form" /tmp/index.html
+          grep -F "formsubmit.co" /tmp/index.html
 
           curl -fsSI http://localhost:8080/logo.png
           curl -fsSI http://localhost:8080/images/gallery/placeholder.png
