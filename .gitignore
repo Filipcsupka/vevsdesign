@@ -1,6 +1,22 @@
-AGENTS.md
-CLAUDE.md
+# dependencies
 node_modules/
+
+# next.js
 .next/
 out/
+
+# build and test artifacts
+coverage/
+*.tsbuildinfo
+next-env.d.ts
+
+# local env and editor files
+.env*
+!.env.example
+.DS_Store
+.venv/
+
+# AI tooling: keep shared instructions/config, ignore local state
+.claude/settings.local.json
 .claude/worktrees/
+CLAUDE.local.md
