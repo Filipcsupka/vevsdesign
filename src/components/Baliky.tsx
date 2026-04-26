@@ -6,7 +6,6 @@ type PackageId = "s" | "m" | "l";
 
 type PackageData = {
   id: PackageId;
-  num: string;
   badge: string;
   name: string;
   price: string;
@@ -26,7 +25,6 @@ type ModalDetail = {
 const PACKAGES: PackageData[] = [
   {
     id: "s",
-    num: "01",
     badge: "Základný",
     name: "Balík S",
     price: "350 €",
@@ -40,7 +38,6 @@ const PACKAGES: PackageData[] = [
   },
   {
     id: "m",
-    num: "02",
     badge: "Najpopulárnejší",
     name: "Balík M",
     price: "500 €",
@@ -56,7 +53,6 @@ const PACKAGES: PackageData[] = [
   },
   {
     id: "l",
-    num: "03",
     badge: "Premium",
     name: "Balík L",
     price: "650 €",
@@ -235,7 +231,6 @@ export default function Baliky({ onSelectPackage }: BalikyProps) {
               }
             }}
           >
-            <div className="balik-num">{p.num}</div>
             <div className="balik-badge">{p.badge}</div>
             <div className="balik-name">{p.name}</div>
             <div className="balik-price">{p.price}</div>
