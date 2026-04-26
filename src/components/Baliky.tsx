@@ -136,6 +136,12 @@ const DETAILS: Record<PackageId, ModalDetail> = {
   },
 };
 
+const DETAIL_HASH_TO_ID: Record<string, PackageId> = {
+  "#balik-s-detail": "s",
+  "#balik-m-detail": "m",
+  "#balik-l-detail": "l",
+};
+
 type BalikyProps = {
   onSelectPackage: (value: string) => void;
 };
@@ -161,20 +167,43 @@ export default function Baliky({ onSelectPackage }: BalikyProps) {
   useEffect(() => {
     if (!openId) return;
     const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpenId(null);
+      if (e.key === "Escape") closeModal();
     };
     document.addEventListener("keydown", handler);
     return () => document.removeEventListener("keydown", handler);
   }, [openId]);
+
+  useEffect(() => {
+    const openFromHash = () => {
+      const nextId = DETAIL_HASH_TO_ID[window.location.hash];
+      if (!nextId) return;
+
+      const targetCard = document.getElementById(`balik-${nextId}`);
+      targetCard?.scrollIntoView({ behavior: "smooth", block: "center" });
+      setOpenId(nextId);
+    };
+
+    openFromHash();
+    window.addEventListener("hashchange", openFromHash);
+    return () => window.removeEventListener("hashchange", openFromHash);
+  }, []);
 
   function handleCardClick(id: PackageId, el: HTMLElement) {
     lastCardRef.current = el;
     setOpenId(id);
   }
 
+  function closeModal() {
+    setOpenId(null);
+    if (typeof window === "undefined") return;
+    if (window.location.hash in DETAIL_HASH_TO_ID) {
+      window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}#baliky`);
+    }
+  }
+
   function handleCta() {
     if (pkg) onSelectPackage(pkg.detailValue);
-    setOpenId(null);
+    closeModal();
   }
 
   return (
@@ -194,6 +223,7 @@ export default function Baliky({ onSelectPackage }: BalikyProps) {
         {PACKAGES.map((p, i) => (
           <div
             key={p.id}
+            id={`balik-${p.id}`}
             className={`balik-card reveal reveal-d${i + 1}${p.featured ? " featured" : ""}`}
             role="button"
             tabIndex={0}
@@ -220,21 +250,21 @@ export default function Baliky({ onSelectPackage }: BalikyProps) {
         ))}
       </div>
 
-      <p className="baliky-note reveal">
+      <p className="baliky-note reveal" id="balik-vlastny">
         Uvedené ceny sú orientačne nastavené pre výzdobu svadby do 8 stolov.
         Konečná cena sa odvíja od rozsahu vašej výzdoby.
       </p>
 
       {openId && detail && (
         <div className="balik-modal" role="dialog" aria-modal="true" aria-labelledby="balik-modal-name">
-          <div className="balik-modal-backdrop" onClick={() => setOpenId(null)} />
+          <div className="balik-modal-backdrop" onClick={closeModal} />
           <div className="balik-modal-dialog">
             <button
               ref={closeButtonRef}
               type="button"
               className="balik-modal-close"
               aria-label="Zavrieť detail balíka"
-              onClick={() => setOpenId(null)}
+              onClick={closeModal}
             >
               &times;
             </button>

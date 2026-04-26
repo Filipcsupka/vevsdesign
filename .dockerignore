@@ -4,3 +4,6 @@ certs/
 node_modules/
 .next/
 out/
+.venv/
+.claude/
+.DS_Store
