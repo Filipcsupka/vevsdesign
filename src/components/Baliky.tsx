@@ -38,7 +38,7 @@ const PACKAGES: PackageData[] = [
   },
   {
     id: "m",
-    badge: "Najpopulárnejší",
+    badge: "Najpredávanejší",
     name: "Balík M",
     price: "500 €",
     detailValue: "Balík M — 500 €",
@@ -88,7 +88,7 @@ const DETAILS: Record<PackageId, ModalDetail> = {
     ],
   },
   m: {
-    badge: "Najpopulárnejší",
+    badge: "Najpredávanejší",
     name: "Balík M",
     price: "500 €",
     lead: "Rozšírený balík pre svadbu, kde chcete okrem výzdoby aj viac osobných prvkov, programu a zábavných detailov pre hostí.",
@@ -206,7 +206,7 @@ export default function Baliky({ onSelectPackage }: BalikyProps) {
     <section id="baliky">
       <p className="sec-label reveal">Čo ponúkame</p>
       <h2 className="reveal reveal-d1">
-        Naše <em>balíky</em>
+        Svadobné <em>balíčky</em>
       </h2>
       <div className="rule reveal reveal-d1">
         <div className="rule-diamond" />

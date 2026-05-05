@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import ShowcaseTile from "@/components/ShowcaseTile";
 
 type ServiceItem = {
   id: string;
@@ -187,6 +188,12 @@ const GUEST_SERVICES: ServiceItem[] = [
 
 const ALL_SERVICES = [...CUSTOM_SERVICES, ...GUEST_SERVICES];
 
+const TILE_VARIANTS = ["sky", "sand", "pearl", "mist"] as const;
+
+function getTileVariant(index: number) {
+  return TILE_VARIANTS[index % TILE_VARIANTS.length];
+}
+
 export default function Services() {
   const [openId, setOpenId] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
@@ -240,34 +247,36 @@ export default function Services() {
       <div className="doplnkove-wrap reveal reveal-d2">
         <div className="doplnkove-inner" id="doplnky-na-mieru">
           <div className="doplnkove-title">Doplnky na mieru</div>
-          <div className="doplnkove-grid">
-            {CUSTOM_SERVICES.map((service) => (
-              <button
+          <div className="showcase-grid showcase-grid-services">
+            {CUSTOM_SERVICES.map((service, index) => (
+              <ShowcaseTile
                 key={service.id}
-                type="button"
-                className="doplnkove-item"
+                eyebrow="Doplnky na mieru"
+                title={service.name}
+                description={service.description}
+                meta={service.price}
+                variant={getTileVariant(index)}
+                featured={index === 0}
                 onClick={() => setOpenId(service.id)}
-              >
-                <span className="doplnkove-dot" />
-                <span className="doplnkove-item-text">{service.name}</span>
-              </button>
+              />
             ))}
           </div>
         </div>
 
         <div className="doplnkove-inner" id="doplnky-pre-hosti">
           <div className="doplnkove-title">Doplnky pre hostí</div>
-          <div className="doplnkove-grid">
-            {GUEST_SERVICES.map((service) => (
-              <button
+          <div className="showcase-grid showcase-grid-services">
+            {GUEST_SERVICES.map((service, index) => (
+              <ShowcaseTile
                 key={service.id}
-                type="button"
-                className="doplnkove-item"
+                eyebrow="Doplnky pre hostí"
+                title={service.name}
+                description={service.description}
+                meta={service.price}
+                variant={getTileVariant(index + 1)}
+                featured={index === 1}
                 onClick={() => setOpenId(service.id)}
-              >
-                <span className="doplnkove-dot" />
-                <span className="doplnkove-item-text">{service.name}</span>
-              </button>
+              />
             ))}
           </div>
           <p className="price-note">Všetko vieme prispôsobiť počtu hostí, štýlu svadby aj vašej predstave.</p>

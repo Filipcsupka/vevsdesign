@@ -45,7 +45,7 @@ export default function Nav() {
   return (
     <nav ref={navRef} id="main-nav">
       <a href="#hero" className="nav-logo">
-        Vevs<em>design</em>
+        VEVS<em>DESIGN</em>
       </a>
       <ul>
         <li><a href="#hero">Domov</a></li>

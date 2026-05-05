@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import ShowcaseTile from "@/components/ShowcaseTile";
 
 const IMAGES = [
   { src: "/images/gallery/01.webp", alt: "Svadobná výzdoba" },
@@ -132,6 +133,12 @@ type ActiveRental = {
   offer: RentalOffer | null;
 };
 
+const TILE_VARIANTS = ["mist", "sky", "sand", "pearl"] as const;
+
+function getTileVariant(index: number) {
+  return TILE_VARIANTS[index % TILE_VARIANTS.length];
+}
+
 export default function Gallery() {
   const [openKey, setOpenKey] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
@@ -198,7 +205,8 @@ export default function Gallery() {
         Vyberte si kategóriu prenájmu, ktorá najlepšie doplní atmosféru vášho svadobného dňa.
       </p>
 
-      <div className="rental-groups reveal reveal-d2">
+      <div className="rental-stage reveal reveal-d2">
+        <div className="rental-groups">
         {RENTAL_CATEGORIES.map((category) => (
           <div key={category.id} className="rental-group" id={category.id}>
             {category.hideOffersGrid ? (
@@ -213,27 +221,34 @@ export default function Gallery() {
               <div className="rental-group-title">{category.title}</div>
             )}
             {category.text && <p className="rental-group-text">{category.text}</p>}
-            {!category.hideOffersGrid && (
-              <div className="rental-offers-grid">
-                {category.offers.map((offer) => (
-                  <button
-                    key={offer.id}
-                    type="button"
-                    className="rental-offer-item"
-                    onClick={(event) => openDetail(category, offer, event.currentTarget)}
-                  >
-                    <span className="rental-offer-dot" />
-                    <span className="rental-offer-text">{offer.title}</span>
-                  </button>
-                ))}
-              </div>
-            )}
+            <div className="showcase-grid showcase-grid-rental">
+              {category.offers.map((offer, index) => (
+                <ShowcaseTile
+                  key={offer.id}
+                  eyebrow={category.title}
+                  title={offer.title}
+                  description={offer.description ?? category.lead}
+                  meta={category.price}
+                  variant={getTileVariant(index)}
+                  featured={index === 0}
+                  onClick={(event) => {
+                    if (category.hideOffersGrid) {
+                      openCategoryDetail(category, event.currentTarget);
+                      return;
+                    }
+                    openDetail(category, offer, event.currentTarget);
+                  }}
+                />
+              ))}
+            </div>
             {category.note ? <p className="rental-group-note">{category.note}</p> : null}
           </div>
         ))}
+        </div>
       </div>
 
-      <div className="gallery-grid reveal reveal-d2">
+      <div className="gallery-collection reveal reveal-d3">
+      <div className="gallery-grid">
         {IMAGES.map((img) => (
           <div key={img.src} className="gal-item">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -247,6 +262,7 @@ export default function Gallery() {
             <div className="gal-overlay" />
           </div>
         ))}
+      </div>
       </div>
 
       {mounted && activeRental && createPortal(

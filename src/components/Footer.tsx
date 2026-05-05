@@ -2,7 +2,7 @@ export default function Footer() {
   return (
     <footer>
       <span className="foot-brand">
-        Vevs<em>design</em>
+        VEVS<em>DESIGN</em>
       </span>
       <span>© 2026 Vevsdesign · Košice, Slovensko</span>
       <div className="foot-social">

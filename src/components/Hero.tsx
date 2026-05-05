@@ -20,7 +20,6 @@ export default function Hero() {
       hero!.style.setProperty("--hero-ring-y", `${y * 0.08}px`);
       hero!.style.setProperty("--hero-line-y", `${y * 0.14}px`);
       hero!.style.setProperty("--hero-glow-y", `${y * 0.28}px`);
-      hero!.style.setProperty("--hero-scroll-y", `${y * 0.1}px`);
       hero!.style.setProperty("--hero-parallax-progress", progress.toFixed(3));
       ticking = false;
     }
@@ -77,11 +76,6 @@ export default function Hero() {
       <div className="btn-pair">
         <a href="#baliky" className="btn-p">Pozrieť balíky</a>
         <a href="#kontakt" className="btn-o">Kontaktujte nás</a>
-      </div>
-
-      <div className="hero-scroll">
-        <div className="hero-scroll-line" />
-        <span>Scroll</span>
       </div>
     </section>
   );

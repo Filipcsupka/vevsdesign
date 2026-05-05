@@ -39,9 +39,9 @@ export default function BackgroundCanvas() {
 
     function drawBackdrop() {
       const base = ctx!.createLinearGradient(0, 0, W, H);
-      base.addColorStop(0, "#FFFCF8");
-      base.addColorStop(0.5, "#F4F6F9");
-      base.addColorStop(1, "#E9EFF7");
+      base.addColorStop(0, "#FFF9F2");
+      base.addColorStop(0.52, "#F7EFE3");
+      base.addColorStop(1, "#EDF6FD");
       ctx!.fillStyle = base;
       ctx!.fillRect(0, 0, W, H);
 
@@ -52,14 +52,14 @@ export default function BackgroundCanvas() {
       ctx!.fillRect(0, 0, W, H);
 
       const glowSide = ctx!.createRadialGradient(W * 0.88, H * 0.58, 0, W * 0.88, H * 0.58, Math.max(W, H) * 0.46);
-      glowSide.addColorStop(0, "rgba(201,219,242,0.16)");
-      glowSide.addColorStop(1, "rgba(201,219,242,0)");
+      glowSide.addColorStop(0, "rgba(186,216,242,0.18)");
+      glowSide.addColorStop(1, "rgba(186,216,242,0)");
       ctx!.fillStyle = glowSide;
       ctx!.fillRect(0, 0, W, H);
 
       const glowWarm = ctx!.createRadialGradient(W * 0.18, H * 0.28, 0, W * 0.18, H * 0.28, Math.max(W, H) * 0.34);
-      glowWarm.addColorStop(0, "rgba(236,226,211,0.18)");
-      glowWarm.addColorStop(1, "rgba(236,226,211,0)");
+      glowWarm.addColorStop(0, "rgba(241,231,216,0.24)");
+      glowWarm.addColorStop(1, "rgba(241,231,216,0)");
       ctx!.fillStyle = glowWarm;
       ctx!.fillRect(0, 0, W, H);
     }
@@ -69,17 +69,20 @@ export default function BackgroundCanvas() {
       ctx!.translate(x, y);
       ctx!.rotate(angle);
       ctx!.globalAlpha = alpha;
+      ctx!.shadowColor = color;
+      ctx!.shadowBlur = size * 1.15;
       ctx!.beginPath();
       ctx!.moveTo(0, -size);
       ctx!.bezierCurveTo(size * 0.82, -size * 0.62, size * 0.72, size * 0.42, size * 0.08, size * 0.78);
       ctx!.bezierCurveTo(-size * 0.58, size * 0.44, -size * 0.78, -size * 0.48, 0, -size);
       ctx!.closePath();
       const petalFill = ctx!.createLinearGradient(-size * 0.7, -size, size * 0.7, size * 0.8);
-      petalFill.addColorStop(0, "rgba(250,253,255,0.84)");
+      petalFill.addColorStop(0, "rgba(252,249,245,0.88)");
       petalFill.addColorStop(0.58, color);
-      petalFill.addColorStop(1, "rgba(198,220,246,0.24)");
+      petalFill.addColorStop(1, "rgba(186,216,242,0.24)");
       ctx!.fillStyle = petalFill;
       ctx!.fill();
+      ctx!.shadowBlur = 0;
       ctx!.globalAlpha = alpha * 0.42;
       ctx!.beginPath();
       ctx!.moveTo(0, -size * 0.72);
@@ -113,22 +116,22 @@ export default function BackgroundCanvas() {
     function createParticle(): Particle {
       const type = Math.random() < 0.62 ? "petal" : Math.random() < 0.68 ? "dot" : "sparkle";
       const colors = [
-        "rgba(201,219,242,0.44)",
-        "rgba(236,226,211,0.32)",
-        "rgba(230,239,249,0.4)",
-        "rgba(246,240,232,0.36)",
-        "rgba(193,210,232,0.34)",
+        "rgba(157,198,234,0.62)",
+        "rgba(207,229,247,0.58)",
+        "rgba(241,231,216,0.48)",
+        "rgba(250,243,233,0.5)",
+        "rgba(126,174,216,0.46)",
       ];
       return {
         type: type as Particle["type"],
         x: Math.random() * (W + 180) - 90,
         y: Math.random() * -H - 40,
-        size: type === "petal" ? Math.random() * 12 + 7 : type === "dot" ? Math.random() * 2.2 + 0.8 : Math.random() * 2.8 + 1.4,
+        size: type === "petal" ? Math.random() * 15 + 9 : type === "dot" ? Math.random() * 2.6 + 1.1 : Math.random() * 3.1 + 1.6,
         speedY: Math.random() * 0.34 + 0.12,
         speedX: (Math.random() - 0.5) * 0.18,
         angle: Math.random() * Math.PI * 2,
         spin: (Math.random() - 0.5) * 0.009,
-        alpha: Math.random() * 0.42 + 0.22,
+        alpha: Math.random() * 0.5 + 0.34,
         alphaDelta: (Math.random() * 0.002 + 0.0007) * (Math.random() < 0.5 ? 1 : -1),
         color: colors[Math.floor(Math.random() * colors.length)],
         drift: (Math.random() - 0.5) * 0.008,
@@ -138,7 +141,7 @@ export default function BackgroundCanvas() {
 
     function initParticles() {
       particles = [];
-      const count = Math.min(Math.max(Math.floor((W * H) / 18000), 24), 92);
+      const count = Math.min(Math.max(Math.floor((W * H) / 13500), 42), 138);
       for (let i = 0; i < count; i++) {
         const p = createParticle();
         p.y = Math.random() * H;
@@ -155,7 +158,7 @@ export default function BackgroundCanvas() {
         p.y += p.speedY;
         p.angle += p.spin;
         p.alpha += p.alphaDelta;
-        if (p.alpha <= 0.08 || p.alpha >= 0.58) p.alphaDelta *= -1;
+        if (p.alpha <= 0.18 || p.alpha >= 0.82) p.alphaDelta *= -1;
 
         if (p.type === "petal") {
           drawPetal(p.x, p.y, p.size, p.angle, p.alpha, p.color);
