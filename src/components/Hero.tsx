@@ -17,7 +17,6 @@ export default function Hero() {
       const progress = Math.min(y / heroHeight, 1);
       hero!.style.setProperty("--hero-logo-y", `${y * 0.16}px`);
       hero!.style.setProperty("--hero-copy-y", `${y * 0.22}px`);
-      hero!.style.setProperty("--hero-ring-y", `${y * 0.08}px`);
       hero!.style.setProperty("--hero-line-y", `${y * 0.14}px`);
       hero!.style.setProperty("--hero-glow-y", `${y * 0.28}px`);
       hero!.style.setProperty("--hero-parallax-progress", progress.toFixed(3));
@@ -47,9 +46,6 @@ export default function Hero() {
       <div className="hero-glow hero-glow-3" />
       <div className="hero-deco-line left" />
       <div className="hero-deco-line right" />
-      <div className="hero-deco-circle c1" />
-      <div className="hero-deco-circle c2" />
-
       <div className="hero-logo-wrap">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img

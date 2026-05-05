@@ -24,20 +24,12 @@ export default function About() {
           </p>
           <div className="about-stats">
             <div>
-              <div className="stat-n">Stovky</div>
-              <div className="stat-l">Návrhov</div>
-            </div>
-            <div>
               <div className="stat-n">3</div>
               <div className="stat-l">Hlavné balíky</div>
             </div>
             <div>
               <div className="stat-n">Doplnky</div>
               <div className="stat-l">Na mieru</div>
-            </div>
-            <div>
-              <div className="stat-n">Prenájom</div>
-              <div className="stat-l">&nbsp;</div>
             </div>
           </div>
         </div>
