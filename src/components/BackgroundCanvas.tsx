@@ -39,9 +39,9 @@ export default function BackgroundCanvas() {
 
     function drawBackdrop() {
       const base = ctx!.createLinearGradient(0, 0, W, H);
-      base.addColorStop(0, "#FBF6EE");
-      base.addColorStop(0.48, "#F7F1E8");
-      base.addColorStop(1, "#EDE0C8");
+      base.addColorStop(0, "#FFFCF8");
+      base.addColorStop(0.5, "#F4F6F9");
+      base.addColorStop(1, "#E9EFF7");
       ctx!.fillStyle = base;
       ctx!.fillRect(0, 0, W, H);
 
@@ -52,9 +52,15 @@ export default function BackgroundCanvas() {
       ctx!.fillRect(0, 0, W, H);
 
       const glowSide = ctx!.createRadialGradient(W * 0.88, H * 0.58, 0, W * 0.88, H * 0.58, Math.max(W, H) * 0.46);
-      glowSide.addColorStop(0, "rgba(193,166,120,0.12)");
-      glowSide.addColorStop(1, "rgba(193,166,120,0)");
+      glowSide.addColorStop(0, "rgba(201,219,242,0.16)");
+      glowSide.addColorStop(1, "rgba(201,219,242,0)");
       ctx!.fillStyle = glowSide;
+      ctx!.fillRect(0, 0, W, H);
+
+      const glowWarm = ctx!.createRadialGradient(W * 0.18, H * 0.28, 0, W * 0.18, H * 0.28, Math.max(W, H) * 0.34);
+      glowWarm.addColorStop(0, "rgba(236,226,211,0.18)");
+      glowWarm.addColorStop(1, "rgba(236,226,211,0)");
+      ctx!.fillStyle = glowWarm;
       ctx!.fillRect(0, 0, W, H);
     }
 
@@ -69,16 +75,16 @@ export default function BackgroundCanvas() {
       ctx!.bezierCurveTo(-size * 0.58, size * 0.44, -size * 0.78, -size * 0.48, 0, -size);
       ctx!.closePath();
       const petalFill = ctx!.createLinearGradient(-size * 0.7, -size, size * 0.7, size * 0.8);
-      petalFill.addColorStop(0, "rgba(255,248,234,0.78)");
+      petalFill.addColorStop(0, "rgba(250,253,255,0.84)");
       petalFill.addColorStop(0.58, color);
-      petalFill.addColorStop(1, "rgba(193,166,120,0.22)");
+      petalFill.addColorStop(1, "rgba(198,220,246,0.24)");
       ctx!.fillStyle = petalFill;
       ctx!.fill();
       ctx!.globalAlpha = alpha * 0.42;
       ctx!.beginPath();
       ctx!.moveTo(0, -size * 0.72);
       ctx!.bezierCurveTo(size * 0.16, -size * 0.25, size * 0.12, size * 0.22, size * 0.02, size * 0.52);
-      ctx!.strokeStyle = "rgba(255,248,234,0.62)";
+      ctx!.strokeStyle = "rgba(244,250,255,0.68)";
       ctx!.lineWidth = Math.max(0.6, size * 0.055);
       ctx!.stroke();
       ctx!.restore();
@@ -99,7 +105,7 @@ export default function BackgroundCanvas() {
         ctx!.lineTo(Math.cos(aMid) * r2, Math.sin(aMid) * r2);
       }
       ctx!.closePath();
-      ctx!.fillStyle = "rgba(255,252,246,0.72)";
+      ctx!.fillStyle = "rgba(248,252,255,0.78)";
       ctx!.fill();
       ctx!.restore();
     }
@@ -107,11 +113,11 @@ export default function BackgroundCanvas() {
     function createParticle(): Particle {
       const type = Math.random() < 0.62 ? "petal" : Math.random() < 0.68 ? "dot" : "sparkle";
       const colors = [
-        "rgba(193,166,120,0.50)",
-        "rgba(212,184,150,0.44)",
-        "rgba(181,154,123,0.38)",
-        "rgba(222,201,167,0.42)",
-        "rgba(238,228,216,0.34)",
+        "rgba(201,219,242,0.44)",
+        "rgba(236,226,211,0.32)",
+        "rgba(230,239,249,0.4)",
+        "rgba(246,240,232,0.36)",
+        "rgba(193,210,232,0.34)",
       ];
       return {
         type: type as Particle["type"],
