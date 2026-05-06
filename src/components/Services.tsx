@@ -159,15 +159,15 @@ const GUEST_SERVICES: ServiceItem[] = [
     id: "cigar-bar",
     name: "Cigar bar",
     price: "Cena individuálne",
-    description: "Cigar bar je štýlový doplnok, ktorý vytvorí výrazný zážitok najmä počas večernej časti programu.",
-    modalDescription: "Cigar bar je štýlový doplnok, ktorý vytvorí výrazný zážitok počas rozlúčky so slobodou, príprav ženícha aj priamo na svadbe.",
+    description: "Cigar bar je štýlový doplnok, ktorý vytvorí výrazný zážitok najmä pre mužov.",
+    modalDescription: "Cigar bar je štýlový doplnok, ktorý vytvorí výrazný zážitok najmä pre chlapov na svadbe, pri príprave ženícha alebo na rozlúčke so slobodou. Obsahuje drevenú krabičku s potrebným príslušenstvom, personalizované cigary za 15 €/ks a možnosťou prenajatia malého čapovacieho sudu s rumom podľa želania. Bez náplne rumu je cena 20 € za samostatný sud.",
     modalDetails: [
       "Drevená krabička s potrebným príslušenstvom",
       "Personalizované cigary: 15 €/ks",
       "Možnosť malého sudu s rumom podľa želania",
       "Minimálny odber cigár: 6 ks",
     ],
-    modalAbout: "Hodí sa to aj na rozlúčku so slobodou, na prípravu ženícha alebo priamo na svadbu. Doba doručenia je 5 až 15 pracovných dní.",
+    modalAbout: "Minimálny odber cigár je 6 ks. Doba doručenia je 5 - 15 pracovných dní pre cigary, krabičku a príslušenstvo. Malý čapovací sud iba osobný odber alebo náš dovoz na miesto v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
     category: "Doplnky pre hostí",
   },
   {
@@ -292,6 +292,7 @@ export default function Services() {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   const activeService = openId ? ALL_SERVICES.find((item) => item.id === openId) ?? null : null;
+  const isGuestService = activeService?.category === "Doplnky pre hostí";
 
   useEffect(() => {
     setMounted(true);
@@ -397,7 +398,7 @@ export default function Services() {
 
             <div className="service-modal-summary">
               <p className="service-modal-lead">{activeService.modalDescription ?? activeService.description}</p>
-              {(activeService.modalDetails ?? activeService.details)?.length ? (
+              {!isGuestService && (activeService.modalDetails ?? activeService.details)?.length ? (
                 <ul className="service-modal-list service-modal-list-top">
                   {(activeService.modalDetails ?? activeService.details)?.map((detail) => (
                     <li key={detail}>{detail}</li>

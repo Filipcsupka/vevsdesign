@@ -99,6 +99,22 @@ out/
 
 Tento adresár sa potom kopíruje do nginx runtime image v `Dockerfile`.
 
+## Analytics
+
+Ak chceš počítať zobrazenia webu bez vlastného backendu, projekt podporuje voliteľný Cloudflare Web Analytics beacon.
+
+Stačí v produkčnom builde nastaviť:
+
+```bash
+NEXT_PUBLIC_CF_WEB_ANALYTICS_TOKEN=...
+```
+
+Poznámky:
+- skript sa vloží len v `production` režime
+- bez tejto premennej sa nenačíta nič
+- metriky potom uvidíš v Cloudflare dashboarde pri danom webe
+- rovnaký pattern môžeš použiť aj v `cv-web`
+
 ## Dôležité URL
 
 - dev server: `http://127.0.0.1:3000`

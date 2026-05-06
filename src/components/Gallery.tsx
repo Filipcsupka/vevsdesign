@@ -18,7 +18,11 @@ const GALLERY_FALLBACK_IMAGE = "/images/gallery/placeholder.png";
 type RentalOffer = {
   id: string;
   title: string;
+  price?: string;
+  lead?: string;
+  text?: string;
   description?: string;
+  details?: string;
 };
 
 type RentalCategory = {
@@ -28,7 +32,7 @@ type RentalCategory = {
   price: string;
   lead: string;
   offers: RentalOffer[];
-  hideOffersGrid?: boolean;
+  details?: string;
   note?: string;
 };
 
@@ -41,35 +45,55 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
     lead: "Kvetinovú výzdobu pripravujeme tak, aby jemne doplnila štýl svadby a prirodzene nadviazala na ostatné dekorácie.",
     offers: [
       {
-        id: "ikebany",
+        id: "ikebana-na-stoly",
         title: "Ikebana na stoly",
-        description: "Ikebana na stoly podľa štýlu, farebnosti a rozsahu vašej svadby.",
+        price: "30 €/ks",
+        description: "Obsahuje všetky kvety ako na fotke vo Vašich požadovaných farbách.",
+        lead: "Obsahuje všetky kvety ako na fotke vo Vašich požadovaných farbách. Vysoká váza v strede so živou ružou. Dva poháre s plávajúcimi sviečkami.",
+        details: "Do poznámky prosím uviesť množstvo a požadované farby. Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska od 4 ks vyššie alebo aj 1 ks pri objednávke nad 100 € (+ príplatok PHM).",
       },
       {
-        id: "ikebana-s-vazami-okolo",
+        id: "ikebana-na-stoly-s-vazami-okolo",
         title: "Ikebana na stoly s vázami okolo",
-        description: "Ikebana na stoly doplnená o vázy okolo podľa štýlu, farebnosti a rozsahu vašej svadby.",
+        price: "40 €/ks",
+        description: "Obsahuje všetky kvety ako na fotke vo Vašich požadovaných farbách.",
+        lead: "Obsahuje všetky kvety ako na fotke vo Vašich požadovaných farbách. Vysoká váza v strede so živou ružou. Dva poháre s plávajúcimi sviečkami. Osem váz dookola s umelými kvetmi. Možnosť živých kvetov v 8 vázach naokolo, napríklad po jednej ruži alebo iných kvetov podľa požiadavky v cene 50 - 70 €.",
+        details: "Do poznámky prosím uviesť množstvo, požadované farby a ak je treba požiadavku živých kvetov. Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska od 4 ks vyššie alebo aj 1 ks pri objednávke nad 100 € (+ príplatok PHM).",
       },
       {
         id: "mala-ikebana",
         title: "Malá ikebana",
-        description: "Malá ikebana pripravená podľa štýlu, farebnosti a rozsahu vašej svadby.",
+        price: "15 €/ks",
+        description: "Obsahuje kvety ako na fotke vo Vašich požadovaných farbách.",
+        lead: "Obsahuje kvety ako na fotke vo Vašich požadovaných farbách. Vhodné umiestniť napríklad ku uvítacej tabuli, na obrad pozdĺž uličky alebo pred hlavný stôl novomanželov.",
+        details: "Do poznámky prosím uviesť množstvo a požadované farby. Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále alebo na obrade v rámci Východného Slovenska od 6 ks vyššie alebo aj 1 ks pri objednávke nad 100 € (+ príplatok PHM).",
       },
       {
         id: "dlha-ikebana",
         title: "Dlhá ikebana",
-        description: "Dlhá ikebana pripravená podľa štýlu, farebnosti a rozsahu vašej svadby.",
+        price: "30 €/ks",
+        description: "Obsahuje kvety ako na fotke vo Vašich požadovaných farbách, úzke svietniky a sviečky.",
+        lead: "Obsahuje kvety ako na fotke vo Vašich požadovaných farbách, úzke svietniky a sviečky.",
+        details: "Do poznámky prosím uviesť množstvo a požadované farby. Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
       },
     ],
   },
   {
     id: "prenajom-detsky-kutik",
     title: "Detský kútik",
-    text: "Obsahuje šmýkalku, penovú podložku, farebné stany, kocky, autíčka, bábiky, omaľovánky.",
-    price: "Cena individuálne",
+    text: "",
+    price: "50 €",
     lead: "Detský kútik pripravíme tak, aby mali malí hostia svoj vlastný bezpečný a hravý priestor počas celej svadby.",
-    hideOffersGrid: true,
-    offers: [],
+    offers: [
+      {
+        id: "detsky-kutik",
+        title: "Detský kútik",
+        price: "50 €",
+        description: "Obsahuje šmýkalku, penovú podložku, farebné stany, kocky, autíčka, bábiky, omaľovánky.",
+        lead: "Obsahuje šmýkalku, penovú podložku, farebné stany, kocky, autíčka, bábiky, omaľovánky.",
+        details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
+      },
+    ],
   },
   {
     id: "prenajom-stojany-zrkadla",
@@ -157,6 +181,11 @@ export default function Gallery() {
     return null;
   }, [openKey]);
 
+  const activeRentalBodyText =
+    activeRental?.offer?.text ?? activeRental?.category.text ?? "";
+  const activeRentalDetails =
+    activeRental?.offer?.details ?? activeRental?.category.details ?? "";
+
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -187,11 +216,6 @@ export default function Gallery() {
     setOpenKey(`${category.id}:${offer.id}`);
   }
 
-  function openCategoryDetail(category: RentalCategory, button: HTMLButtonElement) {
-    lastTriggerRef.current = button;
-    setOpenKey(category.id);
-  }
-
   return (
     <section id="galeria">
       <div className="rental-bg-lines" />
@@ -207,63 +231,52 @@ export default function Gallery() {
 
       <div className="rental-stage reveal reveal-d2">
         <div className="rental-groups">
-        {RENTAL_CATEGORIES.map((category) => (
-          <div key={category.id} className="rental-group" id={category.id}>
-            <div className="rental-group-title">{category.title}</div>
-            {category.hideOffersGrid ? (
-              <div className="showcase-grid showcase-grid-rental">
-                <ShowcaseTile
-                  eyebrow="Prenájom"
-                  title={category.title}
-                  description={category.lead}
-                  meta={category.price}
-                  variant={getTileVariant(0)}
-                  featured
-                  onClick={(event) => openCategoryDetail(category, event.currentTarget)}
-                />
-              </div>
-            ) : (
+          {RENTAL_CATEGORIES.map((category) => (
+            <div key={category.id} className="rental-group" id={category.id}>
+              <div className="rental-group-title">{category.title}</div>
+              {category.text && <p className="rental-group-text">{category.text}</p>}
               <div className="showcase-grid showcase-grid-rental">
                 {category.offers.map((offer, index) => (
                   <ShowcaseTile
                     key={offer.id}
                     eyebrow={category.title}
                     title={offer.title}
-                    description={offer.description ?? category.lead}
-                    meta={category.price}
+                    description={offer.description ?? offer.lead ?? category.lead}
+                    meta={offer.price ?? category.price}
                     variant={getTileVariant(index)}
                     featured={index === 0}
-                    onClick={(event) => openDetail(category, offer, event.currentTarget)}
+                    onClick={(event) => {
+                      openDetail(category, offer, event.currentTarget);
+                    }}
                   />
                 ))}
               </div>
-            )}
-            {category.note ? <p className="rental-group-note">{category.note}</p> : null}
-          </div>
-        ))}
+              {category.note ? <p className="rental-group-note">{category.note}</p> : null}
+            </div>
+          ))}
         </div>
       </div>
 
       <div className="gallery-collection reveal reveal-d3">
-      <div className="gallery-grid">
-        {IMAGES.map((img) => (
-          <div key={img.src} className="gal-item">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={img.src}
-              alt={img.alt}
-              className="gal-img"
-              loading="lazy"
-              onError={(event) => {
-                const image = event.currentTarget;
-                if (image.src.endsWith(GALLERY_FALLBACK_IMAGE)) return;
-                image.src = GALLERY_FALLBACK_IMAGE;
-              }}
-            />
-            <div className="gal-overlay" />
-          </div>
-        ))}
-      </div>
+        <div className="gallery-grid">
+          {IMAGES.map((img) => (
+            <div key={img.src} className="gal-item">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={img.src}
+                alt={img.alt}
+                className="gal-img"
+                loading="lazy"
+                onError={(event) => {
+                  const image = event.currentTarget;
+                  if (image.src.endsWith(GALLERY_FALLBACK_IMAGE)) return;
+                  image.src = GALLERY_FALLBACK_IMAGE;
+                }}
+              />
+              <div className="gal-overlay" />
+            </div>
+          ))}
+        </div>
       </div>
 
       {mounted && activeRental && createPortal(
@@ -286,18 +299,27 @@ export default function Gallery() {
               <div className="rental-modal-name" id="rental-modal-name">
                 {activeRental.offer?.title ?? activeRental.category.title}
               </div>
-              <div className="rental-modal-price">{activeRental.category.price}</div>
+              <div className="rental-modal-price">{activeRental.offer?.price ?? activeRental.category.price}</div>
             </div>
 
             <p className="rental-modal-lead">
-              {activeRental.offer?.description ?? activeRental.category.lead}
+              {activeRental.offer?.lead ?? activeRental.offer?.description ?? activeRental.category.lead}
             </p>
 
             <div className="rental-modal-layout">
-              <div className="rental-modal-section">
-                <h3>O kategórii</h3>
-                <p>{activeRental.category.text}</p>
-              </div>
+              {activeRentalBodyText ? (
+                <div className="rental-modal-section">
+                  <h3>O kategórii</h3>
+                  <p>{activeRentalBodyText}</p>
+                </div>
+              ) : null}
+
+              {activeRentalDetails ? (
+                <div className="rental-modal-section">
+                  <h3>Podrobnosti</h3>
+                  <p>{activeRentalDetails}</p>
+                </div>
+              ) : null}
 
               <div className="rental-modal-section rental-modal-photos">
                 <h3>Budúce fotky</h3>
