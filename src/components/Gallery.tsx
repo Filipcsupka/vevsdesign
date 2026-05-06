@@ -13,6 +13,8 @@ const IMAGES = [
   { src: "/images/gallery/06.webp", alt: "Kvety & ikebany" },
 ];
 
+const GALLERY_FALLBACK_IMAGE = "/images/gallery/placeholder.png";
+
 type RentalOffer = {
   id: string;
   title: string;
@@ -40,18 +42,23 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
     offers: [
       {
         id: "ikebany",
-        title: "Ikebany",
-        description: "Ikebany na stoly aj výraznejšie dekoračné kompozície.",
+        title: "Ikebana na stoly",
+        description: "Ikebana na stoly podľa štýlu, farebnosti a rozsahu vašej svadby.",
       },
       {
-        id: "ine-aranzmany",
-        title: "Iné aranžmány",
-        description: "Iné aranžmány podľa štýlu, farebnosti a rozsahu vašej svadby.",
+        id: "ikebana-s-vazami-okolo",
+        title: "Ikebana na stoly s vázami okolo",
+        description: "Ikebana na stoly doplnená o vázy okolo podľa štýlu, farebnosti a rozsahu vašej svadby.",
       },
       {
-        id: "vyzdoba-obradu",
-        title: "Výzdoba obradu",
-        description: "Výzdoba obradu zladená s celkovým štýlom svadby aj kvetinovou koncepciou dňa.",
+        id: "mala-ikebana",
+        title: "Malá ikebana",
+        description: "Malá ikebana pripravená podľa štýlu, farebnosti a rozsahu vašej svadby.",
+      },
+      {
+        id: "dlha-ikebana",
+        title: "Dlhá ikebana",
+        description: "Dlhá ikebana pripravená podľa štýlu, farebnosti a rozsahu vašej svadby.",
       },
     ],
   },
@@ -62,14 +69,7 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
     price: "Cena individuálne",
     lead: "Detský kútik pripravíme tak, aby mali malí hostia svoj vlastný bezpečný a hravý priestor počas celej svadby.",
     hideOffersGrid: true,
-    offers: [
-      { id: "smykalka", title: "Šmýkalka" },
-      { id: "penova-podlozka", title: "Penová podložka" },
-      { id: "farebne-stany", title: "Farebné stany" },
-      { id: "kocky", title: "Kocky" },
-      { id: "auticka", title: "Autíčka" },
-      { id: "babiky", title: "Bábiky" },
-    ],
+    offers: [],
   },
   {
     id: "prenajom-stojany-zrkadla",
@@ -209,38 +209,35 @@ export default function Gallery() {
         <div className="rental-groups">
         {RENTAL_CATEGORIES.map((category) => (
           <div key={category.id} className="rental-group" id={category.id}>
+            <div className="rental-group-title">{category.title}</div>
             {category.hideOffersGrid ? (
-              <button
-                type="button"
-                className="rental-group-title rental-group-title-button"
-                onClick={(event) => openCategoryDetail(category, event.currentTarget)}
-              >
-                {category.title}
-              </button>
-            ) : (
-              <div className="rental-group-title">{category.title}</div>
-            )}
-            {category.text && <p className="rental-group-text">{category.text}</p>}
-            <div className="showcase-grid showcase-grid-rental">
-              {category.offers.map((offer, index) => (
+              <div className="showcase-grid showcase-grid-rental">
                 <ShowcaseTile
-                  key={offer.id}
-                  eyebrow={category.title}
-                  title={offer.title}
-                  description={offer.description ?? category.lead}
+                  eyebrow="Prenájom"
+                  title={category.title}
+                  description={category.lead}
                   meta={category.price}
-                  variant={getTileVariant(index)}
-                  featured={index === 0}
-                  onClick={(event) => {
-                    if (category.hideOffersGrid) {
-                      openCategoryDetail(category, event.currentTarget);
-                      return;
-                    }
-                    openDetail(category, offer, event.currentTarget);
-                  }}
+                  variant={getTileVariant(0)}
+                  featured
+                  onClick={(event) => openCategoryDetail(category, event.currentTarget)}
                 />
-              ))}
-            </div>
+              </div>
+            ) : (
+              <div className="showcase-grid showcase-grid-rental">
+                {category.offers.map((offer, index) => (
+                  <ShowcaseTile
+                    key={offer.id}
+                    eyebrow={category.title}
+                    title={offer.title}
+                    description={offer.description ?? category.lead}
+                    meta={category.price}
+                    variant={getTileVariant(index)}
+                    featured={index === 0}
+                    onClick={(event) => openDetail(category, offer, event.currentTarget)}
+                  />
+                ))}
+              </div>
+            )}
             {category.note ? <p className="rental-group-note">{category.note}</p> : null}
           </div>
         ))}
@@ -257,7 +254,11 @@ export default function Gallery() {
               alt={img.alt}
               className="gal-img"
               loading="lazy"
-              onError={(e) => { (e.currentTarget as HTMLImageElement).hidden = true; }}
+              onError={(event) => {
+                const image = event.currentTarget;
+                if (image.src.endsWith(GALLERY_FALLBACK_IMAGE)) return;
+                image.src = GALLERY_FALLBACK_IMAGE;
+              }}
             />
             <div className="gal-overlay" />
           </div>
