@@ -1089,11 +1089,12 @@ body.modal-open{overflow:hidden}
     padding:6.4rem max(1rem,env(safe-area-inset-right,0px)) 4rem max(1rem,env(safe-area-inset-left,0px));
   }
   .hero-logo-wrap{
-    width:min(238px,60vw);
-    height:clamp(104px,27vw,138px);
-    margin:-0.55rem 0 -0.35rem;
+    width:min(190px,50vw);
+    height:clamp(78px,21vw,108px);
+    margin:0 0 1rem;
+    overflow:hidden;
   }
-  .hero-logo-wrap::before{inset:-18% -4% -30% -4%;-webkit-mask-size:116% auto;mask-size:116% auto}
+  .hero-logo-wrap::before{inset:0;-webkit-mask-size:contain;mask-size:contain;opacity:0.88}
   .hero-eyebrow{
     width:100%;gap:0.8rem;font-size:0.54rem;letter-spacing:0.2em;
   }
