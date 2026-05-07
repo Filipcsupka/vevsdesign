@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import FallbackImage from "@/components/FallbackImage";
+import { packageDetailImages } from "@/data/imageAssets";
 
 type PackageId = "s" | "m" | "l";
 
@@ -149,6 +151,7 @@ export default function Baliky({ onSelectPackage }: BalikyProps) {
 
   const detail = openId ? DETAILS[openId] : null;
   const pkg = openId ? PACKAGES.find((p) => p.id === openId) : null;
+  const packageImages = openId && detail ? packageDetailImages(openId, detail.name) : [];
 
   useEffect(() => {
     if (openId) {
@@ -204,7 +207,6 @@ export default function Baliky({ onSelectPackage }: BalikyProps) {
 
   return (
     <section id="baliky">
-      <p className="sec-label reveal">Čo ponúkame</p>
       <h2 className="reveal reveal-d1">
         Svadobné <em>balíčky</em>
       </h2>
@@ -212,7 +214,7 @@ export default function Baliky({ onSelectPackage }: BalikyProps) {
         <div className="rule-diamond" />
       </div>
       <p className="sec-intro reveal reveal-d2">
-        Vyberte si balík, ktorý vám najlepšie vyhovuje, alebo si ho vyskladajte na mieru.
+        Vyberte si balík, ktorý vám najlepšie vyhovuje, alebo si ho vyskladajte na mieru našim kontaktovaním.
       </p>
 
       <div className="baliky-grid">
@@ -272,6 +274,20 @@ export default function Baliky({ onSelectPackage }: BalikyProps) {
             <p className="balik-modal-lead">{detail.lead}</p>
 
             <div className="balik-modal-body">
+              <div className="balik-modal-section balik-modal-photos">
+                <h3>Budúce fotky</h3>
+                <div className="balik-photo-grid">
+                  {packageImages.map((image) => (
+                    <FallbackImage
+                      key={image.src}
+                      src={image.src}
+                      alt={image.alt}
+                      className="balik-photo-img"
+                    />
+                  ))}
+                </div>
+              </div>
+
               {detail.sections.map((sec) => (
                 <div key={sec.title} className="balik-modal-section">
                   <h3>{sec.title}</h3>

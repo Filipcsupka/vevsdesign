@@ -1,4 +1,6 @@
 import type { MouseEventHandler } from "react";
+import FallbackImage from "@/components/FallbackImage";
+import type { ImageAsset } from "@/data/imageAssets";
 
 type ShowcaseVariant = "sky" | "sand" | "pearl" | "mist";
 
@@ -9,6 +11,7 @@ type ShowcaseTileProps = {
   meta: string;
   variant: ShowcaseVariant;
   onClick: MouseEventHandler<HTMLButtonElement>;
+  image?: ImageAsset;
   featured?: boolean;
 };
 
@@ -19,6 +22,7 @@ export default function ShowcaseTile({
   meta,
   variant,
   onClick,
+  image,
   featured = false,
 }: ShowcaseTileProps) {
   return (
@@ -28,7 +32,15 @@ export default function ShowcaseTile({
       onClick={onClick}
     >
       <span className="showcase-tile-media" aria-hidden="true">
-        <span className="showcase-tile-media-surface" />
+        <span className="showcase-tile-media-surface">
+          {image ? (
+            <FallbackImage
+              src={image.src}
+              alt={image.alt}
+              className="showcase-tile-img"
+            />
+          ) : null}
+        </span>
         <span className="showcase-tile-media-label">Náhľad fotky</span>
       </span>
 

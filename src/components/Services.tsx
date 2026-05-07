@@ -2,7 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import FallbackImage from "@/components/FallbackImage";
 import ShowcaseTile from "@/components/ShowcaseTile";
+import { serviceDetailImages, serviceImage } from "@/data/imageAssets";
 
 type ServiceItem = {
   id: string;
@@ -286,13 +288,19 @@ function getTileVariant(index: number) {
   return TILE_VARIANTS[index % TILE_VARIANTS.length];
 }
 
+function formatModalDetail(detail: string) {
+  return /[.!?]$/.test(detail) ? detail : `${detail}.`;
+}
+
 export default function Services() {
   const [openId, setOpenId] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   const activeService = openId ? ALL_SERVICES.find((item) => item.id === openId) ?? null : null;
-  const isGuestService = activeService?.category === "Doplnky pre hostí";
+  const activeServiceImages = activeService
+    ? serviceDetailImages(activeService.category, activeService.id, activeService.name)
+    : [];
 
   useEffect(() => {
     setMounted(true);
@@ -326,7 +334,6 @@ export default function Services() {
     <section id="services">
       <div className="services-bg-lines" />
       <div className="services-glow" />
-      <p className="sec-label reveal">Rozšírte svadbu</p>
       <h2 className="reveal reveal-d1">
         Svadobné <em>doplnky</em>
       </h2>
@@ -334,7 +341,7 @@ export default function Services() {
         <div className="rule-diamond" />
       </div>
       <p className="sec-intro reveal reveal-d2">
-        Vybrali sme pre vás doplnky, ktoré svadbu krásne doladia, spríjemnia hosťom
+        Ponúkame doplnky, ktoré svadbu krásne doladia, spríjemnia hosťom
         a dodajú vášmu dňu ešte osobitejšiu atmosféru.
       </p>
       <div className="doplnkove-wrap">
@@ -349,6 +356,7 @@ export default function Services() {
                 description={service.description}
                 meta={service.price}
                 variant={getTileVariant(index)}
+                image={serviceImage(service.category, service.id, service.name)}
                 featured={index === 0}
                 onClick={() => setOpenId(service.id)}
               />
@@ -367,6 +375,7 @@ export default function Services() {
                 description={service.description}
                 meta={service.price}
                 variant={getTileVariant(index + 1)}
+                image={serviceImage(service.category, service.id, service.name)}
                 featured={index === 1}
                 onClick={() => setOpenId(service.id)}
               />
@@ -398,10 +407,10 @@ export default function Services() {
 
             <div className="service-modal-summary">
               <p className="service-modal-lead">{activeService.modalDescription ?? activeService.description}</p>
-              {!isGuestService && (activeService.modalDetails ?? activeService.details)?.length ? (
+              {(activeService.modalDetails ?? activeService.details)?.length ? (
                 <ul className="service-modal-list service-modal-list-top">
                   {(activeService.modalDetails ?? activeService.details)?.map((detail) => (
-                    <li key={detail}>{detail}</li>
+                    <li key={detail}>{formatModalDetail(detail)}</li>
                   ))}
                 </ul>
               ) : null}
@@ -416,8 +425,14 @@ export default function Services() {
               </div>
 
               <div className="service-photo-placeholder">
-                <span>Fotografia doplnku</span>
-                <small>Tu neskôr doplníme reálnu ukážku.</small>
+                {activeServiceImages.map((image) => (
+                  <FallbackImage
+                    key={image.src}
+                    src={image.src}
+                    alt={image.alt}
+                    className="service-photo-img"
+                  />
+                ))}
               </div>
             </div>
 

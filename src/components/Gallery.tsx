@@ -2,18 +2,9 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import FallbackImage from "@/components/FallbackImage";
 import ShowcaseTile from "@/components/ShowcaseTile";
-
-const IMAGES = [
-  { src: "/images/gallery/01.webp", alt: "Svadobná výzdoba" },
-  { src: "/images/gallery/02.webp", alt: "Detail výzdoby" },
-  { src: "/images/gallery/03.webp", alt: "Svadobný stôl" },
-  { src: "/images/gallery/04.webp", alt: "Srdcový stojan" },
-  { src: "/images/gallery/05.webp", alt: "Výzdoba obradu" },
-  { src: "/images/gallery/06.webp", alt: "Kvety & ikebany" },
-];
-
-const GALLERY_FALLBACK_IMAGE = "/images/gallery/placeholder.png";
+import { GALLERY_IMAGES, rentalDetailImages, rentalImage } from "@/data/imageAssets";
 
 type RentalOffer = {
   id: string;
@@ -185,6 +176,14 @@ export default function Gallery() {
     activeRental?.offer?.text ?? activeRental?.category.text ?? "";
   const activeRentalDetails =
     activeRental?.offer?.details ?? activeRental?.category.details ?? "";
+  const activeRentalTitle = activeRental?.offer?.title ?? activeRental?.category.title ?? "";
+  const activeRentalImages = activeRental
+    ? rentalDetailImages(
+        activeRental.category.id,
+        activeRental.offer?.id ?? activeRental.category.id.replace(/^prenajom-/, ""),
+        activeRentalTitle
+      )
+    : [];
 
   useEffect(() => {
     setMounted(true);
@@ -244,6 +243,7 @@ export default function Gallery() {
                     description={offer.description ?? offer.lead ?? category.lead}
                     meta={offer.price ?? category.price}
                     variant={getTileVariant(index)}
+                    image={rentalImage(category.id, offer.id, offer.title)}
                     featured={index === 0}
                     onClick={(event) => {
                       openDetail(category, offer, event.currentTarget);
@@ -259,19 +259,13 @@ export default function Gallery() {
 
       <div className="gallery-collection reveal reveal-d3">
         <div className="gallery-grid">
-          {IMAGES.map((img) => (
+          {GALLERY_IMAGES.map((img) => (
             <div key={img.src} className="gal-item">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <FallbackImage
                 src={img.src}
                 alt={img.alt}
                 className="gal-img"
                 loading="lazy"
-                onError={(event) => {
-                  const image = event.currentTarget;
-                  if (image.src.endsWith(GALLERY_FALLBACK_IMAGE)) return;
-                  image.src = GALLERY_FALLBACK_IMAGE;
-                }}
               />
               <div className="gal-overlay" />
             </div>
@@ -324,16 +318,14 @@ export default function Gallery() {
               <div className="rental-modal-section rental-modal-photos">
                 <h3>Budúce fotky</h3>
                 <div className="rental-photo-grid">
-                  <div className="rental-photo-placeholder">
-                    <span>Miesto pre fotku</span>
-                    <small>
-                      Sem doplníme prvú ukážku pre {(activeRental.offer?.title ?? activeRental.category.title).toLowerCase()}.
-                    </small>
-                  </div>
-                  <div className="rental-photo-placeholder">
-                    <span>Miesto pre fotku</span>
-                    <small>Sem doplníme ďalší detail alebo aranžmán.</small>
-                  </div>
+                  {activeRentalImages.map((image) => (
+                    <FallbackImage
+                      key={image.src}
+                      src={image.src}
+                      alt={image.alt}
+                      className="rental-photo-img"
+                    />
+                  ))}
                 </div>
               </div>
             </div>

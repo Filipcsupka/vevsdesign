@@ -1,7 +1,7 @@
 export default function About() {
   return (
     <section id="about">
-      <p className="sec-label reveal">Kto sme</p>
+      <p className="sec-label reveal">O nás</p>
       <div className="rule reveal reveal-d1">
         <div className="rule-diamond" />
       </div>
@@ -9,14 +9,13 @@ export default function About() {
         <div className="about-quote-block reveal reveal-d1">
           <div className="about-quote-mark">&ldquo;</div>
           <div className="about-quote-text">Detaily robia svadbu nezabudnuteľnou.</div>
-          <div className="about-quote-by">Vevsdesign · Košice &amp; východné Slovensko</div>
         </div>
         <div className="about-text reveal reveal-d2">
           <h3>Vaša svadba, naša vášeň</h3>
           <p>
-            Kreativita je našou silnou stránkou a veríme, že práve detaily robia svadbu
+            Kreativita je našou silnou stránkou a vieme, že práve detaily robia svadbu
             nezabudnuteľnou. Vašu svadbu nevnímame ako zákazku, ale ako jedinečný príbeh,
-            pri ktorom záleží na každom prvku, každej emócii aj na atmosfére, ktorú spolu vytvárame.
+            pri ktorom záleží na každom prvku a každej emócii.
           </p>
           <p>
             Naším cieľom je, aby si hostia aj po rokoch povedali: &bdquo;Táto svadba bola úžasná.&ldquo;
@@ -30,6 +29,10 @@ export default function About() {
             <div>
               <div className="stat-n">Doplnky</div>
               <div className="stat-l">Na mieru</div>
+            </div>
+            <div>
+              <div className="stat-n">Prenájom</div>
+              <div className="stat-l">Výzdoby</div>
             </div>
           </div>
         </div>
