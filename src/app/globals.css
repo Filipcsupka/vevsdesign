@@ -1036,7 +1036,13 @@ body.modal-open{overflow:hidden}
 
 /* === responsive === */
 @media(max-width:900px){
-  nav{padding:1rem max(1.5rem,env(safe-area-inset-right,0px)) 1rem max(1.5rem,env(safe-area-inset-left,0px))}
+  nav{
+    padding:1rem max(1.5rem,env(safe-area-inset-right,0px)) 1rem max(1.5rem,env(safe-area-inset-left,0px));
+    background:linear-gradient(135deg,rgba(var(--bg-surface-rgb),0.9),rgba(var(--bg-surface-soft-rgb),0.84));
+    backdrop-filter:blur(18px) saturate(1.28);
+    -webkit-backdrop-filter:blur(18px) saturate(1.28);
+    border-bottom:1px solid rgba(var(--gold-rgb),0.14);
+  }
   nav.scrolled{padding:0.8rem max(1.5rem,env(safe-area-inset-right,0px)) 0.8rem max(1.5rem,env(safe-area-inset-left,0px))}
   nav ul{display:none}
   section{padding:5rem 1.5rem}
@@ -1077,16 +1083,17 @@ body.modal-open{overflow:hidden}
 @media(max-width:600px){
   html,body{max-width:100%;overflow-x:hidden}
   #hero{
-    --hero-logo-base-y:-6.5rem;
+    --hero-logo-base-y:-0.4rem;
     min-height:100svh;
     justify-content:flex-start;
-    padding:5.2rem max(1rem,env(safe-area-inset-right,0px)) 4rem max(1rem,env(safe-area-inset-left,0px));
+    padding:6.4rem max(1rem,env(safe-area-inset-right,0px)) 4rem max(1rem,env(safe-area-inset-left,0px));
   }
   .hero-logo-wrap{
-    width:min(276px,68vw);
-    height:clamp(121px,32vw,165px);
-    margin:-2.1rem 0 -0.85rem;
+    width:min(238px,60vw);
+    height:clamp(104px,27vw,138px);
+    margin:-0.55rem 0 -0.35rem;
   }
+  .hero-logo-wrap::before{inset:-18% -4% -30% -4%;-webkit-mask-size:116% auto;mask-size:116% auto}
   .hero-eyebrow{
     width:100%;gap:0.8rem;font-size:0.54rem;letter-spacing:0.2em;
   }

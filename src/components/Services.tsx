@@ -337,7 +337,7 @@ export default function Services() {
         Vybrali sme pre vás doplnky, ktoré svadbu krásne doladia, spríjemnia hosťom
         a dodajú vášmu dňu ešte osobitejšiu atmosféru.
       </p>
-      <div className="doplnkove-wrap reveal reveal-d2">
+      <div className="doplnkove-wrap">
         <div className="doplnkove-inner" id="doplnky-na-mieru">
           <div className="doplnkove-title">Doplnky na mieru</div>
           <div className="showcase-grid showcase-grid-services">
