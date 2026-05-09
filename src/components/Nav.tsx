@@ -4,10 +4,13 @@ import { useEffect, useRef, useState } from "react";
 
 export default function Nav() {
   const navRef = useRef<HTMLElement>(null);
-  const packagesMenuRef = useRef<HTMLLIElement>(null);
-  const servicesMenuRef = useRef<HTMLLIElement>(null);
-  const rentalMenuRef = useRef<HTMLLIElement>(null);
   const [openMenu, setOpenMenu] = useState<"packages" | "services" | "rental" | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  function closeNavigation() {
+    setOpenMenu(null);
+    setMobileMenuOpen(false);
+  }
 
   useEffect(() => {
     const nav = navRef.current;
@@ -21,17 +24,17 @@ export default function Nav() {
   useEffect(() => {
     const handlePointerDown = (event: MouseEvent) => {
       const target = event.target as Node;
-      if (
-        !packagesMenuRef.current?.contains(target) &&
-        !servicesMenuRef.current?.contains(target) &&
-        !rentalMenuRef.current?.contains(target)
-      ) {
+      if (!navRef.current?.contains(target)) {
         setOpenMenu(null);
+        setMobileMenuOpen(false);
       }
     };
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpenMenu(null);
+      if (event.key === "Escape") {
+        setOpenMenu(null);
+        setMobileMenuOpen(false);
+      }
     };
 
     document.addEventListener("mousedown", handlePointerDown);
@@ -47,17 +50,31 @@ export default function Nav() {
       <a href="#hero" className="nav-logo">
         VEVS<em>DESIGN</em>
       </a>
-      <ul>
-        <li><a href="#hero">Domov</a></li>
-        <li><a href="#about">O nás</a></li>
+      <button
+        type="button"
+        className={`mobile-menu-button${mobileMenuOpen ? " open" : ""}`}
+        aria-label={mobileMenuOpen ? "Zavrieť menu" : "Otvoriť menu"}
+        aria-expanded={mobileMenuOpen}
+        aria-controls="site-navigation"
+        onClick={() => {
+          setMobileMenuOpen((open) => !open);
+          setOpenMenu(null);
+        }}
+      >
+        <span aria-hidden="true" />
+        <span aria-hidden="true" />
+        <span aria-hidden="true" />
+      </button>
+      <ul id="site-navigation" className={`nav-links${mobileMenuOpen ? " open" : ""}`}>
+        <li><a href="#hero" onClick={closeNavigation}>Domov</a></li>
+        <li><a href="#about" onClick={closeNavigation}>O nás</a></li>
         <li
-          ref={packagesMenuRef}
           className={`nav-item-has-menu${openMenu === "packages" ? " open" : ""}`}
           onMouseEnter={() => setOpenMenu("packages")}
           onMouseLeave={() => setOpenMenu(null)}
         >
           <div className="nav-menu-head">
-            <a href="#baliky" className="nav-menu-link" onClick={() => setOpenMenu(null)}>
+            <a href="#baliky" className="nav-menu-link" onClick={closeNavigation}>
               Svadobné balíčky
             </a>
             <button
@@ -73,20 +90,19 @@ export default function Nav() {
             </button>
           </div>
           <ul id="packages-submenu" className="nav-submenu">
-            <li><a href="#balik-s-detail" onClick={() => setOpenMenu(null)}>Balík S</a></li>
-            <li><a href="#balik-m-detail" onClick={() => setOpenMenu(null)}>Balík M</a></li>
-            <li><a href="#balik-l-detail" onClick={() => setOpenMenu(null)}>Balík L</a></li>
-            <li><a href="#kontakt" onClick={() => setOpenMenu(null)}>Vlastný balík</a></li>
+            <li><a href="#balik-s-detail" onClick={closeNavigation}>Balík S</a></li>
+            <li><a href="#balik-m-detail" onClick={closeNavigation}>Balík M</a></li>
+            <li><a href="#balik-l-detail" onClick={closeNavigation}>Balík L</a></li>
+            <li><a href="#kontakt" onClick={closeNavigation}>Vlastný balík</a></li>
           </ul>
         </li>
         <li
-          ref={servicesMenuRef}
           className={`nav-item-has-menu${openMenu === "services" ? " open" : ""}`}
           onMouseEnter={() => setOpenMenu("services")}
           onMouseLeave={() => setOpenMenu(null)}
         >
           <div className="nav-menu-head">
-            <a href="#services" className="nav-menu-link" onClick={() => setOpenMenu(null)}>
+            <a href="#services" className="nav-menu-link" onClick={closeNavigation}>
               Svadobné doplnky
             </a>
             <button
@@ -102,18 +118,17 @@ export default function Nav() {
             </button>
           </div>
           <ul id="services-submenu" className="nav-submenu">
-            <li><a href="#doplnky-na-mieru" onClick={() => setOpenMenu(null)}>Doplnky na mieru</a></li>
-            <li><a href="#doplnky-pre-hosti" onClick={() => setOpenMenu(null)}>Doplnky pre hostí</a></li>
+            <li><a href="#doplnky-na-mieru" onClick={closeNavigation}>Doplnky na mieru</a></li>
+            <li><a href="#doplnky-pre-hosti" onClick={closeNavigation}>Doplnky pre hostí</a></li>
           </ul>
         </li>
         <li
-          ref={rentalMenuRef}
           className={`nav-item-has-menu${openMenu === "rental" ? " open" : ""}`}
           onMouseEnter={() => setOpenMenu("rental")}
           onMouseLeave={() => setOpenMenu(null)}
         >
           <div className="nav-menu-head">
-            <a href="#galeria" className="nav-menu-link" onClick={() => setOpenMenu(null)}>
+            <a href="#galeria" className="nav-menu-link" onClick={closeNavigation}>
               Prenájom
             </a>
             <button
@@ -129,11 +144,11 @@ export default function Nav() {
             </button>
           </div>
           <ul id="rental-submenu" className="nav-submenu">
-            <li><a href="#prenajom-kvetinova-vyzdoba" onClick={() => setOpenMenu(null)}>Kvetinová výzdoba</a></li>
-            <li><a href="#prenajom-detsky-kutik" onClick={() => setOpenMenu(null)}>Detský kútik</a></li>
-            <li><a href="#prenajom-stojany-zrkadla" onClick={() => setOpenMenu(null)}>Stojany a zrkadlá</a></li>
-            <li><a href="#prenajom-vazy-svietniky" onClick={() => setOpenMenu(null)}>Vázy a svietniky</a></li>
-            <li><a href="#prenajom-ostatne" onClick={() => setOpenMenu(null)}>Ostatné</a></li>
+            <li><a href="#prenajom-kvetinova-vyzdoba" onClick={closeNavigation}>Kvetinová výzdoba</a></li>
+            <li><a href="#prenajom-detsky-kutik" onClick={closeNavigation}>Detský kútik</a></li>
+            <li><a href="#prenajom-stojany-zrkadla" onClick={closeNavigation}>Stojany a zrkadlá</a></li>
+            <li><a href="#prenajom-vazy-svietniky" onClick={closeNavigation}>Vázy a svietniky</a></li>
+            <li><a href="#prenajom-ostatne" onClick={closeNavigation}>Ostatné</a></li>
           </ul>
         </li>
       </ul>
