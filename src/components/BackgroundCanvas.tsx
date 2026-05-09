@@ -34,15 +34,47 @@ export default function BackgroundCanvas() {
     let rafId = 0;
     let petals: Petal[] = [];
 
+    function getCanvasHeight() {
+      const usesMobileViewport = window.matchMedia("(max-width: 900px), (pointer: coarse)").matches;
+      if (!usesMobileViewport) return window.innerHeight;
+
+      return Math.max(window.innerHeight, window.screen?.height || 0);
+    }
+
+    function getPetalCount() {
+      return Math.min(Math.max(Math.floor((W * H) / 16500), 34), 96);
+    }
+
     function resize() {
+      const prevW = W;
+      const prevH = H;
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       W = window.innerWidth;
-      H = window.innerHeight;
+      H = getCanvasHeight();
+
+      if (
+        prevW === W &&
+        prevH === H &&
+        canvas!.width === Math.ceil(W * dpr) &&
+        canvas!.height === Math.ceil(H * dpr)
+      ) {
+        return;
+      }
+
       canvas!.width = Math.ceil(W * dpr);
       canvas!.height = Math.ceil(H * dpr);
       canvas!.style.width = `${W}px`;
       canvas!.style.height = `${H}px`;
       context.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      if (!prevW || !prevH || petals.length === 0) return;
+
+      const scaleX = W / prevW;
+      const scaleY = H / prevH;
+      for (const petal of petals) {
+        petal.x *= scaleX;
+        petal.y *= scaleY;
+      }
     }
 
     function drawBackdrop() {
@@ -129,9 +161,19 @@ export default function BackgroundCanvas() {
 
     function initPetals() {
       petals = [];
-      const count = Math.min(Math.max(Math.floor((W * H) / 16500), 34), 96);
+      const count = getPetalCount();
       for (let i = 0; i < count; i++) {
         petals.push(createPetal(true));
+      }
+    }
+
+    function syncPetalCount() {
+      const count = getPetalCount();
+      if (petals.length > count) {
+        petals.length = count;
+      }
+      while (petals.length < count) {
+        petals.push(createPetal());
       }
     }
 
@@ -157,9 +199,14 @@ export default function BackgroundCanvas() {
       if (!reducedMotion) rafId = requestAnimationFrame(tick);
     }
 
-    function paint() {
+    function paint(resetPetals = false) {
       resize();
-      initPetals();
+      if (resetPetals || petals.length === 0) {
+        initPetals();
+      } else {
+        syncPetalCount();
+      }
+
       if (reducedMotion) {
         drawBackdrop();
         for (const petal of petals) {
@@ -168,13 +215,15 @@ export default function BackgroundCanvas() {
       }
     }
 
-    paint();
+    const handleResize = () => paint(false);
+
+    paint(true);
     if (!reducedMotion) tick();
-    window.addEventListener("resize", paint, { passive: true });
+    window.addEventListener("resize", handleResize, { passive: true });
 
     return () => {
       cancelAnimationFrame(rafId);
-      window.removeEventListener("resize", paint);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
