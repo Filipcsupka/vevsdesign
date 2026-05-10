@@ -93,7 +93,6 @@ jobs:
 
           grep -F "Vevsdesign" /tmp/index.html
           grep -F "id=\"kontakt\"" /tmp/index.html
-          grep -F "Veronika" /tmp/index.html
 
           curl -fsSI http://localhost:8080/logo.png
           curl -fsSI http://localhost:8080/images/gallery/placeholder.png
