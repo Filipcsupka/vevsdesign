@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-const AJAX_ENDPOINT = "https://formsubmit.co/ajax/veronika.csupkova@gmail.com";
+const AJAX_ENDPOINT = "https://formsubmit.co/ajax/vevsdesignn@gmail.com";
 
 type KontaktProps = {
   selectedPackage: string;
@@ -54,17 +54,15 @@ export default function Kontakt({ selectedPackage }: KontaktProps) {
           <p className="lead">
             Kontaktujte nás a spoločne vytvoríme váš vysnívaný deň. Odpovedáme do 24 hodín.
           </p>
-          <div className="kontakt-person-name">Veronika Csupková</div>
-          <div className="kontakt-person-role">Manažérka &amp; Kontaktná osoba</div>
           <div className="kontakt-details">
             <div className="kontakt-item">
               <span className="k-label">Telefón</span>
-              <span className="k-val"><a href="tel:+421910091009">0910 091 009</a></span>
+              <span className="k-val"><a href="tel:+421915309721">+421 915 309 721</a></span>
             </div>
             <div className="kontakt-item">
               <span className="k-label">Email</span>
               <span className="k-val">
-                <a href="mailto:veronika.csupkova@gmail.com">veronika.csupkova@gmail.com</a>
+                <a href="mailto:vevsdesignn@gmail.com">vevsdesignn@gmail.com</a>
               </span>
             </div>
             <div className="kontakt-item">
@@ -88,7 +86,7 @@ export default function Kontakt({ selectedPackage }: KontaktProps) {
           <form onSubmit={handleSubmit} noValidate>
             <input type="hidden" name="_subject" value="Nová správa z webu Vevsdesign" />
             <input type="hidden" name="_template" value="table" />
-            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_captcha" value="true" />
             <input
               type="text"
               name="_honey"
