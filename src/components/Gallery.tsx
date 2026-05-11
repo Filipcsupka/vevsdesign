@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { normalizeQuantity, type PriceKind, type SelectionItem } from "@/components/contactSelection";
 import { createPortal } from "react-dom";
 import FallbackImage from "@/components/FallbackImage";
+import ModalImageGallery from "@/components/ModalImageGallery";
 import ShowcaseTile from "@/components/ShowcaseTile";
 import { GALLERY_IMAGES, rentalDetailImages, rentalImage } from "@/data/imageAssets";
 
@@ -42,7 +43,7 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
       {
         id: "ikebana-na-stoly",
         title: "Ikebana na stoly",
-        price: "30 €/ks",
+        price: "30 €",
         unitPrice: 30,
         priceKind: "fixed",
         description: "Obsahuje všetky kvety ako na fotke vo Vašich požadovaných farbách.",
@@ -52,7 +53,7 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
       {
         id: "ikebana-na-stoly-s-vazami-okolo",
         title: "Ikebana na stoly s vázami okolo",
-        price: "40 €/ks",
+        price: "40 €",
         unitPrice: 40,
         priceKind: "fixed",
         description: "Obsahuje všetky kvety ako na fotke vo Vašich požadovaných farbách.",
@@ -62,7 +63,7 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
       {
         id: "mala-ikebana",
         title: "Malá ikebana",
-        price: "15 €/ks",
+        price: "15 €",
         unitPrice: 15,
         priceKind: "fixed",
         description: "Obsahuje kvety ako na fotke vo Vašich požadovaných farbách.",
@@ -72,7 +73,7 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
       {
         id: "dlha-ikebana",
         title: "Dlhá ikebana",
-        price: "30 €/ks",
+        price: "30 €",
         unitPrice: 30,
         priceKind: "fixed",
         description: "Obsahuje kvety ako na fotke vo Vašich požadovaných farbách, úzke svietniky a sviečky.",
@@ -130,7 +131,7 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
       {
         id: "stojace-tyce-s-balonmi",
         title: "Stojace tyče s balónmi",
-        price: "25 €/ks",
+        price: "25 €",
         unitPrice: 25,
         priceKind: "fixed",
         description: "V cene sú zahrnuté aj balóny.",
@@ -156,10 +157,56 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
     price: "Cena individuálne",
     lead: "Vázy a svietniky vyberáme tak, aby prirodzene doplnili prestretie stolov a podčiarkli jemný svadobný charakter.",
     offers: [
-      { id: "vysoke-svietniky", title: "Vysoké svietniky", price: "Cena individuálne", unitPrice: null, priceKind: "individual" },
-      { id: "champagne-svietniky", title: "Champagne svietniky", price: "Cena individuálne", unitPrice: null, priceKind: "individual" },
-      { id: "vysoke-vazy", title: "Vysoké vázy", price: "Cena individuálne", unitPrice: null, priceKind: "individual" },
-      { id: "uzke-vazy", title: "Úzke vázy", price: "Cena individuálne", unitPrice: null, priceKind: "individual" },
+      {
+        id: "vysoke-svietniky",
+        title: "Vysoké svietniky",
+        price: "5 €",
+        unitPrice: 5,
+        priceKind: "fixed",
+        description: "Elegantne vytiahnu prestretie do výšky a dodajú mu slávnostný lesk.",
+        lead: "Elegantne vytiahnu prestretie do výšky a dodajú mu slávnostný lesk. Na výber zlaté alebo čierne. Cena je za 3ks ako na fotke.",
+        details: "Možnosť osobného odberu, zaslania alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
+      },
+      {
+        id: "uzke-metrove-svietniky",
+        title: "Úzke metrové svietniky",
+        price: "25 €",
+        unitPrice: 25,
+        priceKind: "fixed",
+        description: "Vytvoria výraznú líniu stola a pôsobia moderne, čisto a luxusne. Vhodné aj na obrade alebo pri uvítaní hostí.",
+        lead: "Vytvoria výraznú líniu stola a pôsobia moderne, čisto a luxusne. Vhodné aj na obrade alebo pri uvítaní hostí.",
+        details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100€ (+ príplatok PHM).",
+      },
+      {
+        id: "champagne-svietniky",
+        title: "Champagne svietniky",
+        price: "1,80 €",
+        unitPrice: 1.8,
+        priceKind: "fixed",
+        description: "Jemne odrážajú svetlo sviečok a dodajú stolom mäkký romantický lesk. Slúžia pre plávajúce sviečky, ktoré sú započítané v cene.",
+        lead: "Jemne odrážajú svetlo sviečok a dodajú stolom mäkký romantický lesk. Slúžia pre plávajúce sviečky, ktoré sú započítané v cene.",
+        details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100€ (+ príplatok PHM).",
+      },
+      {
+        id: "vysoke-vazy",
+        title: "Vysoké vázy",
+        price: "2,50 €",
+        unitPrice: 2.5,
+        priceKind: "fixed",
+        description: "Krásne otvoria priestor na vyššie aranžmány a pôsobia vzdušne aj noblesne.",
+        lead: "Krásne otvoria priestor na vyššie aranžmány a pôsobia vzdušne aj noblesne.",
+        details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100€ (+ príplatok PHM).",
+      },
+      {
+        id: "uzke-vazy",
+        title: "Úzke vázy",
+        price: "1 €",
+        unitPrice: 1,
+        priceKind: "fixed",
+        description: "Sú ideálne na jemné detaily, ktoré doladia stôl bez toho, aby ho vizuálne preťažili.",
+        lead: "Sú ideálne na jemné detaily, ktoré doladia stôl bez toho, aby ho vizuálne preťažili.",
+        details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100€ (+ príplatok PHM).",
+      },
     ],
   },
   {
@@ -169,11 +216,46 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
     price: "Cena individuálne",
     lead: "Ak chcete doplniť svadbu o ďalšie efektné alebo praktické kúsky, radi vyskladáme prenájom aj podľa vašej predstavy.",
     offers: [
-      { id: "instax-foto", title: "Instax foto", price: "Cena individuálne", unitPrice: null, priceKind: "individual" },
-      { id: "champagne-tower", title: "Champagne tower", price: "Cena individuálne", unitPrice: null, priceKind: "individual" },
-      { id: "behun-stola", title: "Behúň / štóla", price: "Cena individuálne", unitPrice: null, priceKind: "individual" },
-      { id: "lampase", title: "Lampáše", price: "Cena individuálne", unitPrice: null, priceKind: "individual" },
-      { id: "drevene-boxy", title: "Drevené boxy", price: "Cena individuálne", unitPrice: null, priceKind: "individual" },
+      {
+        id: "champagne-tower",
+        title: "Champagne tower",
+        price: "Od 21 €",
+        unitPrice: 21,
+        priceKind: "from",
+        description: "Efektná champagne veža vytvorí moment, na ktorý si hostia spomenú ešte dlho.",
+        lead: "Efektná champagne veža vytvorí moment, na ktorý si hostia spomenú ešte dlho. Cena za jeden pohár je 1,50€ a najmenšia veža sa skladá zo 14 pohárov. Možnosť vyskladať do 50 pohárov.",
+        details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100€ (+ príplatok PHM).",
+      },
+      {
+        id: "behun-stola",
+        title: "Behúň / štóla",
+        price: "Cena individuálne",
+        unitPrice: null,
+        priceKind: "individual",
+        description: "Jemne zmäkčí prestretie a prepojí celú výzdobu do elegantného celku. Máme na výber modrú, zelenú, ružovú, béžovú, bielu, perličkovú.",
+        lead: "Jemne zmäkčí prestretie a prepojí celú výzdobu do elegantného celku. Máme na výber modrú, zelenú, ružovú, béžovú, bielu, perličkovú.",
+        details: "Možnosť osobného odberu, zaslania alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100€ (+ príplatok PHM).",
+      },
+      {
+        id: "lampase",
+        title: "Lampáše",
+        price: "Cena individuálne",
+        unitPrice: null,
+        priceKind: "individual",
+        description: "Lampáše vytvoria teplú atmosféru a krásne vyniknú pri obrade, ceste aj večernom svietení.",
+        lead: "Lampáše vytvoria teplú atmosféru a krásne vyniknú pri obrade, ceste aj večernom svietení.",
+        details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100€ (+ príplatok PHM).",
+      },
+      {
+        id: "drevene-boxy",
+        title: "Drevené boxy",
+        price: "Cena individuálne",
+        unitPrice: null,
+        priceKind: "individual",
+        description: "Drevené boxy dodajú aranžmánu príjemný rustikálny charakter a zároveň prakticky usporiadajú detaily. Vhodné na cigar bar, rekvizity a iné.",
+        lead: "Drevené boxy dodajú aranžmánu príjemný rustikálny charakter a zároveň prakticky usporiadajú detaily. Vhodné na cigar bar, rekvizity a iné.",
+        details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100€ (+ príplatok PHM).",
+      },
     ],
   },
 ];
@@ -356,38 +438,28 @@ export default function Gallery({ onSelectRental }: GalleryProps) {
               <div className="rental-modal-price">{activeRental.offer?.price ?? activeRental.category.price}</div>
             </div>
 
-            <p className="rental-modal-lead">
-              {activeRental.offer?.lead ?? activeRental.offer?.description ?? activeRental.category.lead}
-            </p>
+            <div className="rental-modal-top">
+              <div className="rental-modal-summary">
+                <p className="rental-modal-lead">
+                  {activeRental.offer?.lead ?? activeRental.offer?.description ?? activeRental.category.lead}
+                </p>
+                {activeRentalBodyText && activeRentalBodyText !== (activeRental.offer?.lead ?? activeRental.offer?.description ?? activeRental.category.lead) ? (
+                  <div className="rental-modal-section">
+                    <h3>O položke</h3>
+                    <p>{activeRentalBodyText}</p>
+                  </div>
+                ) : null}
+              </div>
+              <ModalImageGallery images={activeRentalImages} label={activeRentalTitle} />
+            </div>
 
-            <div className="rental-modal-layout">
-              {activeRentalBodyText ? (
-                <div className="rental-modal-section">
-                  <h3>O položke</h3>
-                  <p>{activeRentalBodyText}</p>
-                </div>
-              ) : null}
-
+            <div className="rental-modal-body">
               {activeRentalDetails ? (
                 <div className="rental-modal-section">
                   <h3>Podrobnosti</h3>
                   <p>{activeRentalDetails}</p>
                 </div>
               ) : null}
-
-              <div className="rental-modal-section rental-modal-photos">
-                <h3>Budúce fotky</h3>
-                <div className="rental-photo-grid">
-                  {activeRentalImages.map((image) => (
-                    <FallbackImage
-                      key={image.src}
-                      src={image.src}
-                      alt={image.alt}
-                      className="rental-photo-img"
-                    />
-                  ))}
-                </div>
-              </div>
             </div>
 
             <div className="rental-modal-actions">

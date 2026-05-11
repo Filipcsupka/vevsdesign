@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { type SelectionItem } from "@/components/contactSelection";
-import FallbackImage from "@/components/FallbackImage";
+import ModalImageGallery from "@/components/ModalImageGallery";
 import { packageDetailImages } from "@/data/imageAssets";
 
 type PackageId = "s" | "m" | "l";
@@ -283,21 +283,17 @@ export default function Baliky({ onSelectPackage }: BalikyProps) {
               <div className="balik-modal-name" id="balik-modal-name">{detail.name}</div>
               <div className="balik-modal-price">{detail.price}</div>
             </div>
-            <p className="balik-modal-lead">{detail.lead}</p>
+            <div className="balik-modal-top">
+              <p className="balik-modal-lead">{detail.lead}</p>
+              <ModalImageGallery images={packageImages} label={detail.name} />
+            </div>
 
             <div className="balik-modal-body">
-              <div className="balik-modal-section balik-modal-photos">
-                <h3>Budúce fotky</h3>
-                <div className="balik-photo-grid">
-                  {packageImages.map((image) => (
-                    <FallbackImage
-                      key={image.src}
-                      src={image.src}
-                      alt={image.alt}
-                      className="balik-photo-img"
-                    />
-                  ))}
-                </div>
+              <div className="balik-modal-section">
+                <h3>Podrobnosti</h3>
+                <p>
+                  Balík vieme doladiť podľa vašej farebnosti, priestoru aj celkovej atmosféry svadobného dňa.
+                </p>
               </div>
 
               {detail.sections.map((sec) => (

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { normalizeQuantity, type PriceKind, type SelectionItem } from "@/components/contactSelection";
 import { createPortal } from "react-dom";
-import FallbackImage from "@/components/FallbackImage";
+import ModalImageGallery from "@/components/ModalImageGallery";
 import ShowcaseTile from "@/components/ShowcaseTile";
 import { serviceDetailImages, serviceImage } from "@/data/imageAssets";
 
@@ -27,7 +27,7 @@ const CUSTOM_SERVICES: ServiceItem[] = [
   {
     id: "pozvanky",
     name: "Pozvánky",
-    price: "Od 0,40 €/ks",
+    price: "Od 0,40 €",
     unitPrice: 0.4,
     priceKind: "from",
     description: "Pozvánky navrhujeme tak, aby už pri prvom pohľade vystihli štýl, náladu a charakter vašej svadby.",
@@ -46,7 +46,7 @@ const CUSTOM_SERVICES: ServiceItem[] = [
   {
     id: "menovky",
     name: "Menovky",
-    price: "Od 0,25 €/ks",
+    price: "Od 0,25 €",
     unitPrice: 0.25,
     priceKind: "from",
     description: "Jemné menovky doladia prestretie stolov a vytvoria osobnejší dojem pre každého hosťa.",
@@ -84,7 +84,7 @@ const CUSTOM_SERVICES: ServiceItem[] = [
   {
     id: "servitky",
     name: "Servítky",
-    price: "0,60 €/ks",
+    price: "0,60 €",
     unitPrice: 0.6,
     priceKind: "fixed",
     description: "Servítky vieme doladiť tak, aby pôsobili elegantne a prirodzene zapadli do celého prestretia.",
@@ -171,7 +171,7 @@ const GUEST_SERVICES: ServiceItem[] = [
   {
     id: "detske-balicky",
     name: "Detský balíček",
-    price: "10 €/ks",
+    price: "10 €",
     unitPrice: 10,
     priceKind: "fixed",
     description: "Detské balíčky spríjemnia svadobný deň malým hosťom a pomôžu zabaviť ich počas hostiny aj programu.",
@@ -183,7 +183,7 @@ const GUEST_SERVICES: ServiceItem[] = [
   {
     id: "omalovanky",
     name: "Omaľovánky",
-    price: "4 €/ks",
+    price: "4 €",
     unitPrice: 4,
     priceKind: "fixed",
     description: "Omaľovánky sú jednoduchý, ale veľmi obľúbený doplnok, ktorý zabaví deti počas svadobného dňa.",
@@ -195,7 +195,7 @@ const GUEST_SERVICES: ServiceItem[] = [
   {
     id: "vejare",
     name: "Vejáre",
-    price: "1,50 €/ks",
+    price: "1,50 €",
     unitPrice: 1.5,
     priceKind: "fixed",
     description: "Vejáre sú pekný aj praktický detail, ktorý hostia ocenia najmä počas teplých letných svadieb.",
@@ -207,7 +207,7 @@ const GUEST_SERVICES: ServiceItem[] = [
   {
     id: "papucky",
     name: "Papučky",
-    price: "0,50 €/ks",
+    price: "0,50 €",
     unitPrice: 0.5,
     priceKind: "fixed",
     description: "Papučky doprajú hosťom väčšie pohodlie pri tanci a zároveň spríjemnia neskorší priebeh oslavy.",
@@ -232,7 +232,7 @@ const GUEST_SERVICES: ServiceItem[] = [
   {
     id: "domaci-med",
     name: "Mini medík domáci",
-    price: "1,50 €/ks",
+    price: "1,50 €",
     unitPrice: 1.5,
     priceKind: "fixed",
     description: "Domáci med je milá a vkusná pozornosť pre hostí, ktorá pôsobí osobne a srdcom.",
@@ -244,7 +244,7 @@ const GUEST_SERVICES: ServiceItem[] = [
   {
     id: "flasticky",
     name: "Mini fľaštičky",
-    price: "1,50 €/ks",
+    price: "1,50 €",
     unitPrice: 1.5,
     priceKind: "fixed",
     description: "Fľaštičky vieme pripraviť ako originálny drobný darček alebo tematický detail pre vašich hostí.",
@@ -401,34 +401,26 @@ export default function Services({ onSelectService }: ServicesProps) {
               <div className="service-modal-price">{activeService.price}</div>
             </div>
 
-            <div className="service-modal-summary">
-              <p className="service-modal-lead">{activeService.modalDescription ?? activeService.description}</p>
-              {(activeService.modalDetails ?? activeService.details)?.length ? (
-                <ul className="service-modal-list service-modal-list-top">
-                  {(activeService.modalDetails ?? activeService.details)?.map((detail) => (
-                    <li key={detail}>{formatModalDetail(detail)}</li>
-                  ))}
-                </ul>
-              ) : null}
+            <div className="service-modal-top">
+              <div className="service-modal-summary">
+                <p className="service-modal-lead">{activeService.modalDescription ?? activeService.description}</p>
+                {(activeService.modalDetails ?? activeService.details)?.length ? (
+                  <ul className="service-modal-list service-modal-list-top">
+                    {(activeService.modalDetails ?? activeService.details)?.map((detail) => (
+                      <li key={detail}>{formatModalDetail(detail)}</li>
+                    ))}
+                  </ul>
+                ) : null}
+              </div>
+              <ModalImageGallery images={activeServiceImages} label={activeService.name} />
             </div>
 
-            <div className="service-modal-layout">
+            <div className="service-modal-body">
               <div className="service-modal-section">
                 <h3>{activeService.modalSectionTitle ?? "Podrobnosti"}</h3>
                 <p>
                   {activeService.modalAbout ?? "Tento doplnok vieme zladiť s vašou farebnosťou, štýlom aj celkovou atmosférou svadby, aby prirodzene zapadol do celého konceptu."}
                 </p>
-              </div>
-
-              <div className="service-photo-placeholder">
-                {activeServiceImages.map((image) => (
-                  <FallbackImage
-                    key={image.src}
-                    src={image.src}
-                    alt={image.alt}
-                    className="service-photo-img"
-                  />
-                ))}
               </div>
             </div>
 
