@@ -309,7 +309,7 @@ export default function Baliky({ onSelectPackage }: BalikyProps) {
                 Máte inú predstavu? Balík vieme vyskladať aj na mieru.
               </span>
               <a href="#kontakt" className="btn-p" onClick={handleCta}>
-                Mám záujem
+                Vybrať
               </a>
             </div>
           </div>

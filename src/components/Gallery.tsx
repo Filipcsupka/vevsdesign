@@ -41,7 +41,7 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         price: "30 €/ks",
         description: "Obsahuje všetky kvety ako na fotke vo Vašich požadovaných farbách.",
         lead: "Obsahuje všetky kvety ako na fotke vo Vašich požadovaných farbách. Vysoká váza v strede so živou ružou. Dva poháre s plávajúcimi sviečkami.",
-        details: "Do poznámky prosím uviesť množstvo a požadované farby. Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska od 4 ks vyššie alebo aj 1 ks pri objednávke nad 100 € (+ príplatok PHM).",
+        details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska od 4 ks vyššie alebo aj 1 ks pri objednávke nad 100 € (+ príplatok PHM).",
       },
       {
         id: "ikebana-na-stoly-s-vazami-okolo",
@@ -49,7 +49,7 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         price: "40 €/ks",
         description: "Obsahuje všetky kvety ako na fotke vo Vašich požadovaných farbách.",
         lead: "Obsahuje všetky kvety ako na fotke vo Vašich požadovaných farbách. Vysoká váza v strede so živou ružou. Dva poháre s plávajúcimi sviečkami. Osem váz dookola s umelými kvetmi. Možnosť živých kvetov v 8 vázach naokolo, napríklad po jednej ruži alebo iných kvetov podľa požiadavky v cene 50 - 70 €.",
-        details: "Do poznámky prosím uviesť množstvo, požadované farby a ak je treba požiadavku živých kvetov. Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska od 4 ks vyššie alebo aj 1 ks pri objednávke nad 100 € (+ príplatok PHM).",
+        details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska od 4 ks vyššie alebo aj 1 ks pri objednávke nad 100 € (+ príplatok PHM).",
       },
       {
         id: "mala-ikebana",
@@ -57,7 +57,7 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         price: "15 €/ks",
         description: "Obsahuje kvety ako na fotke vo Vašich požadovaných farbách.",
         lead: "Obsahuje kvety ako na fotke vo Vašich požadovaných farbách. Vhodné umiestniť napríklad ku uvítacej tabuli, na obrad pozdĺž uličky alebo pred hlavný stôl novomanželov.",
-        details: "Do poznámky prosím uviesť množstvo a požadované farby. Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále alebo na obrade v rámci Východného Slovenska od 6 ks vyššie alebo aj 1 ks pri objednávke nad 100 € (+ príplatok PHM).",
+        details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále alebo na obrade v rámci Východného Slovenska od 6 ks vyššie alebo aj 1 ks pri objednávke nad 100 € (+ príplatok PHM).",
       },
       {
         id: "dlha-ikebana",
@@ -65,7 +65,7 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         price: "30 €/ks",
         description: "Obsahuje kvety ako na fotke vo Vašich požadovaných farbách, úzke svietniky a sviečky.",
         lead: "Obsahuje kvety ako na fotke vo Vašich požadovaných farbách, úzke svietniky a sviečky.",
-        details: "Do poznámky prosím uviesť množstvo a požadované farby. Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
+        details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
       },
     ],
   },
@@ -89,28 +89,41 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
   {
     id: "prenajom-stojany-zrkadla",
     title: "Stojany a zrkadlá",
-    text: "",
+    text: "Dekoračné stojany, zrkadlá a výrazné prvky vhodné na uvítanie hostí, fotenie aj personalizovaný program.",
     price: "Cena individuálne",
     lead: "Stojany a zrkadlá pripravíme ako výrazné dekoračné prvky, ktoré vyniknú pri vstupe, obrade aj počas fotenia.",
     offers: [
       {
         id: "ovalny-stojan",
         title: "Oválny stojan",
-        description: "Vhodný na uvítací banner.",
+        price: "25 €",
+        description: "Cena je za čistý zlatý stojan vhodný na uvítanie hostí.",
+        lead: "Cena je za čistý zlatý stojan, ktorý je vhodný na uvítanie hostí alebo fotenie. Možnosť uvítacej personalizovanej látky +20 € alebo len zaveseného zasadacieho poriadku +15 €.",
+        details: "Možnosť osobného odberu, zaslania iba čistého stojanu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
       },
       {
         id: "srdcovy-stojan",
         title: "Srdcový stojan",
-        description: "Vhodný na obrade alebo za svadobným stolom.",
+        price: "40 €",
+        description: "Čistý zlatý stojan, ktorý krásne vynikne na obrade alebo za hlavným stolom.",
+        lead: "Cena je za čistý zlatý stojan, ktorý krásne vynikne na obrade alebo za hlavným stolom. Taktiež sa môže použiť ako fotostena. Možnosť pokrytia hebkými štólami pre luxusný efekt +20 € a pridania kvetov na rám podľa množstva kvetov od 10 €.",
+        details: "Možnosť osobného odberu, zaslania iba čistého stojanu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
       },
       {
         id: "stojace-tyce-s-balonmi",
         title: "Stojace tyče s balónmi",
-        description: "Vhodné pri vstupe.",
+        price: "25 €/ks",
+        description: "V cene sú zahrnuté aj balóny.",
+        lead: "V cene sú zahrnuté aj balóny. Vhodné pre vstup do sály.",
+        details: "Možnosť osobného odberu, zaslania alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
       },
       {
         id: "zrkadlo-s-menami-a-textom",
         title: "Zrkadlo s menami a textom",
+        price: "30 €",
+        description: "V cene sú zahrnuté aj Vaše personalizované údaje.",
+        lead: "V cene sú zahrnuté aj Vaše personalizované údaje ako mená, dátum a text.",
+        details: "Možnosť osobného odberu, zaslania alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
       },
     ],
   },
@@ -173,7 +186,7 @@ export default function Gallery() {
   }, [openKey]);
 
   const activeRentalBodyText =
-    activeRental?.offer?.text ?? activeRental?.category.text ?? "";
+    activeRental?.offer?.text ?? (!activeRental?.offer ? activeRental?.category.text : "");
   const activeRentalDetails =
     activeRental?.offer?.details ?? activeRental?.category.details ?? "";
   const activeRentalTitle = activeRental?.offer?.title ?? activeRental?.category.title ?? "";
@@ -213,6 +226,10 @@ export default function Gallery() {
   function openDetail(category: RentalCategory, offer: RentalOffer, button: HTMLButtonElement) {
     lastTriggerRef.current = button;
     setOpenKey(`${category.id}:${offer.id}`);
+  }
+
+  function handleCta() {
+    setOpenKey(null);
   }
 
   return (
@@ -303,7 +320,7 @@ export default function Gallery() {
             <div className="rental-modal-layout">
               {activeRentalBodyText ? (
                 <div className="rental-modal-section">
-                  <h3>O kategórii</h3>
+                  <h3>O položke</h3>
                   <p>{activeRentalBodyText}</p>
                 </div>
               ) : null}
@@ -328,6 +345,15 @@ export default function Gallery() {
                   ))}
                 </div>
               </div>
+            </div>
+
+            <div className="rental-modal-actions">
+              <span className="rental-modal-note">
+                Máte záujem o tento prenájom? Napíšte nám a pripravíme ho podľa vašej predstavy.
+              </span>
+              <a href="#kontakt" className="btn-p" onClick={handleCta}>
+                Vybrať
+              </a>
             </div>
           </div>
         </div>,

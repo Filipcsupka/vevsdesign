@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, type Dispatch, type SetStateAction } from "react";
 
 const AJAX_ENDPOINT = "https://formsubmit.co/ajax/vevsdesignn@gmail.com";
 
@@ -8,14 +8,83 @@ type KontaktProps = {
   selectedPackage: string;
 };
 
+const PACKAGE_OPTIONS = [
+  "Balík S",
+  "Balík M",
+  "Balík L",
+  "Balík na mieru",
+];
+
+const SERVICE_OPTIONS = [
+  "Pozvánky",
+  "Menovky",
+  "Balík tlačovín",
+  "Servítky",
+  "Kniha hostí",
+  "Box na obálky",
+  "Strom na plátne",
+  "Uvítacia tabuľa",
+  "Uvítací banner",
+  "Cigar bar",
+  "Detský balíček",
+  "Omaľovánky",
+  "Vejáre",
+  "Papučky",
+  "Okuliare",
+  "Mini medík domáci",
+  "Mini fľaštičky",
+];
+
+const RENTAL_OPTIONS = [
+  "Ikebana na stoly",
+  "Ikebana na stoly s vázami okolo",
+  "Malá ikebana",
+  "Dlhá ikebana",
+  "Detský kútik",
+  "Oválny stojan",
+  "Srdcový stojan",
+  "Stojace tyče s balónmi",
+  "Zrkadlo s menami a textom",
+  "Vysoké svietniky",
+  "Champagne svietniky",
+  "Vysoké vázy",
+  "Úzke vázy",
+  "Instax foto",
+  "Champagne tower",
+  "Behúň / štóla",
+  "Lampáše",
+  "Drevené boxy",
+];
+
 export default function Kontakt({ selectedPackage }: KontaktProps) {
-  const [balik, setBalik] = useState("");
+  const [packageSelections, setPackageSelections] = useState<string[]>([]);
+  const [serviceSelections, setServiceSelections] = useState<string[]>([]);
+  const [rentalSelections, setRentalSelections] = useState<string[]>([]);
   const [status, setStatus] = useState<{ text: string; type: "" | "success" | "error" }>({ text: "", type: "" });
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    if (selectedPackage) setBalik(selectedPackage);
+    if (!selectedPackage) return;
+    const normalizedPackage =
+      selectedPackage.startsWith("Balík S") ? "Balík S"
+        : selectedPackage.startsWith("Balík M") ? "Balík M"
+          : selectedPackage.startsWith("Balík L") ? "Balík L"
+            : selectedPackage;
+    setPackageSelections((current) => (
+      current.includes(normalizedPackage) ? current : [...current, normalizedPackage]
+    ));
   }, [selectedPackage]);
+
+  function toggleSelection(
+    value: string,
+    setSelectedValues: Dispatch<SetStateAction<string[]>>
+  ) {
+    setSelectedValues((current) => (
+      current.includes(value)
+        ? current.filter((item) => item !== value)
+        : [...current, value]
+    ));
+  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -36,7 +105,9 @@ export default function Kontakt({ selectedPackage }: KontaktProps) {
       });
       if (!res.ok) throw new Error("failed");
       form.reset();
-      setBalik("");
+      setPackageSelections([]);
+      setServiceSelections([]);
+      setRentalSelections([]);
       setStatus({ text: "Ďakujeme, správa bola odoslaná. Ozveme sa vám čo najskôr.", type: "success" });
     } catch {
       setStatus({ text: "Správu sa nepodarilo odoslať. Skúste to prosím znova alebo nám napíšte priamo na email.", type: "error" });
@@ -98,7 +169,7 @@ export default function Kontakt({ selectedPackage }: KontaktProps) {
             <div className="form-row">
               <div className="form-group">
                 <label>Vaše meno</label>
-                <input type="text" name="meno" placeholder="Jana & Tomáš" required />
+                <input type="text" name="meno" placeholder="Vaše meno" required />
               </div>
               <div className="form-group">
                 <label>Email</label>
@@ -112,32 +183,75 @@ export default function Kontakt({ selectedPackage }: KontaktProps) {
                 <input type="date" name="datum_svadby" />
               </div>
               <div className="form-group">
-                <label>Záujem o balík</label>
-                <select
-                  name="balik"
-                  value={balik}
-                  onChange={(e) => setBalik(e.target.value)}
-                >
-                  <option value="">Vyberte balík…</option>
-                  <option>Balík S — 350 €</option>
-                  <option>Balík M — 500 €</option>
-                  <option>Balík L — 650 €</option>
-                  <option>Doplnkové služby</option>
-                  <option>Individuálne (vyskladať)</option>
-                </select>
+                <label>Lokalita svadby</label>
+                <input type="text" name="lokalita_svadby" placeholder="Košice a okolie" />
               </div>
             </div>
 
             <div className="form-group">
-              <label>Vaša správa</label>
+              <label>Záujem o balík (vyberte)</label>
+              <div className="checkbox-group">
+                {PACKAGE_OPTIONS.map((option) => (
+                  <label key={option} className="checkbox-item">
+                    <input
+                      type="checkbox"
+                      name="balik"
+                      value={option}
+                      checked={packageSelections.includes(option)}
+                      onChange={() => toggleSelection(option, setPackageSelections)}
+                    />
+                    <span>{option}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label>Záujem o doplnky (vyberte)</label>
+              <div className="checkbox-group checkbox-group-dense">
+                {SERVICE_OPTIONS.map((option) => (
+                  <label key={option} className="checkbox-item">
+                    <input
+                      type="checkbox"
+                      name="doplnky"
+                      value={option}
+                      checked={serviceSelections.includes(option)}
+                      onChange={() => toggleSelection(option, setServiceSelections)}
+                    />
+                    <span>{option}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label>Záujem o prenájom (vyberte)</label>
+              <div className="checkbox-group checkbox-group-dense">
+                {RENTAL_OPTIONS.map((option) => (
+                  <label key={option} className="checkbox-item">
+                    <input
+                      type="checkbox"
+                      name="prenajom"
+                      value={option}
+                      checked={rentalSelections.includes(option)}
+                      onChange={() => toggleSelection(option, setRentalSelections)}
+                    />
+                    <span>{option}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label>Poznámka k produktu a vaša predstava</label>
               <textarea
-                name="sprava"
-                placeholder="Opíšte nám svoju predstavu — miesto, počet hostí, téma…"
+                name="poznamka_a_predstava"
+                placeholder="Napíšte nám, o čo máte záujem a akú máte predstavu"
               />
             </div>
 
             <button type="submit" className="btn-submit" disabled={submitting}>
-              {submitting ? "Odosielame..." : "Odoslať správu →"}
+              {submitting ? "Odosielame..." : "Odoslať správu"}
             </button>
 
             {status.text && (

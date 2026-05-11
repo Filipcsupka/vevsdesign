@@ -828,6 +828,11 @@ h1 .h1-line2{display:block;font-size:0.72em;opacity:0.85}
 }
 .rental-modal-section h3{font-family:var(--serif);font-size:1.25rem;font-weight:300;margin-bottom:0.8rem;color:var(--ink)}
 .rental-modal-section p{color:var(--ink-m);font-size:0.88rem;line-height:1.85}
+.rental-modal-actions{
+  display:flex;justify-content:space-between;align-items:center;gap:1rem;
+  margin-top:2.2rem;padding-top:1.8rem;border-top:1px solid rgba(var(--gold-rgb),0.15);
+  flex-wrap:wrap;
+}
 .rental-modal-list{list-style:none}
 .rental-modal-list li{
   display:flex;gap:0.75rem;align-items:flex-start;
@@ -960,6 +965,36 @@ h1 .h1-line2{display:block;font-size:0.72em;opacity:0.85}
 }
 .form-group textarea{height:115px;resize:vertical}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+.checkbox-group{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0.7rem 0.9rem;
+}
+.checkbox-group-dense{grid-template-columns:1fr 1fr}
+.checkbox-item{
+  display:flex;align-items:flex-start;gap:0.7rem;
+  min-height:48px;
+  padding:0.85rem 1.1rem;
+  background:rgba(255,255,255,0.88);
+  border:1px solid rgba(var(--gold-rgb),0.2);
+  transition:border-color 0.35s,box-shadow 0.35s,background 0.35s;
+}
+.checkbox-item:focus-within{
+  border-color:var(--gold);
+  box-shadow:0 0 0 4px rgba(var(--gold-rgb),0.12);
+  background:#fff;
+}
+.checkbox-item input{
+  margin-top:0.18rem;
+  width:1rem;height:1rem;
+  accent-color:var(--gold);
+  flex:0 0 auto;
+}
+.checkbox-item span{
+  color:var(--ink);
+  font-size:0.86rem;
+  line-height:1.45;
+}
 .btn-submit{
   width:100%;padding:1.1rem;
   background:var(--gold);color:var(--ink);
@@ -1132,6 +1167,7 @@ body.modal-open{overflow:hidden}
   .kontakt-info{padding:5rem 1.5rem}
   .kontakt-form-wrap{padding:5rem 1.5rem}
   .form-row{grid-template-columns:1fr}
+  .checkbox-group,.checkbox-group-dense{grid-template-columns:1fr}
   footer{flex-direction:column;text-align:center;padding:2rem 1.5rem}
   .balik-modal{padding:1rem}
   .balik-modal-dialog{padding:2rem 1.4rem}
@@ -1144,6 +1180,7 @@ body.modal-open{overflow:hidden}
   .rental-modal{padding:1rem}
   .rental-modal-dialog{padding:2rem 1.4rem}
   .rental-modal-layout{grid-template-columns:1fr}
+  .rental-modal-actions{flex-direction:column;align-items:stretch}
   .rental-photo-grid{grid-template-columns:1fr}
 }
 
