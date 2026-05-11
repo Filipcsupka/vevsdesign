@@ -1,98 +1,49 @@
 "use client";
 
-import { useState, useEffect, type Dispatch, type SetStateAction } from "react";
+import {
+  calculateSelectionsPricing,
+  CONTACT_SELECTION_GROUPS,
+  formatSelectionHiddenValue,
+  formatSelectionMeta,
+  formatSelectionsTotalLabel,
+  type ContactSelections,
+  type SelectionKind,
+} from "@/components/contactSelection";
+import { useState } from "react";
 
 const AJAX_ENDPOINT = "https://formsubmit.co/ajax/vevsdesignn@gmail.com";
 
 type KontaktProps = {
-  selectedPackage: string;
+  selections: ContactSelections;
+  onRemoveSelection: (kind: SelectionKind, value: string) => void;
+  onClearSelections: () => void;
 };
 
-const PACKAGE_OPTIONS = [
-  "Balík S",
-  "Balík M",
-  "Balík L",
-  "Balík na mieru",
-];
-
-const SERVICE_OPTIONS = [
-  "Pozvánky",
-  "Menovky",
-  "Balík tlačovín",
-  "Servítky",
-  "Kniha hostí",
-  "Box na obálky",
-  "Strom na plátne",
-  "Uvítacia tabuľa",
-  "Uvítací banner",
-  "Cigar bar",
-  "Detský balíček",
-  "Omaľovánky",
-  "Vejáre",
-  "Papučky",
-  "Okuliare",
-  "Mini medík domáci",
-  "Mini fľaštičky",
-];
-
-const RENTAL_OPTIONS = [
-  "Ikebana na stoly",
-  "Ikebana na stoly s vázami okolo",
-  "Malá ikebana",
-  "Dlhá ikebana",
-  "Detský kútik",
-  "Oválny stojan",
-  "Srdcový stojan",
-  "Stojace tyče s balónmi",
-  "Zrkadlo s menami a textom",
-  "Vysoké svietniky",
-  "Champagne svietniky",
-  "Vysoké vázy",
-  "Úzke vázy",
-  "Instax foto",
-  "Champagne tower",
-  "Behúň / štóla",
-  "Lampáše",
-  "Drevené boxy",
-];
-
-export default function Kontakt({ selectedPackage }: KontaktProps) {
-  const [packageSelections, setPackageSelections] = useState<string[]>([]);
-  const [serviceSelections, setServiceSelections] = useState<string[]>([]);
-  const [rentalSelections, setRentalSelections] = useState<string[]>([]);
+export default function Kontakt({
+  selections,
+  onRemoveSelection,
+  onClearSelections,
+}: KontaktProps) {
   const [status, setStatus] = useState<{ text: string; type: "" | "success" | "error" }>({ text: "", type: "" });
   const [submitting, setSubmitting] = useState(false);
 
-  useEffect(() => {
-    if (!selectedPackage) return;
-    const normalizedPackage =
-      selectedPackage.startsWith("Balík S") ? "Balík S"
-        : selectedPackage.startsWith("Balík M") ? "Balík M"
-          : selectedPackage.startsWith("Balík L") ? "Balík L"
-            : selectedPackage;
-    setPackageSelections((current) => (
-      current.includes(normalizedPackage) ? current : [...current, normalizedPackage]
-    ));
-  }, [selectedPackage]);
-
-  function toggleSelection(
-    value: string,
-    setSelectedValues: Dispatch<SetStateAction<string[]>>
-  ) {
-    setSelectedValues((current) => (
-      current.includes(value)
-        ? current.filter((item) => item !== value)
-        : [...current, value]
-    ));
-  }
+  const hasSelections = CONTACT_SELECTION_GROUPS.some(({ kind }) => selections[kind].length > 0);
+  const pricing = calculateSelectionsPricing(selections);
+  const totalLabel = formatSelectionsTotalLabel(selections);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
-    if (!form.checkValidity()) { form.reportValidity(); return; }
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
 
     const data = new FormData(form);
-    if (data.get("_honey")) { form.reset(); return; }
+    if (data.get("_honey")) {
+      form.reset();
+      return;
+    }
 
     setStatus({ text: "Správu odosielame...", type: "" });
     setSubmitting(true);
@@ -103,14 +54,17 @@ export default function Kontakt({ selectedPackage }: KontaktProps) {
         body: data,
         headers: { Accept: "application/json" },
       });
+
       if (!res.ok) throw new Error("failed");
+
       form.reset();
-      setPackageSelections([]);
-      setServiceSelections([]);
-      setRentalSelections([]);
+      onClearSelections();
       setStatus({ text: "Ďakujeme, správa bola odoslaná. Ozveme sa vám čo najskôr.", type: "success" });
     } catch {
-      setStatus({ text: "Správu sa nepodarilo odoslať. Skúste to prosím znova alebo nám napíšte priamo na email.", type: "error" });
+      setStatus({
+        text: "Správu sa nepodarilo odoslať. Skúste to prosím znova alebo nám napíšte priamo na email.",
+        type: "error",
+      });
     } finally {
       setSubmitting(false);
     }
@@ -166,6 +120,13 @@ export default function Kontakt({ selectedPackage }: KontaktProps) {
               autoComplete="off"
             />
 
+            {CONTACT_SELECTION_GROUPS.flatMap(({ kind, inputName }) =>
+              selections[kind].map((item) => (
+                <input key={`${kind}-${item.id}`} type="hidden" name={inputName} value={formatSelectionHiddenValue(item)} />
+              ))
+            )}
+            <input type="hidden" name="predbezna_cena" value={hasSelections ? totalLabel : "Bez vybraných položiek"} />
+
             <div className="form-row">
               <div className="form-group">
                 <label>Vaše meno</label>
@@ -189,64 +150,61 @@ export default function Kontakt({ selectedPackage }: KontaktProps) {
             </div>
 
             <div className="form-group">
-              <label>Záujem o balík (vyberte)</label>
-              <div className="checkbox-group">
-                {PACKAGE_OPTIONS.map((option) => (
-                  <label key={option} className="checkbox-item">
-                    <input
-                      type="checkbox"
-                      name="balik"
-                      value={option}
-                      checked={packageSelections.includes(option)}
-                      onChange={() => toggleSelection(option, setPackageSelections)}
-                    />
-                    <span>{option}</span>
-                  </label>
-                ))}
+              <label>Vybrané položky</label>
+              <div className="selection-panel">
+                {hasSelections ? (
+                  CONTACT_SELECTION_GROUPS.map(({ kind, label }) => (
+                    selections[kind].length ? (
+                      <div key={kind} className="selection-group">
+                        <span className="selection-group-label">{label}</span>
+                        <div className="selection-chip-list">
+                          {selections[kind].map((item) => (
+                            <span key={item.id} className="selection-chip">
+                              <span className="selection-chip-copy">
+                                <span className="selection-chip-text">{item.name}</span>
+                                <span className="selection-chip-meta">{formatSelectionMeta(item)}</span>
+                              </span>
+                              <button
+                                type="button"
+                                className="selection-chip-remove"
+                                aria-label={`Odstrániť položku ${item.name}`}
+                                onClick={() => onRemoveSelection(kind, item.id)}
+                              >
+                                ×
+                              </button>
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    ) : null
+                  ))
+                ) : (
+                  <p className="selection-empty">
+                    Kliknite na <strong>Vybrať</strong> pri balíku, doplnku alebo prenájme a položka sa sem pridá automaticky.
+                  </p>
+                )}
               </div>
             </div>
 
             <div className="form-group">
-              <label>Záujem o doplnky (vyberte)</label>
-              <div className="checkbox-group checkbox-group-dense">
-                {SERVICE_OPTIONS.map((option) => (
-                  <label key={option} className="checkbox-item">
-                    <input
-                      type="checkbox"
-                      name="doplnky"
-                      value={option}
-                      checked={serviceSelections.includes(option)}
-                      onChange={() => toggleSelection(option, setServiceSelections)}
-                    />
-                    <span>{option}</span>
-                  </label>
-                ))}
+              <label>Predbežná cena</label>
+              <div className="selection-total-card">
+                <strong>{hasSelections ? totalLabel : "Zatiaľ bez ceny"}</strong>
+                {pricing.hasIndividualPricing ? (
+                  <span>Niektoré položky majú individuálne nacenenie a potvrdíme ich po odoslaní formulára.</span>
+                ) : pricing.hasFromPricing ? (
+                  <span>Pri položkách označených „od“ ide o minimálnu orientačnú cenu podľa aktuálneho výberu.</span>
+                ) : (
+                  <span>Súčet vychádza z vybraných položiek a zadaného množstva.</span>
+                )}
               </div>
             </div>
 
             <div className="form-group">
-              <label>Záujem o prenájom (vyberte)</label>
-              <div className="checkbox-group checkbox-group-dense">
-                {RENTAL_OPTIONS.map((option) => (
-                  <label key={option} className="checkbox-item">
-                    <input
-                      type="checkbox"
-                      name="prenajom"
-                      value={option}
-                      checked={rentalSelections.includes(option)}
-                      onChange={() => toggleSelection(option, setRentalSelections)}
-                    />
-                    <span>{option}</span>
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            <div className="form-group">
-              <label>Poznámka k produktu a vaša predstava</label>
+              <label>Poznámka k produktu</label>
               <textarea
                 name="poznamka_a_predstava"
-                placeholder="Napíšte nám, o čo máte záujem a akú máte predstavu"
+                placeholder="Napíšte nám svoju predstavu, počet hostí alebo detaily k vybraným položkám"
               />
             </div>
 
@@ -254,14 +212,14 @@ export default function Kontakt({ selectedPackage }: KontaktProps) {
               {submitting ? "Odosielame..." : "Odoslať správu"}
             </button>
 
-            {status.text && (
+            {status.text ? (
               <p
                 className={`form-status${status.type ? ` ${status.type}` : ""}`}
                 aria-live="polite"
               >
                 {status.text}
               </p>
-            )}
+            ) : null}
           </form>
         </div>
       </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { type SelectionItem } from "@/components/contactSelection";
 import FallbackImage from "@/components/FallbackImage";
 import { packageDetailImages } from "@/data/imageAssets";
 
@@ -11,9 +12,9 @@ type PackageData = {
   badge: string;
   name: string;
   price: string;
+  unitPrice: number;
   items: string[];
   featured?: boolean;
-  detailValue: string;
 };
 
 type ModalDetail = {
@@ -30,7 +31,7 @@ const PACKAGES: PackageData[] = [
     badge: "Základný",
     name: "Balík S",
     price: "350 €",
-    detailValue: "Balík S — 350 €",
+    unitPrice: 350,
     items: [
       "Výzdoba stolov zahrňuje kvetinové ikebany, sviečky, vázu",
       "Uvítacia tabuľa a zasadací poriadok",
@@ -42,7 +43,7 @@ const PACKAGES: PackageData[] = [
     badge: "Najpredávanejší",
     name: "Balík M",
     price: "550 €",
-    detailValue: "Balík M — 550 €",
+    unitPrice: 550,
     featured: true,
     items: [
       "Obsahuje Balík S",
@@ -57,7 +58,7 @@ const PACKAGES: PackageData[] = [
     badge: "Premium",
     name: "Balík L",
     price: "700 €",
-    detailValue: "Balík L — 700 €",
+    unitPrice: 700,
     items: [
       "Obsahuje Balík S, M",
       "Zrkadlo s menami",
@@ -141,7 +142,7 @@ const DETAIL_HASH_TO_ID: Record<string, PackageId> = {
 };
 
 type BalikyProps = {
-  onSelectPackage: (value: string) => void;
+  onSelectPackage: (selection: SelectionItem) => void;
 };
 
 export default function Baliky({ onSelectPackage }: BalikyProps) {
@@ -201,7 +202,18 @@ export default function Baliky({ onSelectPackage }: BalikyProps) {
   }
 
   function handleCta() {
-    if (pkg) onSelectPackage(pkg.detailValue);
+    if (pkg) {
+      onSelectPackage({
+        kind: "packages",
+        id: pkg.id,
+        name: pkg.name,
+        quantity: 1,
+        unitLabel: "balík",
+        priceLabel: pkg.price,
+        unitPrice: pkg.unitPrice,
+        priceKind: "fixed",
+      });
+    }
     closeModal();
   }
 
@@ -308,9 +320,9 @@ export default function Baliky({ onSelectPackage }: BalikyProps) {
               <span className="balik-modal-note">
                 Máte inú predstavu? Balík vieme vyskladať aj na mieru.
               </span>
-              <a href="#kontakt" className="btn-p" onClick={handleCta}>
+              <button type="button" className="btn-p" onClick={handleCta}>
                 Vybrať
-              </a>
+              </button>
             </div>
           </div>
         </div>

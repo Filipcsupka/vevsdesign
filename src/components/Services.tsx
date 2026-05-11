@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { normalizeQuantity, type PriceKind, type SelectionItem } from "@/components/contactSelection";
 import { createPortal } from "react-dom";
 import FallbackImage from "@/components/FallbackImage";
 import ShowcaseTile from "@/components/ShowcaseTile";
@@ -10,6 +11,9 @@ type ServiceItem = {
   id: string;
   name: string;
   price: string;
+  unitPrice: number | null;
+  priceKind: PriceKind;
+  unitLabel?: string;
   description: string;
   details?: string[];
   modalSectionTitle?: string;
@@ -24,6 +28,8 @@ const CUSTOM_SERVICES: ServiceItem[] = [
     id: "pozvanky",
     name: "Pozvánky",
     price: "Od 0,40 €/ks",
+    unitPrice: 0.4,
+    priceKind: "from",
     description: "Pozvánky navrhujeme tak, aby už pri prvom pohľade vystihli štýl, náladu a charakter vašej svadby.",
     modalDescription: "Svadobné pozvánky pripravíme v štýle vašej svadby tak, aby ladili s témou, farbami aj celkovou atmosférou dňa.",
     modalDetails: [
@@ -41,6 +47,8 @@ const CUSTOM_SERVICES: ServiceItem[] = [
     id: "menovky",
     name: "Menovky",
     price: "Od 0,25 €/ks",
+    unitPrice: 0.25,
+    priceKind: "from",
     description: "Jemné menovky doladia prestretie stolov a vytvoria osobnejší dojem pre každého hosťa.",
     modalDescription: "Menovky vieme pripraviť v rôznych formách tak, aby doplnili prestretie stolov a vizuálne zapadli do vašej svadobnej témy.",
     modalDetails: [
@@ -56,6 +64,9 @@ const CUSTOM_SERVICES: ServiceItem[] = [
     id: "balik-tlacovin",
     name: "Balík tlačovín",
     price: "30 €",
+    unitPrice: 30,
+    priceKind: "fixed",
+    unitLabel: "balík",
     description: "Balík tlačovín vytvorí zladený a praktický set svadobných tlačovín, ktorý doplní výzdobu a zároveň pomôže hosťom lepšie sa zorientovať počas celého dňa.",
     modalDescription: "Balík tlačovín obsahuje zladený set svadobných tlačovín vo vašej téme svadby a farbách, ktorý hosťom uľahčí orientáciu a pekne doplní výzdobu.",
     modalDetails: [
@@ -74,6 +85,8 @@ const CUSTOM_SERVICES: ServiceItem[] = [
     id: "servitky",
     name: "Servítky",
     price: "0,60 €/ks",
+    unitPrice: 0.6,
+    priceKind: "fixed",
     description: "Servítky vieme doladiť tak, aby pôsobili elegantne a prirodzene zapadli do celého prestretia.",
     modalDescription: "Personalizované servítky jemne doplnia prestretie a prepoja svadobné detaily do jedného vizuálneho celku.",
     modalDetails: [],
@@ -84,6 +97,8 @@ const CUSTOM_SERVICES: ServiceItem[] = [
     id: "kniha-hosti",
     name: "Kniha hostí",
     price: "12 €",
+    unitPrice: 12,
+    priceKind: "fixed",
     description: "Kniha hostí vytvorí krásny priestor na odkazy, priania a spomienky od vašich blízkych.",
     modalDescription: "Kniha hostí je krásnou spomienkou na svadobný deň a ponúka priestor na odkazy, priania aj milé slová od vašich blízkych. Kniha má čisté strany a obsahuje personalizovanú prednú časť s Vašimi menami a dátumom svadby.",
     modalDetails: [],
@@ -94,6 +109,8 @@ const CUSTOM_SERVICES: ServiceItem[] = [
     id: "box-na-obalky",
     name: "Box na obálky",
     price: "Od 2,50 €",
+    unitPrice: 2.5,
+    priceKind: "from",
     description: "Dekoratívny box na obálky je praktický detail, ktorý zároveň pôsobí elegantne a usporiadane.",
     modalDescription: "Box na obálky je praktický aj dekoratívny prvok, ktorý pekne doplní svadobný stôl a zároveň udrží obálky na jednom mieste. Cena je za čistý box ako na fotke. Cena pre personalizovaný box s menami a zdobením je 5€.",
     modalDetails: [],
@@ -104,6 +121,8 @@ const CUSTOM_SERVICES: ServiceItem[] = [
     id: "strom-na-platne",
     name: "Strom na plátne",
     price: "15 €",
+    unitPrice: 15,
+    priceKind: "fixed",
     description: "Strom na plátne je jemná a osobná pamiatka, do ktorej hostia zanechajú svoj vlastný odtlačok.",
     modalDescription: "Strom na plátne ostane po svadbe ako krásna osobná spomienka, do ktorej hostia zanechajú svoj odtlačok. Farby sú podľa želania a v cene je aj prenajatý stojan.",
     modalDetails: [],
@@ -114,6 +133,8 @@ const CUSTOM_SERVICES: ServiceItem[] = [
     id: "uvitacia-tabula",
     name: "Uvítacia tabuľa",
     price: "25 €",
+    unitPrice: 25,
+    priceKind: "fixed",
     description: "Uvítacia tabuľa vytvorí krásny prvý dojem a hneď pri príchode naladí hostí na atmosféru svadby.",
     modalDescription: "Uvítacia tabuľa vytvorí krásny prvý dojem a hneď pri príchode privíta hostí v štýle vašej svadby. V cene je aj prenajatý stojan s personalizovanou uvítacou tabuľou na plátne.",
     modalDetails: [],
@@ -124,6 +145,8 @@ const CUSTOM_SERVICES: ServiceItem[] = [
     id: "uvitacia-latka",
     name: "Uvítací banner",
     price: "45 €",
+    unitPrice: 45,
+    priceKind: "fixed",
     description: "Uvítací banner pôsobí mäkko, romanticky a veľmi pekne vynikne pri vstupe alebo fotení.",
     modalDescription: "Uvítací banner pôsobí romanticky a výrazne vynikne pri vstupe, obrade aj svadobnom fotení. Obsahuje personalizovanú látku s prenajatým stojanom a mašličkami.",
     modalDetails: [],
@@ -137,6 +160,8 @@ const GUEST_SERVICES: ServiceItem[] = [
     id: "cigar-bar",
     name: "Cigar bar",
     price: "Cena individuálne",
+    unitPrice: null,
+    priceKind: "individual",
     description: "Cigar bar je štýlový doplnok, ktorý vytvorí výrazný zážitok najmä pre mužov.",
     modalDescription: "Cigar bar je štýlový doplnok, ktorý vytvorí výrazný zážitok najmä pre chlapov na svadbe, pri príprave ženícha alebo na rozlúčke so slobodou. Obsahuje drevenú krabičku s potrebným príslušenstvom, personalizované cigary 15 €/ks a možnosť malého sudu s rumom podľa želania.",
     modalDetails: [],
@@ -147,6 +172,8 @@ const GUEST_SERVICES: ServiceItem[] = [
     id: "detske-balicky",
     name: "Detský balíček",
     price: "10 €/ks",
+    unitPrice: 10,
+    priceKind: "fixed",
     description: "Detské balíčky spríjemnia svadobný deň malým hosťom a pomôžu zabaviť ich počas hostiny aj programu.",
     modalDescription: "Detský balíček je milý a praktický doplnok, ktorý zabaví deti počas svadby a vytvorí im vlastný malý darček na pamiatku. Obsahuje omaľovánku s menom dieťaťa, ceruzky, nálepky, naťahovaciu hračku, detskú pružinku a bludiská pre zabavenie detí napríklad počas prvého tanca novomanželov.",
     modalDetails: [],
@@ -157,6 +184,8 @@ const GUEST_SERVICES: ServiceItem[] = [
     id: "omalovanky",
     name: "Omaľovánky",
     price: "4 €/ks",
+    unitPrice: 4,
+    priceKind: "fixed",
     description: "Omaľovánky sú jednoduchý, ale veľmi obľúbený doplnok, ktorý zabaví deti počas svadobného dňa.",
     modalDescription: "Omaľovánky s menom dieťatka vytvoria milú spomienku a zároveň deti zabavia počas svadobného dňa aj ďalších príležitostí. Omaľovánka má meno dieťatka pre krajšiu spomienku a je možnosť pridať aj ceruzky.",
     modalDetails: [],
@@ -167,6 +196,8 @@ const GUEST_SERVICES: ServiceItem[] = [
     id: "vejare",
     name: "Vejáre",
     price: "1,50 €/ks",
+    unitPrice: 1.5,
+    priceKind: "fixed",
     description: "Vejáre sú pekný aj praktický detail, ktorý hostia ocenia najmä počas teplých letných svadieb.",
     modalDescription: "Vejáre sú elegantný a praktický doplnok, ktorý hostia ocenia najmä počas teplých dní, no hodia sa aj na ďalšie oslavy. Môžu byť bez zdobenia alebo s pridaním mien či iným zdobením. Pri zdobení je cena 2€/ks.",
     modalDetails: [],
@@ -177,6 +208,8 @@ const GUEST_SERVICES: ServiceItem[] = [
     id: "papucky",
     name: "Papučky",
     price: "0,50 €/ks",
+    unitPrice: 0.5,
+    priceKind: "fixed",
     description: "Papučky doprajú hosťom väčšie pohodlie pri tanci a zároveň spríjemnia neskorší priebeh oslavy.",
     modalDescription: "Papučky sú praktický detail, ktoré hosťom spríjemnia večernú časť oslavy a doprajú im pohodlie pri tanci. Môžu byť bez zdobenia alebo s pridaním mašličky či iného zdobenia.",
     modalDetails: [],
@@ -187,6 +220,9 @@ const GUEST_SERVICES: ServiceItem[] = [
     id: "okuliare",
     name: "Okuliare",
     price: "10 €/balík",
+    unitPrice: 10,
+    priceKind: "fixed",
+    unitLabel: "balík",
     description: "Okuliare sú hravý doplnok, ktorý vie oživiť fotenie, fotokútik aj spontánnu zábavu hostí.",
     modalDescription: "Okuliare prinesú do fotenia a svadobnej zábavy hravosť, farbu a uvoľnenú atmosféru. Obsahujú balík vtipných okuliarov vo vašich farbách.",
     modalDetails: [],
@@ -197,6 +233,8 @@ const GUEST_SERVICES: ServiceItem[] = [
     id: "domaci-med",
     name: "Mini medík domáci",
     price: "1,50 €/ks",
+    unitPrice: 1.5,
+    priceKind: "fixed",
     description: "Domáci med je milá a vkusná pozornosť pre hostí, ktorá pôsobí osobne a srdcom.",
     modalDescription: "Mini medík domáci je chutný a osobný darček pre hostí, ktorý pekne doplní svadobný stôl aj výslužku. Mini medík bez lyžičky obsahuje personalizovanú etiketu a zlatú včielku, verzia s lyžičkou 1,90€/ks obsahuje aj vrecúško a lyžičku k medu.",
     modalDetails: [],
@@ -207,6 +245,8 @@ const GUEST_SERVICES: ServiceItem[] = [
     id: "flasticky",
     name: "Mini fľaštičky",
     price: "1,50 €/ks",
+    unitPrice: 1.5,
+    priceKind: "fixed",
     description: "Fľaštičky vieme pripraviť ako originálny drobný darček alebo tematický detail pre vašich hostí.",
     modalDescription: "Mini fľaštičky sú obľúbený darček pre hostí, ktorý vieme zladiť s vašou svadobnou témou aj konkrétnou náplňou podľa želania. Obsahujú personalizovanú etiketu, mašľu alebo stužku. Na výber je klobúčik zlatý, strieborný alebo čierny a náplň podľa vašej požiadavky, napríklad limoncello, medovina, slivka, hruška, marhuľa a ďalšie.",
     modalDetails: [],
@@ -227,10 +267,15 @@ function formatModalDetail(detail: string) {
   return /[.!?]$/.test(detail) ? detail : `${detail}.`;
 }
 
-export default function Services() {
+type ServicesProps = {
+  onSelectService: (selection: SelectionItem) => void;
+};
+
+export default function Services({ onSelectService }: ServicesProps) {
   const [openId, setOpenId] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const [quantity, setQuantity] = useState(1);
 
   const activeService = openId ? ALL_SERVICES.find((item) => item.id === openId) ?? null : null;
   const activeServiceImages = activeService
@@ -261,7 +306,23 @@ export default function Services() {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [openId]);
 
+  useEffect(() => {
+    setQuantity(1);
+  }, [openId]);
+
   function handleCta() {
+    if (activeService) {
+      onSelectService({
+        kind: "services",
+        id: activeService.id,
+        name: activeService.name,
+        quantity: normalizeQuantity(quantity),
+        unitLabel: activeService.unitLabel ?? "ks",
+        priceLabel: activeService.price,
+        unitPrice: activeService.unitPrice,
+        priceKind: activeService.priceKind,
+      });
+    }
     setOpenId(null);
   }
 
@@ -372,12 +433,37 @@ export default function Services() {
             </div>
 
             <div className="service-modal-actions">
-              <span className="service-modal-note">
-                Máte záujem o tento doplnok? Napíšte nám a pripravíme ho podľa vašej predstavy.
-              </span>
-              <a href="#kontakt" className="btn-p" onClick={handleCta}>
+              <div className="modal-selection-tools">
+                <span className="service-modal-note">
+                  Máte záujem o tento doplnok? Napíšte nám a pripravíme ho podľa vašej predstavy.
+                </span>
+                <div className="modal-selection-inline">
+                  <label className="modal-qty-field">
+                    <span>Počet</span>
+                    <input
+                      type="number"
+                      min={1}
+                      step={1}
+                      value={quantity}
+                      onChange={(event) => setQuantity(normalizeQuantity(Number(event.target.value)))}
+                    />
+                  </label>
+                  <div className="modal-price-preview">
+                    <span>Cena</span>
+                    <strong>
+                      {activeService.unitPrice == null
+                        ? activeService.price
+                        : `${activeService.priceKind === "from" ? "od " : ""}${(activeService.unitPrice * quantity).toLocaleString("sk-SK", {
+                            minimumFractionDigits: Number.isInteger(activeService.unitPrice * quantity) ? 0 : 2,
+                            maximumFractionDigits: 2,
+                          })} €`}
+                    </strong>
+                  </div>
+                </div>
+              </div>
+              <button type="button" className="btn-p" onClick={handleCta}>
                 Vybrať
-              </a>
+              </button>
             </div>
           </div>
         </div>,

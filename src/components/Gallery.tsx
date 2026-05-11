@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { normalizeQuantity, type PriceKind, type SelectionItem } from "@/components/contactSelection";
 import { createPortal } from "react-dom";
 import FallbackImage from "@/components/FallbackImage";
 import ShowcaseTile from "@/components/ShowcaseTile";
@@ -10,6 +11,9 @@ type RentalOffer = {
   id: string;
   title: string;
   price?: string;
+  unitPrice?: number | null;
+  priceKind?: PriceKind;
+  unitLabel?: string;
   lead?: string;
   text?: string;
   description?: string;
@@ -39,6 +43,8 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         id: "ikebana-na-stoly",
         title: "Ikebana na stoly",
         price: "30 €/ks",
+        unitPrice: 30,
+        priceKind: "fixed",
         description: "Obsahuje všetky kvety ako na fotke vo Vašich požadovaných farbách.",
         lead: "Obsahuje všetky kvety ako na fotke vo Vašich požadovaných farbách. Vysoká váza v strede so živou ružou. Dva poháre s plávajúcimi sviečkami.",
         details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska od 4 ks vyššie alebo aj 1 ks pri objednávke nad 100 € (+ príplatok PHM).",
@@ -47,6 +53,8 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         id: "ikebana-na-stoly-s-vazami-okolo",
         title: "Ikebana na stoly s vázami okolo",
         price: "40 €/ks",
+        unitPrice: 40,
+        priceKind: "fixed",
         description: "Obsahuje všetky kvety ako na fotke vo Vašich požadovaných farbách.",
         lead: "Obsahuje všetky kvety ako na fotke vo Vašich požadovaných farbách. Vysoká váza v strede so živou ružou. Dva poháre s plávajúcimi sviečkami. Osem váz dookola s umelými kvetmi. Možnosť živých kvetov v 8 vázach naokolo, napríklad po jednej ruži alebo iných kvetov podľa požiadavky v cene 50 - 70 €.",
         details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska od 4 ks vyššie alebo aj 1 ks pri objednávke nad 100 € (+ príplatok PHM).",
@@ -55,6 +63,8 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         id: "mala-ikebana",
         title: "Malá ikebana",
         price: "15 €/ks",
+        unitPrice: 15,
+        priceKind: "fixed",
         description: "Obsahuje kvety ako na fotke vo Vašich požadovaných farbách.",
         lead: "Obsahuje kvety ako na fotke vo Vašich požadovaných farbách. Vhodné umiestniť napríklad ku uvítacej tabuli, na obrad pozdĺž uličky alebo pred hlavný stôl novomanželov.",
         details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále alebo na obrade v rámci Východného Slovenska od 6 ks vyššie alebo aj 1 ks pri objednávke nad 100 € (+ príplatok PHM).",
@@ -63,6 +73,8 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         id: "dlha-ikebana",
         title: "Dlhá ikebana",
         price: "30 €/ks",
+        unitPrice: 30,
+        priceKind: "fixed",
         description: "Obsahuje kvety ako na fotke vo Vašich požadovaných farbách, úzke svietniky a sviečky.",
         lead: "Obsahuje kvety ako na fotke vo Vašich požadovaných farbách, úzke svietniky a sviečky.",
         details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
@@ -80,6 +92,8 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         id: "detsky-kutik",
         title: "Detský kútik",
         price: "50 €",
+        unitPrice: 50,
+        priceKind: "fixed",
         description: "Obsahuje šmýkalku, penovú podložku, farebné stany, kocky, autíčka, bábiky, omaľovánky.",
         lead: "Obsahuje šmýkalku, penovú podložku, farebné stany, kocky, autíčka, bábiky, omaľovánky.",
         details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
@@ -97,6 +111,8 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         id: "ovalny-stojan",
         title: "Oválny stojan",
         price: "25 €",
+        unitPrice: 25,
+        priceKind: "fixed",
         description: "Cena je za čistý zlatý stojan vhodný na uvítanie hostí.",
         lead: "Cena je za čistý zlatý stojan, ktorý je vhodný na uvítanie hostí alebo fotenie. Možnosť uvítacej personalizovanej látky +20 € alebo len zaveseného zasadacieho poriadku +15 €.",
         details: "Možnosť osobného odberu, zaslania iba čistého stojanu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
@@ -105,6 +121,8 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         id: "srdcovy-stojan",
         title: "Srdcový stojan",
         price: "40 €",
+        unitPrice: 40,
+        priceKind: "fixed",
         description: "Čistý zlatý stojan, ktorý krásne vynikne na obrade alebo za hlavným stolom.",
         lead: "Cena je za čistý zlatý stojan, ktorý krásne vynikne na obrade alebo za hlavným stolom. Taktiež sa môže použiť ako fotostena. Možnosť pokrytia hebkými štólami pre luxusný efekt +20 € a pridania kvetov na rám podľa množstva kvetov od 10 €.",
         details: "Možnosť osobného odberu, zaslania iba čistého stojanu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
@@ -113,6 +131,8 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         id: "stojace-tyce-s-balonmi",
         title: "Stojace tyče s balónmi",
         price: "25 €/ks",
+        unitPrice: 25,
+        priceKind: "fixed",
         description: "V cene sú zahrnuté aj balóny.",
         lead: "V cene sú zahrnuté aj balóny. Vhodné pre vstup do sály.",
         details: "Možnosť osobného odberu, zaslania alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
@@ -121,6 +141,8 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         id: "zrkadlo-s-menami-a-textom",
         title: "Zrkadlo s menami a textom",
         price: "30 €",
+        unitPrice: 30,
+        priceKind: "fixed",
         description: "V cene sú zahrnuté aj Vaše personalizované údaje.",
         lead: "V cene sú zahrnuté aj Vaše personalizované údaje ako mená, dátum a text.",
         details: "Možnosť osobného odberu, zaslania alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
@@ -134,10 +156,10 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
     price: "Cena individuálne",
     lead: "Vázy a svietniky vyberáme tak, aby prirodzene doplnili prestretie stolov a podčiarkli jemný svadobný charakter.",
     offers: [
-      { id: "vysoke-svietniky", title: "Vysoké svietniky" },
-      { id: "champagne-svietniky", title: "Champagne svietniky" },
-      { id: "vysoke-vazy", title: "Vysoké vázy" },
-      { id: "uzke-vazy", title: "Úzke vázy" },
+      { id: "vysoke-svietniky", title: "Vysoké svietniky", price: "Cena individuálne", unitPrice: null, priceKind: "individual" },
+      { id: "champagne-svietniky", title: "Champagne svietniky", price: "Cena individuálne", unitPrice: null, priceKind: "individual" },
+      { id: "vysoke-vazy", title: "Vysoké vázy", price: "Cena individuálne", unitPrice: null, priceKind: "individual" },
+      { id: "uzke-vazy", title: "Úzke vázy", price: "Cena individuálne", unitPrice: null, priceKind: "individual" },
     ],
   },
   {
@@ -147,11 +169,11 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
     price: "Cena individuálne",
     lead: "Ak chcete doplniť svadbu o ďalšie efektné alebo praktické kúsky, radi vyskladáme prenájom aj podľa vašej predstavy.",
     offers: [
-      { id: "instax-foto", title: "Instax foto" },
-      { id: "champagne-tower", title: "Champagne tower" },
-      { id: "behun-stola", title: "Behúň / štóla" },
-      { id: "lampase", title: "Lampáše" },
-      { id: "drevene-boxy", title: "Drevené boxy" },
+      { id: "instax-foto", title: "Instax foto", price: "Cena individuálne", unitPrice: null, priceKind: "individual" },
+      { id: "champagne-tower", title: "Champagne tower", price: "Cena individuálne", unitPrice: null, priceKind: "individual" },
+      { id: "behun-stola", title: "Behúň / štóla", price: "Cena individuálne", unitPrice: null, priceKind: "individual" },
+      { id: "lampase", title: "Lampáše", price: "Cena individuálne", unitPrice: null, priceKind: "individual" },
+      { id: "drevene-boxy", title: "Drevené boxy", price: "Cena individuálne", unitPrice: null, priceKind: "individual" },
     ],
   },
 ];
@@ -167,11 +189,16 @@ function getTileVariant(index: number) {
   return TILE_VARIANTS[index % TILE_VARIANTS.length];
 }
 
-export default function Gallery() {
+type GalleryProps = {
+  onSelectRental: (selection: SelectionItem) => void;
+};
+
+export default function Gallery({ onSelectRental }: GalleryProps) {
   const [openKey, setOpenKey] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const lastTriggerRef = useRef<HTMLButtonElement | null>(null);
+  const [quantity, setQuantity] = useState(1);
 
   const activeRental = useMemo<ActiveRental | null>(() => {
     if (!openKey) return null;
@@ -223,12 +250,28 @@ export default function Gallery() {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [openKey]);
 
+  useEffect(() => {
+    setQuantity(1);
+  }, [openKey]);
+
   function openDetail(category: RentalCategory, offer: RentalOffer, button: HTMLButtonElement) {
     lastTriggerRef.current = button;
     setOpenKey(`${category.id}:${offer.id}`);
   }
 
   function handleCta() {
+    if (activeRental && activeRental.offer) {
+      onSelectRental({
+        kind: "rentals",
+        id: activeRental.offer.id,
+        name: activeRental.offer.title,
+        quantity: normalizeQuantity(quantity),
+        unitLabel: activeRental.offer.unitLabel ?? "ks",
+        priceLabel: activeRental.offer.price ?? activeRental.category.price,
+        unitPrice: activeRental.offer.unitPrice ?? null,
+        priceKind: activeRental.offer.priceKind ?? "individual",
+      });
+    }
     setOpenKey(null);
   }
 
@@ -348,12 +391,37 @@ export default function Gallery() {
             </div>
 
             <div className="rental-modal-actions">
-              <span className="rental-modal-note">
-                Máte záujem o tento prenájom? Napíšte nám a pripravíme ho podľa vašej predstavy.
-              </span>
-              <a href="#kontakt" className="btn-p" onClick={handleCta}>
+              <div className="modal-selection-tools">
+                <span className="rental-modal-note">
+                  Máte záujem o tento prenájom? Napíšte nám a pripravíme ho podľa vašej predstavy.
+                </span>
+                <div className="modal-selection-inline">
+                  <label className="modal-qty-field">
+                    <span>Počet</span>
+                    <input
+                      type="number"
+                      min={1}
+                      step={1}
+                      value={quantity}
+                      onChange={(event) => setQuantity(normalizeQuantity(Number(event.target.value)))}
+                    />
+                  </label>
+                  <div className="modal-price-preview">
+                    <span>Cena</span>
+                    <strong>
+                      {activeRental.offer?.unitPrice == null
+                        ? activeRental.offer?.price ?? activeRental.category.price
+                        : `${activeRental.offer.priceKind === "from" ? "od " : ""}${(activeRental.offer.unitPrice * quantity).toLocaleString("sk-SK", {
+                            minimumFractionDigits: Number.isInteger(activeRental.offer.unitPrice * quantity) ? 0 : 2,
+                            maximumFractionDigits: 2,
+                          })} €`}
+                    </strong>
+                  </div>
+                </div>
+              </div>
+              <button type="button" className="btn-p" onClick={handleCta}>
                 Vybrať
-              </a>
+              </button>
             </div>
           </div>
         </div>,

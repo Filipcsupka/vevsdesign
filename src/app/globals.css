@@ -944,7 +944,7 @@ h1 .h1-line2{display:block;font-size:0.72em;opacity:0.85}
 }
 .kontakt-form-wrap .sec-label{text-align:left}
 .kontakt-form-wrap h2{text-align:left;margin-bottom:3rem}
-.form-group{margin-bottom:1.1rem}
+.form-group{margin-bottom:1rem}
 .form-group label{
   display:block;font-size:0.6rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;
   color:var(--ink-l);margin-bottom:0.5rem;
@@ -963,37 +963,150 @@ h1 .h1-line2{display:block;font-size:0.72em;opacity:0.85}
   box-shadow:0 0 0 4px rgba(var(--gold-rgb),0.12);
   background:#fff;
 }
-.form-group textarea{height:115px;resize:vertical}
+.form-group textarea{height:105px;resize:vertical}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
-.checkbox-group{
+.selection-panel{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:0.7rem 0.9rem;
-}
-.checkbox-group-dense{grid-template-columns:1fr 1fr}
-.checkbox-item{
-  display:flex;align-items:flex-start;gap:0.7rem;
-  min-height:48px;
-  padding:0.85rem 1.1rem;
-  background:rgba(255,255,255,0.88);
+  gap:0.8rem;
+  padding:1rem 1.05rem;
+  background:rgba(255,255,255,0.8);
   border:1px solid rgba(var(--gold-rgb),0.2);
-  transition:border-color 0.35s,box-shadow 0.35s,background 0.35s;
 }
-.checkbox-item:focus-within{
-  border-color:var(--gold);
-  box-shadow:0 0 0 4px rgba(var(--gold-rgb),0.12);
-  background:#fff;
+.selection-group{
+  display:grid;
+  gap:0.45rem;
 }
-.checkbox-item input{
-  margin-top:0.18rem;
-  width:1rem;height:1rem;
-  accent-color:var(--gold);
-  flex:0 0 auto;
+.selection-group-label{
+  font-size:0.54rem;
+  font-weight:500;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:rgba(var(--ink-rgb),0.56);
 }
-.checkbox-item span{
+.selection-chip-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:0.5rem;
+}
+.selection-chip{
+  display:inline-flex;
+  align-items:flex-start;
+  gap:0.45rem;
+  min-height:34px;
+  max-width:100%;
+  padding:0.45rem 0.5rem 0.45rem 0.8rem;
+  background:linear-gradient(145deg,rgba(var(--gold-ll-rgb),0.92),rgba(255,255,255,0.96));
+  border:1px solid rgba(var(--gold-rgb),0.22);
+  box-shadow:0 10px 24px rgba(var(--ink-rgb),0.05);
+}
+.selection-chip-copy{
+  display:grid;
+  gap:0.18rem;
+}
+.selection-chip-text{
+  font-size:0.75rem;
+  line-height:1.35;
   color:var(--ink);
-  font-size:0.86rem;
+}
+.selection-chip-meta{
+  font-size:0.64rem;
   line-height:1.45;
+  color:rgba(var(--ink-rgb),0.62);
+}
+.selection-chip-remove{
+  width:22px;
+  height:22px;
+  flex:0 0 22px;
+  border:none;
+  border-radius:999px;
+  background:rgba(var(--gold-rgb),0.12);
+  color:var(--ink-m);
+  font-size:0.95rem;
+  line-height:1;
+  cursor:pointer;
+  transition:background 0.25s,color 0.25s,transform 0.25s;
+}
+.selection-chip-remove:hover{
+  background:rgba(var(--gold-rgb),0.22);
+  color:var(--ink);
+  transform:scale(1.04);
+}
+.selection-empty{
+  margin:0;
+  color:var(--ink-m);
+  font-size:0.82rem;
+  line-height:1.7;
+}
+.selection-empty strong{
+  font-weight:500;
+  color:var(--ink);
+}
+.selection-total-card{
+  display:grid;
+  gap:0.35rem;
+  padding:0.9rem 1rem;
+  background:linear-gradient(150deg,rgba(var(--gold-ll-rgb),0.92),rgba(var(--bg-surface-soft-rgb),0.88));
+  border:1px solid rgba(var(--gold-rgb),0.2);
+}
+.selection-total-card strong{
+  font-family:var(--serif2);
+  font-size:1.05rem;
+  font-weight:300;
+  color:var(--ink);
+}
+.selection-total-card span{
+  color:var(--ink-m);
+  font-size:0.74rem;
+  line-height:1.65;
+}
+.modal-selection-tools{
+  display:grid;
+  gap:0.9rem;
+  flex:1 1 320px;
+}
+.modal-selection-inline{
+  display:flex;
+  gap:0.8rem;
+  align-items:stretch;
+  flex-wrap:wrap;
+}
+.modal-qty-field,
+.modal-price-preview{
+  min-width:132px;
+  padding:0.8rem 0.95rem;
+  background:rgba(255,255,255,0.7);
+  border:1px solid rgba(var(--gold-rgb),0.18);
+}
+.modal-qty-field{
+  display:grid;
+  gap:0.45rem;
+}
+.modal-qty-field span,
+.modal-price-preview span{
+  font-size:0.54rem;
+  font-weight:500;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:rgba(var(--ink-rgb),0.58);
+}
+.modal-qty-field input{
+  width:100%;
+  padding:0.55rem 0.7rem;
+  border:1px solid rgba(var(--gold-rgb),0.18);
+  background:#fff;
+  font-size:0.9rem;
+  color:var(--ink);
+}
+.modal-price-preview{
+  display:grid;
+  align-content:center;
+  gap:0.3rem;
+}
+.modal-price-preview strong{
+  font-family:var(--serif2);
+  font-size:1.05rem;
+  font-weight:300;
+  color:var(--gold);
 }
 .btn-submit{
   width:100%;padding:1.1rem;
@@ -1016,6 +1129,23 @@ h1 .h1-line2{display:block;font-size:0.72em;opacity:0.85}
 }
 .form-status.success{color:#5d6f4d}
 .form-status.error{color:#9b4d42}
+.selection-toast{
+  position:fixed;
+  right:1.5rem;
+  bottom:1.5rem;
+  z-index:500;
+  padding:0.8rem 1rem;
+  background:linear-gradient(150deg,rgba(var(--gold-ll-rgb),0.97),rgba(var(--bg-surface-soft-rgb),0.96));
+  border:1px solid rgba(var(--gold-rgb),0.28);
+  box-shadow:0 18px 48px rgba(var(--ink-rgb),0.16);
+  color:var(--ink);
+  font-size:0.68rem;
+  font-weight:500;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  backdrop-filter:blur(14px) saturate(1.08);
+  -webkit-backdrop-filter:blur(14px) saturate(1.08);
+}
 
 /* === footer === */
 footer{
@@ -1167,7 +1297,6 @@ body.modal-open{overflow:hidden}
   .kontakt-info{padding:5rem 1.5rem}
   .kontakt-form-wrap{padding:5rem 1.5rem}
   .form-row{grid-template-columns:1fr}
-  .checkbox-group,.checkbox-group-dense{grid-template-columns:1fr}
   footer{flex-direction:column;text-align:center;padding:2rem 1.5rem}
   .balik-modal{padding:1rem}
   .balik-modal-dialog{padding:2rem 1.4rem}
@@ -1248,6 +1377,16 @@ body.modal-open{overflow:hidden}
   .service-modal-head{padding-right:2rem}
   .rental-modal-dialog{max-width:calc(100vw - 2rem);padding:2rem 1.2rem}
   .rental-modal-head{padding-right:2rem}
+  .selection-panel{padding:0.9rem}
+  .selection-chip{width:100%;justify-content:space-between}
+  .modal-selection-inline{flex-direction:column}
+  .modal-qty-field,.modal-price-preview{min-width:0}
+  .selection-toast{
+    left:1rem;
+    right:1rem;
+    bottom:1rem;
+    text-align:center;
+  }
   footer{padding:2rem max(1rem,env(safe-area-inset-right,0px)) 2rem max(1rem,env(safe-area-inset-left,0px))}
   .foot-social{justify-content:center;gap:1.3rem;flex-wrap:wrap}
 }
