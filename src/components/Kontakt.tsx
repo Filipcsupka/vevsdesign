@@ -77,7 +77,7 @@ export default function Kontakt({
           <p className="sec-label">Spojte sa s nami</p>
           <h2>Začnime <em>plánovať</em></h2>
           <p className="lead">
-            Kontaktujte nás a spoločne vytvoríme váš vysnívaný deň. Odpovedáme do 24 hodín.
+            Kontaktujte nás a spoločne vytvoríme váš vysnívaný deň. Dizajn Vám odošleme do 3 dní.
           </p>
           <div className="kontakt-details">
             <div className="kontakt-item">
@@ -95,7 +95,7 @@ export default function Kontakt({
               <span className="k-val">Košice &amp; Východné Slovensko</span>
             </div>
             <div className="kontakt-item">
-              <span className="k-label">Instagram</span>
+              <span className="k-label">Instagram a Facebook</span>
               <span className="k-val">
                 <a href="https://instagram.com/vevsdesign" target="_blank" rel="noopener noreferrer">
                   @Vevsdesign
