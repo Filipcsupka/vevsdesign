@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { type SelectionItem } from "@/components/contactSelection";
+import { createPortal } from "react-dom";
 import ModalImageGallery from "@/components/ModalImageGallery";
 import { packageDetailImages } from "@/data/imageAssets";
 
@@ -146,6 +147,7 @@ type BalikyProps = {
 };
 
 export default function Baliky({ onSelectPackage }: BalikyProps) {
+  const [mounted, setMounted] = useState(false);
   const [openId, setOpenId] = useState<PackageId | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const lastCardRef = useRef<HTMLElement | null>(null);
@@ -153,6 +155,10 @@ export default function Baliky({ onSelectPackage }: BalikyProps) {
   const detail = openId ? DETAILS[openId] : null;
   const pkg = openId ? PACKAGES.find((p) => p.id === openId) : null;
   const packageImages = openId && detail ? packageDetailImages(openId, detail.name) : [];
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (openId) {
@@ -264,7 +270,7 @@ export default function Baliky({ onSelectPackage }: BalikyProps) {
         Konečná cena sa odvíja od rozsahu vašej výzdoby.
       </p>
 
-      {openId && detail && (
+      {mounted && openId && detail && createPortal(
         <div className="balik-modal" role="dialog" aria-modal="true" aria-labelledby="balik-modal-name">
           <div className="balik-modal-backdrop" onClick={closeModal} />
           <div className="balik-modal-dialog">
@@ -322,7 +328,7 @@ export default function Baliky({ onSelectPackage }: BalikyProps) {
             </div>
           </div>
         </div>
-      )}
+      , document.body)}
     </section>
   );
 }

@@ -139,6 +139,6 @@ Ak localhost nefunguje:
 - Studio: `Vevsdesign`
 - Lokalita: `Košice a okolie`
 - Kontakt: `Veronika Csupková`
-- Email: `veronika.csupkova@gmail.com`
+- Email: `vevsdesignn@gmail.com`
 - Telefón: `0910 091 009`
 - Instagram: `@Vevsdesign`

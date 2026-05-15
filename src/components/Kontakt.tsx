@@ -11,7 +11,37 @@ import {
 } from "@/components/contactSelection";
 import { useState } from "react";
 
-const AJAX_ENDPOINT = "https://formsubmit.co/ajax/vevsdesignn@gmail.com";
+const CONTACT_EMAIL = "vevsdesignn@gmail.com";
+const FORM_ENDPOINT = `https://formsubmit.co/${CONTACT_EMAIL}`;
+const AJAX_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
+
+function createCaptchaChallenge() {
+  const left = Math.floor(Math.random() * 7) + 2;
+  const right = Math.floor(Math.random() * 7) + 2;
+  return {
+    left,
+    right,
+    answer: left + right,
+  };
+}
+
+function buildFallbackMailtoHref(data: FormData) {
+  const lines = [
+    ["Meno", data.get("meno")],
+    ["Email", data.get("email")],
+    ["Dátum svadby", data.get("datum_svadby")],
+    ["Lokalita svadby", data.get("lokalita_svadby")],
+    ["Predbežná cena", data.get("predbezna_cena")],
+    ...CONTACT_SELECTION_GROUPS.map(({ label, inputName }) => [label, data.getAll(inputName).join(", ")]),
+    ["Poznámka k produktu", data.get("poznamka_a_predstava")],
+  ]
+    .map(([label, value]) => [label, typeof value === "string" ? value.trim() : ""] as const)
+    .filter(([, value]) => value);
+
+  const subject = encodeURIComponent("Nová správa z webu Vevsdesign");
+  const body = encodeURIComponent(lines.map(([label, value]) => `${label}: ${value}`).join("\n"));
+  return `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+}
 
 type KontaktProps = {
   selections: ContactSelections;
@@ -25,6 +55,9 @@ export default function Kontakt({
   onClearSelections,
 }: KontaktProps) {
   const [status, setStatus] = useState<{ text: string; type: "" | "success" | "error" }>({ text: "", type: "" });
+  const [fallbackHref, setFallbackHref] = useState("");
+  const [captcha, setCaptcha] = useState(createCaptchaChallenge);
+  const [captchaValue, setCaptchaValue] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
   const hasSelections = CONTACT_SELECTION_GROUPS.some(({ kind }) => selections[kind].length > 0);
@@ -44,8 +77,18 @@ export default function Kontakt({
       form.reset();
       return;
     }
+    if (Number(captchaValue) !== captcha.answer) {
+      setStatus({
+        text: "Prosím vyriešte krátke overenie, aby sme vedeli, že formulár odosiela človek.",
+        type: "error",
+      });
+      setCaptchaValue("");
+      setCaptcha(createCaptchaChallenge());
+      return;
+    }
 
     setStatus({ text: "Správu odosielame...", type: "" });
+    setFallbackHref("");
     setSubmitting(true);
 
     try {
@@ -59,10 +102,16 @@ export default function Kontakt({
 
       form.reset();
       onClearSelections();
+      setFallbackHref("");
+      setCaptchaValue("");
+      setCaptcha(createCaptchaChallenge());
       setStatus({ text: "Ďakujeme, správa bola odoslaná. Ozveme sa vám čo najskôr.", type: "success" });
     } catch {
+      setFallbackHref(buildFallbackMailtoHref(data));
+      setCaptchaValue("");
+      setCaptcha(createCaptchaChallenge());
       setStatus({
-        text: "Správu sa nepodarilo odoslať. Skúste to prosím znova alebo nám napíšte priamo na email.",
+        text: "Správu sa nepodarilo odoslať cez formulár. Skúste to prosím znova alebo použite záložný email nižšie.",
         type: "error",
       });
     } finally {
@@ -87,7 +136,7 @@ export default function Kontakt({
             <div className="kontakt-item">
               <span className="k-label">Email</span>
               <span className="k-val">
-                <a href="mailto:vevsdesignn@gmail.com">vevsdesignn@gmail.com</a>
+                <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
               </span>
             </div>
             <div className="kontakt-item">
@@ -108,7 +157,7 @@ export default function Kontakt({
         <div className="kontakt-form-wrap reveal reveal-d2">
           <p className="sec-label">Formulár</p>
           <h2>Napíšte <em>nám</em></h2>
-          <form onSubmit={handleSubmit} noValidate>
+          <form action={FORM_ENDPOINT} method="POST" onSubmit={handleSubmit} noValidate>
             <input type="hidden" name="_subject" value="Nová správa z webu Vevsdesign" />
             <input type="hidden" name="_template" value="table" />
             <input type="hidden" name="_captcha" value="true" />
@@ -208,17 +257,45 @@ export default function Kontakt({
               />
             </div>
 
+            <div className="form-group">
+              <label>Overenie</label>
+              <div className="captcha-inline">
+                <span className="captcha-prompt" aria-live="polite">
+                  Koľko je {captcha.left} + {captcha.right}?
+                </span>
+                <input
+                  type="number"
+                  inputMode="numeric"
+                  min="0"
+                  step="1"
+                  name="human_check"
+                  placeholder="Výsledok"
+                  value={captchaValue}
+                  onChange={(e) => setCaptchaValue(e.target.value)}
+                  required
+                />
+              </div>
+              <p className="captcha-note">Krátke overenie proti spamu pred odoslaním formulára.</p>
+            </div>
+
             <button type="submit" className="btn-submit" disabled={submitting}>
               {submitting ? "Odosielame..." : "Odoslať správu"}
             </button>
 
             {status.text ? (
-              <p
-                className={`form-status${status.type ? ` ${status.type}` : ""}`}
-                aria-live="polite"
-              >
-                {status.text}
-              </p>
+              <>
+                <p
+                  className={`form-status${status.type ? ` ${status.type}` : ""}`}
+                  aria-live="polite"
+                >
+                  {status.text}
+                </p>
+                {status.type === "error" ? (
+                  <p className="form-status error">
+                    <a href={fallbackHref || `mailto:${CONTACT_EMAIL}`}>Otvoriť záložný email na {CONTACT_EMAIL}</a>
+                  </p>
+                ) : null}
+              </>
             ) : null}
           </form>
         </div>
