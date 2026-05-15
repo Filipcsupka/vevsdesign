@@ -28,6 +28,7 @@ Ak je nieco v konflikte medzi tymto suborom a starsim obsahom inde v projekte, p
 - Obrazky galerie su v `public/images/gallery/`.
 - Logo je subor `public/logo.png`.
 - `next.config.ts` pouziva `output: "export"`, takze produkcny build generuje staticky export do `out/`.
+- Kontakt formular ma byt rieseny cez `Cloudflare Turnstile + Cloudflare Worker + Resend`, nie cez FormSubmit.
 
 ## Ako projekt lokalne otvorit
 
