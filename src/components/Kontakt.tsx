@@ -1,5 +1,6 @@
 "use client";
 
+import Script from "next/script";
 import {
   calculateSelectionsPricing,
   CONTACT_SELECTION_GROUPS,
@@ -12,18 +13,14 @@ import {
 import { useState } from "react";
 
 const CONTACT_EMAIL = "vevsdesignn@gmail.com";
-const FORM_ENDPOINT = `https://formsubmit.co/${CONTACT_EMAIL}`;
-const AJAX_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
+const CONTACT_ENDPOINT = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT || "/api/contact";
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "";
 
-function createCaptchaChallenge() {
-  const left = Math.floor(Math.random() * 7) + 2;
-  const right = Math.floor(Math.random() * 7) + 2;
-  return {
-    left,
-    right,
-    answer: left + right,
-  };
-}
+type KontaktProps = {
+  selections: ContactSelections;
+  onRemoveSelection: (kind: SelectionKind, value: string) => void;
+  onClearSelections: () => void;
+};
 
 function buildFallbackMailtoHref(data: FormData) {
   const lines = [
@@ -43,12 +40,6 @@ function buildFallbackMailtoHref(data: FormData) {
   return `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
 }
 
-type KontaktProps = {
-  selections: ContactSelections;
-  onRemoveSelection: (kind: SelectionKind, value: string) => void;
-  onClearSelections: () => void;
-};
-
 export default function Kontakt({
   selections,
   onRemoveSelection,
@@ -56,13 +47,12 @@ export default function Kontakt({
 }: KontaktProps) {
   const [status, setStatus] = useState<{ text: string; type: "" | "success" | "error" }>({ text: "", type: "" });
   const [fallbackHref, setFallbackHref] = useState("");
-  const [captcha, setCaptcha] = useState(createCaptchaChallenge);
-  const [captchaValue, setCaptchaValue] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
   const hasSelections = CONTACT_SELECTION_GROUPS.some(({ kind }) => selections[kind].length > 0);
   const pricing = calculateSelectionsPricing(selections);
   const totalLabel = formatSelectionsTotalLabel(selections);
+  const hasTurnstile = Boolean(TURNSTILE_SITE_KEY);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -71,45 +61,47 @@ export default function Kontakt({
       form.reportValidity();
       return;
     }
+    if (!hasTurnstile) {
+      setStatus({
+        text: "Odoslanie formulára ešte nie je nakonfigurované. Dočasne nás prosím kontaktujte priamo emailom.",
+        type: "error",
+      });
+      return;
+    }
 
     const data = new FormData(form);
     if (data.get("_honey")) {
       form.reset();
       return;
     }
-    if (Number(captchaValue) !== captcha.answer) {
+    if (!data.get("cf-turnstile-response")) {
       setStatus({
-        text: "Prosím vyriešte krátke overenie, aby sme vedeli, že formulár odosiela človek.",
+        text: "Prosím potvrďte overenie, že nie ste robot, a skúste to znova.",
         type: "error",
       });
-      setCaptchaValue("");
-      setCaptcha(createCaptchaChallenge());
       return;
     }
 
     setStatus({ text: "Správu odosielame...", type: "" });
-    setFallbackHref("");
+    setFallbackHref(buildFallbackMailtoHref(data));
     setSubmitting(true);
 
     try {
-      const res = await fetch(AJAX_ENDPOINT, {
+      const response = await fetch(CONTACT_ENDPOINT, {
         method: "POST",
         body: data,
-        headers: { Accept: "application/json" },
       });
 
-      if (!res.ok) throw new Error("failed");
+      const payload = await response.json().catch(() => null) as { error?: string; ok?: boolean } | null;
+      if (!response.ok || !payload?.ok) {
+        throw new Error(payload?.error || "send_failed");
+      }
 
       form.reset();
       onClearSelections();
       setFallbackHref("");
-      setCaptchaValue("");
-      setCaptcha(createCaptchaChallenge());
       setStatus({ text: "Ďakujeme, správa bola odoslaná. Ozveme sa vám čo najskôr.", type: "success" });
     } catch {
-      setFallbackHref(buildFallbackMailtoHref(data));
-      setCaptchaValue("");
-      setCaptcha(createCaptchaChallenge());
       setStatus({
         text: "Správu sa nepodarilo odoslať cez formulár. Skúste to prosím znova alebo použite záložný email nižšie.",
         type: "error",
@@ -121,6 +113,14 @@ export default function Kontakt({
 
   return (
     <section id="kontakt">
+      {hasTurnstile ? (
+        <Script
+          src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+          strategy="afterInteractive"
+          async
+          defer
+        />
+      ) : null}
       <div className="kontakt-wrap">
         <div className="kontakt-info reveal">
           <p className="sec-label">Spojte sa s nami</p>
@@ -157,10 +157,7 @@ export default function Kontakt({
         <div className="kontakt-form-wrap reveal reveal-d2">
           <p className="sec-label">Formulár</p>
           <h2>Napíšte <em>nám</em></h2>
-          <form action={FORM_ENDPOINT} method="POST" onSubmit={handleSubmit} noValidate>
-            <input type="hidden" name="_subject" value="Nová správa z webu Vevsdesign" />
-            <input type="hidden" name="_template" value="table" />
-            <input type="hidden" name="_captcha" value="true" />
+          <form onSubmit={handleSubmit} noValidate>
             <input
               type="text"
               name="_honey"
@@ -259,26 +256,19 @@ export default function Kontakt({
 
             <div className="form-group">
               <label>Overenie</label>
-              <div className="captcha-inline">
-                <span className="captcha-prompt" aria-live="polite">
-                  Koľko je {captcha.left} + {captcha.right}?
-                </span>
-                <input
-                  type="number"
-                  inputMode="numeric"
-                  min="0"
-                  step="1"
-                  name="human_check"
-                  placeholder="Výsledok"
-                  value={captchaValue}
-                  onChange={(e) => setCaptchaValue(e.target.value)}
-                  required
-                />
-              </div>
-              <p className="captcha-note">Krátke overenie proti spamu pred odoslaním formulára.</p>
+              {hasTurnstile ? (
+                <>
+                  <div className="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY} data-theme="light" />
+                  <p className="captcha-note">Formulár je chránený cez Cloudflare Turnstile.</p>
+                </>
+              ) : (
+                <p className="form-status error">
+                  Turnstile ešte nie je nakonfigurovaný. Kým nedoplníte site key, formulár ostane vypnutý.
+                </p>
+              )}
             </div>
 
-            <button type="submit" className="btn-submit" disabled={submitting}>
+            <button type="submit" className="btn-submit" disabled={submitting || !hasTurnstile}>
               {submitting ? "Odosielame..." : "Odoslať správu"}
             </button>
 

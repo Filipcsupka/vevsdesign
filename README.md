@@ -115,6 +115,91 @@ Poznámky:
 - metriky potom uvidíš v Cloudflare dashboarde pri danom webe
 - rovnaký pattern môžeš použiť aj v `cv-web`
 
+## Kontakt formulár
+
+Web nepoužíva `FormSubmit`. Očakávaná architektúra formulára je:
+
+```text
+browser -> Cloudflare Turnstile -> Cloudflare Worker (/api/contact) -> Cloudflare Email Routing send_email binding -> vevsdesignn@gmail.com
+```
+
+Frontend číta tieto build-time premenné:
+
+```bash
+NEXT_PUBLIC_CONTACT_ENDPOINT=/api/contact
+NEXT_PUBLIC_TURNSTILE_SITE_KEY=...
+```
+
+Pri produkčnom Docker builde musia byť tieto `NEXT_PUBLIC_*` premenné dostupné už počas `npm run build`, nie až v runtime kontajnera.
+
+Worker scaffold je v:
+
+```text
+cloudflare/contact-worker/
+```
+
+Aktuálne implementované riešenie:
+
+- Cloudflare Turnstile chráni formulár na fronte.
+- HTTP Cloudflare Worker `vevsdesign-contact` obsluhuje route `vevsdesign.sk/api/contact*`.
+- Worker používa `Email` binding s menom `EMAIL`.
+- Worker posiela správu na `vevsdesignn@gmail.com`.
+- Produkčný web číta `NEXT_PUBLIC_TURNSTILE_SITE_KEY` z GitHub Actions repository variable.
+- Produkčný web používa endpoint `NEXT_PUBLIC_CONTACT_ENDPOINT=/api/contact`.
+
+Potrebné runtime vars/secrets vo Workeri:
+
+```text
+TURNSTILE_SECRET_KEY
+ALLOWED_ORIGIN=https://vevsdesign.sk
+CONTACT_TO_EMAIL=vevsdesignn@gmail.com
+CONTACT_FROM_EMAIL=noreply@vevsdesign.sk
+```
+
+Odporúčaný sender:
+
+```text
+noreply@vevsdesign.sk
+```
+
+Čo musí byť nastavené v Cloudflare:
+
+1. `Turnstile`:
+   widget pre hostname `vevsdesign.sk`
+   z neho sa používa `site key` vo fronte a `secret key` vo Workeri
+2. `Email Routing`:
+   v `Destination Addresses` musí byť `vevsdesignn@gmail.com` a musí byť verified
+3. `Workers & Pages` -> `vevsdesign-contact`:
+   v `Bindings` musí byť `Email Service` binding s menom `EMAIL`
+4. `Workers & Pages` -> `vevsdesign-contact` -> `Settings` -> `Variables and Secrets`:
+   `ALLOWED_ORIGIN=https://vevsdesign.sk`
+   `CONTACT_FROM_EMAIL=noreply@vevsdesign.sk`
+   `CONTACT_TO_EMAIL=vevsdesignn@gmail.com`
+   `TURNSTILE_SECRET_KEY` musí byť uložený ako secret, nie plaintext
+5. `Workers & Pages` -> `vevsdesign-contact` -> `Domains`:
+   route musí byť `vevsdesign.sk/api/contact*`
+
+Poznámky:
+- Netreba `Resend` účet ani `RESEND_API_KEY`.
+- Netreba ani Cloudflare `Email Sending` platený plan.
+- Používa sa Cloudflare Worker s `Email` bindingom v UI, nie platený `Email Sending` produkt.
+
+Čo musí byť nastavené v GitHub:
+
+1. `Settings` -> `Secrets and variables` -> `Actions` -> `Variables`
+2. Repository variable:
+   `NEXT_PUBLIC_TURNSTILE_SITE_KEY=<site key z Cloudflare Turnstile>`
+3. GitHub Actions workflow v `.github/workflows/ci.yml` už build-time premenné posúva do:
+   `npm run build`
+   Docker build args
+4. `NEXT_PUBLIC_CONTACT_ENDPOINT` je v workflow napevno nastavený na `/api/contact`, netreba ho ručne pridávať v GitHub UI
+
+Po zmene Workeru alebo build premenných:
+
+1. pushni zmeny do repozitára
+2. spusti GitHub Actions build alebo pushni na `main`
+3. po deployi otestuj formulár na `https://vevsdesign.sk`
+
 ## Dôležité URL
 
 - dev server: `http://127.0.0.1:3000`
