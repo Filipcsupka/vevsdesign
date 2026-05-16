@@ -5,6 +5,11 @@ compatibility_date = "2026-05-15"
 [observability.logs]
 enabled = true
 
+[[send_email]]
+name = "EMAIL"
+destination_address = "vevsdesignn@gmail.com"
+
 [vars]
 ALLOWED_ORIGIN = "https://vevsdesign.sk"
 CONTACT_TO_EMAIL = "vevsdesignn@gmail.com"
+CONTACT_FROM_EMAIL = "noreply@vevsdesign.sk"

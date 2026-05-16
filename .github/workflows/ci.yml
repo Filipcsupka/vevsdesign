@@ -19,6 +19,8 @@ permissions:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: filipcsupka/vevsdesign
+  NEXT_PUBLIC_CONTACT_ENDPOINT: /api/contact
+  NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.NEXT_PUBLIC_TURNSTILE_SITE_KEY }}
 
 jobs:
   test:
@@ -39,6 +41,9 @@ jobs:
         run: npm ci
 
       - name: Build
+        env:
+          NEXT_PUBLIC_CONTACT_ENDPOINT: ${{ env.NEXT_PUBLIC_CONTACT_ENDPOINT }}
+          NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${{ env.NEXT_PUBLIC_TURNSTILE_SITE_KEY }}
         run: npm run build
 
       - name: Set up Docker Buildx
@@ -61,6 +66,9 @@ jobs:
           context: .
           load: true
           tags: vevsdesign:ci
+          build-args: |
+            NEXT_PUBLIC_CONTACT_ENDPOINT=${{ env.NEXT_PUBLIC_CONTACT_ENDPOINT }}
+            NEXT_PUBLIC_TURNSTILE_SITE_KEY=${{ env.NEXT_PUBLIC_TURNSTILE_SITE_KEY }}
 
       - name: Smoke test served site
         run: |
@@ -143,6 +151,9 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            NEXT_PUBLIC_CONTACT_ENDPOINT=${{ env.NEXT_PUBLIC_CONTACT_ENDPOINT }}
+            NEXT_PUBLIC_TURNSTILE_SITE_KEY=${{ env.NEXT_PUBLIC_TURNSTILE_SITE_KEY }}
 
   deploy-gitops:
     name: Update GitOps

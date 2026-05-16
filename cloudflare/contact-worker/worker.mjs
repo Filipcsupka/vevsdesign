@@ -1,4 +1,10 @@
+import { EmailMessage } from "cloudflare:email";
+
 const REQUIRED_FIELDS = ["meno", "email"];
+const REQUIRED_ENV_FIELDS = [
+  "TURNSTILE_SECRET_KEY",
+  "CONTACT_FROM_EMAIL",
+];
 
 function jsonResponse(body, init = {}) {
   return new Response(JSON.stringify(body), {
@@ -85,32 +91,57 @@ async function verifyTurnstile(token, request, env) {
   return response.json();
 }
 
-async function sendWithResend(formData, env) {
-  const from = env.RESEND_FROM;
-  const to = env.CONTACT_TO_EMAIL;
+function buildMimeEmail({ from, to, replyTo, subject, html, text }) {
+  const boundary = `vevsdesign-${crypto.randomUUID()}`;
+
+  return [
+    `From: ${from}`,
+    `To: ${to}`,
+    `Subject: ${subject}`,
+    "MIME-Version: 1.0",
+    replyTo ? `Reply-To: ${replyTo}` : null,
+    `Content-Type: multipart/alternative; boundary="${boundary}"`,
+    "",
+    `--${boundary}`,
+    'Content-Type: text/plain; charset="UTF-8"',
+    "Content-Transfer-Encoding: 8bit",
+    "",
+    text,
+    "",
+    `--${boundary}`,
+    'Content-Type: text/html; charset="UTF-8"',
+    "Content-Transfer-Encoding: 8bit",
+    "",
+    html,
+    "",
+    `--${boundary}--`,
+    "",
+  ].filter((line) => line !== null).join("\r\n");
+}
+
+async function sendWithCloudflareEmail(formData, env) {
+  if (!env.EMAIL || typeof env.EMAIL.send !== "function") {
+    throw new Error("cloudflare_email_binding_missing");
+  }
+
+  const from = env.CONTACT_FROM_EMAIL;
+  const to = env.CONTACT_TO_EMAIL || env.EMAIL_DESTINATION || "vevsdesignn@gmail.com";
   const replyTo = getField(formData, "email");
   const { html, text } = buildEmailContent(formData);
 
-  const response = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      authorization: `Bearer ${env.RESEND_API_KEY}`,
-      "content-type": "application/json",
-      "user-agent": "vevsdesign-contact-worker/1.0",
-    },
-    body: JSON.stringify({
-      from,
-      to: [to],
-      reply_to: replyTo || undefined,
-      subject: "Nová správa z webu Vevsdesign",
-      html,
-      text,
-    }),
+  const raw = buildMimeEmail({
+    from,
+    to,
+    replyTo,
+    subject: "Nová správa z webu Vevsdesign",
+    html,
+    text,
   });
+  const message = new EmailMessage(from, to, raw);
+  const response = await env.EMAIL.send(message);
 
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`resend_failed:${errorText}`);
+  if (!response?.messageId) {
+    throw new Error("cloudflare_email_send_failed");
   }
 }
 
@@ -126,6 +157,13 @@ export default {
     const origin = request.headers.get("Origin");
     if (env.ALLOWED_ORIGIN && origin !== env.ALLOWED_ORIGIN) {
       return jsonResponse({ ok: false, error: "forbidden_origin" }, { status: 403 });
+    }
+
+    for (const field of REQUIRED_ENV_FIELDS) {
+      if (!env[field]) {
+        console.error("contact-worker missing env", field);
+        return jsonResponse({ ok: false, error: "worker_not_configured" }, { status: 500 });
+      }
     }
 
     const formData = await request.formData();
@@ -150,7 +188,7 @@ export default {
         return jsonResponse({ ok: false, error: "turnstile_verification_failed" }, { status: 400 });
       }
 
-      await sendWithResend(formData, env);
+      await sendWithCloudflareEmail(formData, env);
       return jsonResponse({ ok: true });
     } catch (error) {
       console.error("contact-worker error", error);
