@@ -4,9 +4,10 @@ Fotky su pripravene tak, aby sa dali doplnat bez zasahu do layoutu.
 
 ## Nazvy suborov
 
-- `cover.webp` - hlavna fotka pre kartu.
-- `detail-01.webp` - prva fotka v detailnom modale.
-- `detail-02.webp` - druha fotka v detailnom modale.
+- `01.jpg` - hlavna fotka pre kartu a zaroven prva velka fotka v modale.
+- `02.jpg` - druha fotka v poradi.
+- `03.jpg` - tretia fotka v poradi.
+- dalsie fotky rovnako pokracuju ako `04.jpg`, `05.jpg`...
 
 Ak subor este neexistuje, web automaticky pouzije `gallery/placeholder.png`.
 

@@ -29,8 +29,12 @@ export default function FallbackImage({
       alt={alt}
       className={className}
       loading={loading}
-      onError={() => {
-        if (currentSrc !== FALLBACK_IMAGE) setCurrentSrc(FALLBACK_IMAGE);
+      onError={(event) => {
+        const img = event.currentTarget;
+        if (img.dataset.fallbackApplied === "true") return;
+        img.dataset.fallbackApplied = "true";
+        img.src = FALLBACK_IMAGE;
+        setCurrentSrc(FALLBACK_IMAGE);
       }}
     />
   );

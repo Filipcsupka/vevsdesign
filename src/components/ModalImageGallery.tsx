@@ -10,7 +10,7 @@ type ModalImageGalleryProps = {
 };
 
 export default function ModalImageGallery({ images, label }: ModalImageGalleryProps) {
-  const galleryImages = useMemo(() => images.slice(0, 4), [images]);
+  const galleryImages = useMemo(() => images, [images]);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const galleryKey = galleryImages.map((image) => image.src).join("|");
