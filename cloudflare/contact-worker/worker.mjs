@@ -143,6 +143,15 @@ async function sendWithCloudflareEmail(formData, env) {
   if (!response?.messageId) {
     throw new Error("cloudflare_email_send_failed");
   }
+
+  console.log("contact-worker email accepted", {
+    messageId: response.messageId,
+    from,
+    to,
+    replyTo: replyTo || null,
+  });
+
+  return response.messageId;
 }
 
 export default {
@@ -188,7 +197,8 @@ export default {
         return jsonResponse({ ok: false, error: "turnstile_verification_failed" }, { status: 400 });
       }
 
-      await sendWithCloudflareEmail(formData, env);
+      const messageId = await sendWithCloudflareEmail(formData, env);
+      console.log("contact-worker request completed", { messageId });
       return jsonResponse({ ok: true });
     } catch (error) {
       console.error("contact-worker error", error);

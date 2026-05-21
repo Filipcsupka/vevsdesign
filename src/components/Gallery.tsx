@@ -256,6 +256,16 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         lead: "Drevené boxy dodajú aranžmánu príjemný rustikálny charakter a zároveň prakticky usporiadajú detaily. Vhodné na cigar bar, rekvizity a iné.",
         details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100€ (+ príplatok PHM).",
       },
+      {
+        id: "capovacie-stanice",
+        title: "Čapovacie stanice",
+        price: "Cena individuálne",
+        unitPrice: null,
+        priceKind: "individual",
+        description: "Čapovacie stanice vytvoria výrazný servisný detail a dodajú hostine uvoľnený, premyslený charakter.",
+        lead: "Čapovacie stanice pripravíme ako praktický aj efektný prvok, ktorý sa hodí na welcome drink, miešané nápoje aj ďalšie občerstvenie podľa štýlu vašej svadby.",
+        details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100€ (+ príplatok PHM). Presné riešenie aj počet stanovísk doladíme individuálne podľa typu podujatia.",
+      },
     ],
   },
 ];
@@ -401,8 +411,8 @@ export default function Gallery({ onSelectRental }: GalleryProps) {
 
       <div className="gallery-collection reveal reveal-d3">
         <div className="gallery-grid">
-          {GALLERY_IMAGES.map((img) => (
-            <div key={img.src} className="gal-item">
+          {GALLERY_IMAGES.map((img, index) => (
+            <div key={`${img.alt}-${index}`} className="gal-item">
               <FallbackImage
                 src={img.src}
                 alt={img.alt}
