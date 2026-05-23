@@ -2,9 +2,9 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "serve-out",
-      "runtimeExecutable": "npx",
-      "runtimeArgs": ["serve", "out", "-p", "3000", "--no-clipboard"],
+      "name": "dev",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--localstorage-file=/tmp/vevsdesign-localstorage.json", "./node_modules/next/dist/bin/next", "dev", "--hostname", "127.0.0.1", "--port", "3000"],
       "port": 3000
     }
   ]

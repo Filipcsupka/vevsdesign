@@ -57,7 +57,7 @@ Ak sa robi vizualna uprava, preferuj menit existujuce komponenty a `src/app/glob
 - Studio: Vevsdesign
 - Mesto: Kosice a okolie
 - Email: `veronika.csupkova@gmail.com`
-- Telefon: `0910 091 009`
+- Telefon: `0915 309 721`
 - Instagram: `@Vevsdesign`
 - Web obsahuje baliky, doplnkove sluzby, galeriu a kontakt.
 

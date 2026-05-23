@@ -2,6 +2,13 @@
 
 import Script from "next/script";
 import {
+  CONTACT_EMAIL,
+  CONTACT_INSTAGRAM_HANDLE,
+  CONTACT_INSTAGRAM_URL,
+  CONTACT_PHONE_DISPLAY,
+  CONTACT_PHONE_HREF,
+} from "@/data/businessInfo";
+import {
   calculateSelectionsPricing,
   CONTACT_SELECTION_GROUPS,
   formatSelectionHiddenValue,
@@ -12,7 +19,6 @@ import {
 } from "@/components/contactSelection";
 import { useState } from "react";
 
-const CONTACT_EMAIL = "vevsdesignn@gmail.com";
 const CONTACT_ENDPOINT = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT || "/api/contact";
 const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "";
 
@@ -128,10 +134,14 @@ export default function Kontakt({
           <p className="lead">
             Kontaktujte nás a spoločne vytvoríme váš vysnívaný deň. Dizajn Vám odošleme do 3 dní.
           </p>
+          <p className="kontakt-note">
+            Formulár slúži na nezáväzný dopyt. Finálnu dostupnosť, cenu, dopravu, inštaláciu a presný rozsah služby si
+            s vami potvrdíme individuálne.
+          </p>
           <div className="kontakt-details">
             <div className="kontakt-item">
               <span className="k-label">Telefón</span>
-              <span className="k-val"><a href="tel:+421915309721">+421 915 309 721</a></span>
+              <span className="k-val"><a href={`tel:${CONTACT_PHONE_HREF}`}>{CONTACT_PHONE_DISPLAY}</a></span>
             </div>
             <div className="kontakt-item">
               <span className="k-label">Email</span>
@@ -144,12 +154,36 @@ export default function Kontakt({
               <span className="k-val">Košice &amp; Východné Slovensko</span>
             </div>
             <div className="kontakt-item">
+              <span className="k-label">Showroom / osobná konzultácia</span>
+              <span className="k-val">Po dohode vopred telefonicky alebo emailom</span>
+            </div>
+            <div className="kontakt-item">
               <span className="k-label">Instagram a Facebook</span>
               <span className="k-val">
-                <a href="https://instagram.com/vevsdesign" target="_blank" rel="noopener noreferrer">
-                  @Vevsdesign
+                <a href={CONTACT_INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">
+                  {CONTACT_INSTAGRAM_HANDLE}
                 </a>
               </span>
+            </div>
+          </div>
+          <div className="kontakt-faq">
+            <div className="kontakt-faq-item">
+              <span className="kontakt-faq-question">Len prenájom dekorácií?</span>
+              <p>
+                Áno. Nemusíte mať od nás kompletnú realizáciu výzdoby, vieme pripraviť aj samostatný prenájom vybraných
+                položiek podľa dostupnosti termínu.
+              </p>
+            </div>
+            <div className="kontakt-faq-item">
+              <span className="kontakt-faq-question">Ako sa určuje cena?</span>
+              <p>
+                Cenu potvrdzujeme individuálne podľa výberu inventáru, množstva, lokality, dopravy a rozsahu
+                inštalácie.
+              </p>
+            </div>
+            <div className="kontakt-faq-item">
+              <span className="kontakt-faq-question">Kedy odpovedáme?</span>
+              <p>Na dopyty odpovedáme spravidla do 2 až 4 pracovných dní.</p>
             </div>
           </div>
         </div>
@@ -263,7 +297,7 @@ export default function Kontakt({
                 </>
               ) : (
                 <p className="form-status error">
-                  Turnstile ešte nie je nakonfigurovaný. Kým nedoplníte site key, formulár ostane vypnutý.
+                  Formulár ešte dokončujeme. Zatiaľ nás prosím kontaktujte priamo emailom alebo telefonicky.
                 </p>
               )}
             </div>
@@ -271,6 +305,11 @@ export default function Kontakt({
             <button type="submit" className="btn-submit" disabled={submitting || !hasTurnstile}>
               {submitting ? "Odosielame..." : "Odoslať správu"}
             </button>
+
+            <p className="form-note">
+              Odoslaním formulára odosielate nezáväzný dopyt. Rezervácia alebo objednávka vzniká až po individuálnom
+              potvrdení e-mailom alebo telefonicky.
+            </p>
 
             {status.text ? (
               <>

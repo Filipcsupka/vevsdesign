@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { CONTACT_EMAIL, CONTACT_PHONE_HREF } from "@/data/businessInfo";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -42,8 +43,8 @@ export default function RootLayout({
     description:
       "Tvoríme svadobnú výzdobu s dušou — personalizovanú, elegantnú a plnú detailov.",
     url: "https://vevsdesign.sk",
-    telephone: "+421915309721",
-    email: "vevsdesignn@gmail.com",
+    telephone: CONTACT_PHONE_HREF,
+    email: CONTACT_EMAIL,
     image: "https://vevsdesign.sk/logo.png",
     priceRange: "€€",
     address: {
