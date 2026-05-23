@@ -3,7 +3,7 @@ export type ImageAsset = {
   alt: string;
 };
 
-const IMAGE_VERSION = "2026-05-21-02";
+const IMAGE_VERSION = "2026-05-23-01";
 export const FALLBACK_IMAGE = "/images/gallery/placeholder.png";
 
 export const GALLERY_IMAGES: ImageAsset[] = [
@@ -61,8 +61,11 @@ const SERVICE_IMAGE_COUNTS: Record<string, number> = {
   "doplnky-na-mieru:strom-na-platne": 2,
   "doplnky-na-mieru:uvitacia-tabula": 3,
   "doplnky-na-mieru:uvitacia-latka": 1,
-  "doplnky-pre-hosti:cigar-bar": 1,
+  "doplnky-pre-hosti:cigar-bar": 2,
   "doplnky-pre-hosti:detske-balicky": 2,
+  "doplnky-pre-hosti:okuliare": 1,
+  "doplnky-pre-hosti:omalovanky": 2,
+  "doplnky-pre-hosti:papucky": 2,
   "doplnky-pre-hosti:vejare": 1,
   "doplnky-pre-hosti:flasticky": 1,
 };
@@ -70,6 +73,8 @@ const SERVICE_IMAGE_COUNTS: Record<string, number> = {
 const RENTAL_IMAGE_COUNTS: Record<string, number> = {
   "kvetinova-vyzdoba:ikebana-na-stoly": 2,
   "kvetinova-vyzdoba:ikebana-na-stoly-s-vazami-okolo": 2,
+  "kvetinova-vyzdoba:mala-ikebana": 1,
+  "kvetinova-vyzdoba:dlha-ikebana": 2,
   "stojany-zrkadla:ovalny-stojan": 1,
   "stojany-zrkadla:srdcovy-stojan": 4,
   "stojany-zrkadla:stojace-tyce-s-balonmi": 1,
@@ -77,6 +82,8 @@ const RENTAL_IMAGE_COUNTS: Record<string, number> = {
   "ostatne:capovacie-stanice": 3,
   "ostatne:drevene-boxy": 2,
   "ostatne:lampase": 3,
+  "vazy-svietniky:vysoke-svietniky": 1,
+  "vazy-svietniky:uzke-metrove-svietniky": 1,
 };
 
 function serviceCategoryFolder(category: "Doplnky na mieru" | "Doplnky pre hostí") {
