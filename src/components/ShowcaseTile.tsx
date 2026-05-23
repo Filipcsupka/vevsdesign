@@ -41,7 +41,6 @@ export default function ShowcaseTile({
             />
           ) : null}
         </span>
-        <span className="showcase-tile-media-label">Náhľad fotky</span>
       </span>
 
       <span className="showcase-tile-body">

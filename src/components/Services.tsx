@@ -14,6 +14,7 @@ type ServiceItem = {
   unitPrice: number | null;
   priceKind: PriceKind;
   unitLabel?: string;
+  hideQuantityField?: boolean;
   description: string;
   details?: string[];
   modalSectionTitle?: string;
@@ -67,6 +68,7 @@ const CUSTOM_SERVICES: ServiceItem[] = [
     unitPrice: 30,
     priceKind: "fixed",
     unitLabel: "balík",
+    hideQuantityField: true,
     description: "Balík tlačovín vytvorí zladený a praktický set svadobných tlačovín, ktorý doplní výzdobu a zároveň pomôže hosťom lepšie sa zorientovať počas celého dňa.",
     modalDescription: "Balík tlačovín obsahuje zladený set svadobných tlačovín vo vašej téme svadby a farbách, ktorý hosťom uľahčí orientáciu a pekne doplní výzdobu.",
     modalDetails: [
@@ -99,6 +101,7 @@ const CUSTOM_SERVICES: ServiceItem[] = [
     price: "12 €",
     unitPrice: 12,
     priceKind: "fixed",
+    hideQuantityField: true,
     description: "Kniha hostí vytvorí krásny priestor na odkazy, priania a spomienky od vašich blízkych.",
     modalDescription: "Kniha hostí je krásnou spomienkou na svadobný deň a ponúka priestor na odkazy, priania aj milé slová od vašich blízkych. Kniha má čisté strany a obsahuje personalizovanú prednú časť s Vašimi menami a dátumom svadby.",
     modalDetails: [],
@@ -111,6 +114,7 @@ const CUSTOM_SERVICES: ServiceItem[] = [
     price: "Od 2,50 €",
     unitPrice: 2.5,
     priceKind: "from",
+    hideQuantityField: true,
     description: "Dekoratívny box na obálky je praktický detail, ktorý zároveň pôsobí elegantne a usporiadane.",
     modalDescription: "Box na obálky je praktický aj dekoratívny prvok, ktorý pekne doplní svadobný stôl a zároveň udrží obálky na jednom mieste. Cena je za čistý box ako na fotke. Cena pre personalizovaný box s menami a zdobením je 5€.",
     modalDetails: [],
@@ -123,6 +127,7 @@ const CUSTOM_SERVICES: ServiceItem[] = [
     price: "15 €",
     unitPrice: 15,
     priceKind: "fixed",
+    hideQuantityField: true,
     description: "Strom na plátne je jemná a osobná pamiatka, do ktorej hostia zanechajú svoj vlastný odtlačok.",
     modalDescription: "Strom na plátne ostane po svadbe ako krásna osobná spomienka, do ktorej hostia zanechajú svoj odtlačok. Farby sú podľa želania a v cene je aj prenajatý stojan.",
     modalDetails: [],
@@ -135,8 +140,9 @@ const CUSTOM_SERVICES: ServiceItem[] = [
     price: "25 €",
     unitPrice: 25,
     priceKind: "fixed",
+    hideQuantityField: true,
     description: "Uvítacia tabuľa vytvorí krásny prvý dojem a hneď pri príchode naladí hostí na atmosféru svadby.",
-    modalDescription: "Uvítacia tabuľa vytvorí krásny prvý dojem a hneď pri príchode privíta hostí v štýle vašej svadby. V cene je aj prenajatý stojan s personalizovanou uvítacou tabuľou na plátne.",
+    modalDescription: "Uvítacia tabuľa vytvorí krásny prvý dojem a hneď pri príchode privíta hostí v štýle vašej svadby. Cena je bez kvetov s prenajatým stojanom a personalizovanou uvítacou tabuľou na plátne.",
     modalDetails: [],
     modalAbout: "Finálny dizajn Vám pošleme do 3 dní. Doba doručenia je 5 až 15 pracovných dní.",
     category: "Doplnky na mieru",
@@ -147,6 +153,7 @@ const CUSTOM_SERVICES: ServiceItem[] = [
     price: "45 €",
     unitPrice: 45,
     priceKind: "fixed",
+    hideQuantityField: true,
     description: "Uvítací banner pôsobí mäkko, romanticky a veľmi pekne vynikne pri vstupe alebo fotení.",
     modalDescription: "Uvítací banner pôsobí romanticky a výrazne vynikne pri vstupe, obrade aj svadobnom fotení. Obsahuje personalizovanú látku s prenajatým stojanom a mašličkami.",
     modalDetails: [],
@@ -159,13 +166,13 @@ const GUEST_SERVICES: ServiceItem[] = [
   {
     id: "cigar-bar",
     name: "Cigar bar",
-    price: "Cena individuálne",
-    unitPrice: null,
-    priceKind: "individual",
+    price: "Od 90 €",
+    unitPrice: 90,
+    priceKind: "from",
     description: "Cigar bar je štýlový doplnok, ktorý vytvorí výrazný zážitok najmä pre mužov.",
     modalDescription: "Cigar bar je štýlový doplnok, ktorý vytvorí výrazný zážitok najmä pre chlapov na svadbe, pri príprave ženícha alebo na rozlúčke so slobodou. Obsahuje drevenú krabičku s potrebným príslušenstvom, personalizované cigary 15 €/ks a možnosť malého sudu s rumom podľa želania.",
     modalDetails: [],
-    modalAbout: "Minimálny odber cigár je 6 ks. Doba doručenia je 5 - 15 pracovných dní pre cigary, krabičku a príslušenstvo. Malý čapovací sud iba osobný odber alebo náš dovoz na miesto v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
+    modalAbout: "Minimálny odber cigár je 6 ks. Počet cigár zadajte nižšie. Doba doručenia je 5 - 15 pracovných dní pre cigary, krabičku a príslušenstvo. Malý čapovací sud iba osobný odber alebo náš dovoz na miesto v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
     category: "Doplnky pre hostí",
   },
   {
@@ -223,6 +230,7 @@ const GUEST_SERVICES: ServiceItem[] = [
     unitPrice: 10,
     priceKind: "fixed",
     unitLabel: "balík",
+    hideQuantityField: true,
     description: "Okuliare sú hravý doplnok, ktorý vie oživiť fotenie, fotokútik aj spontánnu zábavu hostí.",
     modalDescription: "Okuliare prinesú do fotenia a svadobnej zábavy hravosť, farbu a uvoľnenú atmosféru. Obsahujú balík vtipných okuliarov vo vašich farbách.",
     modalDetails: [],
@@ -232,9 +240,9 @@ const GUEST_SERVICES: ServiceItem[] = [
   {
     id: "domaci-med",
     name: "Mini medík domáci",
-    price: "1,50 €",
+    price: "Od 1,50 €",
     unitPrice: 1.5,
-    priceKind: "fixed",
+    priceKind: "from",
     description: "Domáci med je milá a vkusná pozornosť pre hostí, ktorá pôsobí osobne a srdcom.",
     modalDescription: "Mini medík domáci je chutný a osobný darček pre hostí, ktorý pekne doplní svadobný stôl aj výslužku. Mini medík bez lyžičky obsahuje personalizovanú etiketu a zlatú včielku, verzia s lyžičkou 1,90€/ks obsahuje aj vrecúško a lyžičku k medu.",
     modalDetails: [],
@@ -430,16 +438,18 @@ export default function Services({ onSelectService }: ServicesProps) {
                   Máte záujem o tento doplnok? Napíšte nám a pripravíme ho podľa vašej predstavy.
                 </span>
                 <div className="modal-selection-inline">
-                  <label className="modal-qty-field">
-                    <span>Počet</span>
-                    <input
-                      type="number"
-                      min={1}
-                      step={1}
-                      value={quantity}
-                      onChange={(event) => setQuantity(normalizeQuantity(Number(event.target.value)))}
-                    />
-                  </label>
+                  {!activeService.hideQuantityField ? (
+                    <label className="modal-qty-field">
+                      <span>Počet</span>
+                      <input
+                        type="number"
+                        min={1}
+                        step={1}
+                        value={quantity}
+                        onChange={(event) => setQuantity(normalizeQuantity(Number(event.target.value)))}
+                      />
+                    </label>
+                  ) : null}
                   <div className="modal-price-preview">
                     <span>Cena</span>
                     <strong>

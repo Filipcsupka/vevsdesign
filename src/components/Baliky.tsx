@@ -3,8 +3,6 @@
 import { useState, useEffect, useRef } from "react";
 import { type SelectionItem } from "@/components/contactSelection";
 import { createPortal } from "react-dom";
-import ModalImageGallery from "@/components/ModalImageGallery";
-import { packageDetailImages } from "@/data/imageAssets";
 
 type PackageId = "s" | "m" | "l";
 
@@ -154,7 +152,6 @@ export default function Baliky({ onSelectPackage }: BalikyProps) {
 
   const detail = openId ? DETAILS[openId] : null;
   const pkg = openId ? PACKAGES.find((p) => p.id === openId) : null;
-  const packageImages = openId && detail ? packageDetailImages(openId, detail.name) : [];
 
   useEffect(() => {
     setMounted(true);
@@ -291,7 +288,6 @@ export default function Baliky({ onSelectPackage }: BalikyProps) {
             </div>
             <div className="balik-modal-top">
               <p className="balik-modal-lead">{detail.lead}</p>
-              <ModalImageGallery images={packageImages} label={detail.name} />
             </div>
 
             <div className="balik-modal-body">

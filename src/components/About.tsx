@@ -9,6 +9,7 @@ export default function About() {
         <div className="about-quote-block reveal reveal-d1">
           <div className="about-quote-mark">&ldquo;</div>
           <div className="about-quote-text">Detaily robia svadbu nezabudnuteľnou.</div>
+          <div className="about-quote-by">-TÍM VEVS</div>
         </div>
         <div className="about-text reveal reveal-d2">
           <h3>Vaša svadba, naša vášeň</h3>

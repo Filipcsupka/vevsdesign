@@ -3,10 +3,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { normalizeQuantity, type PriceKind, type SelectionItem } from "@/components/contactSelection";
 import { createPortal } from "react-dom";
-import FallbackImage from "@/components/FallbackImage";
 import ModalImageGallery from "@/components/ModalImageGallery";
 import ShowcaseTile from "@/components/ShowcaseTile";
-import { GALLERY_IMAGES, rentalDetailImages, rentalImage } from "@/data/imageAssets";
+import { rentalDetailImages, rentalImage } from "@/data/imageAssets";
 
 type RentalOffer = {
   id: string;
@@ -15,6 +14,7 @@ type RentalOffer = {
   unitPrice?: number | null;
   priceKind?: PriceKind;
   unitLabel?: string;
+  hideQuantityField?: boolean;
   lead?: string;
   text?: string;
   description?: string;
@@ -53,9 +53,9 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
       {
         id: "ikebana-na-stoly-s-vazami-okolo",
         title: "Ikebana na stoly s vázami okolo",
-        price: "40 €",
+        price: "Od 40 €",
         unitPrice: 40,
-        priceKind: "fixed",
+        priceKind: "from",
         description: "Obsahuje všetky kvety ako na fotke vo Vašich požadovaných farbách.",
         lead: "Obsahuje všetky kvety ako na fotke vo Vašich požadovaných farbách. Vysoká váza v strede so živou ružou. Dva poháre s plávajúcimi sviečkami. Osem váz dookola s umelými kvetmi. Možnosť živých kvetov v 8 vázach naokolo, napríklad po jednej ruži alebo iných kvetov podľa požiadavky v cene 50 - 70 €.",
         details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska od 4 ks vyššie alebo aj 1 ks pri objednávke nad 100 € (+ príplatok PHM).",
@@ -95,6 +95,7 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         price: "50 €",
         unitPrice: 50,
         priceKind: "fixed",
+        hideQuantityField: true,
         description: "Obsahuje šmýkalku, penovú podložku, farebné stany, kocky, autíčka, bábiky, omaľovánky.",
         lead: "Obsahuje šmýkalku, penovú podložku, farebné stany, kocky, autíčka, bábiky, omaľovánky.",
         details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
@@ -114,6 +115,7 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         price: "25 €",
         unitPrice: 25,
         priceKind: "fixed",
+        hideQuantityField: true,
         description: "Cena je za čistý zlatý stojan vhodný na uvítanie hostí.",
         lead: "Cena je za čistý zlatý stojan, ktorý je vhodný na uvítanie hostí alebo fotenie. Možnosť uvítacej personalizovanej látky +20 € alebo len zaveseného zasadacieho poriadku +15 €.",
         details: "Možnosť osobného odberu, zaslania iba čistého stojanu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
@@ -121,9 +123,10 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
       {
         id: "srdcovy-stojan",
         title: "Srdcový stojan",
-        price: "40 €",
+        price: "Od 40 €",
         unitPrice: 40,
-        priceKind: "fixed",
+        priceKind: "from",
+        hideQuantityField: true,
         description: "Čistý zlatý stojan, ktorý krásne vynikne na obrade alebo za hlavným stolom.",
         lead: "Cena je za čistý zlatý stojan, ktorý krásne vynikne na obrade alebo za hlavným stolom. Taktiež sa môže použiť ako fotostena. Možnosť pokrytia hebkými štólami pre luxusný efekt +20 € a pridania kvetov na rám podľa množstva kvetov od 10 €.",
         details: "Možnosť osobného odberu, zaslania iba čistého stojanu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
@@ -144,6 +147,7 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         price: "30 €",
         unitPrice: 30,
         priceKind: "fixed",
+        hideQuantityField: true,
         description: "V cene sú zahrnuté aj Vaše personalizované údaje.",
         lead: "V cene sú zahrnuté aj Vaše personalizované údaje ako mená, dátum a text.",
         details: "Možnosť osobného odberu, zaslania alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
@@ -242,8 +246,8 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         price: "Od 2,50 €",
         unitPrice: 2.5,
         priceKind: "from",
-        description: "Lampáše vytvoria teplú atmosféru a krásne vyniknú pri obrade, ceste aj večernom svietení.",
-        lead: "Lampáše vytvoria teplú atmosféru a krásne vyniknú pri obrade, ceste aj večernom svietení.",
+        description: "Lampáše vytvoria teplú atmosféru a krásne vyniknú pri obrade, uvítaní alebo pri iných detailoch výzdoby.",
+        lead: "Lampáše vytvoria teplú atmosféru a krásne vyniknú pri obrade, uvítaní alebo pri iných detailoch výzdoby.",
         details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100€ (+ príplatok PHM).",
       },
       {
@@ -259,11 +263,11 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
       {
         id: "capovacie-stanice",
         title: "Čapovacie stanice",
-        price: "Cena individuálne",
-        unitPrice: null,
-        priceKind: "individual",
+        price: "Od 15 €",
+        unitPrice: 15,
+        priceKind: "from",
         description: "Čapovacie stanice vytvoria výrazný servisný detail a dodajú hostine uvoľnený, premyslený charakter.",
-        lead: "Čapovacie stanice pripravíme ako praktický aj efektný prvok, ktorý sa hodí na welcome drink, miešané nápoje aj ďalšie občerstvenie podľa štýlu vašej svadby.",
+        lead: "Čapovacie stanice pripravíme ako praktický aj efektný prvok, ktorý sa hodí na welcome drink, miešané nápoje aj ďalšie občerstvenie podľa štýlu vašej svadby. K dispozícii dvojitá čapovacia stanica s objemom 2x4L za 20 € a jedna čapovacia stanica s objemom 5,5L za 15 €.",
         details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100€ (+ príplatok PHM). Presné riešenie aj počet stanovísk doladíme individuálne podľa typu podujatia.",
       },
     ],
@@ -408,23 +412,6 @@ export default function Gallery({ onSelectRental }: GalleryProps) {
           ))}
         </div>
       </div>
-
-      <div className="gallery-collection reveal reveal-d3">
-        <div className="gallery-grid">
-          {GALLERY_IMAGES.map((img, index) => (
-            <div key={`${img.alt}-${index}`} className="gal-item">
-              <FallbackImage
-                src={img.src}
-                alt={img.alt}
-                className="gal-img"
-                loading="lazy"
-              />
-              <div className="gal-overlay" />
-            </div>
-          ))}
-        </div>
-      </div>
-
       {mounted && activeRental && createPortal(
         <div className="rental-modal" role="dialog" aria-modal="true" aria-labelledby="rental-modal-name">
           <div className="rental-modal-backdrop" onClick={() => setOpenKey(null)} />
@@ -478,16 +465,18 @@ export default function Gallery({ onSelectRental }: GalleryProps) {
                   Máte záujem o tento prenájom? Napíšte nám a pripravíme ho podľa vašej predstavy.
                 </span>
                 <div className="modal-selection-inline">
-                  <label className="modal-qty-field">
-                    <span>Počet</span>
-                    <input
-                      type="number"
-                      min={1}
-                      step={1}
-                      value={quantity}
-                      onChange={(event) => setQuantity(normalizeQuantity(Number(event.target.value)))}
-                    />
-                  </label>
+                  {!activeRental.offer?.hideQuantityField ? (
+                    <label className="modal-qty-field">
+                      <span>Počet</span>
+                      <input
+                        type="number"
+                        min={1}
+                        step={1}
+                        value={quantity}
+                        onChange={(event) => setQuantity(normalizeQuantity(Number(event.target.value)))}
+                      />
+                    </label>
+                  ) : null}
                   <div className="modal-price-preview">
                     <span>Cena</span>
                     <strong>
