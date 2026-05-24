@@ -1,18 +1,17 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1200" height="630" fill="#F7F1EC"/>
-  <rect x="32" y="32" width="1136" height="566" rx="32" fill="#FBF7F2" stroke="#E5D8CC" stroke-width="2"/>
-  <circle cx="1016" cy="120" r="184" fill="#EFE0D2"/>
-  <circle cx="1118" cy="502" r="146" fill="#E9D7CF"/>
-  <circle cx="152" cy="548" r="168" fill="#F1E7DE"/>
-  <path d="M877 110C915 85 967 79 1010 102C1054 125 1076 172 1071 215C1065 258 1033 297 986 311C940 325 886 312 850 277" stroke="#D4B38E" stroke-width="3" stroke-linecap="round"/>
-  <path d="M867 155C902 132 949 128 986 149C1024 170 1042 208 1038 243C1034 279 1008 311 969 323" stroke="#D4B38E" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
-  <path d="M111 119H299" stroke="#C6A27A" stroke-width="4" stroke-linecap="round"/>
-  <text x="110" y="208" fill="#B78857" font-size="118" font-family="Didot, 'Bodoni 72', Georgia, serif">V</text>
-  <text x="183" y="210" fill="#2D3948" font-size="62" font-family="'Avenir Next', Helvetica, Arial, sans-serif" font-weight="600" letter-spacing="2">Vevsdesign</text>
+  <rect width="1200" height="630" fill="#FFF9F2"/>
+  <rect x="32" y="32" width="1136" height="566" rx="32" fill="#FBF5ED" stroke="#CFE5F7" stroke-width="2"/>
+  <circle cx="1016" cy="120" r="184" fill="#E9F3FB"/>
+  <circle cx="1118" cy="502" r="146" fill="#D7E9F6"/>
+  <circle cx="152" cy="548" r="168" fill="#EDF6FD"/>
+  <path d="M877 110C915 85 967 79 1010 102C1054 125 1076 172 1071 215C1065 258 1033 297 986 311C940 325 886 312 850 277" stroke="#9DC6EA" stroke-width="3" stroke-linecap="round"/>
+  <path d="M867 155C902 132 949 128 986 149C1024 170 1042 208 1038 243C1034 279 1008 311 969 323" stroke="#9DC6EA" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+  <image href="../../logo.png" x="88" y="92" width="112" height="112" preserveAspectRatio="xMidYMid meet"/>
+  <text x="190" y="210" fill="#2D3948" font-size="62" font-family="'Avenir Next', Helvetica, Arial, sans-serif" font-weight="600" letter-spacing="2">Vevsdesign</text>
   <text x="113" y="290" fill="#5E5047" font-size="54" font-family="Didot, 'Bodoni 72', Georgia, serif">Svadobná výzdoba</text>
   <text x="113" y="350" fill="#5E5047" font-size="54" font-family="Didot, 'Bodoni 72', Georgia, serif">&amp; dizajn s dušou</text>
   <text x="113" y="438" fill="#7A6C62" font-size="29" font-family="'Avenir Next', Helvetica, Arial, sans-serif">Elegantná, personalizovaná výzdoba pre svadby v Košiciach</text>
   <text x="113" y="476" fill="#7A6C62" font-size="29" font-family="'Avenir Next', Helvetica, Arial, sans-serif">&amp; na východnom Slovensku.</text>
   <rect x="113" y="523" width="332" height="2" fill="#C6A27A"/>
-  <text x="113" y="559" fill="#B78857" font-size="24" font-family="'Avenir Next', Helvetica, Arial, sans-serif" letter-spacing="4">VEVSDESIGN.SK</text>
+  <text x="113" y="559" fill="#7EAED8" font-size="24" font-family="'Avenir Next', Helvetica, Arial, sans-serif" letter-spacing="4">VEVSDESIGN.SK</text>
 </svg>
