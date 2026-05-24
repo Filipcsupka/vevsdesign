@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { normalizeQuantity, type PriceKind, type SelectionItem } from "@/components/contactSelection";
 import { createPortal } from "react-dom";
 import ModalImageGallery from "@/components/ModalImageGallery";
+import QuantityInput from "@/components/QuantityInput";
 import ShowcaseTile from "@/components/ShowcaseTile";
 import { serviceDetailImages, serviceImage } from "@/data/imageAssets";
 
@@ -439,16 +440,7 @@ export default function Services({ onSelectService }: ServicesProps) {
                 </span>
                 <div className="modal-selection-inline">
                   {!activeService.hideQuantityField ? (
-                    <label className="modal-qty-field">
-                      <span>Počet</span>
-                      <input
-                        type="number"
-                        min={1}
-                        step={1}
-                        value={quantity}
-                        onChange={(event) => setQuantity(normalizeQuantity(Number(event.target.value)))}
-                      />
-                    </label>
+                    <QuantityInput label="Počet" value={quantity} onChange={setQuantity} />
                   ) : null}
                   <div className="modal-price-preview">
                     <span>Cena</span>

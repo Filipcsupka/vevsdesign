@@ -1184,13 +1184,49 @@ h1 .h1-line2{display:block;font-size:0.72em;opacity:0.85}
   text-transform:uppercase;
   color:rgba(var(--ink-rgb),0.58);
 }
-.modal-qty-field input{
-  width:100%;
-  padding:0.55rem 0.7rem;
+.quantity-input{
+  display:grid;
+  grid-template-columns:44px minmax(0,1fr) 44px;
+  align-items:center;
   border:1px solid rgba(var(--gold-rgb),0.18);
   background:#fff;
-  font-size:0.9rem;
+  overflow:hidden;
+}
+.quantity-input input{
+  width:100%;
+  min-width:0;
+  padding:0.7rem 0.35rem;
+  border:none;
+  border-left:1px solid rgba(var(--gold-rgb),0.12);
+  border-right:1px solid rgba(var(--gold-rgb),0.12);
+  background:#fff;
+  font-size:1rem;
   color:var(--ink);
+  text-align:center;
+  appearance:textfield;
+  -moz-appearance:textfield;
+}
+.quantity-input input:focus{
+  outline:none;
+}
+.quantity-input-button{
+  display:grid;
+  place-items:center;
+  min-height:44px;
+  border:none;
+  background:rgba(var(--cream-rgb),0.75);
+  color:var(--ink);
+  font-size:1.25rem;
+  line-height:1;
+  cursor:pointer;
+  transition:background 0.25s ease,color 0.25s ease,opacity 0.25s ease;
+}
+.quantity-input-button:hover{
+  background:rgba(var(--gold-rgb),0.12);
+}
+.quantity-input-button:disabled{
+  opacity:0.45;
+  cursor:not-allowed;
 }
 .modal-price-preview{
   display:grid;
