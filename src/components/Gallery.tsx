@@ -270,7 +270,7 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         priceKind: "from",
         description: "Čapovacie stanice vytvoria výrazný servisný detail a dodajú hostine uvoľnený, premyslený charakter.",
         lead: "Čapovacie stanice pripravíme ako praktický aj efektný prvok, ktorý sa hodí na welcome drink, miešané nápoje aj ďalšie občerstvenie podľa štýlu vašej svadby. K dispozícii dvojitá čapovacia stanica s objemom 2x4L za 20 € a jedna čapovacia stanica s objemom 5,5L za 15 €.",
-        details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100€ (+ príplatok PHM). Presné riešenie aj počet stanovísk doladíme individuálne podľa typu podujatia.",
+        details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100€ (+ príplatok PHM).",
       },
     ],
   },
