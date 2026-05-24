@@ -3,7 +3,7 @@ export type ImageAsset = {
   alt: string;
 };
 
-const IMAGE_VERSION = "2026-05-23-01";
+const IMAGE_VERSION = "2026-05-24-01";
 export const FALLBACK_IMAGE = "/images/gallery/placeholder.png";
 
 export const GALLERY_IMAGES: ImageAsset[] = [
@@ -68,6 +68,7 @@ const SERVICE_IMAGE_COUNTS: Record<string, number> = {
   "doplnky-pre-hosti:papucky": 2,
   "doplnky-pre-hosti:vejare": 1,
   "doplnky-pre-hosti:flasticky": 1,
+  "doplnky-pre-hosti:domaci-med": 1,
 };
 
 const RENTAL_IMAGE_COUNTS: Record<string, number> = {
@@ -84,6 +85,12 @@ const RENTAL_IMAGE_COUNTS: Record<string, number> = {
   "ostatne:lampase": 3,
   "vazy-svietniky:vysoke-svietniky": 1,
   "vazy-svietniky:uzke-metrove-svietniky": 1,
+  "vazy-svietniky:champagne-svietniky": 1,
+  "vazy-svietniky:vysoke-vazy": 1,
+  "vazy-svietniky:uzke-vazy": 1,
+  "ostatne:champagne-tower": 1,
+  "ostatne:behun-stola": 1,
+  "detsky-kutik:detsky-kutik": 1,
 };
 
 function serviceCategoryFolder(category: "Doplnky na mieru" | "Doplnky pre hostí") {

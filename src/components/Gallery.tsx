@@ -98,7 +98,6 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         unitPrice: 50,
         priceKind: "fixed",
         hideQuantityField: true,
-        hideImage: true,
         description: "Obsahuje šmýkalku, penovú podložku, farebné stany, kocky, autíčka, bábiky, omaľovánky.",
         lead: "Obsahuje šmýkalku, penovú podložku, farebné stany, kocky, autíčka, bábiky, omaľovánky.",
         details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
