@@ -16,15 +16,22 @@ export const metadata: Metadata = {
     title: "Vevsdesign — Svadobná Výzdoba & Dizajn",
     description:
       "Tvoríme svadobnú výzdobu s dušou — personalizovanú, elegantnú a plnú detailov. Košice & Východné Slovensko.",
-    images: [{ url: "/logo.png", width: 340, height: 340, alt: "Vevsdesign logo" }],
+    images: [
+      {
+        url: "/images/social/vevsdesign-og-2026-05.png",
+        width: 1200,
+        height: 630,
+        alt: "Vevsdesign — svadobna vyzdoba a dizajn",
+      },
+    ],
     locale: "sk_SK",
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Vevsdesign — Svadobná Výzdoba & Dizajn",
     description:
       "Tvoríme svadobnú výzdobu s dušou — personalizovanú, elegantnú a plnú detailov. Košice & Východné Slovensko.",
-    images: ["/logo.png"],
+    images: ["/images/social/vevsdesign-og-2026-05.png"],
   },
 };
 
@@ -45,7 +52,7 @@ export default function RootLayout({
     url: "https://vevsdesign.sk",
     telephone: CONTACT_PHONE_HREF,
     email: CONTACT_EMAIL,
-    image: "https://vevsdesign.sk/logo.png",
+    image: "https://vevsdesign.sk/images/social/vevsdesign-og-2026-05.png",
     priceRange: "€€",
     address: {
       "@type": "PostalAddress",
