@@ -154,7 +154,7 @@ export default function Kontakt({
               <span className="k-val">Košice &amp; Východné Slovensko</span>
             </div>
             <div className="kontakt-item">
-              <span className="k-label">Showroom / osobná konzultácia</span>
+              <span className="k-label">Osobná konzultácia</span>
               <span className="k-val">Po dohode vopred telefonicky alebo emailom</span>
             </div>
             <div className="kontakt-item">
@@ -183,7 +183,7 @@ export default function Kontakt({
             </div>
             <div className="kontakt-faq-item">
               <span className="kontakt-faq-question">Kedy odpovedáme?</span>
-              <p>Na dopyty odpovedáme spravidla do 2 až 4 pracovných dní.</p>
+              <p>Na dopyty odpovedáme spravidla do 3 pracovných dní.</p>
             </div>
           </div>
         </div>
@@ -288,19 +288,13 @@ export default function Kontakt({
               />
             </div>
 
-            <div className="form-group">
-              <label>Overenie</label>
-              {hasTurnstile ? (
-                <>
-                  <div className="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY} data-theme="light" />
-                  <p className="captcha-note">Formulár je chránený cez Cloudflare Turnstile.</p>
-                </>
-              ) : (
-                <p className="form-status error">
-                  Formulár ešte dokončujeme. Zatiaľ nás prosím kontaktujte priamo emailom alebo telefonicky.
-                </p>
-              )}
-            </div>
+            {hasTurnstile ? (
+              <div className="form-group">
+                <label>Overenie</label>
+                <div className="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY} data-theme="light" />
+                <p className="captcha-note">Formulár je chránený cez Cloudflare Turnstile.</p>
+              </div>
+            ) : null}
 
             <button type="submit" className="btn-submit" disabled={submitting || !hasTurnstile}>
               {submitting ? "Odosielame..." : "Odoslať správu"}

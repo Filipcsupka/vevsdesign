@@ -16,6 +16,7 @@ type RentalOffer = {
   priceKind?: PriceKind;
   unitLabel?: string;
   hideQuantityField?: boolean;
+  hideImage?: boolean;
   lead?: string;
   text?: string;
   description?: string;
@@ -67,18 +68,18 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         price: "15 €",
         unitPrice: 15,
         priceKind: "fixed",
-        description: "Obsahuje kvety ako na fotke vo Vašich požadovaných farbách.",
-        lead: "Obsahuje kvety ako na fotke vo Vašich požadovaných farbách. Vhodné umiestniť napríklad ku uvítacej tabuli, na obrad pozdĺž uličky alebo pred hlavný stôl novomanželov.",
+        description: "Vhodné umiestniť napríklad ku uvítacej tabuli, na obrad pozdĺž uličky alebo pred hlavný stôl novomanželov.",
+        lead: "Vhodné umiestniť napríklad ku uvítacej tabuli, na obrad pozdĺž uličky alebo pred hlavný stôl novomanželov. Obsahuje kvety ako na fotke vo Vašich požadovaných farbách.",
         details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále alebo na obrade v rámci Východného Slovenska od 6 ks vyššie alebo aj 1 ks pri objednávke nad 100 € (+ príplatok PHM).",
       },
       {
         id: "dlha-ikebana",
         title: "Dlhá ikebana",
-        price: "30 €",
-        unitPrice: 30,
+        price: "40 €",
+        unitPrice: 40,
         priceKind: "fixed",
-        description: "Obsahuje kvety ako na fotke vo Vašich požadovaných farbách, úzke svietniky a sviečky.",
-        lead: "Obsahuje kvety ako na fotke vo Vašich požadovaných farbách, úzke svietniky a sviečky. Vhodné na hlavný stôl novomanželov.",
+        description: "Vhodné na hlavný stôl novomanželov.",
+        lead: "Vhodné na hlavný stôl novomanželov. Obsahuje kvety ako na fotke vo Vašich požadovaných farbách, úzke svietniky a sviečky.",
         details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
       },
     ],
@@ -97,6 +98,7 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         unitPrice: 50,
         priceKind: "fixed",
         hideQuantityField: true,
+        hideImage: true,
         description: "Obsahuje šmýkalku, penovú podložku, farebné stany, kocky, autíčka, bábiky, omaľovánky.",
         lead: "Obsahuje šmýkalku, penovú podložku, farebné stany, kocky, autíčka, bábiky, omaľovánky.",
         details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
@@ -315,6 +317,7 @@ export default function Gallery({ onSelectRental }: GalleryProps) {
     activeRental?.offer?.details ?? activeRental?.category.details ?? "";
   const activeRentalTitle = activeRental?.offer?.title ?? activeRental?.category.title ?? "";
   const activeRentalImages = activeRental
+    && !activeRental.offer?.hideImage
     ? rentalDetailImages(
         activeRental.category.id,
         activeRental.offer?.id ?? activeRental.category.id.replace(/^prenajom-/, ""),
@@ -400,7 +403,7 @@ export default function Gallery({ onSelectRental }: GalleryProps) {
                     description={offer.description ?? offer.lead ?? category.lead}
                     meta={offer.price ?? category.price}
                     variant={getTileVariant(index)}
-                    image={rentalImage(category.id, offer.id, offer.title)}
+                    image={offer.hideImage ? undefined : rentalImage(category.id, offer.id, offer.title)}
                     featured={index === 0}
                     onClick={(event) => {
                       openDetail(category, offer, event.currentTarget);

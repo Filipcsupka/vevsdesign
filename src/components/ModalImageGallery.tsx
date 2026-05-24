@@ -32,10 +32,10 @@ export default function ModalImageGallery({ images, label }: ModalImageGalleryPr
           className="modal-gallery-main-img"
           loading="eager"
         />
-        <div className="modal-gallery-meta">
-          <span>Galéria</span>
-          <strong>{activeIndex + 1} / {galleryImages.length}</strong>
-        </div>
+      </div>
+      <div className="modal-gallery-meta" aria-hidden="true">
+        <span>Galéria</span>
+        <strong>{activeIndex + 1} / {galleryImages.length}</strong>
       </div>
 
       {galleryImages.length > 1 ? (

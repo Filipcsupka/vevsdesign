@@ -1,0 +1,10 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/robots.txt/route": "/robots.txt",
+  "/sitemap.xml/route": "/sitemap.xml",
+  "/page": "/",
+  "/cookies/page": "/cookies",
+  "/ochrana-osobnych-udajov/page": "/ochrana-osobnych-udajov",
+  "/obchodne-udaje/page": "/obchodne-udaje",
+  "/ako-funguje-rezervacia/page": "/ako-funguje-rezervacia"
+}

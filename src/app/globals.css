@@ -742,30 +742,23 @@ h1 .h1-line2{display:block;font-size:0.72em;opacity:0.85}
   display:block;
 }
 .modal-gallery-meta{
-  position:absolute;
-  left:1rem;
-  right:1rem;
-  bottom:1rem;
   display:flex;
   justify-content:space-between;
   align-items:center;
   gap:0.8rem;
-  padding:0.7rem 0.85rem;
-  border-radius:18px;
-  background:linear-gradient(180deg,rgba(var(--dark-rgb),0.08),rgba(var(--dark-rgb),0.4));
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
-  color:white;
+  padding:0 0.1rem;
+  color:rgba(var(--ink-rgb),0.62);
 }
 .modal-gallery-meta span{
-  font-size:0.66rem;
+  font-size:0.62rem;
   letter-spacing:0.18em;
   text-transform:uppercase;
 }
 .modal-gallery-meta strong{
   font-family:var(--serif2);
-  font-size:0.92rem;
+  font-size:0.86rem;
   font-weight:400;
+  color:var(--ink);
 }
 .modal-gallery-thumbs{
   display:grid;

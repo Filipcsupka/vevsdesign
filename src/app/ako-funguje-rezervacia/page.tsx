@@ -30,43 +30,37 @@ export default function ReservationInfoPage() {
       </section>
 
       <section className="legal-section">
-        <h2>3. Potvrdenie rezervácie</h2>
+        <h2>3. Potvrdenie rezervácie svadobnej výzdoby</h2>
         <p>
-          Rezervácia termínu alebo prenájmu vzniká až po tom, ako si spolu odsúhlasíme rozsah služby, cenu, termín a
-          spôsob realizácie, a keď vám rezerváciu výslovne potvrdíme emailom alebo inou dohodnutou formou.
+          Rezerváciu si potvrdzujeme cez formulár, ktorý vám odošleme emailom s vašimi vybranými produktmi a službami.
+          Následne vám pošleme faktúru na zaplatenie. Termín je záväzne rezervovaný po zaplatení 50% zálohy, zvyšok sa
+          dopláca mesiac pred svadbou.
         </p>
       </section>
 
       <section className="legal-section">
         <h2>4. Prenájom inventáru</h2>
         <p>
-          Pri položkách určených na prenájom ide o prenájom nášho vlastného inventáru. Presné podmienky prevzatia,
-          vrátenia, zodpovednosti za poškodenie, stratu, prípadnú zálohu alebo kauciu riešime individuálne ešte pred
-          finálnym potvrdením rezervácie.
-        </p>
-      </section>
-
-      <section className="legal-section">
-        <h2>5. Prenájom aj bez kompletnej realizácie</h2>
-        <p>
           Ak máte záujem len o prenájom dekorácií alebo inventáru, je to možné. Nie je nutné objednať si od nás celú
           realizáciu svadobnej výzdoby, pokiaľ vám viac vyhovuje vlastná inštalácia alebo čiastočné zabezpečenie.
+          Presné podmienky prevzatia, vrátenia, zodpovednosti za poškodenie, stratu riešime individuálne ešte pred
+          finálnym potvrdením rezervácie. Všetky informácie budú uvedené vo formulári, ktorý vám odošleme mailom.
+          Prenájom je záväzne rezervovaný po zaplatení 100% ceny prenájmu.
         </p>
       </section>
 
       <section className="legal-section">
-        <h2>6. Showroom a osobná konzultácia</h2>
+        <h2>5. Osobná konzultácia</h2>
         <p>
-          Vybrané položky a možnosti výzdoby si s vami radi prejdeme aj osobne. Návštevu showroomu alebo konzultáciu si
-          prosím dohodnite vopred telefonicky alebo emailom, aby sme sa vám vedeli venovať podľa termínu a rozsahu
-          dopytu.
+          Vybrané položky a možnosti výzdoby si s vami radi prejdeme aj osobne. Konzultáciu si prosím dohodnite vopred
+          telefonicky alebo emailom, aby sme sa vám vedeli venovať podľa termínu a rozsahu dopytu.
         </p>
       </section>
 
       <section className="legal-section">
-        <h2>7. Odpoveď na dopyt</h2>
+        <h2>6. Odpoveď na dopyt</h2>
         <p>
-          Na dopyty odpovedáme spravidla do 2 až 4 pracovných dní. Pri zložitejších realizáciách alebo počas hlavnej
+          Na dopyty odpovedáme spravidla do 3 pracovných dní. Pri zložitejších realizáciách alebo počas hlavnej
           sezóny môže byť príprava ponuky individuálna, o čom vás budeme priebežne informovať.
         </p>
       </section>

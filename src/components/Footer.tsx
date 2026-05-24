@@ -20,7 +20,7 @@ export default function Footer() {
             VEVS<em>DESIGN</em>
           </span>
           <p className="foot-copy">
-            Boutique svadobný dizajn, výzdoba a prenájom vlastného inventáru pre Košice a okolie.
+            Svadobný dizajn, výzdoba a prenájom inventáru.
           </p>
           <p className="foot-company">
             Prevádzkovateľ webu: <strong>{OPERATOR_NAME}</strong>
@@ -31,7 +31,6 @@ export default function Footer() {
         </div>
 
         <div className="footer-block">
-          <span className="footer-title">Dôležité informácie</span>
           <div className="foot-links">
             <Link href="/obchodne-udaje">Obchodné údaje</Link>
             <Link href="/ochrana-osobnych-udajov">Ochrana osobných údajov</Link>
