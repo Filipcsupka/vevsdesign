@@ -154,7 +154,7 @@ async function sendWithCloudflareEmail(formData, env) {
   return response.messageId;
 }
 
-export default {
+const worker = {
   async fetch(request, env) {
     if (request.method === "OPTIONS") {
       return new Response(null, { status: 204 });
@@ -206,3 +206,5 @@ export default {
     }
   },
 };
+
+export default worker;

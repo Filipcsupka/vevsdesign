@@ -32,6 +32,7 @@ export default function BackgroundCanvas() {
     let H = 0;
     let dpr = 1;
     let rafId = 0;
+    let animationActive = false;
     let petals: Petal[] = [];
 
     function getCanvasHeight() {
@@ -178,6 +179,10 @@ export default function BackgroundCanvas() {
     }
 
     function tick() {
+      if (!animationActive) {
+        return;
+      }
+
       drawBackdrop();
 
       for (let i = petals.length - 1; i >= 0; i--) {
@@ -196,7 +201,9 @@ export default function BackgroundCanvas() {
         }
       }
 
-      if (!reducedMotion) rafId = requestAnimationFrame(tick);
+      if (!reducedMotion && animationActive) {
+        rafId = requestAnimationFrame(tick);
+      }
     }
 
     function paint(resetPetals = false) {
@@ -215,15 +222,40 @@ export default function BackgroundCanvas() {
       }
     }
 
+    function stopAnimation() {
+      animationActive = false;
+      cancelAnimationFrame(rafId);
+    }
+
+    function startAnimation() {
+      if (reducedMotion || animationActive) {
+        return;
+      }
+
+      animationActive = true;
+      rafId = requestAnimationFrame(tick);
+    }
+
     const handleResize = () => paint(false);
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        stopAnimation();
+        return;
+      }
+
+      paint(false);
+      startAnimation();
+    };
 
     paint(true);
-    if (!reducedMotion) tick();
+    startAnimation();
     window.addEventListener("resize", handleResize, { passive: true });
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
-      cancelAnimationFrame(rafId);
+      stopAnimation();
       window.removeEventListener("resize", handleResize);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, []);
 

@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { FALLBACK_IMAGE } from "@/data/imageAssets";
 
 type FallbackImageProps = {
@@ -16,25 +15,19 @@ export default function FallbackImage({
   className,
   loading = "lazy",
 }: FallbackImageProps) {
-  const [currentSrc, setCurrentSrc] = useState(src);
-
-  useEffect(() => {
-    setCurrentSrc(src);
-  }, [src]);
-
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      src={currentSrc}
+      src={src}
       alt={alt}
       className={className}
       loading={loading}
+      decoding="async"
       onError={(event) => {
         const img = event.currentTarget;
         if (img.dataset.fallbackApplied === "true") return;
         img.dataset.fallbackApplied = "true";
         img.src = FALLBACK_IMAGE;
-        setCurrentSrc(FALLBACK_IMAGE);
       }}
     />
   );
