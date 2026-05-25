@@ -9,6 +9,14 @@ export const metadata: Metadata = {
     "Tvoríme svadobnú výzdobu s dušou — personalizovanú, elegantnú a plnú detailov. Košice & Východné Slovensko.",
   keywords: ["svadobná výzdoba", "dizajn", "Košice", "Slovensko", "svadba"],
   metadataBase: new URL("https://vevsdesign.sk"),
+  icons: {
+    icon: [
+      { url: "/icon.png", sizes: "512x512", type: "image/png" },
+      { url: "/logo.png", sizes: "2000x2000", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+    shortcut: ["/icon.png"],
+  },
   openGraph: {
     type: "website",
     url: "https://vevsdesign.sk",
@@ -52,6 +60,7 @@ export default function RootLayout({
     url: "https://vevsdesign.sk",
     telephone: CONTACT_PHONE_HREF,
     email: CONTACT_EMAIL,
+    logo: "https://vevsdesign.sk/logo.png",
     image: "https://vevsdesign.sk/images/social/vevsdesign-og-2026-05.png",
     priceRange: "€€",
     address: {
