@@ -17,10 +17,30 @@ import {
   type ContactSelections,
   type SelectionKind,
 } from "@/components/contactSelection";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const CONTACT_ENDPOINT = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT || "/api/contact";
 const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "";
+
+type TurnstileRenderOptions = {
+  sitekey: string;
+  theme?: "light" | "dark" | "auto";
+  callback?: (token: string) => void;
+  "expired-callback"?: () => void;
+  "error-callback"?: () => void;
+};
+
+type TurnstileApi = {
+  render: (container: HTMLElement, options: TurnstileRenderOptions) => string;
+  reset: (widgetId?: string) => void;
+  remove: (widgetId?: string) => void;
+};
+
+declare global {
+  interface Window {
+    turnstile?: TurnstileApi;
+  }
+}
 
 type KontaktProps = {
   selections: ContactSelections;
@@ -54,11 +74,69 @@ export default function Kontakt({
   const [status, setStatus] = useState<{ text: string; type: "" | "success" | "error" }>({ text: "", type: "" });
   const [fallbackHref, setFallbackHref] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [turnstileReady, setTurnstileReady] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const turnstileContainerRef = useRef<HTMLDivElement | null>(null);
+  const turnstileWidgetIdRef = useRef<string | null>(null);
 
   const hasSelections = CONTACT_SELECTION_GROUPS.some(({ kind }) => selections[kind].length > 0);
   const pricing = calculateSelectionsPricing(selections);
   const totalLabel = formatSelectionsTotalLabel(selections);
   const hasTurnstile = Boolean(TURNSTILE_SITE_KEY);
+
+  useEffect(() => {
+    if (!hasTurnstile) {
+      return;
+    }
+
+    const renderTurnstile = () => {
+      const turnstile = window.turnstile;
+      const container = turnstileContainerRef.current;
+      if (!turnstile || !container || turnstileWidgetIdRef.current) {
+        return;
+      }
+
+      turnstileWidgetIdRef.current = turnstile.render(container, {
+        sitekey: TURNSTILE_SITE_KEY,
+        theme: "light",
+        callback: (token) => {
+          setTurnstileToken(token);
+          setStatus((current) =>
+            current.type === "error" && current.text.includes("robot")
+              ? { text: "", type: "" }
+              : current
+          );
+        },
+        "expired-callback": () => {
+          setTurnstileToken("");
+        },
+        "error-callback": () => {
+          setTurnstileToken("");
+        },
+      });
+    };
+
+    renderTurnstile();
+
+    return () => {
+      const turnstile = window.turnstile;
+      if (turnstile && turnstileWidgetIdRef.current) {
+        turnstile.remove(turnstileWidgetIdRef.current);
+      }
+      turnstileWidgetIdRef.current = null;
+    };
+  }, [hasTurnstile, turnstileReady]);
+
+  function resetTurnstile() {
+    const turnstile = window.turnstile;
+    if (!turnstile || !turnstileWidgetIdRef.current) {
+      setTurnstileToken("");
+      return;
+    }
+
+    turnstile.reset(turnstileWidgetIdRef.current);
+    setTurnstileToken("");
+  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -78,9 +156,10 @@ export default function Kontakt({
     const data = new FormData(form);
     if (data.get("_honey")) {
       form.reset();
+      resetTurnstile();
       return;
     }
-    if (!data.get("cf-turnstile-response")) {
+    if (!turnstileToken || !data.get("cf-turnstile-response")) {
       setStatus({
         text: "Prosím potvrďte overenie, že nie ste robot, a skúste to znova.",
         type: "error",
@@ -104,10 +183,12 @@ export default function Kontakt({
       }
 
       form.reset();
+      resetTurnstile();
       onClearSelections();
       setFallbackHref("");
       setStatus({ text: "Ďakujeme, správa bola odoslaná. Ozveme sa vám čo najskôr.", type: "success" });
     } catch {
+      resetTurnstile();
       setStatus({
         text: "Správu sa nepodarilo odoslať cez formulár. Skúste to prosím znova alebo použite záložný email nižšie.",
         type: "error",
@@ -123,6 +204,7 @@ export default function Kontakt({
         <Script
           src="https://challenges.cloudflare.com/turnstile/v0/api.js"
           strategy="afterInteractive"
+          onLoad={() => setTurnstileReady(true)}
           async
           defer
         />
@@ -291,7 +373,7 @@ export default function Kontakt({
             {hasTurnstile ? (
               <div className="form-group">
                 <label>Overenie</label>
-                <div className="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY} data-theme="light" />
+                <div ref={turnstileContainerRef} />
                 <p className="captcha-note">Formulár je chránený cez Cloudflare Turnstile.</p>
               </div>
             ) : null}
