@@ -85,7 +85,7 @@ const DETAILS: Record<PackageId, ModalDetail> = {
       },
       {
         title: "Podrobnosti",
-        content: "Cena je kalkulovaná do 70 hostí. Vyšší počet hostí nie je problém, príplatok je +5€/osoba.",
+        content: "Cena od 70 € / osoba.",
       },
     ],
   },
@@ -107,7 +107,7 @@ const DETAILS: Record<PackageId, ModalDetail> = {
       },
       {
         title: "Podrobnosti",
-        content: "Cena je kalkulovaná do 70 hostí. Vyšší počet hostí nie je problém, príplatok je +5€/osoba.",
+        content: "Cena od 70 € / osoba.",
       },
     ],
   },
@@ -128,7 +128,7 @@ const DETAILS: Record<PackageId, ModalDetail> = {
       },
       {
         title: "Podrobnosti",
-        content: "Cena je kalkulovaná do 70 hostí. Vyšší počet hostí nie je problém, príplatok je +5€/osoba.",
+        content: "Cena od 70 € / osoba.",
       },
     ],
   },
@@ -291,13 +291,6 @@ export default function Baliky({ onSelectPackage }: BalikyProps) {
             </div>
 
             <div className="balik-modal-body">
-              <div className="balik-modal-section">
-                <h3>Podrobnosti</h3>
-                <p>
-                  Balík vieme doladiť podľa vašej farebnosti, priestoru aj celkovej atmosféry svadobného dňa.
-                </p>
-              </div>
-
               {detail.sections.map((sec) => (
                 <div key={sec.title} className="balik-modal-section">
                   <h3>{sec.title}</h3>
