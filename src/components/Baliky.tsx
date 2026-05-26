@@ -85,7 +85,7 @@ const DETAILS: Record<PackageId, ModalDetail> = {
       },
       {
         title: "Podrobnosti",
-        content: "Cena je vypočítaná pre 6-8 okrúhlych stolov v počte do 70 hostí. Pre konkrétny a vyšší počet hostí nám prosím napíšte.",
+        content: "Cena je kalkulovaná do 70 hostí. Vyšší počet hostí nie je problém, príplatok je +5€/osoba.",
       },
     ],
   },
@@ -107,7 +107,7 @@ const DETAILS: Record<PackageId, ModalDetail> = {
       },
       {
         title: "Podrobnosti",
-        content: "Cena je vypočítaná pre 6-8 okrúhlych stolov v počte do 70 hostí. Pre konkrétny a vyšší počet hostí nám prosím napíšte.",
+        content: "Cena je kalkulovaná do 70 hostí. Vyšší počet hostí nie je problém, príplatok je +5€/osoba.",
       },
     ],
   },
@@ -128,7 +128,7 @@ const DETAILS: Record<PackageId, ModalDetail> = {
       },
       {
         title: "Podrobnosti",
-        content: "Cena je vypočítaná pre 6-8 okrúhlych stolov v počte do 70 hostí. Pre konkrétny a vyšší počet hostí nám prosím napíšte.",
+        content: "Cena je kalkulovaná do 70 hostí. Vyšší počet hostí nie je problém, príplatok je +5€/osoba.",
       },
     ],
   },
