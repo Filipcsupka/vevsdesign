@@ -151,7 +151,7 @@ export default function Nav() {
             <li><a href="#prenajom-ostatne" onClick={closeNavigation}>Ostatné</a></li>
           </ul>
         </li>
-        <li><a href="/vf" className="nav-link-vf" onClick={closeNavigation}>V/F</a></li>
+        <li><a href="/vf/" className="nav-link-vf" onClick={closeNavigation}>V/F</a></li>
       </ul>
     </nav>
   );
