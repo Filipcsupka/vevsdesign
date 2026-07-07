@@ -20,6 +20,9 @@ export default function VfStory({ heroImages, chapters }: VfStoryProps) {
 
   return (
     <main className="vf-shell">
+      <Link href="/" className="vf-close" aria-label="Späť na vevsdesign.sk">
+        <span aria-hidden="true">×</span>
+      </Link>
       <p className="vf-back">
         <Link href="/">← Späť na vevsdesign.sk</Link>
       </p>
