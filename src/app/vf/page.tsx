@@ -22,9 +22,13 @@ function loadImages(folder: string): string[] {
   } catch {
     return [];
   }
-  return files
+  const images = files
     .filter((file) => IMAGE_EXTENSIONS.has(path.extname(file).toLowerCase()))
-    .sort((a, b) => a.localeCompare(b, "sk"))
+    .sort((a, b) => a.localeCompare(b, "sk"));
+  const visibleImages =
+    images.length > 1 ? images.filter((file) => !file.toLowerCase().startsWith("placeholder.")) : images;
+
+  return visibleImages
     .map((file) => `/images/vf/${folder}/${file}`);
 }
 
