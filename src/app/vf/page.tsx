@@ -47,8 +47,8 @@ const CHAPTER_META: Array<Omit<VfChapter, "images"> & { folder: string }> = [
     label: "Kapitola 02",
     title: "Prvá spoločná dovolenka",
     text:
-      "Test kompatibility na vysokej úrovni: jeden kufor, jedna mapa a nula plánov. " +
-      "Prežili sme to, dokonca sa aj usmievame na fotkách — takže odvtedy vieme, že to spolu zvládneme kdekoľvek.",
+      "Test kompatibility na vysokej úrovni po troch rokoch: jedna mapa a jeden skrytý plán. " +
+      "Prežili sme to, zasnúbili sme sa a odvtedy vieme, že tých dovoleniek a zážitkov bude ešte veľa.",
     alt: "Veronika a Filip na prvej spoločnej dovolenke",
   },
   {

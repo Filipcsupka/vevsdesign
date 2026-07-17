@@ -42,9 +42,9 @@ export default function VfStory({ heroImages, chapters }: VfStoryProps) {
           Toto sme <em>my</em>
         </h1>
         <p className="vf-lead reveal reveal-d2">
-          Dvaja ľudia, jeden malý parťák a jeden veľký deň. Naskenovali ste náš tag, tak vám
-          v skratke povieme, ako sme sa sem dostali — bez prikrášľovania, zato s láskou
-          (a štipkou humoru).
+          Dvaja ľudia a jeden veľký príbeh. Naskenovali ste náš tag, tak vám v skratke
+          povieme, ako sme sa sem dostali — bez prikrášľovania, zato s láskou (a štipkou
+          humoru).
         </p>
       </section>
 
