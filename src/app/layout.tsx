@@ -80,7 +80,16 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        {/* LobbyAI chat widget */}
+        <Script
+          src="https://lobby-api.filipcsupka.online/widget/widget.js"
+          strategy="afterInteractive"
+          data-hotel="lobby_pa3JZkV6XxEJxOixVuf0rHvFQFRK9oGO"
+          data-lang="en"
+        />
+      </body>
       {cloudflareAnalyticsToken ? (
         <Script
           defer
