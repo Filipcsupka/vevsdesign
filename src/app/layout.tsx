@@ -86,7 +86,7 @@ export default function RootLayout({
         <Script
           src="https://lobby-api.filipcsupka.online/widget/widget.js"
           strategy="afterInteractive"
-          data-hotel="lobby_pa3JZkV6XxEJxOixVuf0rHvFQFRK9oGO"
+          data-hotel="lobby_Ezer4Si4NpcWxBORBjblgWvz38uv-_im"
           data-lang="en"
         />
       </body>
