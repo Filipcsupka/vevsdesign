@@ -29,8 +29,8 @@ const PACKAGES: PackageData[] = [
     id: "s",
     badge: "Základný",
     name: "Balík S",
-    price: "350 €",
-    unitPrice: 350,
+    price: "400 €",
+    unitPrice: 400,
     items: [
       "Výzdoba stolov zahrňuje kvetinové ikebany, sviečky, vázu",
       "Uvítacia tabuľa a zasadací poriadok",
@@ -41,8 +41,8 @@ const PACKAGES: PackageData[] = [
     id: "m",
     badge: "Najpredávanejší",
     name: "Balík M",
-    price: "550 €",
-    unitPrice: 550,
+    price: "600 €",
+    unitPrice: 600,
     featured: true,
     items: [
       "Obsahuje Balík S",
@@ -56,14 +56,15 @@ const PACKAGES: PackageData[] = [
     id: "l",
     badge: "Premium",
     name: "Balík L",
-    price: "700 €",
-    unitPrice: 700,
+    price: "750 €",
+    unitPrice: 750,
     items: [
       "Obsahuje Balík S, M",
       "Zrkadlo s menami",
       "Uvítací banner s vašimi menami so zlatým stojanom",
       "Stojan “srdce” s kvetinovou výzdobou",
       "Detské balíčky",
+      "Strom na plátne",
     ],
   },
 ];
@@ -72,15 +73,15 @@ const DETAILS: Record<PackageId, ModalDetail> = {
   s: {
     badge: "Základný",
     name: "Balík S",
-    price: "350 €",
+    price: "400 €",
     lead: "Jemný základ pre svadbu, kde chcete mať všetko vizuálne zladené a pripravené v elegantnom štýle.",
     sections: [
       {
         title: "Čo balík zahŕňa",
         content: [
-          "Výzdoba stolov je navrhnutá podľa vašich farieb a témy svadby. Kvetinové ikebany s vázou a plávajúcimi sviečkami doladia nádhernú atmosféru.",
+          "Výzdoba stolov je navrhnutá podľa vašich farieb a témy svadby. Kvetinové ikebany s vázou a plávajúcimi sviečkami doladia nádhernú atmosféru. Platí pre stoly hostí, stôl DJ a pre novomanželský stôl.",
           "Uvítacia tabuľa je navrhnutá s vašimi menami a dátumom svadby. Obsahuje aj prenajatý stojan.",
-          "Balík tlačovín obsahuje zasadací poriadok s QR kódom, harmonogram svadby, čísla stolov, menu a vtipné fakty o novomanželoch pre každý stôl, informačné tabuľky ako sladký bar, slaný bar, kniha hostí a ďalšie.",
+          "Balík tlačovín obsahuje zasadací poriadok, harmonogram svadby, čísla stolov, menu a vtipné fakty o novomanželoch pre každý stôl, informačné tabuľky ako sladký bar, slaný bar, kniha hostí a ďalšie.",
         ],
       },
       {
@@ -92,7 +93,7 @@ const DETAILS: Record<PackageId, ModalDetail> = {
   m: {
     badge: "Najpredávanejší",
     name: "Balík M",
-    price: "550 €",
+    price: "600 €",
     lead: "Rozšírený balík pre svadbu, kde chcete k výzdobe pridať viac personalizovaných prvkov a doplnkov pre hostí.",
     sections: [
       {
@@ -114,7 +115,7 @@ const DETAILS: Record<PackageId, ModalDetail> = {
   l: {
     badge: "Premium",
     name: "Balík L",
-    price: "700 €",
+    price: "750 €",
     lead: "Prémiový balík pre svadbu, kde chcete reprezentatívnejší vizuál a výrazné personalizované prvky.",
     sections: [
       {
@@ -124,6 +125,7 @@ const DETAILS: Record<PackageId, ModalDetail> = {
           "Zrkadlo s menami dopĺňa celkový vizuál o elegantný personalizovaný detail, ktorý pôsobí reprezentatívne a štýlovo.",
           "Uvítací banner s vašimi menami dodá svadbe osobitý charakter a stane sa výraznou súčasťou priestoru.",
           "Veľký stojan v tvare srdca je obohatený kvetmi a môže byť aj pokrytý hebkými štólami pre luxusný efekt. Vytvára výrazný romantický prvok, ktorý krásne vynikne na obrade alebo za hlavným stolom. Taktiež sa môže použiť ako fotostena.",
+          "Strom na plátne vytvorí osobnú spomienku, do ktorej hostia zanechajú svoj odtlačok.",
         ],
       },
       {
@@ -230,6 +232,7 @@ export default function Baliky({ onSelectPackage }: BalikyProps) {
       </div>
       <p className="sec-intro reveal reveal-d2">
         Vyberte si balík, ktorý vám najlepšie vyhovuje, alebo si ho vyskladajte na mieru našim kontaktovaním.
+        Cena je do 70 hostí, pri vyššom počte je doplatok 5€/osoba.
       </p>
 
       <div className="baliky-grid">
@@ -261,11 +264,6 @@ export default function Baliky({ onSelectPackage }: BalikyProps) {
           </div>
         ))}
       </div>
-
-      <p className="baliky-note reveal" id="balik-vlastny">
-        Uvedené ceny sú orientačne nastavené pre výzdobu svadby do 8 stolov.
-        Konečná cena sa odvíja od rozsahu vašej výzdoby.
-      </p>
 
       {mounted && openId && detail && createPortal(
         <div className="balik-modal" role="dialog" aria-modal="true" aria-labelledby="balik-modal-name">
