@@ -19,6 +19,7 @@ export default function Hero() {
       hero!.style.setProperty("--hero-copy-y", `${y * 0.22}px`);
       hero!.style.setProperty("--hero-line-y", `${y * 0.14}px`);
       hero!.style.setProperty("--hero-glow-y", `${y * 0.28}px`);
+      hero!.style.setProperty("--hero-photo-y", `${y * 0.08}px`);
       hero!.style.setProperty("--hero-parallax-progress", progress.toFixed(3));
       ticking = false;
     }
@@ -46,32 +47,52 @@ export default function Hero() {
       <div className="hero-glow hero-glow-3" />
       <div className="hero-deco-line left" />
       <div className="hero-deco-line right" />
-      <div className="hero-logo-wrap">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/logo.png"
-          alt="Vevsdesign logo"
-          className="hero-logo-img"
-          width={340}
-          height={340}
-        />
-      </div>
+      <div className="hero-stage">
+        <div className="hero-content">
+          <div className="hero-logo-wrap">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/logo.png"
+              alt="Vevsdesign logo"
+              className="hero-logo-img"
+              width={340}
+              height={340}
+            />
+          </div>
 
-      <div className="hero-eyebrow">Svadobná výzdoba &amp; dizajn</div>
+          <h1>
+            Váš deň,<br />
+            <em>naša vášeň</em>
+            <span className="h1-line2">Výzdoba, ktorú si zapamätáte</span>
+          </h1>
 
-      <h1>
-        Váš deň,<br />
-        <em>naša vášeň</em>
-        <span className="h1-line2">Výzdoba, ktorú si zapamätáte</span>
-      </h1>
+          <p className="hero-sub">
+            Tvoríme svadobnú výzdobu s dušou. Personalizovanú, elegantnú a plnú detailov.
+          </p>
 
-      <p className="hero-sub">
-        Tvoríme svadobnú výzdobu s dušou — personalizovanú, elegantnú a plnú detailov.
-      </p>
+          <div className="btn-pair">
+            <a href="#baliky" className="btn-p">Pozrieť balíky</a>
+            <a href="#kontakt" className="btn-o">Kontaktujte nás</a>
+          </div>
+        </div>
 
-      <div className="btn-pair">
-        <a href="#baliky" className="btn-p">Pozrieť balíky</a>
-        <a href="#kontakt" className="btn-o">Kontaktujte nás</a>
+        <figure className="hero-photo">
+          <div className="hero-photo-frame">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/hero/table-decoration.jpeg"
+              alt="Svadobný stôl s modro-bielou kvetinovou výzdobou a sviečkami"
+              width={2701}
+              height={1797}
+              fetchPriority="high"
+            />
+            <div className="hero-photo-wash" aria-hidden="true" />
+          </div>
+          <figcaption>
+            <span>Vevsdesign</span>
+            <span>Košice &amp; okolie</span>
+          </figcaption>
+        </figure>
       </div>
     </section>
   );
