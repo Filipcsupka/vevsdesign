@@ -882,6 +882,8 @@ h1 .h1-line2{display:block;font-size:0.72em;opacity:0.85}
 #nfc-srdce .sec-intro{color:var(--ink-m)}
 #nfc-srdce .rule-diamond{background:var(--gold)}
 #nfc-srdce .rule::before,#nfc-srdce .rule::after{background:rgba(var(--gold-rgb),0.4)}
+.nfc-heart-example-link{color:var(--gold);font-weight:500;text-underline-offset:0.18em}
+.nfc-heart-example-link:hover{color:var(--ink)}
 .rental-bg-lines{position:absolute;inset:0;pointer-events:none;overflow:hidden}
 .rental-bg-lines::before{
   display:none;

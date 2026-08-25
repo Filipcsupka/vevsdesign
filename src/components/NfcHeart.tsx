@@ -35,18 +35,18 @@ export default function NfcHeart() {
     <section id="nfc-srdce">
       <div className="rental-bg-lines" />
       <div className="rental-glow" />
-      <p className="sec-label reveal">Osobná spomienka na jeden dotyk</p>
+      <p className="sec-label reveal">Váš príbeh ukrytý v srdci</p>
       <h2 className="reveal reveal-d1">NFC srdce</h2>
       <div className="rule reveal reveal-d1"><div className="rule-diamond" /></div>
       <p className="sec-intro reveal reveal-d2">
-        Personalizované srdce s NFC technológiou pripravíme ako originálny detail vášho svadobného dňa.
+        3D tlačené srdce s vlastným nápisom a dátumom ukrýva NFC tag. Po priložení telefónu otvorí odkaz, ktorý si sami vyberiete.
       </p>
       <div className="rental-stage reveal reveal-d2">
         <div className="showcase-grid showcase-grid-rental">
           <ShowcaseTile
             eyebrow="NFC srdce"
             title="Personalizované NFC srdce"
-            description="Srdce s vašimi menami, dátumom a zdobením vo farbách podľa vašej predstavy."
+            description="3D tlačené srdce s vlastným nápisom, dátumom a NFC tagom, ktorý otvorí váš osobný odkaz."
             meta="Cena individuálne"
             variant="pearl"
             image={nfcHeartImage()}
@@ -77,8 +77,14 @@ export default function NfcHeart() {
             <div className="rental-modal-top">
               <div className="rental-modal-summary">
                 <p className="rental-modal-lead">
-                  Srdce pripravíme s vašimi menami, dátumom a zdobením vo farbách podľa vašej predstavy.
+                  Každé srdce vytlačíme na 3D tlačiarni s vaším vlastným nápisom, menami alebo dátumom a doladíme zdobením vo farbách podľa vašej predstavy. Zabudovaný NFC tag po priložení telefónu otvorí odkaz, ktorý si zvolíte.
                 </p>
+                <div className="rental-modal-section">
+                  <h3>Kam môže NFC odkaz smerovať?</h3>
+                  <p>
+                    Napríklad na váš spoločný príbeh, svadobnú stránku, fotogalériu, video alebo inú osobnú spomienku. Pozrite si našu ukážku príbehu <a className="nfc-heart-example-link" href="/vf/">V/F</a>.
+                  </p>
+                </div>
               </div>
               <ModalImageGallery images={nfcHeartDetailImages()} label="NFC srdce" />
             </div>

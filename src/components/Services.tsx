@@ -164,13 +164,13 @@ const CUSTOM_SERVICES: ServiceItem[] = [
   {
     id: "naramky",
     name: "Náramky",
-    price: "Cena individuálne",
-    unitPrice: null,
-    priceKind: "individual",
+    price: "0,60 €/ks",
+    unitPrice: 0.6,
+    priceKind: "fixed",
     description: "Personalizované náramky doladia svadbu milým detailom s vašimi iniciálkami, menami alebo dátumom.",
     modalDescription: "Náramky pripravíme vo farbe vašej svadby a doplníme ich personalizovanou potlačou podľa vašej predstavy.",
     modalDetails: [],
-    modalAbout: "Farebnosť a potlač náramkov prispôsobíme vašej svadbe. Pre cenu a dobu dodania nám napíšte požadovaný počet kusov.",
+    modalAbout: "Farebnosť a potlač náramkov prispôsobíme vašej svadbe. Cena za jeden personalizovaný náramok je 0,60 €.",
     category: "Doplnky na mieru",
   },
 ];
