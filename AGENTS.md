@@ -3,6 +3,19 @@
 Tento subor je kanonicky kontext pre AI asistenta pracujuceho na projekte `vevsdesign`.
 Ak je nieco v konflikte medzi tymto suborom a starsim obsahom inde v projekte, preferuj tento subor.
 
+## Context Protocol (run FIRST, before answering any issue)
+
+1. Load repo-local context: this file + `CLAUDE.md` + `README.md`.
+2. For deploy/infra/k8s topics load ops-brain vault `~/Documents/ops-brain/`:
+   - `AGENTS.md` (canonical agent rules), `personal-infra/_context.md`, `personal-infra/clusters/khtz.md` (web runs on the khtz k3s cluster via `../infra` GitOps repo)
+3. Reply only after context loaded; say which notes you used. New durable facts → propose ops-brain note update.
+
+## Execution Policy — Codex App / Orca Autonomy
+
+- Run normal requested work end-to-end without approval prompts: repo inspection, file edits in scope, `npm install`, builds, tests, lint/format, dev server, local Docker validation, curl/dig, docker ps|logs, git status|log|diff, file reads, greps.
+- Read-only diagnostics run IMMEDIATELY, never ask: kubectl get|describe|logs|events|top, curl/dig, docker ps|logs, git status|log|diff, file reads, greps. Chain them fast.
+- Approval required BEFORE external/destructive state changes: live cluster mutations (only via `../infra` GitOps repo), deploys, secrets, git push, deletes, production writes, or work outside the requested scope. Present exact command/diff, wait for explicit yes.
+
 ## Projekt
 
 - Nazov: `Vevsdesign`
@@ -62,6 +75,8 @@ Ak sa robi vizualna uprava, preferuj menit existujuce komponenty a `src/app/glob
 - Telefon: `0915 309 721`
 - Instagram: `@Vevsdesign`
 - Web obsahuje baliky, doplnkove sluzby, galeriu a kontakt.
+- Doplnky na mieru obsahuju aj personalizovane naramky.
+- `NFC srdce` je samostatna kategoria v hlavnej navigacii s vlastnou galeriou.
 
 ## Prevadzka a nasadenie
 
