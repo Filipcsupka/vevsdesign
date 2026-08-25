@@ -3,7 +3,7 @@ export type ImageAsset = {
   alt: string;
 };
 
-const IMAGE_VERSION = "2026-05-24-01";
+const IMAGE_VERSION = "2026-08-25-01";
 export const FALLBACK_IMAGE = "/images/gallery/placeholder.png";
 
 export const GALLERY_IMAGES: ImageAsset[] = [
@@ -45,6 +45,14 @@ export function rentalDetailImages(categoryId: string, offerId: string, label: s
   return numberedCollectionOrFallback(rentalImages(categoryId, offerId, label), label);
 }
 
+export function nfcHeartImage(): ImageAsset {
+  return numberedCollectionFirst(nfcHeartImages(), "NFC srdce");
+}
+
+export function nfcHeartDetailImages(): ImageAsset[] {
+  return numberedCollectionOrFallback(nfcHeartImages(), "NFC srdce");
+}
+
 const PACKAGE_IMAGE_COUNTS: Record<string, number> = {
   s: 0,
   m: 0,
@@ -54,14 +62,15 @@ const PACKAGE_IMAGE_COUNTS: Record<string, number> = {
 const SERVICE_IMAGE_COUNTS: Record<string, number> = {
   "doplnky-na-mieru:pozvanky": 4,
   "doplnky-na-mieru:menovky": 4,
-  "doplnky-na-mieru:balik-tlacovin": 8,
+  "doplnky-na-mieru:balik-tlacovin": 10,
   "doplnky-na-mieru:servitky": 2,
   "doplnky-na-mieru:kniha-hosti": 1,
   "doplnky-na-mieru:box-na-obalky": 2,
-  "doplnky-na-mieru:strom-na-platne": 2,
+  "doplnky-na-mieru:strom-na-platne": 3,
   "doplnky-na-mieru:uvitacia-tabula": 3,
   "doplnky-na-mieru:uvitacia-latka": 1,
-  "doplnky-pre-hosti:cigar-bar": 2,
+  "doplnky-na-mieru:naramky": 2,
+  "doplnky-pre-hosti:cigar-bar": 3,
   "doplnky-pre-hosti:detske-balicky": 2,
   "doplnky-pre-hosti:okuliare": 1,
   "doplnky-pre-hosti:omalovanky": 2,
@@ -74,13 +83,13 @@ const SERVICE_IMAGE_COUNTS: Record<string, number> = {
 const RENTAL_IMAGE_COUNTS: Record<string, number> = {
   "kvetinova-vyzdoba:ikebana-na-stoly": 2,
   "kvetinova-vyzdoba:ikebana-na-stoly-s-vazami-okolo": 2,
-  "kvetinova-vyzdoba:mala-ikebana": 1,
-  "kvetinova-vyzdoba:dlha-ikebana": 2,
+  "kvetinova-vyzdoba:mala-ikebana": 2,
+  "kvetinova-vyzdoba:dlha-ikebana": 3,
   "stojany-zrkadla:ovalny-stojan": 1,
   "stojany-zrkadla:srdcovy-stojan": 4,
   "stojany-zrkadla:stojace-tyce-s-balonmi": 1,
   "stojany-zrkadla:zrkadlo-s-menami-a-textom": 2,
-  "ostatne:capovacie-stanice": 3,
+  "ostatne:capovacie-stanice": 4,
   "ostatne:drevene-boxy": 2,
   "ostatne:lampase": 3,
   "vazy-svietniky:vysoke-svietniky": 1,
@@ -117,6 +126,10 @@ function rentalImages(categoryId: string, offerId: string, label: string) {
     label,
     RENTAL_IMAGE_COUNTS[`${folder}:${offerId}`] ?? 0
   );
+}
+
+function nfcHeartImages() {
+  return numberedCollection("/images/nfc-srdce", "NFC srdce", 2);
 }
 
 function numberedCollection(basePath: string, label: string, count: number): ImageAsset[] {

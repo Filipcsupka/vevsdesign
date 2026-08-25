@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Baliky from "@/components/Baliky";
 import Services from "@/components/Services";
 import Gallery from "@/components/Gallery";
+import NfcHeart from "@/components/NfcHeart";
 import Kontakt from "@/components/Kontakt";
 import {
   EMPTY_CONTACT_SELECTIONS,
@@ -54,6 +55,7 @@ export default function HomeInteractiveSections() {
       <Baliky onSelectPackage={addSelection} />
       <Services onSelectService={addSelection} />
       <Gallery onSelectRental={addSelection} />
+      <NfcHeart />
       <Kontakt
         selections={selections}
         onRemoveSelection={removeSelection}

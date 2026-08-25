@@ -161,6 +161,18 @@ const CUSTOM_SERVICES: ServiceItem[] = [
     modalAbout: "Finálny dizajn Vám pošleme do 3 dní. Doba doručenia je 5 až 15 pracovných dní.",
     category: "Doplnky na mieru",
   },
+  {
+    id: "naramky",
+    name: "Náramky",
+    price: "Cena individuálne",
+    unitPrice: null,
+    priceKind: "individual",
+    description: "Personalizované náramky doladia svadbu milým detailom s vašimi iniciálkami, menami alebo dátumom.",
+    modalDescription: "Náramky pripravíme vo farbe vašej svadby a doplníme ich personalizovanou potlačou podľa vašej predstavy.",
+    modalDetails: [],
+    modalAbout: "Farebnosť a potlač náramkov prispôsobíme vašej svadbe. Pre cenu a dobu dodania nám napíšte požadovaný počet kusov.",
+    category: "Doplnky na mieru",
+  },
 ];
 
 const GUEST_SERVICES: ServiceItem[] = [
