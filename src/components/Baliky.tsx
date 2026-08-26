@@ -222,6 +222,25 @@ export default function Baliky({ onSelectPackage }: BalikyProps) {
     closeModal();
   }
 
+  function handleIndividualPackage() {
+    onSelectPackage({
+      kind: "packages",
+      id: "individual",
+      name: "Individuálny balík",
+      quantity: 1,
+      unitLabel: "balík",
+      priceLabel: "Cena na dopyt",
+      unitPrice: null,
+      priceKind: "individual",
+    });
+
+    window.requestAnimationFrame(() => {
+      const noteField = document.getElementById("poznamka-a-predstava") as HTMLTextAreaElement | null;
+      noteField?.focus({ preventScroll: true });
+      noteField?.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+  }
+
   return (
     <section id="baliky">
       <h2 className="reveal reveal-d1">
@@ -274,6 +293,9 @@ export default function Baliky({ onSelectPackage }: BalikyProps) {
             z inventára, ktorý ponúkame na stránke, ale aj z toho, čo na stránke nie je. Stačí nám
             opísať vašu predstavu a my ju s radosťou premeníme na realitu.
           </p>
+          <button type="button" className="btn-p balik-individual-button" onClick={handleIndividualPackage}>
+            Pridať
+          </button>
         </article>
       </div>
 

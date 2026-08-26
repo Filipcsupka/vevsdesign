@@ -363,10 +363,11 @@ export default function Kontakt({
             </div>
 
             <div className="form-group">
-              <label>Poznámka k produktu</label>
+              <label htmlFor="poznamka-a-predstava">Poznámka a vaša predstava</label>
               <textarea
+                id="poznamka-a-predstava"
                 name="poznamka_a_predstava"
-                placeholder="Napíšte nám svoju predstavu, počet hostí alebo detaily k vybraným položkám"
+                placeholder="Opíšte nám približne, čo by mal váš individuálny balík obsahovať, počet hostí alebo ďalšie detaily"
               />
             </div>
 
