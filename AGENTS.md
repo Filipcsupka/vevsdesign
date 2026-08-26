@@ -75,6 +75,7 @@ Ak sa robi vizualna uprava, preferuj menit existujuce komponenty a `src/app/glob
 - Telefon: `0915 309 721`
 - Instagram: `@Vevsdesign`
 - Web obsahuje baliky, doplnkove sluzby, galeriu a kontakt.
+- Pod balíkmi S, M a L je samostatný „Individuálny balík“ pre nevesty, ktoré si chcú vyskladať ponuku na mieru aj z položiek mimo webu.
 - Doplnky na mieru obsahuju aj personalizovane naramky za `0,60 €/ks`.
 - `NFC srdce` je samostatna kategoria v hlavnej navigacii s vlastnou galeriou. Ide o 3D tlacene personalizovane srdce s vlastnym napisom, datumom a NFC tagom, ktory moze otvorit zvoleny osobny odkaz.
 

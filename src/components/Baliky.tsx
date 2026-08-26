@@ -263,6 +263,18 @@ export default function Baliky({ onSelectPackage }: BalikyProps) {
             <div className="balik-hint">Kliknite pre detail →</div>
           </div>
         ))}
+
+        <article className="balik-card balik-card-individual reveal reveal-d4">
+          <div className="balik-individual-heading">
+            <div className="balik-badge">Na mieru</div>
+            <div className="balik-name">Individuálny balík</div>
+          </div>
+          <p className="balik-individual-copy">
+            Tento balík ponúkame nevestám, ktoré majú vlastnú predstavu. Môžete si ho vyskladať
+            z inventára, ktorý ponúkame na stránke, ale aj z toho, čo na stránke nie je. Stačí nám
+            opísať vašu predstavu a my ju s radosťou premeníme na realitu.
+          </p>
+        </article>
       </div>
 
       {mounted && openId && detail && createPortal(
