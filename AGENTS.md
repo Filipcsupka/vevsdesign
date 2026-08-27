@@ -75,6 +75,10 @@ Ak sa robi vizualna uprava, preferuj menit existujuce komponenty a `src/app/glob
 - Telefon: `0915 309 721`
 - Instagram: `@Vevsdesign`
 - Web obsahuje baliky, doplnkove sluzby, galeriu a kontakt.
+- Ceny svadobnych balikov su: Balik S `450 €`, Balik M `650 €`, Balik L `750 €`.
+- Balik S obsahuje vyzdobu stolov pre hosti, vyzdobu hlavneho stola novomanzelov, uvitaciu tabulu a zasadaci poriadok.
+- Balik M obsahuje Balik S, menovky a servitky, uvitaci banner so zlatym stojanom, personalizovanu knihu hosti, box na obalky a kompletny balik tlacovin.
+- Balik L obsahuje Baliky S a M, zrkadlo s menami, velky stojan srdce s kvetinovou vyzdobou, strom na platne, detske balicky a personalizovane tabulky a okuliare do fotokutika.
 - Pod balíkmi S, M a L je samostatný „Individuálny balík“ pre nevesty, ktoré si chcú vyskladať ponuku na mieru aj z položiek mimo webu.
 - Doplnky na mieru obsahuju aj personalizovane naramky za `0,60 €/ks`.
 - `NFC srdce` je samostatna kategoria v hlavnej navigacii s vlastnou galeriou. Ide o 3D tlacene personalizovane srdce s vlastnym napisom, datumom a NFC tagom, ktory moze otvorit zvoleny osobny odkaz.

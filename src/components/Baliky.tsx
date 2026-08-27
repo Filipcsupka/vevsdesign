@@ -29,27 +29,28 @@ const PACKAGES: PackageData[] = [
     id: "s",
     badge: "Základný",
     name: "Balík S",
-    price: "400 €",
-    unitPrice: 400,
+    price: "450 €",
+    unitPrice: 450,
     items: [
-      "Výzdoba stolov zahrňuje kvetinové ikebany, sviečky, vázu",
-      "Uvítacia tabuľa a zasadací poriadok",
-      "Balík tlačovín",
+      "Výzdoba stolov pre hostí zahŕňa kvetinové ikebany, plávajúce sviečky a vázy na živé kvety",
+      "Výzdoba hlavného stola novomanželov zahŕňa dlhú ikebanu so svietnikmi a sviečkami",
+      "Uvítacia tabuľa",
+      "Zasadací poriadok",
     ],
   },
   {
     id: "m",
     badge: "Najpredávanejší",
     name: "Balík M",
-    price: "600 €",
-    unitPrice: 600,
+    price: "650 €",
+    unitPrice: 650,
     featured: true,
     items: [
       "Obsahuje Balík S",
       "Menovky a servítky s vašimi iniciálkami/menami",
-      "Personalizovaná kniha hostí s perami a box na obálky",
-      "Tabuľky do fotokútika a okuliare s vtipnými hláškami",
-      "Detský kútik s personalizovanými omaľovánkami pre každé dieťa",
+      "Uvítací banner s vašimi menami so zlatým stojanom",
+      "Personalizovaná kniha hostí a box na obálky",
+      "Kompletný balík tlačovín",
     ],
   },
   {
@@ -59,12 +60,12 @@ const PACKAGES: PackageData[] = [
     price: "750 €",
     unitPrice: 750,
     items: [
-      "Obsahuje Balík S, M",
+      "Obsahuje Balíky S a M",
       "Zrkadlo s menami",
-      "Uvítací banner s vašimi menami so zlatým stojanom",
-      "Stojan “srdce” s kvetinovou výzdobou",
-      "Detské balíčky",
+      "Veľký stojan srdce s kvetinovou výzdobou",
       "Strom na plátne",
+      "Detské balíčky",
+      "Personalizované tabuľky do fotokútika a okuliare s vašimi vtipnými hláškami",
     ],
   },
 ];
@@ -73,15 +74,16 @@ const DETAILS: Record<PackageId, ModalDetail> = {
   s: {
     badge: "Základný",
     name: "Balík S",
-    price: "400 €",
+    price: "450 €",
     lead: "Jemný základ pre svadbu, kde chcete mať všetko vizuálne zladené a pripravené v elegantnom štýle.",
     sections: [
       {
         title: "Čo balík zahŕňa",
         content: [
-          "Výzdoba stolov je navrhnutá podľa vašich farieb a témy svadby. Kvetinové ikebany s vázou a plávajúcimi sviečkami doladia nádhernú atmosféru. Platí pre stoly hostí, stôl DJ a pre novomanželský stôl.",
-          "Uvítacia tabuľa je navrhnutá s vašimi menami a dátumom svadby. Obsahuje aj prenajatý stojan.",
-          "Balík tlačovín obsahuje zasadací poriadok, harmonogram svadby, čísla stolov, menu a vtipné fakty o novomanželoch pre každý stôl, informačné tabuľky ako sladký bar, slaný bar, kniha hostí a ďalšie.",
+          "Výzdoba stolov pre hostí zahŕňa kvetinové ikebany, plávajúce sviečky a vázy na živé kvety.",
+          "Výzdoba hlavného stola novomanželov zahŕňa dlhú ikebanu so svietnikmi a sviečkami.",
+          "Uvítacia tabuľa.",
+          "Zasadací poriadok.",
         ],
       },
       {
@@ -93,17 +95,17 @@ const DETAILS: Record<PackageId, ModalDetail> = {
   m: {
     badge: "Najpredávanejší",
     name: "Balík M",
-    price: "600 €",
+    price: "650 €",
     lead: "Rozšírený balík pre svadbu, kde chcete k výzdobe pridať viac personalizovaných prvkov a doplnkov pre hostí.",
     sections: [
       {
         title: "Čo balík zahŕňa",
         content: [
-          "K balíku S sa pripájajú ďalšie dôležité prvky, ktoré svadbu obohatia o osobnejší a premyslenejší charakter.",
-          "Menovky a servítky sú základom každej udalosti a ich vzhľad si vyberiete aký potrebujete vy.",
-          "Personalizovaná kniha hostí s perami vytvorí krásny priestor na odkazy, priania a spomienky od vašich blízkych. Box na obálky je súčasť balíka.",
-          "Tabuľky do fotokútika vytvoríme s vašimi požadovanými textami a okuliare prispôsobíme k téme svadby.",
-          "Pripravený bude aj detský kútik pre najmenších, ktorý obsahuje šmýkalku, farebné stany, mäkkú podložku, kocky, autíčka, bábiky, farbičky aj omaľovánky.",
+          "Obsahuje Balík S.",
+          "Menovky a servítky s vašimi iniciálkami alebo menami.",
+          "Uvítací banner s vašimi menami so zlatým stojanom.",
+          "Personalizovaná kniha hostí a box na obálky.",
+          "Kompletný balík tlačovín.",
         ],
       },
       {
@@ -121,11 +123,12 @@ const DETAILS: Record<PackageId, ModalDetail> = {
       {
         title: "Čo balík zahŕňa",
         content: [
-          "Balík L spája výzdobu, personalizované prvky a doplnky pre hostí do jedného celku.",
-          "Zrkadlo s menami dopĺňa celkový vizuál o elegantný personalizovaný detail, ktorý pôsobí reprezentatívne a štýlovo.",
-          "Uvítací banner s vašimi menami dodá svadbe osobitý charakter a stane sa výraznou súčasťou priestoru.",
-          "Veľký stojan v tvare srdca je obohatený kvetmi a môže byť aj pokrytý hebkými štólami pre luxusný efekt. Vytvára výrazný romantický prvok, ktorý krásne vynikne na obrade alebo za hlavným stolom. Taktiež sa môže použiť ako fotostena.",
-          "Strom na plátne vytvorí osobnú spomienku, do ktorej hostia zanechajú svoj odtlačok.",
+          "Obsahuje Balík S a Balík M.",
+          "Zrkadlo s menami.",
+          "Veľký stojan srdce s kvetinovou výzdobou.",
+          "Strom na plátne.",
+          "Detské balíčky.",
+          "Personalizované tabuľky do fotokútika a okuliare s vašimi vtipnými hláškami.",
         ],
       },
       {
