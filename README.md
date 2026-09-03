@@ -99,6 +99,19 @@ out/
 
 Tento adresár sa potom kopíruje do nginx runtime image v `Dockerfile`.
 
+## CI/CD, bezpečnosť a verziovanie
+
+Každý push na branch a každý pull request spúšťa kontrolu:
+
+- ESLint a TypeScript typecheck,
+- `npm audit` pre high/critical zraniteľnosti,
+- produkčný Next.js build a Docker smoke test,
+- Trivy scan výsledného nginx image.
+
+JavaScript/TypeScript sa navyše skenuje cez CodeQL. Image build, push do GHCR a následný GitOps deploy zostávajú povolené iba pre `main`.
+
+Verzie a changelog pripravuje Release Please z conventional commitov (`feat:`, `fix:`, `perf:`, `security:`). Release workflow vytvorí release pull request a po jeho mergi tag vo formáte `vX.Y.Z`.
+
 ## Analytics
 
 Ak chceš počítať zobrazenia webu bez vlastného backendu, projekt podporuje voliteľný Cloudflare Web Analytics beacon.

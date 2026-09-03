@@ -17,7 +17,7 @@ ENV NEXT_PUBLIC_TURNSTILE_SITE_KEY=$NEXT_PUBLIC_TURNSTILE_SITE_KEY
 
 RUN npm run build
 
-FROM --platform=$TARGETPLATFORM nginx:1.27-alpine AS runner
+FROM --platform=$TARGETPLATFORM nginx:1.31.5-alpine3.24 AS runner
 
 RUN rm /etc/nginx/conf.d/default.conf
 
