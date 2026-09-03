@@ -4,6 +4,7 @@ import LegalPage from "@/components/LegalPage";
 export const metadata: Metadata = {
   title: "Cookies | Vevsdesign",
   description: "Informácie o používaní cookies a podobných technológií na webe Vevsdesign.",
+  alternates: { canonical: "/cookies/" },
 };
 
 export default function CookiesPage() {

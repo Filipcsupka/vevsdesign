@@ -19,6 +19,7 @@ import {
 export const metadata: Metadata = {
   title: "Obchodné údaje | Vevsdesign",
   description: "Identifikačné a kontaktné údaje prevádzkovateľa webu Vevsdesign.",
+  alternates: { canonical: "/obchodne-udaje/" },
 };
 
 export default function BusinessDetailsPage() {

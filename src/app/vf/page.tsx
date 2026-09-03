@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "V & F — Veronika a Filip | Vevsdesign",
   description: "Náš príbeh v skratke — Veronika a Filip.",
   robots: { index: false, follow: false },
+  alternates: { canonical: "/vf/" },
 };
 
 const IMAGE_EXTENSIONS = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif"]);

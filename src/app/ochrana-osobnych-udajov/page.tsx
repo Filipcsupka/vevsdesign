@@ -11,6 +11,7 @@ import {
 export const metadata: Metadata = {
   title: "Ochrana osobných údajov | Vevsdesign",
   description: "Základné informácie o spracúvaní osobných údajov na webe Vevsdesign.",
+  alternates: { canonical: "/ochrana-osobnych-udajov/" },
 };
 
 export default function PrivacyPage() {
