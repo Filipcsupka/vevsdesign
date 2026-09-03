@@ -7,7 +7,11 @@ export default function Hero() {
 
   useEffect(() => {
     const hero = heroRef.current;
-    if (!hero || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (
+      !hero ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      window.matchMedia("(max-width: 900px), (pointer: coarse)").matches
+    ) return;
 
     let ticking = false;
 
@@ -78,14 +82,22 @@ export default function Hero() {
 
         <figure className="hero-photo">
           <div className="hero-photo-frame">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/images/hero/table-decoration.jpeg"
-              alt="Svadobný stôl s modro-bielou kvetinovou výzdobou a sviečkami"
-              width={2701}
-              height={1797}
-              fetchPriority="high"
-            />
+            <picture>
+              <source
+                type="image/webp"
+                srcSet="/images/hero/table-decoration-768.webp 768w, /images/hero/table-decoration-1600.webp 1600w"
+                sizes="(max-width: 900px) 100vw, 62vw"
+              />
+              <img
+                src="/images/hero/table-decoration.jpeg"
+                alt="Svadobný stôl s modro-bielou kvetinovou výzdobou a sviečkami"
+                width={2701}
+                height={1797}
+                fetchPriority="high"
+                loading="eager"
+                decoding="async"
+              />
+            </picture>
             <div className="hero-photo-wash" aria-hidden="true" />
           </div>
           <figcaption>

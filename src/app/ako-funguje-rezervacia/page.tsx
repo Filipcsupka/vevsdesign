@@ -4,6 +4,7 @@ import LegalPage from "@/components/LegalPage";
 export const metadata: Metadata = {
   title: "Ako funguje rezervácia | Vevsdesign",
   description: "Informácie o tom, ako vo Vevsdesign funguje dopyt, cenová ponuka a potvrdenie rezervácie.",
+  alternates: { canonical: "/ako-funguje-rezervacia/" },
 };
 
 export default function ReservationInfoPage() {

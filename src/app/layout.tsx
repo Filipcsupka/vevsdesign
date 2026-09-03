@@ -1,7 +1,31 @@
 import type { Metadata } from "next";
+import { Bodoni_Moda, Cormorant_Garamond, Raleway } from "next/font/google";
 import Script from "next/script";
 import { CONTACT_EMAIL, CONTACT_PHONE_HREF } from "@/data/businessInfo";
 import "./globals.css";
+
+const bodoniModa = Bodoni_Moda({
+  variable: "--font-bodoni",
+  subsets: ["latin", "latin-ext"],
+  weight: "variable",
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const cormorantGaramond = Cormorant_Garamond({
+  variable: "--font-cormorant",
+  subsets: ["latin", "latin-ext"],
+  weight: ["300", "400"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const raleway = Raleway({
+  variable: "--font-raleway",
+  subsets: ["latin", "latin-ext"],
+  weight: ["200", "300", "400", "500"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Vevsdesign — Svadobná Výzdoba & Dizajn",
@@ -9,6 +33,9 @@ export const metadata: Metadata = {
     "Tvoríme svadobnú výzdobu s dušou — personalizovanú, elegantnú a plnú detailov. Košice & Východné Slovensko.",
   keywords: ["svadobná výzdoba", "dizajn", "Košice", "Slovensko", "svadba"],
   metadataBase: new URL("https://vevsdesign.sk"),
+  alternates: {
+    canonical: "/",
+  },
   icons: {
     icon: [
       { url: "/icon.png", sizes: "512x512", type: "image/png" },
@@ -80,7 +107,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body>{children}</body>
+      <body className={`${bodoniModa.variable} ${cormorantGaramond.variable} ${raleway.variable}`}>
+        {children}
+      </body>
       {cloudflareAnalyticsToken ? (
         <Script
           defer
