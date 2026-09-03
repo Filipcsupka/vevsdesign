@@ -108,7 +108,7 @@ Každý push na branch a každý pull request spúšťa kontrolu:
 - produkčný Next.js build a Docker smoke test,
 - Trivy scan výsledného nginx image.
 
-Na pull requestoch sa navyše kontrolujú zmeny závislostí a JavaScript/TypeScript cez CodeQL. Image build, push do GHCR a následný GitOps deploy zostávajú povolené iba pre `main`.
+JavaScript/TypeScript sa navyše skenuje cez CodeQL. Image build, push do GHCR a následný GitOps deploy zostávajú povolené iba pre `main`.
 
 Verzie a changelog pripravuje Release Please z conventional commitov (`feat:`, `fix:`, `perf:`, `security:`). Release workflow vytvorí release pull request a po jeho mergi tag vo formáte `vX.Y.Z`.
 
