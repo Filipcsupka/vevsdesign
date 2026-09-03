@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 export default function Nav() {
   const navRef = useRef<HTMLElement>(null);
-  const [openMenu, setOpenMenu] = useState<"packages" | "services" | "rental" | null>(null);
+  const [openMenu, setOpenMenu] = useState<"packages" | "services" | "rental" | "nfc" | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   function closeNavigation() {
@@ -151,8 +151,31 @@ export default function Nav() {
             <li><a href="#prenajom-ostatne" onClick={closeNavigation}>Ostatné</a></li>
           </ul>
         </li>
-        <li><a href="#nfc-srdce" onClick={closeNavigation}>NFC srdce</a></li>
-        <li><a href="/vf/" className="nav-link-vf" onClick={closeNavigation}>V/F</a></li>
+        <li
+          className={`nav-item-has-menu${openMenu === "nfc" ? " open" : ""}`}
+          onMouseEnter={() => setOpenMenu("nfc")}
+          onMouseLeave={() => setOpenMenu(null)}
+        >
+          <div className="nav-menu-head">
+            <a href="#nfc-srdce" className="nav-menu-link" onClick={closeNavigation}>
+              NFC srdce
+            </a>
+            <button
+              type="button"
+              className="nav-menu-toggle"
+              aria-label="Zobraziť podkategórie NFC srdca"
+              aria-haspopup="true"
+              aria-expanded={openMenu === "nfc"}
+              aria-controls="nfc-submenu"
+              onClick={() => setOpenMenu((open) => (open === "nfc" ? null : "nfc"))}
+            >
+              <span aria-hidden="true">▾</span>
+            </button>
+          </div>
+          <ul id="nfc-submenu" className="nav-submenu">
+            <li><a href="/vf/" onClick={closeNavigation}>V/F</a></li>
+          </ul>
+        </li>
       </ul>
     </nav>
   );

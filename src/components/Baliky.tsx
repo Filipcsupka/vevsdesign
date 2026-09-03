@@ -33,7 +33,7 @@ const PACKAGES: PackageData[] = [
     unitPrice: 450,
     items: [
       "Výzdoba stolov pre hostí zahŕňa kvetinové ikebany, plávajúce sviečky a vázy na živé kvety",
-      "Výzdoba hlavného stola novomanželov zahŕňa dlhú ikebanu so svietnikmi a sviečkami",
+      "Výzdoba hlavného stola novomanželov zahŕňa dlhú ikebanu so svietnikmi a sviečkami + živé kvety",
       "Uvítacia tabuľa",
       "Zasadací poriadok",
     ],
@@ -42,8 +42,8 @@ const PACKAGES: PackageData[] = [
     id: "m",
     badge: "Najpredávanejší",
     name: "Balík M",
-    price: "650 €",
-    unitPrice: 650,
+    price: "600 €",
+    unitPrice: 600,
     featured: true,
     items: [
       "Obsahuje Balík S",
@@ -81,7 +81,7 @@ const DETAILS: Record<PackageId, ModalDetail> = {
         title: "Čo balík zahŕňa",
         content: [
           "Výzdoba stolov pre hostí zahŕňa kvetinové ikebany, plávajúce sviečky a vázy na živé kvety.",
-          "Výzdoba hlavného stola novomanželov zahŕňa dlhú ikebanu so svietnikmi a sviečkami.",
+          "Výzdoba hlavného stola novomanželov zahŕňa dlhú ikebanu so svietnikmi a sviečkami + živé kvety.",
           "Uvítacia tabuľa.",
           "Zasadací poriadok.",
         ],
@@ -95,7 +95,7 @@ const DETAILS: Record<PackageId, ModalDetail> = {
   m: {
     badge: "Najpredávanejší",
     name: "Balík M",
-    price: "650 €",
+    price: "600 €",
     lead: "Rozšírený balík pre svadbu, kde chcete k výzdobe pridať viac personalizovaných prvkov a doplnkov pre hostí.",
     sections: [
       {
@@ -229,7 +229,7 @@ export default function Baliky({ onSelectPackage }: BalikyProps) {
     onSelectPackage({
       kind: "packages",
       id: "individual",
-      name: "Individuálny balík",
+      name: "Ponuka na mieru",
       quantity: 1,
       unitLabel: "balík",
       priceLabel: "Cena na dopyt",
@@ -289,7 +289,7 @@ export default function Baliky({ onSelectPackage }: BalikyProps) {
         <article className="balik-card balik-card-individual reveal reveal-d4">
           <div className="balik-individual-heading">
             <div className="balik-badge">Na mieru</div>
-            <div className="balik-name">Individuálny balík</div>
+            <div className="balik-name">Ponuka na mieru</div>
           </div>
           <p className="balik-individual-copy">
             Tento balík ponúkame nevestám, ktoré majú vlastnú predstavu. Môžete si ho vyskladať

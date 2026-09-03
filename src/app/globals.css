@@ -1522,15 +1522,6 @@ footer{
 }
 
 /* === V/F story === */
-.nav-link-vf{
-  font-weight:500;
-  color:var(--gold)!important;
-  border:1px solid rgba(var(--gold-rgb),0.4);
-  border-radius:999px;
-  padding:0.32rem 0.85rem;
-}
-.nav-link-vf::after{display:none}
-.nav-link-vf:hover{background:var(--gold-bg)}
 .vf-shell{
   min-height:100vh;
   min-height:100dvh;

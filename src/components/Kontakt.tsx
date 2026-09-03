@@ -367,7 +367,7 @@ export default function Kontakt({
               <textarea
                 id="poznamka-a-predstava"
                 name="poznamka_a_predstava"
-                placeholder="Opíšte nám približne, čo by mal váš individuálny balík obsahovať, počet hostí alebo ďalšie detaily"
+                placeholder="Opíšte nám približne, čo by mala vaša ponuka na mieru obsahovať, počet hostí alebo ďalšie detaily"
               />
             </div>
 

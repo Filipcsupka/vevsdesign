@@ -75,7 +75,7 @@ Ak sa robi vizualna uprava, preferuj menit existujuce komponenty a `src/app/glob
 - Telefon: `0915 309 721`
 - Instagram: `@Vevsdesign`
 - Web obsahuje baliky, doplnkove sluzby, galeriu a kontakt.
-- Ceny svadobnych balikov su: Balik S `450 €`, Balik M `650 €`, Balik L `750 €`.
+- Ceny svadobnych balikov su: Balik S `450 €`, Balik M `600 €`, Balik L `750 €`.
 - Balik S obsahuje vyzdobu stolov pre hosti, vyzdobu hlavneho stola novomanzelov, uvitaciu tabulu a zasadaci poriadok.
 - Balik M obsahuje Balik S, menovky a servitky, uvitaci banner so zlatym stojanom, personalizovanu knihu hosti, box na obalky a kompletny balik tlacovin.
 - Balik L obsahuje Baliky S a M, zrkadlo s menami, velky stojan srdce s kvetinovou vyzdobou, strom na platne, detske balicky a personalizovane tabulky a okuliare do fotokutika.
