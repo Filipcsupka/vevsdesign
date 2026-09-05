@@ -33,6 +33,7 @@ export default function Footer() {
         <div className="footer-block">
           <div className="foot-links">
             <Link href="/obchodne-udaje">Obchodné údaje</Link>
+            <Link href="/obchodne-podmienky">Obchodné podmienky</Link>
             <Link href="/ochrana-osobnych-udajov">Ochrana osobných údajov</Link>
             <Link href="/cookies">Cookies</Link>
             <Link href="/ako-funguje-rezervacia">Ako funguje rezervácia</Link>

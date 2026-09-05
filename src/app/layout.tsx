@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Bodoni_Moda, Cormorant_Garamond, Raleway } from "next/font/google";
-import Script from "next/script";
 import { CONTACT_EMAIL, CONTACT_PHONE_HREF } from "@/data/businessInfo";
+import AnalyticsConsent from "@/components/AnalyticsConsent";
+import CookieBanner from "@/components/CookieBanner";
 import "./globals.css";
 
 const bodoniModa = Bodoni_Moda({
@@ -109,17 +110,9 @@ export default function RootLayout({
       </head>
       <body className={`${bodoniModa.variable} ${cormorantGaramond.variable} ${raleway.variable}`}>
         {children}
+        <CookieBanner />
       </body>
-      {cloudflareAnalyticsToken ? (
-        <Script
-          defer
-          src="https://static.cloudflareinsights.com/beacon.min.js"
-          data-cf-beacon={JSON.stringify({
-            token: cloudflareAnalyticsToken,
-          })}
-          strategy="afterInteractive"
-        />
-      ) : null}
+      <AnalyticsConsent token={cloudflareAnalyticsToken} />
     </html>
   );
 }

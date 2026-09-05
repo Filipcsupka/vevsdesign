@@ -17,6 +17,7 @@ export default function Page() {
         <About />
         <HomeInteractiveSections />
       </main>
+      <a href="#kontakt" className="mobile-contact-cta">Kontaktujte nás</a>
       <Footer />
     </>
   );

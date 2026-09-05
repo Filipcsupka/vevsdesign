@@ -17,6 +17,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.4,
     },
     {
+      url: "https://vevsdesign.sk/obchodne-podmienky",
+      lastModified: new Date(),
+      changeFrequency: "yearly",
+      priority: 0.4,
+    },
+    {
       url: "https://vevsdesign.sk/ochrana-osobnych-udajov",
       lastModified: new Date(),
       changeFrequency: "yearly",
