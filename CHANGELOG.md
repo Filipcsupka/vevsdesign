@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/Filipcsupka/vevsdesign/compare/v1.1.0...v1.1.1) (2026-09-06)
+
+
+### Fixes
+
+* upgrade libuuid in runtime image ([22325f8](https://github.com/Filipcsupka/vevsdesign/commit/22325f83b2fd81f1e64a3f9c3c1bdc89ed752188))
+
 ## [1.1.0](https://github.com/Filipcsupka/vevsdesign/compare/v1.0.0...v1.1.0) (2026-09-06)
 
 
