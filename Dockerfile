@@ -19,6 +19,8 @@ RUN npm run build
 
 FROM --platform=$TARGETPLATFORM nginx:1.31.5-alpine3.24 AS runner
 
+RUN apk upgrade --no-cache libuuid
+
 RUN rm /etc/nginx/conf.d/default.conf
 
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
