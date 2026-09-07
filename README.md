@@ -101,16 +101,16 @@ Tento adresár sa potom kopíruje do nginx runtime image v `Dockerfile`.
 
 ## CI/CD, bezpečnosť a verziovanie
 
-Každý push na branch a každý pull request spúšťa kontrolu:
+Každý pull request do `main` a každý push na `main` spúšťa kontrolu:
 
 - ESLint a TypeScript typecheck,
 - `npm audit` pre high/critical zraniteľnosti,
 - produkčný Next.js build a Docker smoke test,
 - Trivy scan výsledného nginx image.
 
-JavaScript/TypeScript sa navyše skenuje cez CodeQL. Image build, push do GHCR a následný GitOps deploy zostávajú povolené iba pre `main`.
+JavaScript/TypeScript sa navyše skenuje cez CodeQL. Po úspešnom overení pushu na `main` workflow vytvorí a publikuje GHCR image (tagy `sha-*`, `latest` a `vX.Y.Z`), aktualizuje GitOps image tag a až potom vytvorí Git tag `vX.Y.Z`.
 
-Verzie a changelog pripravuje Release Please z conventional commitov (`feat:`, `fix:`, `perf:`, `security:`). Release workflow vytvorí release pull request a po jeho mergi tag vo formáte `vX.Y.Z`.
+Verzia sa určuje priamo z conventional commitov: `feat:` zvyšuje minor, `fix:`, `perf:` a `security:` patch a breaking change major. Nevytvára sa žiadny release pull request ani samostatný release workflow.
 
 ## Analytics
 

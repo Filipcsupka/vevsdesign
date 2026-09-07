@@ -1,5 +1,6 @@
 /* === reset + variables === */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+button,input,textarea,select{font:inherit}
 :root{
   --ivory:#FBF5ED;
   --ivory-d:#F4ECDF;
@@ -685,7 +686,7 @@ h1 .h1-line2{display:block;font-size:0.72em;opacity:0.85}
   color:var(--gold);
 }
 .showcase-tile-title{
-  font-family:var(--serif2);font-size:1.95rem;font-weight:300;font-style:italic;
+  font-family:var(--serif);font-size:1.95rem;font-weight:300;font-style:italic;
   line-height:1.02;color:var(--ink);
 }
 .showcase-tile-copy{

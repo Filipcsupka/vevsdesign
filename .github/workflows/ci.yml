@@ -1,9 +1,12 @@
 name: CI
 
 on:
+  pull_request:
+    branches:
+      - main
   push:
     branches:
-      - '**'
+      - main
   workflow_dispatch:
 
 permissions:
@@ -107,10 +110,54 @@ jobs:
           curl -fsSI http://localhost:8080/logo.png
           curl -fsSI http://localhost:8080/images/gallery/placeholder.png
 
+  version:
+    name: Calculate version
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    permissions:
+      contents: read
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Calculate next semantic version
+        id: version
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          latest_tag="$(git tag --list 'v*' --sort=-v:refname | head -n 1)"
+          if [ -n "$latest_tag" ]; then
+            commit_range="${latest_tag}..HEAD"
+            base_version="${latest_tag#v}"
+          else
+            commit_range="HEAD"
+            base_version="0.0.0"
+          fi
+
+          IFS='.' read -r major minor patch <<< "$base_version"
+          messages="$(git log --format='%B%n' "$commit_range")"
+
+          if grep -Eq 'BREAKING CHANGE:|^[a-z]+(\([^)]+\))?!:' <<< "$messages"; then
+            version="$((major + 1)).0.0"
+          elif grep -Eq '^feat(\([^)]+\))?:' <<< "$messages"; then
+            version="${major}.$((minor + 1)).0"
+          else
+            version="${major}.${minor}.$((patch + 1))"
+          fi
+
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
   build:
     name: Build Image
     runs-on: ubuntu-latest
-    needs: test
+    needs: version
     if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     permissions:
       contents: read
@@ -142,6 +189,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             type=sha,prefix=sha-,format=short
+            type=raw,value=v${{ needs.version.outputs.version }}
             type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
 
       - name: Build and push image
@@ -224,3 +272,36 @@ jobs:
           git add gitops/apps/vevsdesign/overlays/prod/kustomization.yaml
           git commit -m "deploy vevsdesign sha-${GITHUB_SHA::7}"
           git push
+
+  tag-release:
+    name: Create version tag
+    runs-on: ubuntu-latest
+    needs: [deploy-gitops, version]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create and push version tag
+        env:
+          VERSION: ${{ needs.version.outputs.version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          tag="v${VERSION}"
+          git fetch --tags --force
+          if git rev-parse -q --verify "refs/tags/${tag}" >/dev/null; then
+            echo "Tag ${tag} already exists."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "$tag" -m "Release $tag" "$GITHUB_SHA"
+          git push origin "$tag"
