@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/Filipcsupka/vevsdesign/compare/v1.1.1...v1.1.2) (2026-09-07)
+
+
+### Fixes
+
+* unify site typography with Bodoni ([4b8b16a](https://github.com/Filipcsupka/vevsdesign/commit/4b8b16a3d646ddade1bf66b2e9b5cd477916d624))
+
 ## [1.1.1](https://github.com/Filipcsupka/vevsdesign/compare/v1.1.0...v1.1.1) (2026-09-06)
 
 
