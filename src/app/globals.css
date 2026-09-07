@@ -41,8 +41,8 @@
   --bg-line-rgb:161,198,230;
   --bg-dark-blue-rgb:194,220,242;
   --serif:var(--font-bodoni),Georgia,serif;
-  --serif2:var(--font-cormorant),Georgia,serif;
-  --sans:var(--font-raleway),sans-serif;
+  --serif2:var(--font-bodoni),Georgia,serif;
+  --sans:var(--font-bodoni),Georgia,serif;
   --shadow:0 24px 70px rgba(23,21,20,0.08);
   --shadow-l:0 4px 24px rgba(23,21,20,0.05);
   --glass:rgba(250,246,239,0.78);

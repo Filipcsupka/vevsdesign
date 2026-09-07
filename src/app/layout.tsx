@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bodoni_Moda, Cormorant_Garamond, Raleway } from "next/font/google";
+import { Bodoni_Moda } from "next/font/google";
 import { CONTACT_EMAIL, CONTACT_PHONE_HREF } from "@/data/businessInfo";
 import AnalyticsConsent from "@/components/AnalyticsConsent";
 import CookieBanner from "@/components/CookieBanner";
@@ -10,21 +10,6 @@ const bodoniModa = Bodoni_Moda({
   subsets: ["latin", "latin-ext"],
   weight: "400",
   style: ["normal", "italic"],
-  display: "swap",
-});
-
-const cormorantGaramond = Cormorant_Garamond({
-  variable: "--font-cormorant",
-  subsets: ["latin", "latin-ext"],
-  weight: ["300", "400"],
-  style: ["normal", "italic"],
-  display: "swap",
-});
-
-const raleway = Raleway({
-  variable: "--font-raleway",
-  subsets: ["latin", "latin-ext"],
-  weight: ["200", "300", "400", "500"],
   display: "swap",
 });
 
@@ -108,7 +93,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${bodoniModa.variable} ${cormorantGaramond.variable} ${raleway.variable}`}>
+      <body className={bodoniModa.variable}>
         {children}
         <CookieBanner />
       </body>
