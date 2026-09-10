@@ -21,6 +21,7 @@ type ModalDetail = {
   name: string;
   price: string;
   lead: string;
+  followUp?: string;
   sections: { title: string; content: string | string[] }[];
 };
 
@@ -47,11 +48,13 @@ const PACKAGES: PackageData[] = [
     unitPrice: 600,
     featured: true,
     items: [
-      "Obsahuje Balík S",
-      "Menovky a servítky s vašimi iniciálkami/menami",
-      "Uvítací banner s vašimi menami so zlatým stojanom",
-      "Personalizovaná kniha hostí a box na obálky",
-      "Kompletný balík tlačovín",
+      "Výzdoba stolov (stredové ikebany alebo viacero váz so živými kvetmi)",
+      "Sviečky a champagne svietniky pre každý stôl",
+      "Menovky a servítky s vašimi iniciálkami",
+      "Výzdoba hlavného stola (zahŕňajúca dlhú ikebanu a úzke svietniky so sviečkami)",
+      "Uvítací banner s Vašim textom",
+      "Zrkadlo s Vašim textom",
+      "Výzdoba vchodu a balík tlačovín",
     ],
   },
   {
@@ -77,6 +80,7 @@ const DETAILS: Record<PackageId, ModalDetail> = {
     name: "Balík S",
     price: "450 €",
     lead: "Balík S je navrhnutý tak, aby spolu jednotlivé prvky vytvorili harmonickú a štýlovú výzdobu bez toho, aby ste museli riešiť každý detail samostatne.",
+    followUp: "Výzdoba stolov zahŕňa naozaj všetko, už si len vybrať typ menoviek a farbu Vášho dňa. Uvítacia tabuľa a zasadací poriadok sa dodávajú aj so stojanmi.",
     sections: [
       {
         title: "Čo balík zahŕňa",
@@ -98,21 +102,24 @@ const DETAILS: Record<PackageId, ModalDetail> = {
     badge: "Najpredávanejší",
     name: "Balík M",
     price: "600 €",
-    lead: "Rozšírený balík pre svadbu, kde chcete k výzdobe pridať viac personalizovaných prvkov a doplnkov pre hostí.",
+    lead: "Balík M vytvára prepracovanú výzdobu do posledného detailu. Od stolov a hlavného stola až po uvítacie prvky a tlačoviny. Všetko spolu vytvára elegantný a harmonický celok.",
+    followUp: "Výzdoba stolov zahŕňa komplex tlačovín, aranžmánu kvetov a doplnkov na mieru. Výzdobu hlavného stola si vyberiete podľa Vašich požiadaviek. Stačí si už len vybrať typ menoviek a farbu Vášho dňa, ktorá sa bude odrážať naprieč celou výzdobou. Uvítací banner je látka, ktorú si hostia všimnú ako prvú. Zrkadlo je hitom, ktoré nesmie chýbať a výzdoba vchodu je niečo čo predstaví Vás a Vašu udalosť.",
     sections: [
       {
         title: "Čo balík zahŕňa",
         content: [
-          "Obsahuje Balík S.",
-          "Menovky a servítky s vašimi iniciálkami alebo menami.",
-          "Uvítací banner s vašimi menami so zlatým stojanom.",
-          "Personalizovaná kniha hostí a box na obálky.",
-          "Kompletný balík tlačovín.",
+          "Výzdoba stolov (stredové ikebany alebo viacero váz so živými kvetmi).",
+          "Sviečky a champagne svietniky pre každý stôl.",
+          "Menovky a servítky s vašimi iniciálkami.",
+          "Výzdoba hlavného stola (zahŕňajúca dlhú ikebanu a úzke svietniky so sviečkami).",
+          "Uvítací banner s Vašim textom.",
+          "Zrkadlo s Vašim textom.",
+          "Výzdoba vchodu a balík tlačovín.",
         ],
       },
       {
         title: "Podrobnosti",
-        content: "Cena je kalkulovaná do 70 hostí. Vyšší počet hostí nie je problém, príplatok je +5€/osoba.",
+        content: "V cene sú zahrnuté jednoduché živé kvietky. Pri výbere konkrétneho druhu kvietkov sa môže cena mierne upraviť.",
       },
     ],
   },
@@ -325,6 +332,7 @@ export default function Baliky({ onSelectPackage }: BalikyProps) {
             </div>
             <div className="balik-modal-top">
               <p className="balik-modal-lead">{detail.lead}</p>
+              {detail.followUp ? <p className="balik-modal-lead">{detail.followUp}</p> : null}
             </div>
 
             <div className="balik-modal-body">
