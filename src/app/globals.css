@@ -443,6 +443,7 @@ h1 .h1-line2{display:block;font-size:0.72em;opacity:0.85}
   backdrop-filter:blur(18px) saturate(1.1);
   -webkit-backdrop-filter:blur(18px) saturate(1.1);
 }
+.about-inner-single{grid-template-columns:1fr;max-width:900px}
 .about-quote-block{position:relative}
 .about-quote-mark{
   font-family:var(--serif2);font-size:14rem;line-height:0.65;

@@ -5,37 +5,11 @@ export default function About() {
       <div className="rule reveal reveal-d1">
         <div className="rule-diamond" />
       </div>
-      <div className="about-inner">
-        <div className="about-quote-block reveal reveal-d1">
-          <div className="about-quote-mark">&ldquo;</div>
-          <div className="about-quote-text">Detaily robia svadbu nezabudnuteľnou.</div>
-          <div className="about-quote-by">-TÍM VEVS</div>
-        </div>
+      <div className="about-inner about-inner-single">
         <div className="about-text reveal reveal-d2">
-          <h3>Vaša svadba, naša vášeň</h3>
           <p>
-            Kreativita je našou silnou stránkou a vieme, že práve detaily robia svadbu
-            nezabudnuteľnou. Vašu svadbu nevnímame ako zákazku, ale ako jedinečný príbeh,
-            pri ktorom záleží na každom prvku a každej emócii.
+            Tvoríme kompletnú svadobnú a eventovú výzdobu plnú detailov. Kreativita je našou silnou stránkou a práve preto každú svadbu alebo event vnímame ako jedinečný príbeh, pri ktorom nám záleží na každom prvku a každej emócii. Ponúkame komplexné balíky, doplnky a tlačoviny na mieru, doplnky pre hostí a deti, stojany, zrkadlá, svietniky a kompletnú výzdobu stolov s vytvorením honosných ikebán a aranžmánom živých kvetov.
           </p>
-          <p>
-            Naším cieľom je, aby si hostia aj po rokoch povedali: &bdquo;Táto svadba bola úžasná.&ldquo;
-            Všetko tvoríme srdcom a s dôrazom na to, aby bol váš deň výnimočný presne tak, ako vy.
-          </p>
-          <div className="about-stats">
-            <div>
-              <div className="stat-n">3</div>
-              <div className="stat-l">Hlavné balíky</div>
-            </div>
-            <div>
-              <div className="stat-n">Doplnky</div>
-              <div className="stat-l">Na mieru</div>
-            </div>
-            <div>
-              <div className="stat-n">Prenájom</div>
-              <div className="stat-l">Výzdoby</div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

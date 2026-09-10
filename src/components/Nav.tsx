@@ -75,12 +75,12 @@ export default function Nav() {
         >
           <div className="nav-menu-head">
             <a href="#baliky" className="nav-menu-link" onClick={closeNavigation}>
-              Svadobné balíčky
+              Komplexné balíčky
             </a>
             <button
               type="button"
               className="nav-menu-toggle"
-              aria-label="Zobraziť podkategórie svadobných balíčkov"
+              aria-label="Zobraziť podkategórie komplexných balíčkov"
               aria-haspopup="true"
               aria-expanded={openMenu === "packages"}
               aria-controls="packages-submenu"

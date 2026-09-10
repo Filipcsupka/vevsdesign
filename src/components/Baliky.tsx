@@ -32,10 +32,11 @@ const PACKAGES: PackageData[] = [
     price: "450 €",
     unitPrice: 450,
     items: [
-      "Výzdoba stolov pre hostí zahŕňa kvetinové ikebany, plávajúce sviečky a vázy na živé kvety",
-      "Výzdoba hlavného stola novomanželov zahŕňa dlhú ikebanu so svietnikmi a sviečkami + živé kvety",
-      "Uvítacia tabuľa",
-      "Zasadací poriadok",
+      "Výzdoba stolov (stredové ikebany alebo viacero váz so živými kvetmi)",
+      "Sviečky a champagne svietniky pre každý stôl",
+      "Menovky a servítky s vašimi iniciálkami",
+      "Uvítacia tabuľa alebo 50x40cm uvítacie zrkadlo",
+      "Zasadací poriadok A3 za sklom",
     ],
   },
   {
@@ -75,20 +76,21 @@ const DETAILS: Record<PackageId, ModalDetail> = {
     badge: "Základný",
     name: "Balík S",
     price: "450 €",
-    lead: "Jemný základ pre svadbu, kde chcete mať všetko vizuálne zladené a pripravené v elegantnom štýle.",
+    lead: "Balík S je navrhnutý tak, aby spolu jednotlivé prvky vytvorili harmonickú a štýlovú výzdobu bez toho, aby ste museli riešiť každý detail samostatne.",
     sections: [
       {
         title: "Čo balík zahŕňa",
         content: [
-          "Výzdoba stolov pre hostí zahŕňa kvetinové ikebany, plávajúce sviečky a vázy na živé kvety.",
-          "Výzdoba hlavného stola novomanželov zahŕňa dlhú ikebanu so svietnikmi a sviečkami + živé kvety.",
-          "Uvítacia tabuľa.",
-          "Zasadací poriadok.",
+          "Výzdoba stolov (stredové ikebany alebo viacero váz so živými kvetmi).",
+          "Sviečky a champagne svietniky pre každý stôl.",
+          "Menovky a servítky s vašimi iniciálkami.",
+          "Uvítacia tabuľa alebo 50x40cm uvítacie zrkadlo.",
+          "Zasadací poriadok A3 za sklom.",
         ],
       },
       {
         title: "Podrobnosti",
-        content: "Cena je kalkulovaná do 70 hostí. Vyšší počet hostí nie je problém, príplatok je +5€/osoba.",
+        content: "V cene sú zahrnuté jednoduché živé kvietky. Pri výbere konkrétneho druhu kvietkov sa môže cena mierne upraviť.",
       },
     ],
   },
@@ -247,7 +249,7 @@ export default function Baliky({ onSelectPackage }: BalikyProps) {
   return (
     <section id="baliky">
       <h2 className="reveal reveal-d1">
-        Svadobné <em>balíčky</em>
+        Komplexné <em>balíčky</em>
       </h2>
       <div className="rule reveal reveal-d1">
         <div className="rule-diamond" />

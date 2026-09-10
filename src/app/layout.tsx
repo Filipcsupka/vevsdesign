@@ -16,7 +16,7 @@ const bodoniModa = Bodoni_Moda({
 export const metadata: Metadata = {
   title: "Vevsdesign — Svadobná Výzdoba & Dizajn",
   description:
-    "Tvoríme svadobnú výzdobu s dušou — personalizovanú, elegantnú a plnú detailov. Košice & Východné Slovensko.",
+    "Kompletná svadobná a eventová výzdoba plná detailov. Košice a okolie.",
   keywords: ["svadobná výzdoba", "dizajn", "Košice", "Slovensko", "svadba"],
   metadataBase: new URL("https://vevsdesign.sk"),
   alternates: {
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     siteName: "Vevsdesign",
     title: "Vevsdesign — Svadobná Výzdoba & Dizajn",
     description:
-      "Tvoríme svadobnú výzdobu s dušou — personalizovanú, elegantnú a plnú detailov. Košice & Východné Slovensko.",
+      "Kompletná svadobná a eventová výzdoba plná detailov. Košice a okolie.",
     images: [
       {
         url: "/images/social/vevsdesign-og-2026-05.png",
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Vevsdesign — Svadobná Výzdoba & Dizajn",
     description:
-      "Tvoríme svadobnú výzdobu s dušou — personalizovanú, elegantnú a plnú detailov. Košice & Východné Slovensko.",
+      "Kompletná svadobná a eventová výzdoba plná detailov. Košice a okolie.",
     images: ["/images/social/vevsdesign-og-2026-05.png"],
   },
 };
@@ -69,7 +69,7 @@ export default function RootLayout({
     "@type": "LocalBusiness",
     name: "Vevsdesign",
     description:
-      "Tvoríme svadobnú výzdobu s dušou — personalizovanú, elegantnú a plnú detailov.",
+      "Kompletná svadobná a eventová výzdoba plná detailov v Košiciach a okolí.",
     url: "https://vevsdesign.sk",
     telephone: CONTACT_PHONE_HREF,
     email: CONTACT_EMAIL,

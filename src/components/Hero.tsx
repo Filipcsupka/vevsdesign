@@ -70,10 +70,6 @@ export default function Hero() {
             <span className="h1-line2">Výzdoba, ktorú si zapamätáte</span>
           </h1>
 
-          <p className="hero-sub">
-            Tvoríme svadobnú výzdobu s dušou. Personalizovanú, elegantnú a plnú detailov.
-          </p>
-
           <div className="btn-pair">
             <a href="#baliky" className="btn-p">Pozrieť balíky</a>
             <a href="#kontakt" className="btn-o">Kontaktujte nás</a>
