@@ -88,7 +88,7 @@ const RENTAL_IMAGE_COUNTS: Record<string, number> = {
   "stojany-zrkadla:ovalny-stojan": 1,
   "stojany-zrkadla:stojan-vlna": 1,
   "stojany-zrkadla:stojan-oval-s-bocnymi-vlnami": 1,
-  "stojany-zrkadla:stojan-oval-s-vlnovym-navlekom": 1,
+  "stojany-zrkadla:stojan-oval-s-vlnovym-navlekom": 2,
   "stojany-zrkadla:srdcovy-stojan": 4,
   "stojany-zrkadla:stojace-tyce-s-balonmi": 1,
   "stojany-zrkadla:zrkadlo-s-menami-a-textom": 2,
