@@ -82,7 +82,7 @@ Ak sa robi vizualna uprava, preferuj menit existujuce komponenty a `src/app/glob
 - Pod balíkmi S, M a L je samostatný „Individuálny balík“ pre nevesty, ktoré si chcú vyskladať ponuku na mieru aj z položiek mimo webu.
 - Doplnky na mieru obsahuju aj personalizovane naramky za `0,60 €/ks`.
 - `NFC srdce` je samostatna kategoria v hlavnej navigacii s vlastnou galeriou. Ide o 3D tlacene personalizovane srdce s vlastnym napisom, datumom a NFC tagom, ktory moze otvorit zvoleny osobny odkaz.
-- Novinky pre rok 2027 predstavuju tri nove moznosti v kategorii Prenajom > Stojany a zrkadla: Stojan vlna za `150 €`, Stojan oval s bocnymi vlnami za `100 €` a Stojan oval s vlnovym navlekom od `50 €` (vo vyske 2 m alebo 1,8 m).
+- Novinky pre rok 2027 predstavuju styri nove moznosti v kategorii Prenajom > Stojany a zrkadla: Stojan vlna za `150 €`, Stojan oval s bocnymi vlnami za `100 €`, Stojan oval s vlnovym navlekom od `50 €` (vo vyske 2 m alebo 1,8 m) a Stojan 2 × 2 m od `70 €`.
 
 ## Prevadzka a nasadenie
 

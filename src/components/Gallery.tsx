@@ -145,6 +145,17 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         details: "Možnosť doladiť ozdobu podľa farieb a štýlu vašej svadby.",
       },
       {
+        id: "stojan-2x2m",
+        title: "Stojan 2 × 2 m",
+        price: "Od 70 €",
+        unitPrice: 70,
+        priceKind: "from",
+        hideQuantityField: true,
+        description: "Romantický stojan vhodný ako fotostena alebo na obrad.",
+        lead: "Romantický stojan vhodný ako fotostena alebo na obrad. Cena závisí od počtu závesov potrebných na vytvorenie Vašej predstavy.",
+        details: "Počet závesov a výsledný vzhľad prispôsobíme priestoru a štýlu vašej svadby.",
+      },
+      {
         id: "ovalny-stojan",
         title: "Oválny stojan",
         price: "25 €",
@@ -417,7 +428,7 @@ export default function Gallery({ onSelectRental }: GalleryProps) {
         <div className="rule-diamond" />
       </div>
       <p className="sec-intro reveal reveal-d2">
-        Vyberte si kategóriu prenájmu, ktorá najlepšie doplní atmosféru vášho svadobného dňa.
+        Vyberte si kategóriu prenájmu, ktorá najlepšie doplní atmosféru vášho dňa.
       </p>
 
       <div className="rental-stage reveal reveal-d2">

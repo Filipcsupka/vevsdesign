@@ -351,16 +351,6 @@ export default function Services({ onSelectService }: ServicesProps) {
     <section id="services">
       <div className="services-bg-lines" />
       <div className="services-glow" />
-      <h2 className="reveal reveal-d1">
-        Svadobné <em>doplnky</em>
-      </h2>
-      <div className="rule reveal reveal-d1">
-        <div className="rule-diamond" />
-      </div>
-      <p className="sec-intro reveal reveal-d2">
-        Ponúkame doplnky, ktoré svadbu krásne doladia, spríjemnia hosťom
-        a dodajú vášmu dňu ešte osobitejšiu atmosféru.
-      </p>
       <div className="doplnkove-wrap">
         <div className="doplnkove-inner" id="doplnky-na-mieru">
           <div className="doplnkove-title">Doplnky na mieru</div>
@@ -398,7 +388,6 @@ export default function Services({ onSelectService }: ServicesProps) {
               />
             ))}
           </div>
-          <p className="price-note">Všetko vieme prispôsobiť počtu hostí, štýlu svadby aj vašej predstave.</p>
         </div>
       </div>
 
