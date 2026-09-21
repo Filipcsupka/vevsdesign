@@ -23,9 +23,106 @@ type ServiceItem = {
   modalDetails?: string[];
   modalAbout?: string;
   category: "Doplnky na mieru" | "Doplnky pre hostí";
+  imageId?: string;
+  variants?: ServiceItem[];
 };
 
 const CUSTOM_SERVICES: ServiceItem[] = [
+  {
+    id: "uvitacie-tabule-a-zasadaci-poriadok",
+    name: "Uvítacie tabule a zasadací poriadok",
+    price: "Od 15 €",
+    unitPrice: null,
+    priceKind: "from",
+    description: "Uvítací banner, tabuľa, zrkadlo a rôzne zasadacie poriadky, ktoré hostí privítajú a navedú k stolu.",
+    modalDescription: "Vyberte si z uvítacích tabúľ, bannera, zrkadla alebo zasadacieho poriadku v obraze, na tabuli či visiaceho.",
+    modalDetails: [],
+    imageId: "uvitacia-tabula",
+    variants: [
+    {
+      id: "uvitacia-tabula",
+      name: "Uvítacia tabuľa",
+      price: "28 €",
+      unitPrice: 28,
+      priceKind: "fixed",
+      hideQuantityField: true,
+      description: "Uvítacia tabuľa vytvorí krásny prvý dojem a hneď pri príchode naladí hostí na atmosféru svadby.",
+      modalDescription: "Uvítacia tabuľa vytvorí krásny prvý dojem a hneď pri príchode privíta hostí v štýle vašej svadby. Cena je bez kvetov s prenajatým stojanom a personalizovanou uvítacou tabuľou na plátne.",
+      modalDetails: [],
+      modalAbout: "Finálny dizajn Vám pošleme do 3 dní. Doba doručenia je 5 až 15 pracovných dní.",
+      category: "Doplnky na mieru",
+    },
+    {
+      id: "uvitacia-latka",
+      name: "Uvítací banner",
+      price: "45 €",
+      unitPrice: 45,
+      priceKind: "fixed",
+      hideQuantityField: true,
+      description: "Uvítací banner pôsobí mäkko, romanticky a veľmi pekne vynikne pri vstupe alebo fotení.",
+      modalDescription: "Uvítací banner pôsobí romanticky a výrazne vynikne pri vstupe, obrade aj svadobnom fotení. Obsahuje personalizovanú látku s prenajatým stojanom a mašličkami.",
+      modalDetails: [],
+      modalAbout: "Finálny dizajn Vám pošleme do 3 dní. Doba doručenia je 5 až 15 pracovných dní.",
+      category: "Doplnky na mieru",
+    },
+    {
+      id: "uvitacie-zrkadlo",
+      name: "Uvítacie zrkadlo",
+      price: "20 €",
+      unitPrice: 20,
+      priceKind: "fixed",
+      hideQuantityField: true,
+      description: "Uvítacie zrkadlo s personalizovaným nápisom je elegantný prvý dojem pri vstupe.",
+      modalDescription: "Uvítacie zrkadlo s Vaším textom a dátumom pekne privíta hostí a hodí sa aj na zasadací poriadok.",
+      modalDetails: [],
+      modalAbout: "Finálny dizajn Vám pošleme do 3 dní. Doba doručenia je 5 až 15 pracovných dní.",
+      category: "Doplnky na mieru",
+    },
+    {
+      id: "zasadaci-poriadok-v-obraze",
+      name: "Zasadací poriadok v obraze",
+      price: "Od 15 €",
+      unitPrice: 15,
+      priceKind: "from",
+      hideQuantityField: true,
+      description: "Zasadací poriadok v ráme s Vašimi menami a farebnosťou dňa.",
+      modalDescription: "Personalizovaný zasadací poriadok v obraze vyladený podľa Vašej svadby.",
+      modalDetails: [
+        "Na drevenom stojane: 15 €",
+        "Na bielom vysokom stojane: 20 €",
+      ],
+      modalAbout: "Finálny dizajn Vám pošleme do 3 dní. Doba doručenia je 5 až 15 pracovných dní.",
+      category: "Doplnky na mieru",
+    },
+    {
+      id: "zasadaci-poriadok-na-tabuli",
+      name: "Zasadací poriadok na tabuli",
+      price: "30 €",
+      unitPrice: 30,
+      priceKind: "fixed",
+      hideQuantityField: true,
+      description: "Veľký zasadací poriadok na tabuli s bielym vysokým stojanom.",
+      modalDescription: "Prehľadný zasadací poriadok na veľkej tabuli, ktorý hostom hneď ukáže cestu k ich stolu.",
+      modalDetails: [],
+      modalAbout: "Finálny dizajn Vám pošleme do 3 dní. Doba doručenia je 5 až 15 pracovných dní.",
+      category: "Doplnky na mieru",
+    },
+    {
+      id: "zasadaci-poriadok-visiaci",
+      name: "Zasadací poriadok visiaci",
+      price: "35 €",
+      unitPrice: 35,
+      priceKind: "fixed",
+      hideQuantityField: true,
+      description: "Zasadací poriadok zavesený na bielom ráme s jemnou látkou.",
+      modalDescription: "Zasadací poriadok visiaci na bielom ráme s jemnou látkou je výrazný dekoračný prvok vstupu do sály.",
+      modalDetails: [],
+      modalAbout: "Finálny dizajn Vám pošleme do 3 dní. Doba doručenia je 5 až 15 pracovných dní.",
+      category: "Doplnky na mieru",
+    },
+    ],
+    category: "Doplnky na mieru",
+  },
   {
     id: "pozvanky",
     name: "Pozvánky",
@@ -131,32 +228,6 @@ const CUSTOM_SERVICES: ServiceItem[] = [
     hideQuantityField: true,
     description: "Strom na plátne je jemná a osobná pamiatka, do ktorej hostia zanechajú svoj vlastný odtlačok.",
     modalDescription: "Strom na plátne ostane po svadbe ako krásna osobná spomienka, do ktorej hostia zanechajú svoj odtlačok. Farby sú podľa želania a v cene je aj prenajatý stojan.",
-    modalDetails: [],
-    modalAbout: "Finálny dizajn Vám pošleme do 3 dní. Doba doručenia je 5 až 15 pracovných dní.",
-    category: "Doplnky na mieru",
-  },
-  {
-    id: "uvitacia-tabula",
-    name: "Uvítacia tabuľa",
-    price: "28 €",
-    unitPrice: 28,
-    priceKind: "fixed",
-    hideQuantityField: true,
-    description: "Uvítacia tabuľa vytvorí krásny prvý dojem a hneď pri príchode naladí hostí na atmosféru svadby.",
-    modalDescription: "Uvítacia tabuľa vytvorí krásny prvý dojem a hneď pri príchode privíta hostí v štýle vašej svadby. Cena je bez kvetov s prenajatým stojanom a personalizovanou uvítacou tabuľou na plátne.",
-    modalDetails: [],
-    modalAbout: "Finálny dizajn Vám pošleme do 3 dní. Doba doručenia je 5 až 15 pracovných dní.",
-    category: "Doplnky na mieru",
-  },
-  {
-    id: "uvitacia-latka",
-    name: "Uvítací banner",
-    price: "45 €",
-    unitPrice: 45,
-    priceKind: "fixed",
-    hideQuantityField: true,
-    description: "Uvítací banner pôsobí mäkko, romanticky a veľmi pekne vynikne pri vstupe alebo fotení.",
-    modalDescription: "Uvítací banner pôsobí romanticky a výrazne vynikne pri vstupe, obrade aj svadobnom fotení. Obsahuje personalizovanú látku s prenajatým stojanom a mašličkami.",
     modalDetails: [],
     modalAbout: "Finálny dizajn Vám pošleme do 3 dní. Doba doručenia je 5 až 15 pracovných dní.",
     category: "Doplnky na mieru",
@@ -276,7 +347,7 @@ const GUEST_SERVICES: ServiceItem[] = [
   },
 ];
 
-const ALL_SERVICES = [...CUSTOM_SERVICES, ...GUEST_SERVICES];
+const ALL_SERVICES = [...CUSTOM_SERVICES, ...GUEST_SERVICES].flatMap((item) => [item, ...(item.variants ?? [])]);
 
 const TILE_VARIANTS = ["sky", "sand", "pearl", "mist"] as const;
 
@@ -297,8 +368,12 @@ export default function Services({ onSelectService }: ServicesProps) {
   const [mounted, setMounted] = useState(false);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const [quantity, setQuantity] = useState(1);
+  const [variantId, setVariantId] = useState<string | null>(null);
 
-  const activeService = openId ? ALL_SERVICES.find((item) => item.id === openId) ?? null : null;
+  const activeGroup = openId ? ALL_SERVICES.find((item) => item.id === openId) ?? null : null;
+  const activeService = activeGroup?.variants
+    ? activeGroup.variants.find((v) => v.id === variantId) ?? activeGroup.variants[0]
+    : activeGroup;
   const activeServiceImages = activeService
     ? serviceDetailImages(activeService.category, activeService.id, activeService.name)
     : [];
@@ -329,7 +404,12 @@ export default function Services({ onSelectService }: ServicesProps) {
 
   useEffect(() => {
     setQuantity(1);
+    setVariantId(null);
   }, [openId]);
+
+  useEffect(() => {
+    setQuantity(1);
+  }, [variantId]);
 
   function handleCta() {
     if (activeService) {
@@ -363,7 +443,7 @@ export default function Services({ onSelectService }: ServicesProps) {
                 description={service.description}
                 meta={service.price}
                 variant={getTileVariant(index)}
-                image={serviceImage(service.category, service.id, service.name)}
+                image={serviceImage(service.category, service.imageId ?? service.id, service.name)}
                 featured={index === 0}
                 onClick={() => setOpenId(service.id)}
               />
@@ -407,9 +487,26 @@ export default function Services({ onSelectService }: ServicesProps) {
 
             <div className="service-modal-badge">{activeService.category}</div>
             <div className="service-modal-head">
-              <div className="service-modal-name" id="service-modal-name">{activeService.name}</div>
+              <div className="service-modal-name" id="service-modal-name">{activeGroup?.variants ? activeGroup.name : activeService.name}</div>
               <div className="service-modal-price">{activeService.price}</div>
             </div>
+
+            {activeGroup?.variants ? (
+              <div className="service-variant-picker" role="tablist" aria-label="Typ">
+                {activeGroup.variants.map((v) => (
+                  <button
+                    key={v.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={v.id === activeService.id}
+                    className={`service-variant-chip${v.id === activeService.id ? " active" : ""}`}
+                    onClick={() => setVariantId(v.id)}
+                  >
+                    {v.name} <span>({v.price})</span>
+                  </button>
+                ))}
+              </div>
+            ) : null}
 
             <div className="service-modal-top">
               <div className="service-modal-summary">

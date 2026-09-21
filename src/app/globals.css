@@ -2075,3 +2075,8 @@ body.modal-open{overflow:hidden}
   .legal-card{padding:2.4rem 1.5rem}
   .legal-title,.legal-label{text-align:left}
 }
+
+.service-variant-picker{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.service-variant-chip{font:inherit;font-size:.85rem;padding:7px 14px;border-radius:999px;border:1px solid rgba(0,0,0,.15);background:transparent;color:inherit;cursor:pointer;transition:background .2s,border-color .2s}
+.service-variant-chip span{opacity:.65}
+.service-variant-chip.active{background:rgba(0,0,0,.07);border-color:rgba(0,0,0,.45)}
