@@ -12,6 +12,7 @@ type ShowcaseTileProps = {
   variant: ShowcaseVariant;
   onClick: MouseEventHandler<HTMLButtonElement>;
   image?: ImageAsset;
+  images?: ImageAsset[];
   featured?: boolean;
 };
 
@@ -23,8 +24,11 @@ export default function ShowcaseTile({
   variant,
   onClick,
   image,
+  images,
   featured = false,
 }: ShowcaseTileProps) {
+  const collage = images && images.length > 1 ? images.slice(0, 3) : null;
+
   return (
     <button
       type="button"
@@ -33,7 +37,31 @@ export default function ShowcaseTile({
     >
       <span className="showcase-tile-media" aria-hidden="true">
         <span className="showcase-tile-media-surface">
-          {image ? (
+          {collage ? (
+            <span className="showcase-tile-collage">
+              <span className="showcase-tile-collage-main">
+                <FallbackImage
+                  src={collage[0].src}
+                  alt={collage[0].alt}
+                  className="showcase-tile-img"
+                />
+              </span>
+              <span className="showcase-tile-collage-sub">
+                <FallbackImage
+                  src={collage[1].src}
+                  alt={collage[1].alt}
+                  className="showcase-tile-img"
+                />
+              </span>
+              <span className="showcase-tile-collage-sub">
+                <FallbackImage
+                  src={collage[2].src}
+                  alt={collage[2].alt}
+                  className="showcase-tile-img"
+                />
+              </span>
+            </span>
+          ) : image ? (
             <FallbackImage
               src={image.src}
               alt={image.alt}

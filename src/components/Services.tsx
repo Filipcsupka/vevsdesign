@@ -444,6 +444,15 @@ export default function Services({ onSelectService }: ServicesProps) {
                 meta={service.price}
                 variant={getTileVariant(index)}
                 image={serviceImage(service.category, service.imageId ?? service.id, service.name)}
+                images={
+                  service.id === "uvitacie-tabule-a-zasadaci-poriadok"
+                    ? [
+                        serviceImage(service.category, "zasadaci-poriadok-visiaci", "Zasadací poriadok visiaci"),
+                        serviceImage(service.category, "uvitacia-latka", "Uvítací banner"),
+                        serviceImage(service.category, "uvitacie-zrkadlo", "Uvítacie zrkadlo"),
+                      ]
+                    : undefined
+                }
                 featured={index === 0}
                 onClick={() => setOpenId(service.id)}
               />
