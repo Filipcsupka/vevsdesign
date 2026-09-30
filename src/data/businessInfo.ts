@@ -1,5 +1,8 @@
 export const BRAND_NAME = "Vevsdesign";
 export const OPERATOR_NAME = "DevOps s. r. o.";
+export const OPERATOR_EMAIL = "devopssro@gmail.com";
+export const OPERATOR_PHONE_DISPLAY = "0919 235 462";
+export const OPERATOR_PHONE_HREF = "+421919235462";
 export const OPERATOR_ADDRESS = "Panelová 6, 040 01 Košice - mestská časť Juh";
 export const OPERATOR_ICO = "54515866";
 export const OPERATOR_DIC = "2121703023";

@@ -8,7 +8,10 @@ import {
   OPERATOR_DIC,
   OPERATOR_ICO,
   OPERATOR_IC_DPH,
+  OPERATOR_EMAIL,
   OPERATOR_NAME,
+  OPERATOR_PHONE_DISPLAY,
+  OPERATOR_PHONE_HREF,
 } from "@/data/businessInfo";
 
 export default function Footer() {
@@ -24,6 +27,11 @@ export default function Footer() {
           </p>
           <p className="foot-company">
             Prevádzkovateľ webu: <strong>{OPERATOR_NAME}</strong>
+          </p>
+          <p className="foot-company">
+            Kontakt: <a href={`tel:${OPERATOR_PHONE_HREF}`}>{OPERATOR_PHONE_DISPLAY}</a>
+            <span aria-hidden="true"> · </span>
+            <a href={`mailto:${OPERATOR_EMAIL}`}>{OPERATOR_EMAIL}</a>
           </p>
           <p className="foot-company">
             IČO {OPERATOR_ICO} · DIČ {OPERATOR_DIC} · IČ DPH {OPERATOR_IC_DPH}
