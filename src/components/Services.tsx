@@ -30,14 +30,14 @@ type ServiceItem = {
 const CUSTOM_SERVICES: ServiceItem[] = [
   {
     id: "uvitacie-tabule-a-zasadaci-poriadok",
-    name: "Uvítacie tabule a zasadací poriadok",
+    name: "Uvítacie prvky a zasadací poriadok",
     price: "Od 15 €",
     unitPrice: null,
     priceKind: "from",
     description: "Uvítací banner, tabuľa, zrkadlo a rôzne zasadacie poriadky, ktoré hostí privítajú a navedú k stolu.",
     modalDescription: "Vyberte si z uvítacích tabúľ, bannera, zrkadla alebo zasadacieho poriadku v obraze, na tabuli či visiaceho.",
     modalDetails: [],
-    imageId: "uvitacia-tabula",
+    imageId: "uvitacia-latka",
     variants: [
     {
       id: "uvitacia-tabula",
@@ -76,6 +76,18 @@ const CUSTOM_SERVICES: ServiceItem[] = [
       modalDescription: "Uvítacie zrkadlo s Vaším textom a dátumom pekne privíta hostí a hodí sa aj na zasadací poriadok.",
       modalDetails: [],
       modalAbout: "Finálny dizajn Vám pošleme do 3 dní. Doba doručenia je 5 až 15 pracovných dní.",
+      category: "Doplnky na mieru",
+    },
+    {
+      id: "zrkadlo-s-menami-a-textom",
+      name: "Zrkadlo s menami a textom",
+      price: "30 €",
+      unitPrice: 30,
+      priceKind: "fixed",
+      hideQuantityField: true,
+      description: "V cene sú zahrnuté aj Vaše personalizované údaje.",
+      modalDescription: "V cene sú zahrnuté aj Vaše personalizované údaje ako mená, dátum a text.",
+      modalAbout: "Možnosť osobného odberu, zaslania alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
       category: "Doplnky na mieru",
     },
     {
@@ -160,6 +172,16 @@ const CUSTOM_SERVICES: ServiceItem[] = [
     category: "Doplnky na mieru",
   },
   {
+    id: "menu-s-menovkou",
+    name: "Menu s menovkou",
+    price: "0,90 €/ks",
+    unitPrice: 0.9,
+    priceKind: "fixed",
+    description: "Menu s menovkou spojí jedálny lístok a meno hosťa do jedného zladeného doplnku na stôl.",
+    modalDescription: "Menu s menovkou pripravíme vo farbách a štýle vašej udalosti. Cena je za 1 ks.",
+    category: "Doplnky na mieru",
+  },
+  {
     id: "balik-tlacovin",
     name: "Balík tlačovín",
     price: "35 €",
@@ -175,7 +197,7 @@ const CUSTOM_SERVICES: ServiceItem[] = [
       "Čísla stolov pre každý stôl",
       "Menu pre každý stôl",
       "Vtipné fakty o novomanželoch pre každý stôl",
-      "Informačné tabuľky ako sladký bar, slaný bar, kniha hostí, detský kútik, papučky, ...",
+      "Informačné tabuľky pre sladký bar, slaný bar, knihu hostí a detský kútik",
       "Možnosť doplniť karty do fotokútika s vašimi alebo našimi vtipnými hláškami: +0,40 €/ks",
     ],
     modalAbout: "Finálny dizajn Vám pošleme do 3 dní. Doba doručenia je 5 až 15 pracovných dní.",
@@ -248,6 +270,16 @@ const CUSTOM_SERVICES: ServiceItem[] = [
 
 const GUEST_SERVICES: ServiceItem[] = [
   {
+    id: "prstenec-diamond",
+    name: "Prstenec Diamond",
+    price: "2,40 €/ks",
+    unitPrice: 2.4,
+    priceKind: "fixed",
+    description: "Ozdobný prstenec na servítku s brúseným detailom.",
+    modalDescription: "Prstenec Diamond je ozdobný krúžok na servítku s brúseným detailom. Cena je za 1 ks.",
+    category: "Doplnky pre hostí",
+  },
+  {
     id: "cigar-bar",
     name: "Cigar bar",
     price: "Od 90 €",
@@ -257,18 +289,6 @@ const GUEST_SERVICES: ServiceItem[] = [
     modalDescription: "Cigar bar je štýlový doplnok, ktorý vytvorí výrazný zážitok najmä pre chlapov na svadbe, pri príprave ženícha alebo na rozlúčke so slobodou. Obsahuje drevenú krabičku s potrebným príslušenstvom, personalizované cigary za 15 €/ks s možnosťou prenajatia čapovacieho sudu 1 l v cene 10 €. Ponúkame aj personalizovaný popolník na cigary v cene 15 €.",
     modalDetails: [],
     modalAbout: "Minimálny odber cigár je 6 ks. Počet cigár zadajte nižšie. Doba doručenia je 5 - 15 pracovných dní pre cigary, krabičku a príslušenstvo. Malý čapovací sud iba osobný odber alebo náš dovoz na miesto v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
-    category: "Doplnky pre hostí",
-  },
-  {
-    id: "detske-balicky",
-    name: "Detský balíček",
-    price: "10 €",
-    unitPrice: 10,
-    priceKind: "fixed",
-    description: "Detské balíčky spríjemnia svadobný deň malým hosťom a pomôžu zabaviť ich počas hostiny aj programu.",
-    modalDescription: "Detský balíček je milý a praktický doplnok, ktorý zabaví deti počas svadby a vytvorí im vlastný malý darček na pamiatku. Obsahuje omaľovánku s menom dieťaťa, ceruzky, nálepky, naťahovaciu hračku, detskú pružinku a bludiská pre zabavenie detí napríklad počas prvého tanca novomanželov.",
-    modalDetails: [],
-    modalAbout: "Vhodné aj ako darček pre deti do škôlky alebo na iné podujatia. Doba doručenia je 5 až 15 pracovných dní.",
     category: "Doplnky pre hostí",
   },
   {
@@ -293,18 +313,6 @@ const GUEST_SERVICES: ServiceItem[] = [
     modalDescription: "Vejáre sú elegantný a praktický doplnok, ktorý hostia ocenia najmä počas teplých dní, no hodia sa aj na ďalšie oslavy.",
     modalDetails: [],
     modalAbout: "Minimálny odber je 8 ks. Vhodné aj na rozlúčku so slobodou alebo iné príležitosti. Doba doručenia je 5 až 15 pracovných dní.",
-    category: "Doplnky pre hostí",
-  },
-  {
-    id: "papucky",
-    name: "Papučky",
-    price: "Od 0,70 €",
-    unitPrice: 0.7,
-    priceKind: "fixed",
-    description: "Papučky doprajú hosťom väčšie pohodlie pri tanci a zároveň spríjemnia neskorší priebeh oslavy.",
-    modalDescription: "Papučky sú praktický detail, ktoré hosťom spríjemnia večernú časť oslavy a doprajú im pohodlie pri tanci. Môžu byť bez zdobenia alebo s pridaním mašličky či iného zdobenia za cenu papučiek 1 €/ks.",
-    modalDetails: [],
-    modalAbout: "Minimálny odber je 8 ks. Vhodné aj na rozlúčku so slobodou alebo na iné príležitosti. Doba doručenia je 5 až 15 pracovných dní.",
     category: "Doplnky pre hostí",
   },
   {
@@ -336,11 +344,11 @@ const GUEST_SERVICES: ServiceItem[] = [
   {
     id: "flasticky",
     name: "Mini fľaštičky",
-    price: "1,50 €",
-    unitPrice: 1.5,
+    price: "0,70 €/ks",
+    unitPrice: 0.7,
     priceKind: "fixed",
-    description: "Fľaštičky vieme pripraviť ako originálny drobný darček alebo tematický detail pre vašich hostí.",
-    modalDescription: "Mini fľaštičky sú obľúbený darček pre hostí, ktorý vieme zladiť s vašou svadobnou témou aj konkrétnou náplňou podľa želania. Obsahujú personalizovanú etiketu, mašľu alebo stužku. Na výber je klobúčik zlatý, strieborný alebo čierny a náplň podľa vašej požiadavky, napríklad limoncello, medovina, slivka, hruška, marhuľa a ďalšie.",
+    description: "Mini fľaštičky s doplnkami a vrchnáčikom podľa výberu Vám pošleme pripravené na naplnenie.",
+    modalDescription: "Ponúkame fľaštičky s doplnkami, ako sú mašľa, stuha a personalizovaná nálepka. Vrchnáčiky si môžete vybrať v zlatej, striebornej alebo čiernej farbe. Takto pripravené fľaštičky Vám vieme odoslať a Vy si ich už len naplníte. Cena je za 1 ks.",
     modalDetails: [],
     modalAbout: "Minimálny odber je 30 ks. Doba doručenia je 5 až 20 pracovných dní podľa počtu kusov.",
     category: "Doplnky pre hostí",
@@ -447,9 +455,9 @@ export default function Services({ onSelectService }: ServicesProps) {
                 images={
                   service.id === "uvitacie-tabule-a-zasadaci-poriadok"
                     ? [
-                        serviceImage(service.category, "zasadaci-poriadok-visiaci", "Zasadací poriadok visiaci"),
                         serviceImage(service.category, "uvitacia-latka", "Uvítací banner"),
-                        serviceImage(service.category, "uvitacie-zrkadlo", "Uvítacie zrkadlo"),
+                        serviceImage(service.category, "zasadaci-poriadok-visiaci", "Zasadací poriadok visiaci"),
+                        serviceImage(service.category, "zrkadlo-s-menami-a-textom", "Zrkadlo s menami a textom"),
                       ]
                     : undefined
                 }

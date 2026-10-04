@@ -24,6 +24,7 @@ images/
     doplnky-na-mieru/
       pozvanky/
       menovky/
+      menu-s-menovkou/
       balik-tlacovin/
       servitky/
       kniha-hosti/
@@ -32,11 +33,10 @@ images/
       uvitacia-tabula/
       uvitacia-latka/
     doplnky-pre-hosti/
+      prstenec-diamond/
       cigar-bar/
-      detske-balicky/
       omalovanky/
       vejare/
-      papucky/
       okuliare/
       domaci-med/
       flasticky/

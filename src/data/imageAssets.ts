@@ -3,7 +3,7 @@ export type ImageAsset = {
   alt: string;
 };
 
-const IMAGE_VERSION = "2026-08-25-01";
+const IMAGE_VERSION = "2026-10-04-01";
 export const FALLBACK_IMAGE = "/images/gallery/placeholder.png";
 
 export const GALLERY_IMAGES: ImageAsset[] = [
@@ -62,6 +62,7 @@ const PACKAGE_IMAGE_COUNTS: Record<string, number> = {
 const SERVICE_IMAGE_COUNTS: Record<string, number> = {
   "doplnky-na-mieru:pozvanky": 4,
   "doplnky-na-mieru:menovky": 4,
+  "doplnky-na-mieru:menu-s-menovkou": 2,
   "doplnky-na-mieru:balik-tlacovin": 10,
   "doplnky-na-mieru:servitky": 2,
   "doplnky-na-mieru:kniha-hosti": 1,
@@ -70,15 +71,15 @@ const SERVICE_IMAGE_COUNTS: Record<string, number> = {
   "doplnky-na-mieru:uvitacia-tabula": 3,
   "doplnky-na-mieru:uvitacia-latka": 1,
   "doplnky-na-mieru:uvitacie-zrkadlo": 1,
+  "doplnky-na-mieru:zrkadlo-s-menami-a-textom": 2,
   "doplnky-na-mieru:zasadaci-poriadok-v-obraze": 2,
   "doplnky-na-mieru:zasadaci-poriadok-na-tabuli": 1,
   "doplnky-na-mieru:zasadaci-poriadok-visiaci": 1,
   "doplnky-na-mieru:naramky": 2,
+  "doplnky-pre-hosti:prstenec-diamond": 1,
   "doplnky-pre-hosti:cigar-bar": 3,
-  "doplnky-pre-hosti:detske-balicky": 2,
   "doplnky-pre-hosti:okuliare": 1,
   "doplnky-pre-hosti:omalovanky": 2,
-  "doplnky-pre-hosti:papucky": 2,
   "doplnky-pre-hosti:vejare": 1,
   "doplnky-pre-hosti:flasticky": 1,
   "doplnky-pre-hosti:domaci-med": 1,
@@ -89,14 +90,12 @@ const RENTAL_IMAGE_COUNTS: Record<string, number> = {
   "kvetinova-vyzdoba:ikebana-na-stoly-s-vazami-okolo": 2,
   "kvetinova-vyzdoba:mala-ikebana": 2,
   "kvetinova-vyzdoba:dlha-ikebana": 3,
-  "stojany-zrkadla:ovalny-stojan": 1,
   "stojany-zrkadla:stojan-vlna": 1,
   "stojany-zrkadla:stojan-oval-s-bocnymi-vlnami": 1,
-  "stojany-zrkadla:stojan-oval-s-vlnovym-navlekom": 2,
+  "stojany-zrkadla:stojan-oval-s-vlnovym-navlekom": 1,
   "stojany-zrkadla:stojan-2x2m": 1,
   "stojany-zrkadla:srdcovy-stojan": 4,
   "stojany-zrkadla:stojace-tyce-s-balonmi": 1,
-  "stojany-zrkadla:zrkadlo-s-menami-a-textom": 2,
   "ostatne:capovacie-stanice": 4,
   "ostatne:drevene-boxy": 2,
   "ostatne:lampase": 3,
@@ -105,6 +104,8 @@ const RENTAL_IMAGE_COUNTS: Record<string, number> = {
   "vazy-svietniky:champagne-svietniky": 1,
   "vazy-svietniky:vysoke-vazy": 1,
   "vazy-svietniky:uzke-vazy": 1,
+  "vazy-svietniky:jednostlpova-vaza": 1,
+  "vazy-svietniky:stvorstlpova-vaza": 1,
   "ostatne:champagne-tower": 1,
   "ostatne:behun-stola": 1,
   "detsky-kutik:detsky-kutik": 1,

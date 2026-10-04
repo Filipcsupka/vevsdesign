@@ -114,12 +114,12 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
       {
         id: "stojan-vlna",
         title: "Stojan vlna",
-        price: "150 €",
-        unitPrice: 150,
+        price: "180 €",
+        unitPrice: 180,
         priceKind: "fixed",
         hideQuantityField: true,
         description: "Nežný a nádherný doplnok priestoru alebo obradu s možnosťou doplniť ho honosnými ikebanami.",
-        lead: "Nežný a nádherný doplnok priestoru alebo obradu. Možnosť doplniť aj honosnými ikebanami pre wau efekt.",
+        lead: "Nežný a nádherný doplnok priestoru alebo obradu. Možnosť doplniť aj honosnými ikebanami pre wau efekt. Cena zahŕňa stojan aj závesy ako na fotografii.",
         details: "Vhodný ako výrazný prvok obradu, pri vstupe do sály alebo za hlavným stolom novomanželov.",
       },
       {
@@ -135,14 +135,13 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
       },
       {
         id: "stojan-oval-s-vlnovym-navlekom",
-        title: "Stojan ovál s vlnovým návlekom",
-        price: "Od 50 €",
-        unitPrice: 50,
-        priceKind: "from",
+        title: "Oválny stojan s doplnkami",
+        price: "65 €",
+        unitPrice: 65,
+        priceKind: "fixed",
         hideQuantityField: true,
-        description: "Cena je za jeden stojan; k dispozícii sú výšky 2 m a 1,8 m.",
-        lead: "Cena je za 1 stojan. Na fotke je možnosť prenajatia aj dvoch stojanov s ozdobou podľa priania. Máme 2 m a 1,8 m stojan.",
-        details: "Možnosť doladiť ozdobu podľa farieb a štýlu vašej svadby.",
+        description: "Cena 65 € zahŕňa stojan s vlnovým návlekom, kvety aj mašle s perlami ako na fotografii. Čistý stojan s návlekom bez týchto doplnkov stojí 50 €.",
+        lead: "Cena 65 € zahŕňa stojan s vlnovým návlekom, kvety aj mašle s perlami ako na fotografii. Čistý stojan s návlekom bez týchto doplnkov stojí 50 €.",
       },
       {
         id: "stojan-2x2m",
@@ -152,19 +151,8 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         priceKind: "from",
         hideQuantityField: true,
         description: "Romantický stojan vhodný ako fotostena alebo na obrad.",
-        lead: "Romantický stojan vhodný ako fotostena alebo na obrad. Cena závisí od počtu závesov potrebných na vytvorenie Vašej predstavy.",
+        lead: "Romantický stojan vhodný ako fotostena alebo na obrad. Cena závisí od počtu závesov potrebných na vytvorenie Vašej predstavy. Na fotografii sú dva závesy navyše pre luxusný efekt (príplatok za jeden záves je 10 €).",
         details: "Počet závesov a výsledný vzhľad prispôsobíme priestoru a štýlu vašej svadby.",
-      },
-      {
-        id: "ovalny-stojan",
-        title: "Oválny stojan",
-        price: "25 €",
-        unitPrice: 25,
-        priceKind: "fixed",
-        hideQuantityField: true,
-        description: "Cena je za čistý zlatý stojan vhodný na uvítanie hostí.",
-        lead: "Cena je za čistý zlatý stojan, ktorý je vhodný na uvítanie hostí alebo fotenie. Možnosť uvítacej personalizovanej látky +20 € alebo len zaveseného zasadacieho poriadku +15 €.",
-        details: "Možnosť osobného odberu, zaslania iba čistého stojanu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
       },
       {
         id: "srdcovy-stojan",
@@ -185,17 +173,6 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         priceKind: "fixed",
         description: "V cene sú zahrnuté aj balóny.",
         lead: "V cene sú zahrnuté aj balóny. Vhodné pre vstup do sály.",
-        details: "Možnosť osobného odberu, zaslania alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
-      },
-      {
-        id: "zrkadlo-s-menami-a-textom",
-        title: "Zrkadlo s menami a textom",
-        price: "30 €",
-        unitPrice: 30,
-        priceKind: "fixed",
-        hideQuantityField: true,
-        description: "V cene sú zahrnuté aj Vaše personalizované údaje.",
-        lead: "V cene sú zahrnuté aj Vaše personalizované údaje ako mená, dátum a text.",
         details: "Možnosť osobného odberu, zaslania alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
       },
     ],
@@ -256,6 +233,22 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         description: "Sú ideálne na jemné detaily, ktoré doladia stôl bez toho, aby ho vizuálne preťažili.",
         lead: "Sú ideálne na jemné detaily, ktoré doladia stôl bez toho, aby ho vizuálne preťažili.",
         details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100€ (+ príplatok PHM).",
+      },
+      {
+        id: "jednostlpova-vaza",
+        title: "Jednostĺpová váza",
+        price: "10 €",
+        unitPrice: 10,
+        priceKind: "fixed",
+        description: "Jednostĺpová váza na svadobnú výzdobu. Vhodná na uloženie ikebany.",
+      },
+      {
+        id: "stvorstlpova-vaza",
+        title: "Štvorstĺpová váza",
+        price: "15 €",
+        unitPrice: 15,
+        priceKind: "fixed",
+        description: "Štvorstĺpová váza na svadobnú výzdobu. Vhodná na uloženie ikebany.",
       },
     ],
   },
@@ -341,6 +334,7 @@ export default function Gallery({ onSelectRental }: GalleryProps) {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const lastTriggerRef = useRef<HTMLButtonElement | null>(null);
   const [quantity, setQuantity] = useState(1);
+  const [ovalStandWithAccessories, setOvalStandWithAccessories] = useState(true);
 
   const activeRental = useMemo<ActiveRental | null>(() => {
     if (!openKey) return null;
@@ -358,7 +352,13 @@ export default function Gallery({ onSelectRental }: GalleryProps) {
     activeRental?.offer?.text ?? (!activeRental?.offer ? activeRental?.category.text : "");
   const activeRentalDetails =
     activeRental?.offer?.details ?? activeRental?.category.details ?? "";
-  const activeRentalTitle = activeRental?.offer?.title ?? activeRental?.category.title ?? "";
+  const isOvalStand = activeRental?.offer?.id === "stojan-oval-s-vlnovym-navlekom";
+  const isPlainOvalStand = isOvalStand && !ovalStandWithAccessories;
+  const activeRentalTitle = isPlainOvalStand
+    ? "Oválny stojan bez doplnkov"
+    : activeRental?.offer?.title ?? activeRental?.category.title ?? "";
+  const activePriceLabel = isPlainOvalStand ? "50 €" : activeRental?.offer?.price ?? activeRental?.category.price ?? "";
+  const activeUnitPrice = isPlainOvalStand ? 50 : activeRental?.offer?.unitPrice ?? null;
   const activeRentalImages = activeRental
     && !activeRental.offer?.hideImage
     ? rentalDetailImages(
@@ -399,6 +399,7 @@ export default function Gallery({ onSelectRental }: GalleryProps) {
 
   function openDetail(category: RentalCategory, offer: RentalOffer, button: HTMLButtonElement) {
     lastTriggerRef.current = button;
+    setOvalStandWithAccessories(true);
     setOpenKey(`${category.id}:${offer.id}`);
   }
 
@@ -406,12 +407,12 @@ export default function Gallery({ onSelectRental }: GalleryProps) {
     if (activeRental && activeRental.offer) {
       onSelectRental({
         kind: "rentals",
-        id: activeRental.offer.id,
-        name: activeRental.offer.title,
+        id: isPlainOvalStand ? `${activeRental.offer.id}-bez-doplnkov` : activeRental.offer.id,
+        name: activeRentalTitle,
         quantity: normalizeQuantity(quantity),
         unitLabel: activeRental.offer.unitLabel ?? "ks",
-        priceLabel: activeRental.offer.price ?? activeRental.category.price,
-        unitPrice: activeRental.offer.unitPrice ?? null,
+        priceLabel: activePriceLabel,
+        unitPrice: activeUnitPrice,
         priceKind: activeRental.offer.priceKind ?? "individual",
       });
     }
@@ -477,10 +478,31 @@ export default function Gallery({ onSelectRental }: GalleryProps) {
             <div className="rental-modal-head">
               <div className="rental-modal-category">{activeRental.category.title}</div>
               <div className="rental-modal-name" id="rental-modal-name">
-                {activeRental.offer?.title ?? activeRental.category.title}
+                {activeRentalTitle}
               </div>
-              <div className="rental-modal-price">{activeRental.offer?.price ?? activeRental.category.price}</div>
+              <div className="rental-modal-price">{activePriceLabel}</div>
             </div>
+
+            {isOvalStand ? (
+              <div className="service-variant-picker" role="group" aria-label="Vyhotovenie oválneho stojana">
+                <button
+                  type="button"
+                  className={`service-variant-chip${ovalStandWithAccessories ? " active" : ""}`}
+                  aria-pressed={ovalStandWithAccessories}
+                  onClick={() => setOvalStandWithAccessories(true)}
+                >
+                  S doplnkami <span>(65 €)</span>
+                </button>
+                <button
+                  type="button"
+                  className={`service-variant-chip${ovalStandWithAccessories ? "" : " active"}`}
+                  aria-pressed={!ovalStandWithAccessories}
+                  onClick={() => setOvalStandWithAccessories(false)}
+                >
+                  Bez doplnkov <span>(50 €)</span>
+                </button>
+              </div>
+            ) : null}
 
             <div className="rental-modal-top">
               <div className="rental-modal-summary">
@@ -518,10 +540,10 @@ export default function Gallery({ onSelectRental }: GalleryProps) {
                   <div className="modal-price-preview">
                     <span>Cena</span>
                     <strong>
-                      {activeRental.offer?.unitPrice == null
-                        ? activeRental.offer?.price ?? activeRental.category.price
-                        : `${activeRental.offer.priceKind === "from" ? "od " : ""}${(activeRental.offer.unitPrice * quantity).toLocaleString("sk-SK", {
-                            minimumFractionDigits: Number.isInteger(activeRental.offer.unitPrice * quantity) ? 0 : 2,
+                      {activeUnitPrice == null
+                        ? activePriceLabel
+                        : `${activeRental.offer?.priceKind === "from" ? "od " : ""}${(activeUnitPrice * quantity).toLocaleString("sk-SK", {
+                            minimumFractionDigits: Number.isInteger(activeUnitPrice * quantity) ? 0 : 2,
                             maximumFractionDigits: 2,
                           })} €`}
                     </strong>

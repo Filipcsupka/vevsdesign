@@ -78,11 +78,16 @@ Ak sa robi vizualna uprava, preferuj menit existujuce komponenty a `src/app/glob
 - Ceny svadobnych balikov su: Balik S `450 €`, Balik M `600 €`, Balik L `750 €`.
 - Balik S obsahuje vyzdobu stolov pre hosti, vyzdobu hlavneho stola novomanzelov, uvitaciu tabulu a zasadaci poriadok.
 - Balik M obsahuje Balik S, menovky a servitky, uvitaci banner so zlatym stojanom, personalizovanu knihu hosti, box na obalky a kompletny balik tlacovin.
-- Balik L obsahuje Baliky S a M, zrkadlo s menami, velky stojan srdce s kvetinovou vyzdobou, strom na platne, detske balicky a personalizovane tabulky a okuliare do fotokutika.
+- Balík L obsahuje Balík M, fotostenu 2 × 2 m alebo srdcový stojan, personalizované tabuľky do fotokútika a výzdobu priestoru malými ikebanami alebo podľa požiadaviek.
 - Pod balíkmi S, M a L je samostatný „Individuálny balík“ pre nevesty, ktoré si chcú vyskladať ponuku na mieru aj z položiek mimo webu.
 - Doplnky na mieru obsahuju aj personalizovane naramky za `0,60 €/ks`.
+- Za Menovkami je samostatná položka `Menu s menovkou` za `0,90 €/ks`.
+- Prvou položkou v `Doplnky pre hostí` je `Prstenec Diamond` za `2,40 €/ks`.
+- `Zrkadlo s menami a textom` za `30 €` patri do `Doplnky na mieru > Uvítacie prvky a zasadací poriadok`.
+- V kategorii `Prenájom > Vázy a svietniky` su `Jednostĺpová váza` za `10 €` a `Štvorstĺpová váza` za `15 €`.
+- Mini fľaštičky za `0,70 €/ks` sa dodávajú pripravené s vybranými doplnkami a vrchnáčikom; zákazník si ich naplní sám.
 - `NFC srdce` je samostatna kategoria v hlavnej navigacii s vlastnou galeriou. Ide o 3D tlacene personalizovane srdce s vlastnym napisom, datumom a NFC tagom, ktory moze otvorit zvoleny osobny odkaz.
-- Novinky pre rok 2027 predstavuju styri nove moznosti v kategorii Prenajom > Stojany a zrkadla: Stojan vlna za `150 €`, Stojan oval s bocnymi vlnami za `100 €`, Stojan oval s vlnovym navlekom od `50 €` (vo vyske 2 m alebo 1,8 m) a Stojan 2 × 2 m od `70 €`.
+- Novinky pre rok 2027 predstavuju styri nove moznosti v kategorii Prenajom > Stojany a zrkadla: Stojan vlna za `180 €`, Stojan oval s bocnymi vlnami za `100 €`, Oválny stojan s doplnkami za `65 €` s kvetmi a mašľami s perlami ako na fotografii (`50 €` bez doplnkov; výšky 2 m alebo 1,8 m) a Stojan 2 × 2 m od `70 €`.
 
 ## Prevadzka a nasadenie
 
