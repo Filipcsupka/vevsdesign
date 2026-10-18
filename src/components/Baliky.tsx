@@ -194,9 +194,9 @@ export default function Baliky() {
 
   return (
     <section id="baliky">
-      <p className="sec-intro baliky-intro reveal reveal-d1">
-        Vyberte si balík, ktorý vám najlepšie vyhovuje, alebo si vyberte ponuku na mieru.
-      </p>
+      <h2 className="baliky-intro reveal reveal-d1">
+        Vyberte si balík, ktorý vám najlepšie vyhovuje, alebo si vyberte <em>ponuku na mieru.</em>
+      </h2>
 
       <div className="baliky-grid">
         {PACKAGES.map((p, i) => (
