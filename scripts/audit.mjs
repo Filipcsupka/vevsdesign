@@ -8,8 +8,8 @@ const waivedChain = new Map([
   ["braces", { version: "3.0.3", via: advisoryUrl }],
   ["micromatch", { version: "4.0.8", via: "braces" }],
   ["fast-glob", { version: "3.3.1", via: "micromatch" }],
-  ["@next/eslint-plugin-next", { version: "16.3.4", via: "fast-glob" }],
-  ["eslint-config-next", { version: "16.3.4", via: "@next/eslint-plugin-next" }],
+  ["@next/eslint-plugin-next", { version: "16.4.2", via: "fast-glob" }],
+  ["eslint-config-next", { version: "16.4.2", via: "@next/eslint-plugin-next" }],
 ]);
 
 function runAudit(args) {
