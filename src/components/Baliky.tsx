@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import { useSelections } from "@/components/SelectionProvider";
 import { createPortal } from "react-dom";
 import { PACKAGES, type PackageId } from "@/data/packages";
@@ -94,6 +95,7 @@ const DETAIL_HASH_TO_ID: Record<string, PackageId> = {
 };
 
 export default function Baliky() {
+  const router = useRouter();
   const { addSelection: onSelectPackage } = useSelections();
   const [mounted, setMounted] = useState(false);
   const [openId, setOpenId] = useState<PackageId | null>(null);
@@ -168,6 +170,7 @@ export default function Baliky() {
       });
     }
     closeModal();
+    router.push("/kontakt/");
   }
 
   function handleIndividualPackage() {
@@ -182,11 +185,7 @@ export default function Baliky() {
       priceKind: "individual",
     });
 
-    window.requestAnimationFrame(() => {
-      const noteField = document.getElementById("poznamka-a-predstava") as HTMLTextAreaElement | null;
-      noteField?.focus({ preventScroll: true });
-      noteField?.scrollIntoView({ behavior: "smooth", block: "center" });
-    });
+    router.push("/kontakt/");
   }
 
   return (

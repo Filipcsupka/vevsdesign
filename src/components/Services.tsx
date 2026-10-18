@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { normalizeQuantity, type PriceKind } from "@/components/contactSelection";
 import { useSelections } from "@/components/SelectionProvider";
 import { createPortal } from "react-dom";
@@ -369,6 +370,7 @@ function formatModalDetail(detail: string) {
 }
 
 export default function Services() {
+  const router = useRouter();
   const { addSelection: onSelectService } = useSelections();
   const [openId, setOpenId] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
@@ -431,6 +433,7 @@ export default function Services() {
       });
     }
     setOpenId(null);
+    router.push("/kontakt/");
   }
 
   return (
