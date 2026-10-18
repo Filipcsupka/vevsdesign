@@ -2088,3 +2088,25 @@ body.modal-open{overflow:hidden}
 }
 .svadba-head,.prenajom-head{padding-top:9rem;text-align:center}
 .svadba-head h1,.prenajom-head h1{font-family:var(--serif);font-weight:300;font-size:clamp(2.2rem,5vw,3.4rem);margin:0.5rem 0 1.4rem;color:var(--ink)}
+
+.inventar-head{padding-top:9rem;text-align:center}
+.inventar-head h1{font-family:var(--serif);font-weight:300;font-size:clamp(2.2rem,5vw,3.4rem);margin:0.5rem 0 1.4rem;color:var(--ink)}
+.inventar-jump{display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin-top:1.6rem}
+.inventar-packages{padding:3rem 2rem 0;text-align:center}
+.inventar-packages .home-inventory-text{margin-bottom:1.2rem}
+.selection-bar{position:fixed;left:0;right:0;bottom:0;z-index:180;display:flex;align-items:center;justify-content:center;gap:1.2rem;flex-wrap:wrap;padding:0.8rem 1.5rem calc(0.8rem + env(safe-area-inset-bottom,0px));background:linear-gradient(150deg,rgba(var(--bg-beige-soft-rgb),0.98),rgba(var(--gold-ll-rgb),0.97));border-top:1px solid rgba(var(--gold-rgb),0.35);box-shadow:0 -12px 32px rgba(var(--ink-rgb),0.1)}
+.selection-bar-text{font-size:0.78rem;letter-spacing:0.08em;color:var(--ink)}
+.selection-bar-actions{display:flex;align-items:center;gap:1rem}
+.selection-bar .btn-p{padding:0.8rem 1.6rem}
+.selection-bar-clear{background:none;border:none;padding:0.4rem;cursor:pointer;color:var(--ink-m);font-family:var(--sans);font-size:0.65rem;letter-spacing:0.16em;text-transform:uppercase;text-decoration:underline}
+.selection-bar-clear:hover,.selection-bar-clear:focus-visible{color:var(--ink)}
+body:has(.selection-bar) .selection-toast{bottom:6rem}
+body:has(.selection-bar) .mobile-contact-cta{display:none}
+body:has(.selection-bar) footer{padding-bottom:5rem}
+@media (max-width:900px){
+  .inventar-packages{padding:2.5rem 1.2rem 0}
+  .selection-bar{padding-left:1rem;padding-right:1rem;justify-content:space-between;gap:0.6rem}
+  .selection-bar-text{font-size:0.72rem}
+  .selection-bar .btn-p{padding:0.75rem 1.1rem}
+  body:has(.selection-bar) .selection-toast{bottom:6rem}
+}

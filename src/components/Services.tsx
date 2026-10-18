@@ -369,7 +369,11 @@ function formatModalDetail(detail: string) {
   return /[.!?]$/.test(detail) ? detail : `${detail}.`;
 }
 
-export default function Services() {
+type ServicesProps = {
+  afterSelect?: "contact" | "stay";
+};
+
+export default function Services({ afterSelect = "contact" }: ServicesProps = {}) {
   const router = useRouter();
   const { addSelection: onSelectService } = useSelections();
   const [openId, setOpenId] = useState<string | null>(null);
@@ -433,7 +437,7 @@ export default function Services() {
       });
     }
     setOpenId(null);
-    router.push("/kontakt/");
+    if (afterSelect === "contact") router.push("/kontakt/");
   }
 
   return (
