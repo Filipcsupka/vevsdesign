@@ -45,7 +45,7 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
     text: "",
     price: "Cena individuálne",
     lead: "Kvetinovú výzdobu pripravujeme tak, aby jemne doplnila štýl svadby a prirodzene nadviazala na ostatné dekorácie.",
-    coverOfferId: "ikebana-na-stoly",
+    coverOfferId: "dlha-ikebana",
     offers: [
       {
         id: "ikebana-gypsomilka",
