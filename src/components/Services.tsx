@@ -271,9 +271,9 @@ export const CUSTOM_SERVICES: ServiceItem[] = [
   {
     id: "zasadaci-poriadok-luxury",
     name: "Zasadací poriadok luxury",
-    price: "Cena na dopyt",
-    unitPrice: null,
-    priceKind: "individual",
+    price: "50 €",
+    unitPrice: 50,
+    priceKind: "fixed",
     hideQuantityField: true,
     description: "",
     category: "Doplnky na mieru",
