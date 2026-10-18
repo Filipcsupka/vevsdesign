@@ -38,16 +38,6 @@ export default function PrenajomPage() {
 
         <Gallery variant="browse" />
 
-        <section className="home-inventory">
-          <div className="home-inventory-inner reveal">
-            <p className="sec-label">Inventár</p>
-            <p className="home-inventory-text">
-              Celý inventár na jednom mieste. Vyberte si položky a dopyt nám odošlete sami.
-            </p>
-            <Link href="/inventar/" className="home-link">Celý inventár <span aria-hidden="true">→</span></Link>
-          </div>
-        </section>
-
         <section className="home-contact">
           <p className="sec-label reveal">Kontakt</p>
           <div className="rule reveal reveal-d1">
