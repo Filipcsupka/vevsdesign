@@ -68,8 +68,8 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
       {
         id: "ikebana-na-stoly",
         title: "Ikebana so sviečkami a vázou",
-        price: "35 €",
-        unitPrice: 35,
+        price: "40 €",
+        unitPrice: 40,
         priceKind: "fixed",
         description: "Obsahuje všetky kvety ako na fotke vo Vašich požadovaných farbách.",
         lead: "Obsahuje všetky kvety ako na fotke vo Vašich požadovaných farbách. Vysoká váza v strede so živou ružou. Dva poháre s plávajúcimi sviečkami.",
