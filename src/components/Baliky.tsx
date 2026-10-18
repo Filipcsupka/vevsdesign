@@ -35,7 +35,7 @@ const DETAILS: Record<PackageId, ModalDetail> = {
       },
       {
         title: "Podrobnosti",
-        content: "V cene sú zahrnuté jednoduché živé kvietky. Pri výbere konkrétneho druhu kvietkov sa môže cena mierne upraviť.",
+        content: "V cene sú zahrnuté jednoduché živé kvietky. Pri výbere konkrétneho druhu kvietkov sa môže cena mierne upraviť. Cena je do 70 hostí. Pri vyššom počte hostí je cena +5 €/osoba.",
       },
     ],
   },
@@ -60,7 +60,7 @@ const DETAILS: Record<PackageId, ModalDetail> = {
       },
       {
         title: "Podrobnosti",
-        content: "V cene sú zahrnuté jednoduché živé kvietky. Pri výbere konkrétneho druhu kvietkov sa môže cena mierne upraviť.",
+        content: "V cene sú zahrnuté jednoduché živé kvietky. Pri výbere konkrétneho druhu kvietkov sa môže cena mierne upraviť. Cena je do 70 hostí. Pri vyššom počte hostí je cena +5 €/osoba.",
       },
     ],
   },
@@ -82,7 +82,7 @@ const DETAILS: Record<PackageId, ModalDetail> = {
       },
       {
         title: "Podrobnosti",
-        content: "V cene sú zahrnuté jednoduché živé kvietky. Pri výbere konkrétneho druhu kvietkov sa môže cena mierne upraviť.",
+        content: "V cene sú zahrnuté jednoduché živé kvietky. Pri výbere konkrétneho druhu kvietkov sa môže cena mierne upraviť. Cena je do 70 hostí. Pri vyššom počte hostí je cena +5 €/osoba.",
       },
     ],
   },
