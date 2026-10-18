@@ -33,10 +33,7 @@ export default function PrenajomPage() {
           <div className="rule reveal reveal-d1">
             <div className="rule-diamond" />
           </div>
-          <h1 className="reveal reveal-d1">Prenájom <em>dekorácií</em></h1>
-          <p className="home-intro-text reveal reveal-d2">
-            Prezrite si, čo vieme zapožičať. Ak vás niečo zaujme, napíšte nám alebo zavolajte.
-          </p>
+          <h1 className="reveal reveal-d1">Prenájom</h1>
         </section>
 
         <Gallery variant="browse" />
