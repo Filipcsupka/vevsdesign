@@ -1,9 +1,17 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import {
+  CONTACT_EMAIL,
+  CONTACT_INSTAGRAM_HANDLE,
+  CONTACT_INSTAGRAM_URL,
+  CONTACT_PHONE_DISPLAY,
+  CONTACT_PHONE_HREF,
+} from "@/data/businessInfo";
 
 export default function Nav() {
   const navRef = useRef<HTMLElement>(null);
+  const topbarRef = useRef<HTMLDivElement>(null);
   const [openMenu, setOpenMenu] = useState<"packages" | "services" | "rental" | "nfc" | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -14,8 +22,13 @@ export default function Nav() {
 
   useEffect(() => {
     const nav = navRef.current;
+    const topbar = topbarRef.current;
     if (!nav) return;
-    const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 60);
+    const onScroll = () => {
+      const scrolled = window.scrollY > 60;
+      nav.classList.toggle("scrolled", scrolled);
+      topbar?.classList.toggle("hidden", scrolled);
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
@@ -46,6 +59,14 @@ export default function Nav() {
   }, []);
 
   return (
+    <>
+    <div ref={topbarRef} className="topbar">
+      <a href={`tel:${CONTACT_PHONE_HREF}`}>{CONTACT_PHONE_DISPLAY}</a>
+      <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+      <a href={CONTACT_INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">
+        {CONTACT_INSTAGRAM_HANDLE}
+      </a>
+    </div>
     <nav ref={navRef} id="main-nav">
       <a href="#hero" className="nav-logo">
         VEVS<em>DESIGN</em>
@@ -178,5 +199,6 @@ export default function Nav() {
         </li>
       </ul>
     </nav>
+    </>
   );
 }
