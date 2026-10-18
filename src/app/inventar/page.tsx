@@ -17,9 +17,9 @@ import {
 } from "@/data/businessInfo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Celý inventár | Vevsdesign",
+  title: "Inventár a prenájom dekorácií | Vevsdesign",
   description:
-    "Celý inventár na jednom mieste: prenájom dekorácií, doplnky na mieru a doplnky pre hostí. Vyberte si položky a odošlite jeden dopyt. Košice a okolie.",
+    "Inventár pre kompletnú výzdobu aj prenájom jednotlivých dekorácií: kvetinová výzdoba, stojany, zrkadlá, vázy, svietniky, doplnky na mieru a doplnky pre hostí. Košice a okolie.",
   path: "/inventar/",
 });
 
@@ -31,7 +31,7 @@ export default function InventarPage() {
       <Nav />
       <main>
         <section className="svadba-head svadba-head-compact">
-          <h1 className="sr-only">Celý inventár</h1>
+          <h1 className="sr-only">Inventár a prenájom dekorácií</h1>
         </section>
 
         <Gallery />

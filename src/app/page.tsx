@@ -19,7 +19,7 @@ const SERVICE_CARDS = [
     image: planningPhoto,
   },
   {
-    href: "/prenajom/",
+    href: "/inventar/",
     title: "Prenájom",
     image: rentalPhoto,
   },

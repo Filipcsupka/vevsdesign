@@ -14,7 +14,7 @@ export default function News2027() {
           Objavte nové výrazné kúsky pre obrad, vstup do sály aj miesto za novomanželmi.
           Jemné línie a možnosť kvetinovej výzdoby vytvoria nezabudnuteľný wau efekt.
         </p>
-        <Link className="news-2027-link" href="/prenajom/">
+        <Link className="news-2027-link" href="/inventar/#prenajom-stojany-zrkadla">
           Pozrieť stojany a zrkadlá <span aria-hidden="true">→</span>
         </Link>
       </div>

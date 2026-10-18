@@ -1,12 +1,12 @@
 "use client";
 
-import Link from "next/link";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { normalizeQuantity, type PriceKind } from "@/components/contactSelection";
 import { useSelections } from "@/components/SelectionProvider";
 import { createPortal } from "react-dom";
 import ModalImageGallery from "@/components/ModalImageGallery";
 import QuantityInput from "@/components/QuantityInput";
+import FallbackImage from "@/components/FallbackImage";
 import ShowcaseTile from "@/components/ShowcaseTile";
 import { rentalDetailImages, rentalImage } from "@/data/imageAssets";
 
@@ -316,7 +316,6 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
   },
 ];
 
-const STANDS_FIRST_ID = "prenajom-stojany-zrkadla";
 const KIDS_ID = "prenajom-detsky-kutik";
 const OTHER_ID = "prenajom-ostatne";
 
@@ -333,11 +332,6 @@ const FOLDED_CATEGORIES: RentalCategory[] = (() => {
   );
 })();
 
-// /prenajom: same categories, stands first.
-const BROWSE_CATEGORIES: RentalCategory[] = [...FOLDED_CATEGORIES].sort(
-  (a, b) => Number(b.id === STANDS_FIRST_ID) - Number(a.id === STANDS_FIRST_ID),
-);
-
 type ActiveRental = {
   category: RentalCategory;
   offer: RentalOffer | null;
@@ -349,12 +343,13 @@ function getTileVariant(index: number) {
   return TILE_VARIANTS[index % TILE_VARIANTS.length];
 }
 
-type GalleryProps = {
-  variant?: "inventory" | "browse";
-};
+function coverImage(category: RentalCategory) {
+  const offer = category.offers.find((item) => !item.hideImage) ?? category.offers[0];
+  return rentalImage(offer.imageCategoryId ?? category.id, offer.id, category.title);
+}
 
-export default function Gallery({ variant = "inventory" }: GalleryProps = {}) {
-  const browseOnly = variant === "browse";
+export default function Gallery() {
+  const [openCats, setOpenCats] = useState<string[]>([]);
   const { addSelection: onSelectRental } = useSelections();
   const [openKey, setOpenKey] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
@@ -366,14 +361,14 @@ export default function Gallery({ variant = "inventory" }: GalleryProps = {}) {
   const activeRental = useMemo<ActiveRental | null>(() => {
     if (!openKey) return null;
 
-    for (const category of browseOnly ? BROWSE_CATEGORIES : FOLDED_CATEGORIES) {
+    for (const category of FOLDED_CATEGORIES) {
       if (category.id === openKey) return { category, offer: null };
       const offer = category.offers.find((item) => `${category.id}:${item.id}` === openKey);
       if (offer) return { category, offer };
     }
 
     return null;
-  }, [openKey, browseOnly]);
+  }, [openKey]);
 
   const activeRentalBodyText =
     activeRental?.offer?.text ?? (!activeRental?.offer ? activeRental?.category.text : "");
@@ -424,6 +419,30 @@ export default function Gallery({ variant = "inventory" }: GalleryProps = {}) {
     setQuantity(1);
   }, [openKey]);
 
+  // Deep links (#prenajom-...) open the matching category and scroll to it.
+  useEffect(() => {
+    const openFromHash = () => {
+      const id = decodeURIComponent(window.location.hash.slice(1));
+      if (!FOLDED_CATEGORIES.some((category) => category.id === id)) return;
+      setOpenCats((current) => (current.includes(id) ? current : [...current, id]));
+      window.requestAnimationFrame(() => {
+        document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    };
+
+    openFromHash();
+    window.addEventListener("hashchange", openFromHash);
+    window.addEventListener("popstate", openFromHash);
+    return () => {
+      window.removeEventListener("hashchange", openFromHash);
+      window.removeEventListener("popstate", openFromHash);
+    };
+  }, []);
+
+  function toggleCategory(id: string) {
+    setOpenCats((current) => (current.includes(id) ? current.filter((item) => item !== id) : [...current, id]));
+  }
+
   function openDetail(category: RentalCategory, offer: RentalOffer, button: HTMLButtonElement) {
     lastTriggerRef.current = button;
     setOvalStandWithAccessories(true);
@@ -431,7 +450,7 @@ export default function Gallery({ variant = "inventory" }: GalleryProps = {}) {
   }
 
   function handleCta() {
-    if (!browseOnly && activeRental && activeRental.offer) {
+    if (activeRental && activeRental.offer) {
       onSelectRental({
         kind: "rentals",
         id: isPlainOvalStand ? `${activeRental.offer.id}-bez-doplnkov` : activeRental.offer.id,
@@ -451,31 +470,64 @@ export default function Gallery({ variant = "inventory" }: GalleryProps = {}) {
       <div className="rental-bg-lines" />
       <div className="rental-glow" />
       <div className="rental-stage reveal reveal-d2">
-        <div className="rental-groups">
-          {(browseOnly ? BROWSE_CATEGORIES : FOLDED_CATEGORIES).map((category) => (
-            <div key={category.id} className="rental-group" id={category.id}>
-              <div className="rental-group-title">{category.title}</div>
-              {category.text && <p className="rental-group-text">{category.text}</p>}
-              <div className="showcase-grid showcase-grid-rental">
-                {category.offers.map((offer, index) => (
-                  <ShowcaseTile
-                    key={offer.id}
-                    eyebrow={category.title}
-                    title={offer.title}
-                    description={offer.description ?? offer.lead ?? category.lead}
-                    meta={offer.price ?? category.price}
-                    variant={getTileVariant(index)}
-                    image={offer.hideImage ? undefined : rentalImage(offer.imageCategoryId ?? category.id, offer.id, offer.title)}
-                    featured={index === 0}
-                    onClick={(event) => {
-                      openDetail(category, offer, event.currentTarget);
-                    }}
-                  />
-                ))}
+        <h2 className="inv-intro reveal">
+          Vyberte si inventár pre kompletnú výzdobu <em>alebo prenájom jednotlivých dekorácií</em>
+        </h2>
+        <div className="inv-cats">
+          {FOLDED_CATEGORIES.map((category, index) => {
+            const isOpen = openCats.includes(category.id);
+            const cover = coverImage(category);
+            const pair = Math.floor(index / 2);
+            const layout = {
+              "--inv-col": (index % 2) + 1,
+              "--inv-cover-row": pair * 3 + 1,
+              "--inv-panel-row": pair * 3 + 2 + (index % 2),
+            } as CSSProperties;
+            return (
+              <div key={category.id} className="inv-cat" id={category.id} style={layout}>
+                <button
+                  type="button"
+                  className={`inv-cat-cover${isOpen ? " is-open" : ""}`}
+                  aria-expanded={isOpen}
+                  aria-controls={`${category.id}-panel`}
+                  onClick={() => toggleCategory(category.id)}
+                >
+                  <FallbackImage src={cover.src} alt="" className="inv-cat-img" />
+                  <span className="inv-cat-shade" aria-hidden="true" />
+                  <span className="inv-cat-body">
+                    <span className="inv-cat-title">{category.title}</span>
+                    <span className="inv-cat-lead">{category.lead}</span>
+                  </span>
+                  <span className="inv-cat-toggle" aria-hidden="true" />
+                </button>
+                <div className="inv-cat-panel" id={`${category.id}-panel`} hidden={!isOpen}>
+                  {isOpen ? (
+                    <>
+                      {category.text && <p className="rental-group-text">{category.text}</p>}
+                      <div className="showcase-grid showcase-grid-rental">
+                        {category.offers.map((offer, offerIndex) => (
+                          <ShowcaseTile
+                            key={offer.id}
+                            eyebrow={category.title}
+                            title={offer.title}
+                            description={offer.description ?? offer.lead ?? category.lead}
+                            meta={offer.price ?? category.price}
+                            variant={getTileVariant(offerIndex)}
+                            image={offer.hideImage ? undefined : rentalImage(offer.imageCategoryId ?? category.id, offer.id, offer.title)}
+                            featured={offerIndex === 0}
+                            onClick={(event) => {
+                              openDetail(category, offer, event.currentTarget);
+                            }}
+                          />
+                        ))}
+                      </div>
+                      {category.note ? <p className="rental-group-note">{category.note}</p> : null}
+                    </>
+                  ) : null}
+                </div>
               </div>
-              {category.note ? <p className="rental-group-note">{category.note}</p> : null}
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
       {mounted && activeRental && createPortal(
@@ -546,41 +598,32 @@ export default function Gallery({ variant = "inventory" }: GalleryProps = {}) {
               ) : null}
             </div>
 
-            {browseOnly ? (
-              <div className="rental-modal-actions">
+            <div className="rental-modal-actions">
+              <div className="modal-selection-tools">
                 <span className="rental-modal-note">
-                  Máte záujem o tento prenájom? Napíšte nám alebo zavolajte a pripravíme ho podľa vašej predstavy.
+                  Máte záujem o tento prenájom? Napíšte nám a pripravíme ho podľa vašej predstavy.
                 </span>
-                <Link href="/kontakt/" className="btn-p">Kontaktovať</Link>
-              </div>
-            ) : (
-              <div className="rental-modal-actions">
-                <div className="modal-selection-tools">
-                  <span className="rental-modal-note">
-                    Máte záujem o tento prenájom? Napíšte nám a pripravíme ho podľa vašej predstavy.
-                  </span>
-                  <div className="modal-selection-inline">
-                    {!activeRental.offer?.hideQuantityField ? (
-                      <QuantityInput label="Počet" value={quantity} onChange={setQuantity} />
-                    ) : null}
-                    <div className="modal-price-preview">
-                      <span>Cena</span>
-                      <strong>
-                        {activeUnitPrice == null
-                          ? activePriceLabel
-                          : `${activeRental.offer?.priceKind === "from" ? "od " : ""}${(activeUnitPrice * quantity).toLocaleString("sk-SK", {
-                              minimumFractionDigits: Number.isInteger(activeUnitPrice * quantity) ? 0 : 2,
-                              maximumFractionDigits: 2,
-                            })} €`}
-                      </strong>
-                    </div>
+                <div className="modal-selection-inline">
+                  {!activeRental.offer?.hideQuantityField ? (
+                    <QuantityInput label="Počet" value={quantity} onChange={setQuantity} />
+                  ) : null}
+                  <div className="modal-price-preview">
+                    <span>Cena</span>
+                    <strong>
+                      {activeUnitPrice == null
+                        ? activePriceLabel
+                        : `${activeRental.offer?.priceKind === "from" ? "od " : ""}${(activeUnitPrice * quantity).toLocaleString("sk-SK", {
+                            minimumFractionDigits: Number.isInteger(activeUnitPrice * quantity) ? 0 : 2,
+                            maximumFractionDigits: 2,
+                          })} €`}
+                    </strong>
                   </div>
                 </div>
-                <button type="button" className="btn-p" onClick={handleCta}>
-                  Vybrať
-                </button>
               </div>
-            )}
+              <button type="button" className="btn-p" onClick={handleCta}>
+                Vybrať
+              </button>
+            </div>
           </div>
         </div>,
         document.body

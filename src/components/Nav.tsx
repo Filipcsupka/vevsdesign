@@ -16,7 +16,6 @@ import {
 const NAV_ITEMS = [
   { href: "/", label: "Domov" },
   { href: "/svadba", label: "Svadba" },
-  { href: "/prenajom", label: "Prenájom" },
   { href: "/inventar", label: "Inventár" },
   { href: "/nfc-srdce", label: "NFC srdce" },
   { href: "/kontakt", label: "Kontakt" },
