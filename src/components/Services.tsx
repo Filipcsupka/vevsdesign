@@ -100,7 +100,7 @@ export const CUSTOM_SERVICES: ServiceItem[] = [
       priceKind: "from",
       hideQuantityField: true,
       description: "Zasadací poriadok v ráme s Vašimi menami a farebnosťou dňa.",
-      modalDescription: "Personalizovaný zasadací poriadok v obraze vyladený podľa Vašej svadby.",
+      modalDescription: "",
       modalDetails: [
         "Na drevenom stojane: 15 €",
         "Na bielom vysokom stojane: 20 €",
@@ -518,7 +518,9 @@ export default function ServiceItems({ items, eyebrow, afterSelect = "contact" }
 
             <div className="service-modal-top">
               <div className="service-modal-summary">
-                <p className="service-modal-lead">{activeService.modalDescription ?? activeService.description}</p>
+                {(activeService.modalDescription ?? activeService.description) ? (
+                  <p className="service-modal-lead">{activeService.modalDescription ?? activeService.description}</p>
+                ) : null}
                 {(activeService.modalDetails ?? activeService.details)?.length ? (
                   <ul className="service-modal-list service-modal-list-top">
                     {(activeService.modalDetails ?? activeService.details)?.map((detail) => (
