@@ -45,9 +45,7 @@ export default function Page() {
             <div className="rule-diamond" />
           </div>
           <p className="home-intro-text reveal reveal-d2">
-            Tvoríme kompletnú svadobnú a eventovú výzdobu plnú detailov. Každú svadbu vnímame ako jedinečný príbeh,
-            pri ktorom nám záleží na každom prvku a každej emócii. Od kvetinových ikebán a stolov až po tlačoviny
-            na mieru.
+            Tvoríme kompletnú svadobnú a eventovú výzdobu plnú detailov. Kreativita je našou silnou stránkou a práve preto každú svadbu alebo event vnímame ako jedinečný príbeh, pri ktorom nám záleží na každom prvku a každej emócii. Ponúkame komplexné balíky, doplnky a tlačoviny na mieru, doplnky pre hostí a deti, stojany, zrkadlá, svietniky a kompletnú výzdobu stolov s vytvorením honosných ikebán a aranžmánom živých kvetov.
           </p>
         </section>
 
