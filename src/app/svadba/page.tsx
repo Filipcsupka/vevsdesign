@@ -34,16 +34,6 @@ export default function SvadbaPage() {
 
         <Baliky />
 
-        <section className="home-inventory">
-          <div className="home-inventory-inner reveal">
-            <p className="sec-label">Inventár</p>
-            <p className="home-inventory-text">
-              Všetky doplnky a položky si môžete vybrať v inventári.
-            </p>
-            <Link href="/inventar/" className="home-link">Vybrať z celého inventára <span aria-hidden="true">→</span></Link>
-          </div>
-        </section>
-
         <section className="home-contact">
           <p className="sec-label reveal">Kontakt</p>
           <div className="rule reveal reveal-d1">

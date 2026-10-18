@@ -99,6 +99,8 @@ export default function Baliky() {
   const { addSelection: onSelectPackage } = useSelections();
   const [mounted, setMounted] = useState(false);
   const [openId, setOpenId] = useState<PackageId | null>(null);
+  const [individualOpen, setIndividualOpen] = useState(false);
+  const anyOpen = openId !== null || individualOpen;
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const lastCardRef = useRef<HTMLElement | null>(null);
 
@@ -110,23 +112,23 @@ export default function Baliky() {
   }, []);
 
   useEffect(() => {
-    if (openId) {
+    if (anyOpen) {
       document.body.classList.add("modal-open");
       closeButtonRef.current?.focus();
     } else {
       document.body.classList.remove("modal-open");
       (lastCardRef.current as HTMLElement | null)?.focus();
     }
-  }, [openId]);
+  }, [anyOpen]);
 
   useEffect(() => {
-    if (!openId) return;
+    if (!anyOpen) return;
     const handler = (e: KeyboardEvent) => {
       if (e.key === "Escape") closeModal();
     };
     document.addEventListener("keydown", handler);
     return () => document.removeEventListener("keydown", handler);
-  }, [openId]);
+  }, [anyOpen]);
 
   useEffect(() => {
     const openFromHash = () => {
@@ -150,6 +152,7 @@ export default function Baliky() {
 
   function closeModal() {
     setOpenId(null);
+    setIndividualOpen(false);
     if (typeof window === "undefined") return;
     if (window.location.hash in DETAIL_HASH_TO_ID) {
       window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}#baliky`);
@@ -185,6 +188,7 @@ export default function Baliky() {
       priceKind: "individual",
     });
 
+    closeModal();
     router.push("/kontakt/");
   }
 
@@ -223,7 +227,23 @@ export default function Baliky() {
           </div>
         ))}
 
-        <article className="balik-card balik-card-individual reveal reveal-d4">
+        <div
+          id="balik-individual"
+          className="balik-card balik-card-individual reveal reveal-d4"
+          role="button"
+          tabIndex={0}
+          onClick={(e) => {
+            lastCardRef.current = e.currentTarget as HTMLElement;
+            setIndividualOpen(true);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              lastCardRef.current = e.currentTarget as HTMLElement;
+              setIndividualOpen(true);
+            }
+          }}
+        >
           <div className="balik-individual-heading">
             <div className="balik-badge">Na mieru</div>
             <div className="balik-name">Ponuka na mieru</div>
@@ -233,11 +253,45 @@ export default function Baliky() {
             z inventára, ktorý ponúkame na stránke, ale aj z toho, čo na stránke nie je. Stačí nám
             opísať vašu predstavu a my ju s radosťou premeníme na realitu.
           </p>
-          <button type="button" className="btn-p balik-individual-button" onClick={handleIndividualPackage}>
-            Pridať
-          </button>
-        </article>
+          <div className="balik-hint">Kliknite pre detail →</div>
+        </div>
       </div>
+
+      {mounted && individualOpen && createPortal(
+        <div className="balik-modal" role="dialog" aria-modal="true" aria-labelledby="balik-modal-name">
+          <div className="balik-modal-backdrop" onClick={closeModal} />
+          <div className="balik-modal-dialog">
+            <button
+              ref={closeButtonRef}
+              type="button"
+              className="balik-modal-close"
+              aria-label="Zavrieť detail balíka"
+              onClick={closeModal}
+            >
+              &times;
+            </button>
+
+            <div className="balik-modal-badge">Na mieru</div>
+            <div className="balik-modal-head">
+              <div className="balik-modal-name" id="balik-modal-name">Ponuka na mieru</div>
+              <div className="balik-modal-price">Cena na dopyt</div>
+            </div>
+            <div className="balik-modal-top">
+              <p className="balik-modal-lead">
+                Tento balík ponúkame nevestám, ktoré majú vlastnú predstavu. Môžete si ho vyskladať
+                z inventára, ktorý ponúkame na stránke, ale aj z toho, čo na stránke nie je. Stačí nám
+                opísať vašu predstavu a my ju s radosťou premeníme na realitu.
+              </p>
+            </div>
+
+            <div className="balik-modal-actions">
+              <button type="button" className="btn-p" onClick={handleIndividualPackage}>
+                Vybrať
+              </button>
+            </div>
+          </div>
+        </div>
+      , document.body)}
 
       {mounted && openId && detail && createPortal(
         <div className="balik-modal" role="dialog" aria-modal="true" aria-labelledby="balik-modal-name">

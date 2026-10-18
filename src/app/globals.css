@@ -551,10 +551,8 @@ h1 .h1-line2{display:block;font-size:0.72em;opacity:0.85}
 .balik-card.featured .balik-hint{color:rgba(var(--ink-rgb),0.62)}
 .balik-card-individual{
   display:flex;flex-direction:column;align-items:flex-start;gap:1.5rem;
-  cursor:default;
   background:linear-gradient(145deg,rgba(var(--bg-surface-rgb),0.92),rgba(var(--gold-ll-rgb),0.72));
 }
-.balik-card-individual:hover{transform:translateY(-4px)}
 .balik-card-individual .balik-badge{margin-bottom:0.75rem}
 .balik-card-individual .balik-name{margin-bottom:0}
 .balik-individual-copy{
