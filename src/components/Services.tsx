@@ -44,8 +44,8 @@ export const CUSTOM_SERVICES: ServiceItem[] = [
     {
       id: "uvitacia-tabula",
       name: "Uvítacia tabuľa / zasadací na tabuli",
-      price: "28 €",
-      unitPrice: 28,
+      price: "30 €",
+      unitPrice: 30,
       priceKind: "fixed",
       hideQuantityField: true,
       description: "Uvítacia tabuľa vytvorí krásny prvý dojem a hneď pri príchode naladí hostí na atmosféru svadby.",
