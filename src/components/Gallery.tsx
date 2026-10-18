@@ -57,7 +57,7 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
       },
       {
         id: "ikebana-na-stoly",
-        title: "Ikebana na stoly so sviečkami a živým kvetom",
+        title: "Ikebana so sviečkami a vázou",
         price: "35 €",
         unitPrice: 35,
         priceKind: "fixed",
