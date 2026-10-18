@@ -60,14 +60,14 @@ export default function InventarPage() {
             <div className="rule-diamond" />
           </div>
           <h2 className="reveal reveal-d1">Napíšte nám <em>alebo zavolajte</em></h2>
-          <ul className="home-contact-list reveal reveal-d2">
+          <ul className="home-contact-list">
             <li><a href={`tel:${CONTACT_PHONE_HREF}`}>{CONTACT_PHONE_DISPLAY}</a></li>
             <li><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></li>
             <li>
               <a href={CONTACT_INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">{CONTACT_INSTAGRAM_HANDLE}</a>
             </li>
           </ul>
-          <div className="btn-pair-static reveal reveal-d3">
+          <div className="btn-pair-static">
             <Link href="/kontakt/" className="btn-p">Kontaktný formulár</Link>
           </div>
         </section>
