@@ -34,6 +34,8 @@ export type RentalCategory = {
   offers: RentalOffer[];
   details?: string;
   note?: string;
+  // Offer whose photo is used as the category cover (defaults to the first with an image).
+  coverOfferId?: string;
 };
 
 const RENTAL_CATEGORIES: RentalCategory[] = [
@@ -43,7 +45,16 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
     text: "",
     price: "Cena individuálne",
     lead: "Kvetinovú výzdobu pripravujeme tak, aby jemne doplnila štýl svadby a prirodzene nadviazala na ostatné dekorácie.",
+    coverOfferId: "ikebana-na-stoly",
     offers: [
+      {
+        id: "ikebana-gypsomilka",
+        title: "Ikebana gypsomilka",
+      },
+      {
+        id: "ikebana-z-kvetov",
+        title: "Ikebana z kvetov",
+      },
       {
         id: "ikebana-na-stoly",
         title: "Ikebana na stoly so sviečkami a živým kvetom",
@@ -343,7 +354,10 @@ function getTileVariant(index: number) {
 }
 
 export function rentalCategoryCover(category: RentalCategory) {
-  const offer = category.offers.find((item) => !item.hideImage) ?? category.offers[0];
+  const offer =
+    category.offers.find((item) => item.id === category.coverOfferId) ??
+    category.offers.find((item) => !item.hideImage) ??
+    category.offers[0];
   return rentalImage(offer.imageCategoryId ?? category.id, offer.id, category.title);
 }
 
