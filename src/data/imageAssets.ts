@@ -89,7 +89,7 @@ const RENTAL_IMAGE_COUNTS: Record<string, number> = {
   "kvetinova-vyzdoba:ikebana-na-stoly": 1,
   "kvetinova-vyzdoba:ikebana-na-stoly-s-vazami-okolo": 2,
   "kvetinova-vyzdoba:mala-ikebana": 2,
-  "kvetinova-vyzdoba:dlha-ikebana": 3,
+  "kvetinova-vyzdoba:dlha-ikebana": 1,
   "stojany-zrkadla:stojan-vlna": 1,
   "stojany-zrkadla:stojan-oval-s-bocnymi-vlnami": 1,
   "stojany-zrkadla:stojan-oval-s-vlnovym-navlekom": 1,
