@@ -142,7 +142,15 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
     text: "Dekoračné stojany, zrkadlá a výrazné prvky vhodné na uvítanie hostí, fotenie aj personalizovaný program.",
     price: "Cena individuálne",
     lead: "Stojany a zrkadlá pripravíme ako výrazné dekoračné prvky, ktoré vyniknú pri vstupe, obrade aj počas fotenia.",
+    coverOfferId: "stojan-vlna",
     offers: [
+      {
+        id: "champagne-stena",
+        title: "Champagne stena",
+        price: "80 €",
+        unitPrice: 80,
+        priceKind: "fixed",
+      },
       {
         id: "stojan-vlna",
         title: "Stojan vlna",
