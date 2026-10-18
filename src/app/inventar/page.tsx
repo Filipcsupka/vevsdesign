@@ -45,7 +45,7 @@ export default function InventarPage() {
           </div>
         </section>
 
-        <section className="home-contact">
+        <section className="home-contact inventar-contact">
           <p className="sec-label reveal">Kontakt</p>
           <div className="rule reveal reveal-d1">
             <div className="rule-diamond" />

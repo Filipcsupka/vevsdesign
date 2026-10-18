@@ -6,7 +6,7 @@ import { useSelections } from "@/components/SelectionProvider";
 import { createPortal } from "react-dom";
 import ModalImageGallery from "@/components/ModalImageGallery";
 import QuantityInput from "@/components/QuantityInput";
-import FallbackImage from "@/components/FallbackImage";
+import CategoryBanner from "@/components/CategoryBanner";
 import ShowcaseTile from "@/components/ShowcaseTile";
 import { rentalDetailImages, rentalImage } from "@/data/imageAssets";
 
@@ -484,48 +484,36 @@ export default function Gallery() {
               "--inv-panel-row": pair * 3 + 2 + (index % 2),
             } as CSSProperties;
             return (
-              <div key={category.id} className="inv-cat" id={category.id} style={layout}>
-                <button
-                  type="button"
-                  className={`inv-cat-cover${isOpen ? " is-open" : ""}`}
-                  aria-expanded={isOpen}
-                  aria-controls={`${category.id}-panel`}
-                  onClick={() => toggleCategory(category.id)}
-                >
-                  <FallbackImage src={cover.src} alt="" className="inv-cat-img" />
-                  <span className="inv-cat-shade" aria-hidden="true" />
-                  <span className="inv-cat-body">
-                    <span className="inv-cat-title">{category.title}</span>
-                    <span className="inv-cat-lead">{category.lead}</span>
-                  </span>
-                  <span className="inv-cat-toggle" aria-hidden="true" />
-                </button>
-                <div className="inv-cat-panel" id={`${category.id}-panel`} hidden={!isOpen}>
-                  {isOpen ? (
-                    <>
-                      {category.text && <p className="rental-group-text">{category.text}</p>}
-                      <div className="showcase-grid showcase-grid-rental">
-                        {category.offers.map((offer, offerIndex) => (
-                          <ShowcaseTile
-                            key={offer.id}
-                            eyebrow={category.title}
-                            title={offer.title}
-                            description={offer.description ?? offer.lead ?? category.lead}
-                            meta={offer.price ?? category.price}
-                            variant={getTileVariant(offerIndex)}
-                            image={offer.hideImage ? undefined : rentalImage(offer.imageCategoryId ?? category.id, offer.id, offer.title)}
-                            featured={offerIndex === 0}
-                            onClick={(event) => {
-                              openDetail(category, offer, event.currentTarget);
-                            }}
-                          />
-                        ))}
-                      </div>
-                      {category.note ? <p className="rental-group-note">{category.note}</p> : null}
-                    </>
-                  ) : null}
+              <CategoryBanner
+                key={category.id}
+                id={category.id}
+                title={category.title}
+                lead={category.lead}
+                coverSrc={cover.src}
+                isOpen={isOpen}
+                onToggle={() => toggleCategory(category.id)}
+                layout={layout}
+              >
+                {category.text && <p className="rental-group-text">{category.text}</p>}
+                <div className="showcase-grid showcase-grid-rental">
+                  {category.offers.map((offer, offerIndex) => (
+                    <ShowcaseTile
+                      key={offer.id}
+                      eyebrow={category.title}
+                      title={offer.title}
+                      description={offer.description ?? offer.lead ?? category.lead}
+                      meta={offer.price ?? category.price}
+                      variant={getTileVariant(offerIndex)}
+                      image={offer.hideImage ? undefined : rentalImage(offer.imageCategoryId ?? category.id, offer.id, offer.title)}
+                      featured={offerIndex === 0}
+                      onClick={(event) => {
+                        openDetail(category, offer, event.currentTarget);
+                      }}
+                    />
+                  ))}
                 </div>
-              </div>
+                {category.note ? <p className="rental-group-note">{category.note}</p> : null}
+              </CategoryBanner>
             );
           })}
         </div>
