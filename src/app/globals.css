@@ -103,6 +103,8 @@ body::before{
   color:var(--ink-soft);text-decoration:none;transition:color 0.3s;white-space:nowrap;
 }
 .topbar a:hover,.topbar a:focus-visible{color:var(--rose)}
+.topbar-instagram{display:inline-flex;align-items:center;gap:0.5rem}
+.topbar-ig-icon{flex:none}
 body.modal-open .topbar{opacity:0;pointer-events:none}
 nav{
   position:fixed;top:var(--topbar-h);left:0;right:0;width:100%;z-index:200;
@@ -1849,7 +1851,7 @@ body.modal-open{overflow:hidden}
   }
   .topbar{padding:0 1rem;gap:0.9rem;justify-content:space-between}
   .topbar a{font-size:0.82rem;letter-spacing:0.04em}
-  .topbar a:nth-child(2){display:none}
+  .topbar a:nth-child(3){display:none}
   nav{
     padding:1rem max(1.5rem,env(safe-area-inset-right,0px)) 1rem max(1.5rem,env(safe-area-inset-left,0px));
     background:linear-gradient(135deg,rgba(var(--bg-surface-rgb),0.9),rgba(var(--bg-surface-soft-rgb),0.84));
