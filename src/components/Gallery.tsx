@@ -446,19 +446,6 @@ export default function Gallery({ variant = "inventory" }: GalleryProps = {}) {
     <section id="galeria">
       <div className="rental-bg-lines" />
       <div className="rental-glow" />
-      {browseOnly ? null : (
-        <>
-          <p className="sec-label reveal">Kúsky, ktoré vieme zapožičať</p>
-          <h2 className="reveal reveal-d1">Prenájom</h2>
-          <div className="rule reveal reveal-d1">
-            <div className="rule-diamond" />
-          </div>
-          <p className="sec-intro reveal reveal-d2">
-            Vyberte si kategóriu prenájmu, ktorá najlepšie doplní atmosféru vášho dňa.
-          </p>
-        </>
-      )}
-
       <div className="rental-stage reveal reveal-d2">
         <div className="rental-groups">
           {(browseOnly ? BROWSE_CATEGORIES : RENTAL_CATEGORIES).map((category) => (

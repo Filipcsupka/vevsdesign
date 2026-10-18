@@ -30,19 +30,8 @@ export default function InventarPage() {
       <BackgroundCanvas />
       <Nav />
       <main>
-        <section className="home-intro inventar-head">
-          <p className="sec-label reveal">Inventár</p>
-          <div className="rule reveal reveal-d1">
-            <div className="rule-diamond" />
-          </div>
-          <h1 className="reveal reveal-d1">Celý <em>inventár</em></h1>
-          <p className="home-intro-text reveal reveal-d2">
-            Prezrite si všetko na jednom mieste, pridajte položky do výberu a my vám pošleme jeden dopyt.
-          </p>
-          <nav className="inventar-jump reveal reveal-d3" aria-label="Sekcie inventára">
-            <a href="#galeria" className="home-link">Prenájom</a>
-            <a href="#services" className="home-link">Doplnky</a>
-          </nav>
+        <section className="svadba-head svadba-head-compact">
+          <h1 className="sr-only">Celý inventár</h1>
         </section>
 
         <Gallery />
