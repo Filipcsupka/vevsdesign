@@ -28,12 +28,8 @@ export default function SvadbaPage() {
       <BackgroundCanvas />
       <Nav />
       <main>
-        <section className="home-intro svadba-head">
-          <p className="sec-label reveal">Svadba</p>
-          <div className="rule reveal reveal-d1">
-            <div className="rule-diamond" />
-          </div>
-          <h1 className="reveal reveal-d1">Plánovanie <em>celej svadby</em></h1>
+        <section className="svadba-head svadba-head-compact">
+          <h1 className="sr-only">Plánovanie celej svadby</h1>
         </section>
 
         <Baliky />
