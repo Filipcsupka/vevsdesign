@@ -108,7 +108,7 @@ const INVENTORY_CATEGORIES: InventoryCategory[] = [
     "inventar-vyzdoba-stola",
     "Výzdoba stola",
     "Servítky a prstenec Diamond.",
-    ["servitky", "prstenec-diamond"],
+    ["servitky", "prstenec-diamond", "klubove-taniere"],
     undefined,
     "prstenec-diamond",
   ),

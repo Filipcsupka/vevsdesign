@@ -298,6 +298,16 @@ export const CUSTOM_SERVICES: ServiceItem[] = [
     description: "Obsahuje štólu, jednoduché kvety a sviečky. Možnosť aj koberca, cena podľa metráže.",
     category: "Doplnky na mieru",
   },
+  {
+    id: "klubove-taniere",
+    name: "Klubové taniere",
+    price: "2,10 €",
+    unitPrice: 2.1,
+    priceKind: "fixed",
+    unitLabel: "ks",
+    description: "",
+    category: "Doplnky na mieru",
+  },
 ];
 
 export const GUEST_SERVICES: ServiceItem[] = [
