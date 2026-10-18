@@ -109,6 +109,8 @@ const INVENTORY_CATEGORIES: InventoryCategory[] = [
     "Výzdoba stola",
     "Servítky a prstenec Diamond.",
     ["servitky", "prstenec-diamond"],
+    undefined,
+    "prstenec-diamond",
   ),
   fromServices(
     "inventar-vyzdoba-priestoru",
