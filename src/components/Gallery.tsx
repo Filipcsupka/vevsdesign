@@ -320,10 +320,10 @@ const STANDS_FIRST_ID = "prenajom-stojany-zrkadla";
 const KIDS_ID = "prenajom-detsky-kutik";
 const OTHER_ID = "prenajom-ostatne";
 
-// /prenajom: no separate kids category (its offer lives under "Ostatné"), stands first.
-const BROWSE_CATEGORIES: RentalCategory[] = (() => {
+// Kids corner has no category of its own: its offer lives under "Ostatné".
+const FOLDED_CATEGORIES: RentalCategory[] = (() => {
   const kids = RENTAL_CATEGORIES.find((c) => c.id === KIDS_ID);
-  const list = RENTAL_CATEGORIES.filter((c) => c.id !== KIDS_ID).map((c) =>
+  return RENTAL_CATEGORIES.filter((c) => c.id !== KIDS_ID).map((c) =>
     c.id === OTHER_ID && kids
       ? {
           ...c,
@@ -331,8 +331,12 @@ const BROWSE_CATEGORIES: RentalCategory[] = (() => {
         }
       : c,
   );
-  return list.sort((a, b) => Number(b.id === STANDS_FIRST_ID) - Number(a.id === STANDS_FIRST_ID));
 })();
+
+// /prenajom: same categories, stands first.
+const BROWSE_CATEGORIES: RentalCategory[] = [...FOLDED_CATEGORIES].sort(
+  (a, b) => Number(b.id === STANDS_FIRST_ID) - Number(a.id === STANDS_FIRST_ID),
+);
 
 type ActiveRental = {
   category: RentalCategory;
@@ -362,7 +366,7 @@ export default function Gallery({ variant = "inventory" }: GalleryProps = {}) {
   const activeRental = useMemo<ActiveRental | null>(() => {
     if (!openKey) return null;
 
-    for (const category of browseOnly ? BROWSE_CATEGORIES : RENTAL_CATEGORIES) {
+    for (const category of browseOnly ? BROWSE_CATEGORIES : FOLDED_CATEGORIES) {
       if (category.id === openKey) return { category, offer: null };
       const offer = category.offers.find((item) => `${category.id}:${item.id}` === openKey);
       if (offer) return { category, offer };
@@ -448,7 +452,7 @@ export default function Gallery({ variant = "inventory" }: GalleryProps = {}) {
       <div className="rental-glow" />
       <div className="rental-stage reveal reveal-d2">
         <div className="rental-groups">
-          {(browseOnly ? BROWSE_CATEGORIES : RENTAL_CATEGORIES).map((category) => (
+          {(browseOnly ? BROWSE_CATEGORIES : FOLDED_CATEGORIES).map((category) => (
             <div key={category.id} className="rental-group" id={category.id}>
               <div className="rental-group-title">{category.title}</div>
               {category.text && <p className="rental-group-text">{category.text}</p>}
