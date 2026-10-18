@@ -22,13 +22,11 @@ const SERVICE_CARDS = [
   {
     href: "/svadba/",
     title: "Plánovanie celej svadby",
-    text: "Balíky výzdoby od návrhu až po zariadenie priestoru.",
     image: planningPhoto,
   },
   {
     href: "/prenajom/",
     title: "Prenájom dekorácií",
-    text: "Stojany, zrkadlá, ikebany, vázy a svietniky na mieru.",
     image: rentalPhoto,
   },
 ];
@@ -64,7 +62,6 @@ export default function Page() {
                 <FallbackImage src={card.image.src} alt={card.image.alt} className="home-card-img" />
                 <span className="home-card-shade" aria-hidden="true" />
                 <span className="home-card-body">
-                  <span className="home-card-text">{card.text}</span>
                   <span className="home-card-btn">{card.title}</span>
                 </span>
               </Link>

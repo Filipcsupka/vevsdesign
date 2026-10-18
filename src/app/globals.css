@@ -2053,7 +2053,6 @@ body.modal-open{overflow:hidden}
 .home-card:hover .home-card-img,.home-card:focus-visible .home-card-img{transform:scale(1.04)}
 .home-card-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(var(--ink-rgb),0) 55%,rgba(var(--ink-rgb),0.28) 100%)}
 .home-card-body{position:absolute;left:0;right:0;bottom:2rem;display:grid;gap:0.9rem;justify-items:center;padding:0 1.4rem;text-align:center}
-.home-card-text{color:#fff;font-family:var(--serif);font-size:1.05rem;line-height:1.5;text-shadow:0 1px 14px rgba(var(--ink-rgb),0.45)}
 .home-card-btn{display:inline-block;padding:1rem 2.2rem;background:rgba(var(--bg-beige-soft-rgb),0.96);color:var(--ink);font-size:0.68rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;border:1px solid rgba(var(--gold-rgb),0.3);transition:background 0.4s,transform 0.4s}
 .home-card:hover .home-card-btn,.home-card:focus-visible .home-card-btn{background:var(--gold-ll);transform:translateY(-3px)}
 .home-packages{text-align:center}
