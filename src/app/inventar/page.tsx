@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { pageMetadata } from "@/data/pageMetadata";
 import Link from "next/link";
 import Nav from "@/components/Nav";
-import Gallery from "@/components/Gallery";
-import Services from "@/components/Services";
+import Inventory from "@/components/Inventory";
 import SelectionBar from "@/components/SelectionBar";
 import Footer from "@/components/Footer";
 import RevealController from "@/components/RevealController";
@@ -34,8 +33,7 @@ export default function InventarPage() {
           <h1 className="sr-only">Inventár a prenájom dekorácií</h1>
         </section>
 
-        <Gallery />
-        <Services afterSelect="stay" />
+        <Inventory />
 
         <section className="inventar-packages">
           <div className="home-inventory-inner reveal">

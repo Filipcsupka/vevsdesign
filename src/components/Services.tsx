@@ -1,17 +1,16 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { normalizeQuantity, type PriceKind } from "@/components/contactSelection";
 import { useSelections } from "@/components/SelectionProvider";
 import { createPortal } from "react-dom";
 import ModalImageGallery from "@/components/ModalImageGallery";
 import QuantityInput from "@/components/QuantityInput";
-import CategoryBanner from "@/components/CategoryBanner";
 import ShowcaseTile from "@/components/ShowcaseTile";
 import { serviceDetailImages, serviceImage } from "@/data/imageAssets";
 
-type ServiceItem = {
+export type ServiceItem = {
   id: string;
   name: string;
   price: string;
@@ -30,7 +29,7 @@ type ServiceItem = {
   variants?: ServiceItem[];
 };
 
-const CUSTOM_SERVICES: ServiceItem[] = [
+export const CUSTOM_SERVICES: ServiceItem[] = [
   {
     id: "uvitacie-tabule-a-zasadaci-poriadok",
     name: "Uvítacie prvky a zasadací poriadok",
@@ -271,7 +270,7 @@ const CUSTOM_SERVICES: ServiceItem[] = [
   },
 ];
 
-const GUEST_SERVICES: ServiceItem[] = [
+export const GUEST_SERVICES: ServiceItem[] = [
   {
     id: "prstenec-diamond",
     name: "Prstenec Diamond",
@@ -360,48 +359,8 @@ const GUEST_SERVICES: ServiceItem[] = [
 
 const ALL_SERVICES = [...CUSTOM_SERVICES, ...GUEST_SERVICES].flatMap((item) => [item, ...(item.variants ?? [])]);
 
-type ServiceGroup = {
-  id: string;
-  title: ServiceItem["category"];
-  lead: string;
-  services: ServiceItem[];
-  tileOffset: number;
-  featuredIndex: number;
-};
-
-const SERVICE_GROUPS: ServiceGroup[] = [
-  {
-    id: "doplnky-na-mieru",
-    title: "Doplnky na mieru",
-    lead: "Uvítacie prvky, zasadací poriadok, pozvánky, menovky, tlačoviny a ďalšie personalizované detaily.",
-    services: CUSTOM_SERVICES,
-    tileOffset: 0,
-    featuredIndex: 0,
-  },
-  {
-    id: "doplnky-pre-hosti",
-    title: "Doplnky pre hostí",
-    lead: "Prstenec Diamond, cigar bar, omaľovánky, vejáre, okuliare, mini medík a mini fľaštičky.",
-    services: GUEST_SERVICES,
-    tileOffset: 1,
-    featuredIndex: 1,
-  },
-];
-
-function groupCover(group: ServiceGroup) {
-  const first = group.services[0];
-  return serviceImage(first.category, first.imageId ?? first.id, first.name);
-}
-
-// Accent-insensitive, so both #doplnky-pre-hosti and #doplnky-pre-hostí work.
-function normalizeHash(hash: string) {
-  let value = hash.replace(/^#/, "");
-  try {
-    value = decodeURIComponent(value);
-  } catch {
-    // keep the raw value
-  }
-  return value.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+export function serviceCover(item: ServiceItem) {
+  return serviceImage(item.category, item.imageId ?? item.id, item.name);
 }
 
 const TILE_VARIANTS = ["sky", "sand", "pearl", "mist"] as const;
@@ -414,11 +373,14 @@ function formatModalDetail(detail: string) {
   return /[.!?]$/.test(detail) ? detail : `${detail}.`;
 }
 
-type ServicesProps = {
+type ServiceItemsProps = {
+  items: ServiceItem[];
+  eyebrow: string;
   afterSelect?: "contact" | "stay";
 };
 
-export default function Services({ afterSelect = "contact" }: ServicesProps = {}) {
+// Tiles + detail modal (cart kind "services") for a list of add-on services.
+export default function ServiceItems({ items, eyebrow, afterSelect = "contact" }: ServiceItemsProps) {
   const router = useRouter();
   const { addSelection: onSelectService } = useSelections();
   const [openId, setOpenId] = useState<string | null>(null);
@@ -426,7 +388,6 @@ export default function Services({ afterSelect = "contact" }: ServicesProps = {}
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const [quantity, setQuantity] = useState(1);
   const [variantId, setVariantId] = useState<string | null>(null);
-  const [openGroups, setOpenGroups] = useState<string[]>([]);
   const lastTriggerRef = useRef<HTMLButtonElement | null>(null);
 
   const activeGroup = openId ? ALL_SERVICES.find((item) => item.id === openId) ?? null : null;
@@ -471,30 +432,6 @@ export default function Services({ afterSelect = "contact" }: ServicesProps = {}
     setQuantity(1);
   }, [variantId]);
 
-  // Deep links (#doplnky-...) open the matching group and scroll to it.
-  useEffect(() => {
-    const openFromHash = () => {
-      const id = normalizeHash(window.location.hash);
-      if (!SERVICE_GROUPS.some((group) => group.id === id)) return;
-      setOpenGroups((current) => (current.includes(id) ? current : [...current, id]));
-      window.requestAnimationFrame(() => {
-        document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-    };
-
-    openFromHash();
-    window.addEventListener("hashchange", openFromHash);
-    window.addEventListener("popstate", openFromHash);
-    return () => {
-      window.removeEventListener("hashchange", openFromHash);
-      window.removeEventListener("popstate", openFromHash);
-    };
-  }, []);
-
-  function toggleGroup(id: string) {
-    setOpenGroups((current) => (current.includes(id) ? current.filter((item) => item !== id) : [...current, id]));
-  }
-
   function handleCta() {
     if (activeService) {
       onSelectService({
@@ -513,55 +450,33 @@ export default function Services({ afterSelect = "contact" }: ServicesProps = {}
   }
 
   return (
-    <section id="services" className="inv-services">
-      <div className="inv-cats inv-services-cats">
-        {SERVICE_GROUPS.map((group, groupIndex) => {
-          const layout = {
-            "--inv-col": (groupIndex % 2) + 1,
-            "--inv-cover-row": 1,
-            "--inv-panel-row": 2 + (groupIndex % 2),
-          } as CSSProperties;
-          return (
-            <CategoryBanner
-              key={group.id}
-              id={group.id}
-              title={group.title}
-              lead={group.lead}
-              coverSrc={groupCover(group).src}
-              isOpen={openGroups.includes(group.id)}
-              onToggle={() => toggleGroup(group.id)}
-              layout={layout}
-            >
-              <div className="showcase-grid showcase-grid-services">
-                {group.services.map((service, index) => (
-                  <ShowcaseTile
-                    key={service.id}
-                    eyebrow={group.title}
-                    title={service.name}
-                    description={service.description}
-                    meta={service.price}
-                    variant={getTileVariant(index + group.tileOffset)}
-                    image={serviceImage(service.category, service.imageId ?? service.id, service.name)}
-                    images={
-                      service.id === "uvitacie-tabule-a-zasadaci-poriadok"
-                        ? [
-                            serviceImage(service.category, "uvitacia-latka", "Uvítací banner"),
-                            serviceImage(service.category, "zasadaci-poriadok-visiaci", "Zasadací poriadok visiaci"),
-                            serviceImage(service.category, "zrkadlo-s-menami-a-textom", "Zrkadlo s menami a textom"),
-                          ]
-                        : undefined
-                    }
-                    featured={index === group.featuredIndex}
-                    onClick={(event) => {
-                      lastTriggerRef.current = event.currentTarget;
-                      setOpenId(service.id);
-                    }}
-                  />
-                ))}
-              </div>
-            </CategoryBanner>
-          );
-        })}
+    <>
+      <div className="showcase-grid showcase-grid-services">
+        {items.map((service, index) => (
+          <ShowcaseTile
+            key={service.id}
+            eyebrow={eyebrow}
+            title={service.name}
+            description={service.description}
+            meta={service.price}
+            variant={getTileVariant(index)}
+            image={serviceImage(service.category, service.imageId ?? service.id, service.name)}
+            images={
+              service.id === "uvitacie-tabule-a-zasadaci-poriadok"
+                ? [
+                    serviceImage(service.category, "uvitacia-latka", "Uvítací banner"),
+                    serviceImage(service.category, "zasadaci-poriadok-visiaci", "Zasadací poriadok visiaci"),
+                    serviceImage(service.category, "zrkadlo-s-menami-a-textom", "Zrkadlo s menami a textom"),
+                  ]
+                : undefined
+            }
+            featured={index === 0}
+            onClick={(event) => {
+              lastTriggerRef.current = event.currentTarget;
+              setOpenId(service.id);
+            }}
+          />
+        ))}
       </div>
 
       {mounted && activeService && createPortal(
@@ -654,6 +569,6 @@ export default function Services({ afterSelect = "contact" }: ServicesProps = {}
         </div>,
         document.body
       )}
-    </section>
+    </>
   );
 }

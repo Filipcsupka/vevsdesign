@@ -1,16 +1,15 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { normalizeQuantity, type PriceKind } from "@/components/contactSelection";
 import { useSelections } from "@/components/SelectionProvider";
 import { createPortal } from "react-dom";
 import ModalImageGallery from "@/components/ModalImageGallery";
 import QuantityInput from "@/components/QuantityInput";
-import CategoryBanner from "@/components/CategoryBanner";
 import ShowcaseTile from "@/components/ShowcaseTile";
 import { rentalDetailImages, rentalImage } from "@/data/imageAssets";
 
-type RentalOffer = {
+export type RentalOffer = {
   id: string;
   title: string;
   price?: string;
@@ -26,7 +25,7 @@ type RentalOffer = {
   details?: string;
 };
 
-type RentalCategory = {
+export type RentalCategory = {
   id: string;
   title: string;
   text: string;
@@ -320,7 +319,7 @@ const KIDS_ID = "prenajom-detsky-kutik";
 const OTHER_ID = "prenajom-ostatne";
 
 // Kids corner has no category of its own: its offer lives under "Ostatné".
-const FOLDED_CATEGORIES: RentalCategory[] = (() => {
+export const FOLDED_CATEGORIES: RentalCategory[] = (() => {
   const kids = RENTAL_CATEGORIES.find((c) => c.id === KIDS_ID);
   return RENTAL_CATEGORIES.filter((c) => c.id !== KIDS_ID).map((c) =>
     c.id === OTHER_ID && kids
@@ -343,13 +342,13 @@ function getTileVariant(index: number) {
   return TILE_VARIANTS[index % TILE_VARIANTS.length];
 }
 
-function coverImage(category: RentalCategory) {
+export function rentalCategoryCover(category: RentalCategory) {
   const offer = category.offers.find((item) => !item.hideImage) ?? category.offers[0];
   return rentalImage(offer.imageCategoryId ?? category.id, offer.id, category.title);
 }
 
-export default function Gallery() {
-  const [openCats, setOpenCats] = useState<string[]>([]);
+// Tiles + detail modal (cart kind "rentals") for one rental category.
+export default function RentalItems({ category }: { category: RentalCategory }) {
   const { addSelection: onSelectRental } = useSelections();
   const [openKey, setOpenKey] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
@@ -361,14 +360,10 @@ export default function Gallery() {
   const activeRental = useMemo<ActiveRental | null>(() => {
     if (!openKey) return null;
 
-    for (const category of FOLDED_CATEGORIES) {
-      if (category.id === openKey) return { category, offer: null };
-      const offer = category.offers.find((item) => `${category.id}:${item.id}` === openKey);
-      if (offer) return { category, offer };
-    }
-
-    return null;
-  }, [openKey]);
+    if (category.id === openKey) return { category, offer: null };
+    const offer = category.offers.find((item) => `${category.id}:${item.id}` === openKey);
+    return offer ? { category, offer } : null;
+  }, [category, openKey]);
 
   const activeRentalBodyText =
     activeRental?.offer?.text ?? (!activeRental?.offer ? activeRental?.category.text : "");
@@ -419,30 +414,6 @@ export default function Gallery() {
     setQuantity(1);
   }, [openKey]);
 
-  // Deep links (#prenajom-...) open the matching category and scroll to it.
-  useEffect(() => {
-    const openFromHash = () => {
-      const id = decodeURIComponent(window.location.hash.slice(1));
-      if (!FOLDED_CATEGORIES.some((category) => category.id === id)) return;
-      setOpenCats((current) => (current.includes(id) ? current : [...current, id]));
-      window.requestAnimationFrame(() => {
-        document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-    };
-
-    openFromHash();
-    window.addEventListener("hashchange", openFromHash);
-    window.addEventListener("popstate", openFromHash);
-    return () => {
-      window.removeEventListener("hashchange", openFromHash);
-      window.removeEventListener("popstate", openFromHash);
-    };
-  }, []);
-
-  function toggleCategory(id: string) {
-    setOpenCats((current) => (current.includes(id) ? current.filter((item) => item !== id) : [...current, id]));
-  }
-
   function openDetail(category: RentalCategory, offer: RentalOffer, button: HTMLButtonElement) {
     lastTriggerRef.current = button;
     setOvalStandWithAccessories(true);
@@ -466,58 +437,26 @@ export default function Gallery() {
   }
 
   return (
-    <section id="galeria">
-      <div className="rental-bg-lines" />
-      <div className="rental-glow" />
-      <div className="rental-stage reveal reveal-d2">
-        <h2 className="inv-intro reveal">
-          Vyberte si inventár pre kompletnú výzdobu <em>alebo prenájom jednotlivých dekorácií</em>
-        </h2>
-        <div className="inv-cats">
-          {FOLDED_CATEGORIES.map((category, index) => {
-            const isOpen = openCats.includes(category.id);
-            const cover = coverImage(category);
-            const pair = Math.floor(index / 2);
-            const layout = {
-              "--inv-col": (index % 2) + 1,
-              "--inv-cover-row": pair * 3 + 1,
-              "--inv-panel-row": pair * 3 + 2 + (index % 2),
-            } as CSSProperties;
-            return (
-              <CategoryBanner
-                key={category.id}
-                id={category.id}
-                title={category.title}
-                lead={category.lead}
-                coverSrc={cover.src}
-                isOpen={isOpen}
-                onToggle={() => toggleCategory(category.id)}
-                layout={layout}
-              >
-                {category.text && <p className="rental-group-text">{category.text}</p>}
-                <div className="showcase-grid showcase-grid-rental">
-                  {category.offers.map((offer, offerIndex) => (
-                    <ShowcaseTile
-                      key={offer.id}
-                      eyebrow={category.title}
-                      title={offer.title}
-                      description={offer.description ?? offer.lead ?? category.lead}
-                      meta={offer.price ?? category.price}
-                      variant={getTileVariant(offerIndex)}
-                      image={offer.hideImage ? undefined : rentalImage(offer.imageCategoryId ?? category.id, offer.id, offer.title)}
-                      featured={offerIndex === 0}
-                      onClick={(event) => {
-                        openDetail(category, offer, event.currentTarget);
-                      }}
-                    />
-                  ))}
-                </div>
-                {category.note ? <p className="rental-group-note">{category.note}</p> : null}
-              </CategoryBanner>
-            );
-          })}
-        </div>
+    <>
+      {category.text && <p className="rental-group-text">{category.text}</p>}
+      <div className="showcase-grid showcase-grid-rental">
+        {category.offers.map((offer, offerIndex) => (
+          <ShowcaseTile
+            key={offer.id}
+            eyebrow={category.title}
+            title={offer.title}
+            description={offer.description ?? offer.lead ?? category.lead}
+            meta={offer.price ?? category.price}
+            variant={getTileVariant(offerIndex)}
+            image={offer.hideImage ? undefined : rentalImage(offer.imageCategoryId ?? category.id, offer.id, offer.title)}
+            featured={offerIndex === 0}
+            onClick={(event) => {
+              openDetail(category, offer, event.currentTarget);
+            }}
+          />
+        ))}
       </div>
+      {category.note ? <p className="rental-group-note">{category.note}</p> : null}
       {mounted && activeRental && createPortal(
         <div className="rental-modal" role="dialog" aria-modal="true" aria-labelledby="rental-modal-name">
           <div className="rental-modal-backdrop" onClick={() => setOpenKey(null)} />
@@ -616,6 +555,6 @@ export default function Gallery() {
         </div>,
         document.body
       )}
-    </section>
+    </>
   );
 }

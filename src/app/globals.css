@@ -63,10 +63,7 @@ img,svg,video,canvas{max-width:100%}
 
 #hero{scroll-margin-top:0}
 #about,#novinky,#baliky,#services,#galeria,#nfc-srdce,#kontakt,
-#balik-s,#balik-m,#balik-l,#balik-vlastny,
-#doplnky-na-mieru,#doplnky-pre-hosti,
-#prenajom-kvetinova-vyzdoba,#prenajom-detsky-kutik,#prenajom-stojany-zrkadla,
-#prenajom-vazy-svietniky,#prenajom-ostatne{scroll-margin-top:5.5rem}
+#balik-s,#balik-m,#balik-l,#balik-vlastny{scroll-margin-top:5.5rem}
 
 #site-canvas{
   position:fixed;inset:0;z-index:0;
@@ -2129,12 +2126,9 @@ body:has(.cookie-banner) .selection-bar{bottom:calc(var(--cookie-banner-h,9rem) 
 }
 @media (prefers-reduced-motion:reduce){.inv-cat-img{transition:none}}
 
-/* === inventory page: add-on banners and lower blocks === */
-#services.inv-services{
-  background:none;padding:0 5rem 3.5rem;
-  backdrop-filter:none;-webkit-backdrop-filter:none;
-}
-.inv-services .inv-cats{margin-bottom:0}
+/* === inventory page: lower blocks === */
+.inv-cat-cover{scroll-margin-top:5.5rem}
+.inv-cat-block+.inv-cat-block{margin-top:2rem}
 .inventar-packages .home-inventory-inner{
   max-width:1180px;padding:3rem 2rem;border:none;border-radius:6px;
   background:rgba(var(--bg-beige-soft-rgb),0.7);box-shadow:var(--shadow);
@@ -2151,9 +2145,5 @@ body:has(.cookie-banner) .selection-bar{bottom:calc(var(--cookie-banner-h,9rem) 
 .inventar-contact h2{font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.3}
 .inventar-contact .home-contact-list a{font-family:var(--serif2);font-style:italic;font-weight:300;font-size:1.3rem;letter-spacing:0.02em}
 @media (max-width:900px){
-  #services.inv-services{padding:0 1.5rem 3rem}
   .inventar-contact{margin:2rem 1rem 5rem;padding:2.8rem 1.2rem}
-}
-@media (max-width:640px){
-  #services.inv-services{padding:0 max(1rem,env(safe-area-inset-right,0px)) 3rem max(1rem,env(safe-area-inset-left,0px))}
 }
