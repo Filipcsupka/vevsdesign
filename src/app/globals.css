@@ -2102,3 +2102,6 @@ body:has(.cookie-banner) .selection-bar{bottom:calc(var(--cookie-banner-h,9rem) 
 @media (max-width:900px){#baliky .baliky-intro{margin-bottom:2.5rem}}
 .baliky-grid .balik-card{display:flex;flex-direction:column}
 .baliky-grid .balik-hint{margin-top:auto;padding-top:2rem}
+.prenajom-head{padding-bottom:0}
+.prenajom-head h1{margin-bottom:0}
+.prenajom-head + #galeria{padding-top:1rem}
