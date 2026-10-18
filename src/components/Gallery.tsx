@@ -88,9 +88,9 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
       {
         id: "mala-ikebana",
         title: "Malá ikebana",
-        price: "15 €",
+        price: "15 – 20 €",
         unitPrice: 15,
-        priceKind: "fixed",
+        priceKind: "from",
         description: "Vhodné umiestniť napríklad ku uvítacej tabuli, na obrad pozdĺž uličky alebo pred hlavný stôl novomanželov.",
         lead: "Vhodné umiestniť napríklad ku uvítacej tabuli, na obrad pozdĺž uličky alebo pred hlavný stôl novomanželov. Obsahuje kvety ako na fotke vo Vašich požadovaných farbách.",
         details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále alebo na obrade v rámci Východného Slovenska od 6 ks vyššie alebo aj 1 ks pri objednávke nad 100 € (+ príplatok PHM).",
