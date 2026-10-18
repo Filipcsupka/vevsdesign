@@ -101,7 +101,7 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         price: "50 €",
         unitPrice: 50,
         priceKind: "fixed",
-        description: "Vhodné na hlavný stôl novomanželov.",
+        description: "Obsahuje svietniky aj sviečky.",
         lead: "Vhodné na hlavný stôl novomanželov. Obsahuje kvety ako na fotke vo Vašich požadovaných farbách, úzke svietniky a sviečky.",
         details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
       },
