@@ -442,7 +442,7 @@ export default function Gallery({ variant = "inventory" }: GalleryProps = {}) {
 
       <div className="rental-stage reveal reveal-d2">
         <div className="rental-groups">
-          {RENTAL_CATEGORIES.map((category) => (
+          {(browseOnly ? [...RENTAL_CATEGORIES].sort((a, b) => Number(b.id === "prenajom-stojany-zrkadla") - Number(a.id === "prenajom-stojany-zrkadla")) : RENTAL_CATEGORIES).map((category) => (
             <div key={category.id} className="rental-group" id={category.id}>
               <div className="rental-group-title">{category.title}</div>
               {category.text && <p className="rental-group-text">{category.text}</p>}
