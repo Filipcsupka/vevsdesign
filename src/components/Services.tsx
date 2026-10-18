@@ -43,7 +43,7 @@ export const CUSTOM_SERVICES: ServiceItem[] = [
     variants: [
     {
       id: "uvitacia-tabula",
-      name: "Uvítacia tabuľa/zasadací na tabuli",
+      name: "Uvítacia tabuľa / zasadací na tabuli",
       price: "28 €",
       unitPrice: 28,
       priceKind: "fixed",
