@@ -291,9 +291,9 @@ export const CUSTOM_SERVICES: ServiceItem[] = [
   {
     id: "vyzdoba-vchodu",
     name: "Výzdoba vchodu",
-    price: "Cena na dopyt",
-    unitPrice: null,
-    priceKind: "individual",
+    price: "50 €",
+    unitPrice: 50,
+    priceKind: "fixed",
     hideQuantityField: true,
     description: "Obsahuje štólu, jednoduché kvety a sviečky. Možnosť aj koberca, cena podľa metráže.",
     category: "Doplnky na mieru",
