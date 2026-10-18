@@ -288,6 +288,16 @@ export const CUSTOM_SERVICES: ServiceItem[] = [
     description: "",
     category: "Doplnky na mieru",
   },
+  {
+    id: "vyzdoba-vchodu",
+    name: "Výzdoba vchodu",
+    price: "Cena na dopyt",
+    unitPrice: null,
+    priceKind: "individual",
+    hideQuantityField: true,
+    description: "",
+    category: "Doplnky na mieru",
+  },
 ];
 
 export const GUEST_SERVICES: ServiceItem[] = [
