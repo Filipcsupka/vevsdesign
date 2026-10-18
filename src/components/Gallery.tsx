@@ -108,7 +108,7 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
       {
         id: "padava-ikebana",
         title: "Padavá ikebana",
-        description: "Nádherný doplnok pre zvýraznenie novomanželského stola alebo pri výzdobe fotosteny či konca dlhého stola. Cena závisí od hojnosti ikebany.",
+        description: "Nádherný doplnok pre zvýraznenie novomanželského stola alebo pri výzdobe fotosteny či konca dlhého stola.",
         lead: "Nádherný doplnok pre zvýraznenie novomanželského stola alebo pri výzdobe fotosteny či konca dlhého stola. Cena závisí od hojnosti ikebany.",
       },
     ],
