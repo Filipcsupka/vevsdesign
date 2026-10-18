@@ -101,7 +101,7 @@ export default function Nav() {
           </svg>
           {CONTACT_INSTAGRAM_HANDLE.replace(/^@/, "")}
         </a>
-        <a href={`tel:${CONTACT_PHONE_HREF}`}>{CONTACT_PHONE_DISPLAY}</a>
+        <a href={`tel:${CONTACT_PHONE_HREF}`}>t.č.: {CONTACT_PHONE_DISPLAY}</a>
         <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
       </div>
       <nav ref={navRef} id="main-nav">
