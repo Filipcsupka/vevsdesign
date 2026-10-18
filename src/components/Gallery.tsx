@@ -19,6 +19,7 @@ type RentalOffer = {
   unitLabel?: string;
   hideQuantityField?: boolean;
   hideImage?: boolean;
+  imageCategoryId?: string;
   lead?: string;
   text?: string;
   description?: string;
@@ -315,6 +316,24 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
   },
 ];
 
+const STANDS_FIRST_ID = "prenajom-stojany-zrkadla";
+const KIDS_ID = "prenajom-detsky-kutik";
+const OTHER_ID = "prenajom-ostatne";
+
+// /prenajom: no separate kids category (its offer lives under "Ostatné"), stands first.
+const BROWSE_CATEGORIES: RentalCategory[] = (() => {
+  const kids = RENTAL_CATEGORIES.find((c) => c.id === KIDS_ID);
+  const list = RENTAL_CATEGORIES.filter((c) => c.id !== KIDS_ID).map((c) =>
+    c.id === OTHER_ID && kids
+      ? {
+          ...c,
+          offers: [...c.offers, ...kids.offers.map((o) => ({ ...o, imageCategoryId: KIDS_ID }))],
+        }
+      : c,
+  );
+  return list.sort((a, b) => Number(b.id === STANDS_FIRST_ID) - Number(a.id === STANDS_FIRST_ID));
+})();
+
 type ActiveRental = {
   category: RentalCategory;
   offer: RentalOffer | null;
@@ -343,14 +362,14 @@ export default function Gallery({ variant = "inventory" }: GalleryProps = {}) {
   const activeRental = useMemo<ActiveRental | null>(() => {
     if (!openKey) return null;
 
-    for (const category of RENTAL_CATEGORIES) {
+    for (const category of browseOnly ? BROWSE_CATEGORIES : RENTAL_CATEGORIES) {
       if (category.id === openKey) return { category, offer: null };
       const offer = category.offers.find((item) => `${category.id}:${item.id}` === openKey);
       if (offer) return { category, offer };
     }
 
     return null;
-  }, [openKey]);
+  }, [openKey, browseOnly]);
 
   const activeRentalBodyText =
     activeRental?.offer?.text ?? (!activeRental?.offer ? activeRental?.category.text : "");
@@ -366,7 +385,7 @@ export default function Gallery({ variant = "inventory" }: GalleryProps = {}) {
   const activeRentalImages = activeRental
     && !activeRental.offer?.hideImage
     ? rentalDetailImages(
-        activeRental.category.id,
+        activeRental.offer?.imageCategoryId ?? activeRental.category.id,
         activeRental.offer?.id ?? activeRental.category.id.replace(/^prenajom-/, ""),
         activeRentalTitle
       )
@@ -442,7 +461,7 @@ export default function Gallery({ variant = "inventory" }: GalleryProps = {}) {
 
       <div className="rental-stage reveal reveal-d2">
         <div className="rental-groups">
-          {(browseOnly ? [...RENTAL_CATEGORIES].sort((a, b) => Number(b.id === "prenajom-stojany-zrkadla") - Number(a.id === "prenajom-stojany-zrkadla")) : RENTAL_CATEGORIES).map((category) => (
+          {(browseOnly ? BROWSE_CATEGORIES : RENTAL_CATEGORIES).map((category) => (
             <div key={category.id} className="rental-group" id={category.id}>
               <div className="rental-group-title">{category.title}</div>
               {category.text && <p className="rental-group-text">{category.text}</p>}
@@ -455,7 +474,7 @@ export default function Gallery({ variant = "inventory" }: GalleryProps = {}) {
                     description={offer.description ?? offer.lead ?? category.lead}
                     meta={offer.price ?? category.price}
                     variant={getTileVariant(index)}
-                    image={offer.hideImage ? undefined : rentalImage(category.id, offer.id, offer.title)}
+                    image={offer.hideImage ? undefined : rentalImage(offer.imageCategoryId ?? category.id, offer.id, offer.title)}
                     featured={index === 0}
                     onClick={(event) => {
                       openDetail(category, offer, event.currentTarget);
