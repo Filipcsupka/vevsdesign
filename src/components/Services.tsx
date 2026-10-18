@@ -49,7 +49,7 @@ export const CUSTOM_SERVICES: ServiceItem[] = [
       priceKind: "fixed",
       hideQuantityField: true,
       description: "Uvítacia tabuľa vytvorí krásny prvý dojem a hneď pri príchode naladí hostí na atmosféru svadby.",
-      modalDescription: "Uvítacia tabuľa vytvorí krásny prvý dojem a hneď pri príchode privíta hostí v štýle vašej svadby. Cena je bez kvetov s prenajatým stojanom a personalizovanou uvítacou tabuľou na plátne.",
+      modalDescription: "Uvítacia tabuľa vytvorí krásny prvý dojem a hneď pri príchode privíta hostí. Vytvára sa v štýle vašej svadby a vašich farieb. Takisto platí pre zasadací poriadok, vieme ho vyrobiť podľa Vašich predstáv. Cena zahŕňa aj prenajatý stojan, ktorý vieme vyzdobiť za malý príplatok behúňom, tylom, kvetmi.",
       modalDetails: [],
       modalAbout: "Finálny dizajn Vám pošleme do 3 dní. Doba doručenia je 5 až 15 pracovných dní.",
       category: "Doplnky na mieru",
