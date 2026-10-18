@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useRef } from "react";
 
 export default function Hero() {
@@ -70,11 +69,6 @@ export default function Hero() {
             <em>naša vášeň</em>
             <span className="h1-line2">Výzdoba, ktorú si zapamätáte</span>
           </h1>
-
-          <div className="btn-pair">
-            <Link href="/svadba/" className="btn-p">Pozrieť balíky</Link>
-            <Link href="/kontakt/" className="btn-o">Kontaktujte nás</Link>
-          </div>
         </div>
 
         <figure className="hero-photo">

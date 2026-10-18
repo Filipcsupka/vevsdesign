@@ -380,13 +380,6 @@ h1 .h1-line2{display:block;font-size:0.72em;opacity:0.85}
 .hero-photo figcaption span:first-child{
   color:var(--gold);font-family:var(--serif);font-size:0.72rem;letter-spacing:0.18em;
 }
-.btn-pair{
-  position:relative;z-index:2;
-  display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap;
-  animation:heroFade 1.6s 0.65s cubic-bezier(0.4,0,0.2,1) both;
-  translate:0 var(--hero-copy-y);
-  will-change:translate;
-}
 .btn-p{
   padding:1rem 2.8rem;
   background:linear-gradient(160deg,rgba(var(--gold-ll-rgb),0.98) 0%,rgba(255,255,255,0.94) 42%,rgba(var(--gold-l-rgb),0.9) 100%);
@@ -1983,7 +1976,6 @@ body.modal-open{overflow:hidden}
   h1 .h1-line2{font-size:0.8em}
   h1{margin-bottom:1.25rem}
   .hero-sub{font-size:1.06rem;max-width:min(100%,17rem);padding:0 0.25rem;margin-bottom:2rem}
-  .btn-pair{width:100%;max-width:21rem;flex-direction:column;align-items:stretch}
   .btn-p,.btn-o,.btn-submit{
     width:100%;padding:0.95rem 1.1rem;text-align:center;
     letter-spacing:0.15em;white-space:normal;

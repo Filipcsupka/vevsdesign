@@ -3,7 +3,6 @@ import { pageMetadata } from "@/data/pageMetadata";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Baliky from "@/components/Baliky";
-import Services from "@/components/Services";
 import Footer from "@/components/Footer";
 import RevealController from "@/components/RevealController";
 import {
@@ -17,7 +16,7 @@ import {
 export const metadata: Metadata = pageMetadata({
   title: "Plánovanie celej svadby | Vevsdesign",
   description:
-    "Svadobné balíčky výzdoby, doplnky na mieru a doplnky pre hostí. Košice a okolie.",
+    "Svadobné balíčky výzdoby na mieru. Košice a okolie.",
   path: "/svadba/",
 });
 
@@ -35,19 +34,17 @@ export default function SvadbaPage() {
           <h1 className="reveal reveal-d1">Plánovanie <em>celej svadby</em></h1>
           <p className="home-intro-text reveal reveal-d2">
             Tvoríme kompletnú svadobnú a eventovú výzdobu plnú detailov. Každú svadbu vnímame ako jedinečný príbeh,
-            pri ktorom nám záleží na každom prvku a každej emócii. Ponúkame komplexné balíky, doplnky a tlačoviny
-            na mieru a doplnky pre hostí.
+            pri ktorom nám záleží na každom prvku a každej emócii. Vyberte si balíček, ktorý vám sadne.
           </p>
         </section>
 
         <Baliky />
-        <Services />
 
         <section className="home-inventory">
           <div className="home-inventory-inner reveal">
             <p className="sec-label">Inventár</p>
             <p className="home-inventory-text">
-              Celý inventár na jednom mieste. Vyberte si položky a dopyt nám odošlete sami.
+              Všetky doplnky a položky si môžete vybrať v inventári.
             </p>
             <Link href="/inventar/" className="home-link">Vybrať z celého inventára <span aria-hidden="true">→</span></Link>
           </div>

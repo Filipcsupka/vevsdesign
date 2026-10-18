@@ -15,8 +15,8 @@ import {
 } from "@/data/businessInfo";
 import { rentalImage } from "@/data/imageAssets";
 
-const planningPhoto = rentalImage("stojany-zrkadla", "stojan-oval-s-bocnymi-vlnami", "Biely oblúkový stojan s bielymi kvetmi a sviečkami");
-const rentalPhoto = rentalImage("kvetinova-vyzdoba", "mala-ikebana", "Malá ikebana zo živých kvetov");
+const planningPhoto = rentalImage("kvetinova-vyzdoba", "mala-ikebana", "Priehľadné stoličky s modrými stuhami a kvetmi pri svadobnom obrade v záhrade");
+const rentalPhoto = rentalImage("stojany-zrkadla", "stojan-oval-s-bocnymi-vlnami", "Biely oblúkový stojan s bielymi kvetmi a sviečkami");
 
 const SERVICE_CARDS = [
   {
