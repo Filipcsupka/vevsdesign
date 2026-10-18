@@ -126,7 +126,7 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
       },
       {
         id: "stojan-oval-s-bocnymi-vlnami",
-        title: "Stojan ovál s bočnými vlnami",
+        title: "Oválny stojan s bočnými vlnami",
         price: "100 €",
         unitPrice: 100,
         priceKind: "fixed",
