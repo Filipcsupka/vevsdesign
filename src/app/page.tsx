@@ -5,7 +5,6 @@ import News2027 from "@/components/News2027";
 import Footer from "@/components/Footer";
 import FallbackImage from "@/components/FallbackImage";
 import RevealController from "@/components/RevealController";
-import { PACKAGES } from "@/data/packages";
 import {
   CONTACT_EMAIL,
   CONTACT_INSTAGRAM_HANDLE,
@@ -68,37 +67,6 @@ export default function Page() {
         </section>
 
         <News2027 />
-
-        <section className="home-packages">
-          <p className="sec-label reveal">Balíčky</p>
-          <div className="rule reveal reveal-d1">
-            <div className="rule-diamond" />
-          </div>
-          <h2 className="reveal reveal-d1">Svadobné <em>balíčky</em></h2>
-          <div className="home-pkg-grid">
-            {PACKAGES.map((p, i) => (
-              <Link key={p.id} href="/svadba/" className={`home-pkg reveal reveal-d${i + 1}`}>
-                <span className="home-pkg-badge">{p.badge}</span>
-                <span className="home-pkg-name">{p.name}</span>
-                <span className="home-pkg-price">{p.price}</span>
-                <span className="home-pkg-line">{p.summary}</span>
-              </Link>
-            ))}
-          </div>
-          <p className="home-more reveal">
-            <Link href="/svadba/" className="home-link">Všetky balíčky <span aria-hidden="true">→</span></Link>
-          </p>
-        </section>
-
-        <section className="home-inventory">
-          <div className="home-inventory-inner reveal">
-            <p className="sec-label">Inventár</p>
-            <p className="home-inventory-text">
-              Celý inventár na jednom mieste. Vyberte si položky a dopyt nám odošlete sami.
-            </p>
-            <Link href="/inventar/" className="home-link">Celý inventár <span aria-hidden="true">→</span></Link>
-          </div>
-        </section>
 
         <section className="home-contact">
           <p className="sec-label reveal">Kontakt</p>

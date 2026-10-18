@@ -2045,7 +2045,7 @@ body.modal-open{overflow:hidden}
 .service-variant-chip.active{background:rgba(0,0,0,.07);border-color:rgba(0,0,0,.45)}
 
 /* === home (light landing) === */
-.home-intro,.home-services,.home-packages,.home-contact{padding:5rem 2rem 1rem;max-width:1180px;margin:0 auto}
+.home-intro,.home-services,.home-contact{padding:5rem 2rem 1rem;max-width:1180px;margin:0 auto}
 .home-intro-text{max-width:720px;margin:0 auto;text-align:center;color:var(--ink-light);font-size:0.95rem;line-height:1.95}
 .home-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:1.6rem;margin-top:1rem}
 .home-card{position:relative;display:block;aspect-ratio:3/4;max-height:760px;overflow:hidden;border-radius:6px;text-decoration:none;color:var(--ink);box-shadow:var(--shadow)}
@@ -2055,15 +2055,6 @@ body.modal-open{overflow:hidden}
 .home-card-body{position:absolute;left:0;right:0;bottom:2rem;display:grid;gap:0.9rem;justify-items:center;padding:0 1.4rem;text-align:center}
 .home-card-btn{display:inline-block;padding:1rem 2.2rem;background:rgba(var(--bg-beige-soft-rgb),0.96);color:var(--ink);font-size:0.68rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;border:1px solid rgba(var(--gold-rgb),0.3);transition:background 0.4s,transform 0.4s}
 .home-card:hover .home-card-btn,.home-card:focus-visible .home-card-btn{background:var(--gold-ll);transform:translateY(-3px)}
-.home-packages{text-align:center}
-.home-pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2rem}
-.home-pkg{display:grid;gap:0.5rem;justify-items:center;padding:2rem 1.4rem;text-decoration:none;color:var(--ink);background:rgba(var(--bg-surface-rgb),0.8);border:1px solid rgba(var(--bg-line-rgb),0.28);border-radius:6px;transition:transform 0.4s,box-shadow 0.4s}
-.home-pkg:hover,.home-pkg:focus-visible{transform:translateY(-4px);box-shadow:var(--shadow);outline:none}
-.home-pkg-badge{font-size:0.58rem;letter-spacing:0.26em;text-transform:uppercase;color:var(--rose)}
-.home-pkg-name{font-family:var(--serif);font-size:1.7rem;font-weight:300}
-.home-pkg-price{font-family:var(--serif);font-size:1.3rem;color:var(--ink-soft)}
-.home-pkg-line{color:var(--ink-m);font-size:0.85rem;line-height:1.7}
-.home-more{margin-top:2rem;text-align:center}
 .home-link{display:inline-flex;align-items:center;gap:0.6rem;padding:0.9rem 1.8rem;border:1px solid rgba(var(--gold-rgb),0.45);color:var(--ink);text-decoration:none;font-size:0.65rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;transition:background 0.3s,color 0.3s}
 .home-link:hover,.home-link:focus-visible{background:var(--gold);color:var(--bg-surface);outline:none}
 .home-inventory{padding:4rem 2rem 1rem}
@@ -2075,10 +2066,9 @@ body.modal-open{overflow:hidden}
 .home-contact-list a:hover{color:var(--rose)}
 .btn-pair-static{display:flex;justify-content:center}
 @media (max-width:900px){
-  .home-intro,.home-services,.home-packages,.home-contact{padding:3.5rem 1.2rem 0.5rem}
+  .home-intro,.home-services,.home-contact{padding:3.5rem 1.2rem 0.5rem}
   .home-cards{grid-template-columns:1fr}
   .home-card{aspect-ratio:4/5}
-  .home-pkg-grid{grid-template-columns:1fr}
   .home-inventory{padding:3rem 1.2rem 0.5rem}
   .home-contact{padding-bottom:6rem}
 }
