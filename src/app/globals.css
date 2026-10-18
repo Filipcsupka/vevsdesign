@@ -2100,3 +2100,5 @@ body:has(.cookie-banner) .selection-bar{bottom:calc(var(--cookie-banner-h,9rem) 
 .svadba-head-compact{padding-top:6rem;padding-bottom:0}
 @media (min-width:901px) and (max-width:1200px){.baliky-grid{grid-template-columns:repeat(2,1fr)}}
 @media (min-width:1201px){.baliky-grid .balik-card{padding:3rem 1.8rem}}
+#baliky .baliky-intro{max-width:760px;margin:0 auto 4rem;font-family:var(--serif);font-size:1.7rem;font-weight:400;line-height:1.5;color:var(--ink)}
+@media (max-width:900px){#baliky .baliky-intro{font-size:1.35rem;margin-bottom:2.5rem}}

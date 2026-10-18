@@ -190,15 +190,8 @@ export default function Baliky() {
 
   return (
     <section id="baliky">
-      <h2 className="reveal reveal-d1">
-        Komplexné <em>balíčky</em>
-      </h2>
-      <div className="rule reveal reveal-d1">
-        <div className="rule-diamond" />
-      </div>
-      <p className="sec-intro reveal reveal-d2">
-        Vyberte si balík, ktorý vám najlepšie vyhovuje, alebo si ho vyskladajte na mieru našim kontaktovaním.
-        Cena je do 70 hostí, pri vyššom počte je doplatok 5€/osoba.
+      <p className="sec-intro baliky-intro reveal reveal-d1">
+        Vyberte si balík, ktorý vám najlepšie vyhovuje, alebo si vyberte ponuku na mieru.
       </p>
 
       <div className="baliky-grid">
