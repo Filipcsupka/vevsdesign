@@ -374,8 +374,8 @@ export const GUEST_SERVICES: ServiceItem[] = [
   {
     id: "domaci-med",
     name: "Mini medík domáci",
-    price: "Od 1,50 €",
-    unitPrice: 1.5,
+    price: "Od 2 €",
+    unitPrice: 2,
     priceKind: "from",
     description: "Domáci med je milá a vkusná pozornosť pre hostí, ktorá pôsobí osobne a srdcom.",
     modalDescription: "Mini medík domáci je chutný a osobný darček pre hostí, ktorý pekne doplní svadobný stôl aj výslužku. Mini medík bez lyžičky obsahuje personalizovanú etiketu a zlatú včielku, verzia s lyžičkou 1,90€/ks obsahuje aj vrecúško a lyžičku k medu.",
