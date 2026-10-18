@@ -275,7 +275,7 @@ export const CUSTOM_SERVICES: ServiceItem[] = [
     unitPrice: 50,
     priceKind: "fixed",
     hideQuantityField: true,
-    description: "",
+    description: "Prvok, ktorý nie je všade a pôsobí elegantne a výnimočne.",
     category: "Doplnky na mieru",
   },
   {
