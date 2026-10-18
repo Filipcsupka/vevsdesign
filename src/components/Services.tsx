@@ -75,7 +75,7 @@ export const CUSTOM_SERVICES: ServiceItem[] = [
       priceKind: "fixed",
       hideQuantityField: true,
       description: "Uvítacie zrkadlo s personalizovaným nápisom je elegantný prvý dojem pri vstupe.",
-      modalDescription: "Uvítacie zrkadlo s Vaším textom a dátumom pekne privíta hostí a hodí sa aj na zasadací poriadok.",
+      modalDescription: "Uvítacie zrkadlo s Vaším textom a dátumom pre uvítanie hostí.",
       modalDetails: [],
       modalAbout: "Finálny dizajn Vám pošleme do 3 dní. Doba doručenia je 5 až 15 pracovných dní.",
       category: "Doplnky na mieru",
