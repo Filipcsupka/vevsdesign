@@ -56,6 +56,9 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
       {
         id: "ikebana-z-kvetov",
         title: "Ikebana z kvetov",
+        description:
+          "Kvetinovú výzdobu pripravujeme tak, aby jemne doplnila štýl svadby a prirodzene nadviazala na ostatné dekorácie.",
+        lead: "Vhodná pre stred stola, na vázu alebo len tak v priestore či na obrade. Ide o mix živých a umelých kvetov.",
       },
       {
         id: "ikebana-na-stoly",
