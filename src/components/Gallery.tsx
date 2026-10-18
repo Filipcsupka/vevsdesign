@@ -193,7 +193,7 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         unitPrice: 5,
         priceKind: "fixed",
         description: "Elegantne vytiahnu prestretie do výšky a dodajú mu slávnostný lesk.",
-        lead: "Elegantne vytiahnu prestretie do výšky a dodajú mu slávnostný lesk. Na výber zlaté, strieborné alebo číre podľa požiadavky. Cena je za 3ks ako na fotke bez sviečok. Cena vysokej sviečky je 0,70e/ks.",
+        lead: "Elegantne vytiahnu prestretie do výšky a dodajú mu slávnostný lesk. Na výber zlaté, strieborné alebo číre podľa požiadavky. Cena je za 3ks ako na fotke bez sviečok. Cena vysokej sviečky je 0,70 €/ks.",
         details: "Možnosť osobného odberu, zaslania alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
       },
       {
