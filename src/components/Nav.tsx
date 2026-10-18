@@ -1,6 +1,9 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { useSelections } from "@/components/SelectionProvider";
 import {
   CONTACT_EMAIL,
   CONTACT_INSTAGRAM_HANDLE,
@@ -9,14 +12,31 @@ import {
   CONTACT_PHONE_HREF,
 } from "@/data/businessInfo";
 
+const NAV_ITEMS = [
+  { href: "/", label: "Domov" },
+  { href: "/svadba", label: "Svadba" },
+  { href: "/prenajom", label: "Prenájom" },
+  { href: "/inventar", label: "Inventár" },
+  { href: "/nfc-srdce", label: "NFC srdce" },
+  { href: "/kontakt", label: "Kontakt" },
+] as const;
+
+function normalizePath(path: string | null) {
+  if (!path) return "/";
+  return path.length > 1 ? path.replace(/\/+$/, "") : path;
+}
+
 export default function Nav() {
   const navRef = useRef<HTMLElement>(null);
   const topbarRef = useRef<HTMLDivElement>(null);
-  const [openMenu, setOpenMenu] = useState<"packages" | "services" | "rental" | "nfc" | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = normalizePath(usePathname());
+  const { count } = useSelections();
 
-  function closeNavigation() {
-    setOpenMenu(null);
+  // Close the mobile menu on route change (adjust state during render).
+  const [lastPath, setLastPath] = useState(pathname);
+  if (lastPath !== pathname) {
+    setLastPath(pathname);
     setMobileMenuOpen(false);
   }
 
@@ -36,18 +56,12 @@ export default function Nav() {
 
   useEffect(() => {
     const handlePointerDown = (event: MouseEvent) => {
-      const target = event.target as Node;
-      if (!navRef.current?.contains(target)) {
-        setOpenMenu(null);
+      if (!navRef.current?.contains(event.target as Node)) {
         setMobileMenuOpen(false);
       }
     };
-
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setOpenMenu(null);
-        setMobileMenuOpen(false);
-      }
+      if (event.key === "Escape") setMobileMenuOpen(false);
     };
 
     document.addEventListener("mousedown", handlePointerDown);
@@ -58,147 +72,60 @@ export default function Nav() {
     };
   }, []);
 
+  const closeNavigation = () => setMobileMenuOpen(false);
+
   return (
     <>
-    <div ref={topbarRef} className="topbar">
-      <a href={`tel:${CONTACT_PHONE_HREF}`}>{CONTACT_PHONE_DISPLAY}</a>
-      <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
-      <a href={CONTACT_INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">
-        {CONTACT_INSTAGRAM_HANDLE}
-      </a>
-    </div>
-    <nav ref={navRef} id="main-nav">
-      <a href="#hero" className="nav-logo">
-        VEVS<em>DESIGN</em>
-      </a>
-      <button
-        type="button"
-        className={`mobile-menu-button${mobileMenuOpen ? " open" : ""}`}
-        aria-label={mobileMenuOpen ? "Zavrieť menu" : "Otvoriť menu"}
-        aria-expanded={mobileMenuOpen}
-        aria-controls="site-navigation"
-        onClick={() => {
-          setMobileMenuOpen((open) => !open);
-          setOpenMenu(null);
-        }}
-      >
-        <span aria-hidden="true" />
-        <span aria-hidden="true" />
-        <span aria-hidden="true" />
-      </button>
-      <ul id="site-navigation" className={`nav-links${mobileMenuOpen ? " open" : ""}`}>
-        <li><a href="#hero" onClick={closeNavigation}>Domov</a></li>
-        <li><a href="#about" onClick={closeNavigation}>O nás</a></li>
-        <li
-          className={`nav-item-has-menu${openMenu === "packages" ? " open" : ""}`}
-          onMouseEnter={() => setOpenMenu("packages")}
-          onMouseLeave={() => setOpenMenu(null)}
+      <div ref={topbarRef} className="topbar">
+        <a href={`tel:${CONTACT_PHONE_HREF}`}>{CONTACT_PHONE_DISPLAY}</a>
+        <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+        <a href={CONTACT_INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">
+          {CONTACT_INSTAGRAM_HANDLE}
+        </a>
+      </div>
+      <nav ref={navRef} id="main-nav">
+        <Link href="/" className="nav-logo" onClick={closeNavigation}>
+          VEVS<em>DESIGN</em>
+        </Link>
+        <button
+          type="button"
+          className={`mobile-menu-button${mobileMenuOpen ? " open" : ""}`}
+          aria-label={mobileMenuOpen ? "Zavrieť menu" : "Otvoriť menu"}
+          aria-expanded={mobileMenuOpen}
+          aria-controls="site-navigation"
+          onClick={() => setMobileMenuOpen((open) => !open)}
         >
-          <div className="nav-menu-head">
-            <a href="#baliky" className="nav-menu-link" onClick={closeNavigation}>
-              Komplexné balíčky
-            </a>
-            <button
-              type="button"
-              className="nav-menu-toggle"
-              aria-label="Zobraziť podkategórie komplexných balíčkov"
-              aria-haspopup="true"
-              aria-expanded={openMenu === "packages"}
-              aria-controls="packages-submenu"
-              onClick={() => setOpenMenu((open) => (open === "packages" ? null : "packages"))}
-            >
-              <span aria-hidden="true">▾</span>
-            </button>
-          </div>
-          <ul id="packages-submenu" className="nav-submenu">
-            <li><a href="#balik-s-detail" onClick={closeNavigation}>Balík S</a></li>
-            <li><a href="#balik-m-detail" onClick={closeNavigation}>Balík M</a></li>
-            <li><a href="#balik-l-detail" onClick={closeNavigation}>Balík L</a></li>
-            <li><a href="#kontakt" onClick={closeNavigation}>Vlastný balík</a></li>
-          </ul>
-        </li>
-        <li
-          className={`nav-item-has-menu${openMenu === "services" ? " open" : ""}`}
-          onMouseEnter={() => setOpenMenu("services")}
-          onMouseLeave={() => setOpenMenu(null)}
-        >
-          <div className="nav-menu-head">
-            <a href="#services" className="nav-menu-link" onClick={closeNavigation}>
-              Svadobné doplnky
-            </a>
-            <button
-              type="button"
-              className="nav-menu-toggle"
-              aria-label="Zobraziť podkategórie svadobných doplnkov"
-              aria-haspopup="true"
-              aria-expanded={openMenu === "services"}
-              aria-controls="services-submenu"
-              onClick={() => setOpenMenu((open) => (open === "services" ? null : "services"))}
-            >
-              <span aria-hidden="true">▾</span>
-            </button>
-          </div>
-          <ul id="services-submenu" className="nav-submenu">
-            <li><a href="#doplnky-na-mieru" onClick={closeNavigation}>Doplnky na mieru</a></li>
-            <li><a href="#doplnky-pre-hosti" onClick={closeNavigation}>Doplnky pre hostí</a></li>
-          </ul>
-        </li>
-        <li
-          className={`nav-item-has-menu${openMenu === "rental" ? " open" : ""}`}
-          onMouseEnter={() => setOpenMenu("rental")}
-          onMouseLeave={() => setOpenMenu(null)}
-        >
-          <div className="nav-menu-head">
-            <a href="#galeria" className="nav-menu-link" onClick={closeNavigation}>
-              Prenájom
-            </a>
-            <button
-              type="button"
-              className="nav-menu-toggle"
-              aria-label="Zobraziť podkategórie prenájmu"
-              aria-haspopup="true"
-              aria-expanded={openMenu === "rental"}
-              aria-controls="rental-submenu"
-              onClick={() => setOpenMenu((open) => (open === "rental" ? null : "rental"))}
-            >
-              <span aria-hidden="true">▾</span>
-            </button>
-          </div>
-          <ul id="rental-submenu" className="nav-submenu">
-            <li><a href="#prenajom-kvetinova-vyzdoba" onClick={closeNavigation}>Kvetinová výzdoba</a></li>
-            <li><a href="#prenajom-detsky-kutik" onClick={closeNavigation}>Detský kútik</a></li>
-            <li><a href="#prenajom-stojany-zrkadla" onClick={closeNavigation}>Stojany a zrkadlá</a></li>
-            <li><a href="#prenajom-vazy-svietniky" onClick={closeNavigation}>Vázy a svietniky</a></li>
-            <li><a href="#prenajom-ostatne" onClick={closeNavigation}>Ostatné</a></li>
-          </ul>
-        </li>
-        <li
-          className={`nav-item-has-menu${openMenu === "nfc" ? " open" : ""}`}
-          onMouseEnter={() => setOpenMenu("nfc")}
-          onMouseLeave={() => setOpenMenu(null)}
-        >
-          <div className="nav-menu-head">
-            <a href="#nfc-srdce" className="nav-menu-link" onClick={closeNavigation}>
-              NFC srdce
-            </a>
-            <button
-              type="button"
-              className="nav-menu-toggle"
-              aria-label="Zobraziť podkategórie NFC srdca"
-              aria-haspopup="true"
-              aria-expanded={openMenu === "nfc"}
-              aria-controls="nfc-submenu"
-              onClick={() => setOpenMenu((open) => (open === "nfc" ? null : "nfc"))}
-            >
-              <span aria-hidden="true">▾</span>
-            </button>
-          </div>
-          <ul id="nfc-submenu" className="nav-submenu">
-            <li><a href="/vf/" onClick={closeNavigation}>V/F</a></li>
-          </ul>
-        </li>
-      </ul>
-    </nav>
+          <span aria-hidden="true" />
+          <span aria-hidden="true" />
+          <span aria-hidden="true" />
+        </button>
+        <ul id="site-navigation" className={`nav-links${mobileMenuOpen ? " open" : ""}`}>
+          {NAV_ITEMS.map((item) => (
+            <li key={item.href}>
+              <Link
+                href={item.href}
+                aria-current={pathname === item.href ? "page" : undefined}
+                onClick={closeNavigation}
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
+          {count > 0 && (
+            <li>
+              <Link
+                href="/kontakt"
+                className="nav-selection"
+                aria-label={`Môj výber, ${count} položiek`}
+                onClick={closeNavigation}
+              >
+                Môj výber
+                <span className="nav-badge" aria-hidden="true">{count}</span>
+              </Link>
+            </li>
+          )}
+        </ul>
+      </nav>
     </>
   );
 }
