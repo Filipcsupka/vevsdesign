@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useSelections } from "@/components/SelectionProvider";
+import { itemsLabel } from "@/components/contactSelection";
 import {
   CONTACT_EMAIL,
   CONTACT_INSTAGRAM_HANDLE,
@@ -116,7 +117,8 @@ export default function Nav() {
               <Link
                 href="/kontakt"
                 className="nav-selection"
-                aria-label={`Môj výber, ${count} položiek`}
+                aria-label={`Môj výber, ${count} ${itemsLabel(count)}`}
+                aria-current={pathname === "/kontakt" ? "page" : undefined}
                 onClick={closeNavigation}
               >
                 Môj výber

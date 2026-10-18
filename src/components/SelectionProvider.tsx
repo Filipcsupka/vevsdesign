@@ -6,7 +6,6 @@ import {
   useContext,
   useEffect,
   useMemo,
-  useRef,
   useState,
   type ReactNode,
 } from "react";
@@ -93,7 +92,7 @@ function writeStorage(selections: ContactSelections) {
 export function SelectionProvider({ children }: { children: ReactNode }) {
   const [selections, setSelections] = useState<ContactSelections>(EMPTY_CONTACT_SELECTIONS);
   const [selectionToast, setSelectionToast] = useState<{ id: number; text: string } | null>(null);
-  const hydratedRef = useRef(false);
+  const [hydrated, setHydrated] = useState(false);
 
   // Hydrate after mount so the static export markup matches the first client render.
   useEffect(() => {
@@ -109,14 +108,14 @@ export function SelectionProvider({ children }: { children: ReactNode }) {
         return merged;
       });
     }
-    hydratedRef.current = true;
+    setHydrated(true);
   }, []);
 
   // Persist changes, but only after hydration so we never overwrite stored data with the empty initial state.
   useEffect(() => {
-    if (!hydratedRef.current) return;
+    if (!hydrated) return;
     writeStorage(selections);
-  }, [selections]);
+  }, [selections, hydrated]);
 
   // Sync across tabs.
   useEffect(() => {

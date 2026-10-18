@@ -92,3 +92,9 @@ export function formatSelectionsTotalLabel(selections: ContactSelections) {
 
   return `Predbežná cena ${formatMoney(pricing.total)}`;
 }
+
+export function itemsLabel(count: number) {
+  if (count === 1) return "položka";
+  if (count >= 2 && count <= 4) return "položky";
+  return "položiek";
+}

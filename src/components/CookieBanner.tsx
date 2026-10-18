@@ -1,6 +1,6 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
+import { useEffect, useRef, useSyncExternalStore } from "react";
 
 const CONSENT_KEY = "vevsdesign-cookie-consent";
 
@@ -14,6 +14,23 @@ export default function CookieBanner() {
     () => false,
   );
 
+  const bannerRef = useRef<HTMLElement>(null);
+
+  // Publish the banner height so the selection bar can sit above it.
+  useEffect(() => {
+    const banner = bannerRef.current;
+    if (!visible || !banner) return;
+    const root = document.documentElement;
+    const update = () => root.style.setProperty("--cookie-banner-h", `${banner.offsetHeight}px`);
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(banner);
+    return () => {
+      observer.disconnect();
+      root.style.removeProperty("--cookie-banner-h");
+    };
+  }, [visible]);
+
   function choose(value: "accepted" | "rejected") {
     window.localStorage.setItem(CONSENT_KEY, value);
     window.dispatchEvent(new Event("vevsdesign-consent-changed"));
@@ -22,7 +39,7 @@ export default function CookieBanner() {
   if (!visible) return null;
 
   return (
-    <aside className="cookie-banner" aria-label="Nastavenie cookies">
+    <aside ref={bannerRef} className="cookie-banner" aria-label="Nastavenie cookies">
       <div>
         <strong>Vaše súkromie</strong>
         <p>

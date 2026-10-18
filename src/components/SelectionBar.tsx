@@ -2,12 +2,7 @@
 
 import Link from "next/link";
 import { useSelections } from "@/components/SelectionProvider";
-
-function itemsLabel(count: number) {
-  if (count === 1) return "položka";
-  if (count >= 2 && count <= 4) return "položky";
-  return "položiek";
-}
+import { itemsLabel } from "@/components/contactSelection";
 
 export default function SelectionBar() {
   const { count, clearSelections } = useSelections();

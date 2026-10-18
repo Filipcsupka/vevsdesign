@@ -37,7 +37,7 @@ export default function NfcHeart() {
       <div className="rental-bg-lines" />
       <div className="rental-glow" />
       <p className="sec-label reveal">Váš príbeh ukrytý v srdci</p>
-      <h2 className="reveal reveal-d1">NFC srdce</h2>
+      <h1 className="reveal reveal-d1">NFC srdce</h1>
       <div className="rule reveal reveal-d1"><div className="rule-diamond" /></div>
       <p className="sec-intro reveal reveal-d2">
         3D tlačené srdce s vlastným nápisom a dátumom ukrýva NFC tag. Po priložení telefónu otvorí odkaz, ktorý si sami vyberiete.
