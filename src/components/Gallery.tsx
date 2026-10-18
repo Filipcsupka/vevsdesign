@@ -146,8 +146,8 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
       {
         id: "stojan-vlna",
         title: "Stojan vlna",
-        price: "180 €",
-        unitPrice: 180,
+        price: "170 €",
+        unitPrice: 170,
         priceKind: "fixed",
         hideQuantityField: true,
         description: "Nežný a nádherný doplnok priestoru alebo obradu s možnosťou doplniť ho honosnými ikebanami.",
