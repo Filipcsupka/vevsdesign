@@ -295,7 +295,7 @@ export const CUSTOM_SERVICES: ServiceItem[] = [
     unitPrice: null,
     priceKind: "individual",
     hideQuantityField: true,
-    description: "",
+    description: "Obsahuje štólu, jednoduché kvety a sviečky. Možnosť aj koberca, cena podľa metráže.",
     category: "Doplnky na mieru",
   },
 ];
