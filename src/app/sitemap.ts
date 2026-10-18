@@ -29,6 +29,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: "https://vevsdesign.sk/nfc-srdce/",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: "https://vevsdesign.sk/kontakt/",
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: "https://vevsdesign.sk/obchodne-udaje",
       lastModified: new Date(),
       changeFrequency: "yearly",

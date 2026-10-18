@@ -2086,10 +2086,11 @@ body.modal-open{overflow:hidden}
   .home-inventory{padding:3rem 1.2rem 0.5rem}
   .home-contact{padding-bottom:6rem}
 }
-.svadba-head,.prenajom-head{padding-top:9rem;text-align:center}
-.svadba-head h1,.prenajom-head h1{font-family:var(--serif);font-weight:300;font-size:clamp(2.2rem,5vw,3.4rem);margin:0.5rem 0 1.4rem;color:var(--ink)}
+.svadba-head,.prenajom-head,.kontakt-head{padding-top:9rem;text-align:center}
+.svadba-head h1,.prenajom-head h1,.kontakt-head h1{font-family:var(--serif);font-weight:300;font-size:clamp(2.2rem,5vw,3.4rem);margin:0.5rem 0 1.4rem;color:var(--ink)}
 
 .inventar-head{padding-top:9rem;text-align:center}
+.kontakt-hint{margin-top:0.2rem}
 .inventar-head h1{font-family:var(--serif);font-weight:300;font-size:clamp(2.2rem,5vw,3.4rem);margin:0.5rem 0 1.4rem;color:var(--ink)}
 .inventar-jump{display:flex;gap:0.8rem;justify-content:center;flex-wrap:wrap;margin-top:1.6rem}
 .inventar-packages{padding:3rem 2rem 0;text-align:center}

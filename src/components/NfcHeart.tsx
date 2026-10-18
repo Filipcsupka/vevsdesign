@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { createPortal } from "react-dom";
 import ModalImageGallery from "@/components/ModalImageGallery";
 import ShowcaseTile from "@/components/ShowcaseTile";
@@ -90,7 +91,7 @@ export default function NfcHeart() {
             </div>
             <div className="rental-modal-actions">
               <span className="rental-modal-note">Pre cenu a možnosti personalizácie nám napíšte.</span>
-              <a href="#kontakt" className="btn-p" onClick={() => setOpen(false)}>Kontaktovať nás</a>
+              <Link href="/kontakt/" className="btn-p" onClick={() => setOpen(false)}>Kontaktovať nás</Link>
             </div>
           </div>
         </div>,
