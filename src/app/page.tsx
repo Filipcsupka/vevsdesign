@@ -15,12 +15,12 @@ const rentalPhoto = rentalImage("stojany-zrkadla", "stojan-oval-s-bocnymi-vlnami
 const SERVICE_CARDS = [
   {
     href: "/svadba/",
-    title: "Plánovanie celej svadby",
+    title: "Kompletná výzdoba",
     image: planningPhoto,
   },
   {
     href: "/prenajom/",
-    title: "Prenájom dekorácií",
+    title: "Prenájom",
     image: rentalPhoto,
   },
 ];
