@@ -107,6 +107,9 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
       },
       {
         id: "padava-ikebana",
+        price: "60 €",
+        unitPrice: 60,
+        priceKind: "fixed",
         title: "Padavá ikebana",
         description: "Nádherný doplnok pre zvýraznenie novomanželského stola alebo pri výzdobe fotosteny či konca dlhého stola.",
         lead: "Nádherný doplnok pre zvýraznenie novomanželského stola alebo pri výzdobe fotosteny či konca dlhého stola. Cena závisí od hojnosti ikebany.",
