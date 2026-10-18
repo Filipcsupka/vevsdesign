@@ -2100,3 +2100,5 @@ body:has(.cookie-banner) .selection-bar{bottom:calc(var(--cookie-banner-h,9rem) 
 @media (min-width:1201px){.baliky-grid .balik-card{padding:3rem 1.8rem}}
 #baliky .baliky-intro{max-width:900px;margin:0 auto 4rem;font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.35;text-align:center}
 @media (max-width:900px){#baliky .baliky-intro{margin-bottom:2.5rem}}
+.baliky-grid .balik-card{display:flex;flex-direction:column}
+.baliky-grid .balik-hint{margin-top:auto;padding-top:2rem}
