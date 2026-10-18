@@ -67,10 +67,12 @@ function fromServices(
   lead: string,
   ids: string[],
   aliases?: string[],
+  coverId?: string,
 ): InventoryCategory {
   const block = serviceBlock(ids);
   if (block.type !== "service") throw new Error("unreachable");
-  return { id, title, lead, blocks: [block], coverSrc: serviceCover(block.items[0]).src, aliases };
+  const coverItem = (coverId && block.items.find((item) => item.id === coverId)) || block.items[0];
+  return { id, title, lead, blocks: [block], coverSrc: serviceCover(coverItem).src, aliases };
 }
 
 // One ordered list for /inventar/: rental categories and add-on services side by side.
@@ -88,6 +90,7 @@ const INVENTORY_CATEGORIES: InventoryCategory[] = [
       "zrkadlo-s-menami-a-textom",
     ],
     ["doplnky-na-mieru"],
+    "uvitacia-latka",
   ),
   fromRental("prenajom-stojany-zrkadla"),
   fromRental("prenajom-vazy-svietniky"),
