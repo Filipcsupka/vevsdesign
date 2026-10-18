@@ -34,10 +34,6 @@ export default function SvadbaPage() {
             <div className="rule-diamond" />
           </div>
           <h1 className="reveal reveal-d1">Plánovanie <em>celej svadby</em></h1>
-          <p className="home-intro-text reveal reveal-d2">
-            Tvoríme kompletnú svadobnú a eventovú výzdobu plnú detailov. Každú svadbu vnímame ako jedinečný príbeh,
-            pri ktorom nám záleží na každom prvku a každej emócii. Vyberte si balíček, ktorý vám sadne.
-          </p>
         </section>
 
         <Baliky />
