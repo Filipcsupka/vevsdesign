@@ -105,6 +105,10 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         lead: "Vhodné na hlavný stôl novomanželov. Obsahuje kvety ako na fotke vo Vašich požadovaných farbách, úzke svietniky a sviečky.",
         details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
       },
+      {
+        id: "padava-ikebana",
+        title: "Padavá ikebana",
+      },
     ],
   },
   {
