@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/data/pageMetadata";
 import Nav from "@/components/Nav";
 import Kontakt from "@/components/Kontakt";
 import KontaktSelectionHint from "@/components/KontaktSelectionHint";
 import Footer from "@/components/Footer";
 import RevealController from "@/components/RevealController";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Kontakt | Vevsdesign",
   description:
     "Nezáväzný dopyt na svadobnú výzdobu, prenájom dekorácií alebo NFC srdce. Košice a východné Slovensko.",
-  alternates: {
-    canonical: "/kontakt/",
-  },
-};
+  path: "/kontakt/",
+});
 
 export default function KontaktPage() {
   return (

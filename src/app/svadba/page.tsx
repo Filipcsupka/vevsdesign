@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/data/pageMetadata";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Baliky from "@/components/Baliky";
@@ -13,14 +14,12 @@ import {
   CONTACT_PHONE_HREF,
 } from "@/data/businessInfo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Plánovanie celej svadby | Vevsdesign",
   description:
     "Svadobné balíčky výzdoby, doplnky na mieru a doplnky pre hostí. Košice a okolie.",
-  alternates: {
-    canonical: "/svadba/",
-  },
-};
+  path: "/svadba/",
+});
 
 export default function SvadbaPage() {
   return (

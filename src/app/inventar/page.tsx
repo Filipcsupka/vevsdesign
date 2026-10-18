@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/data/pageMetadata";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Gallery from "@/components/Gallery";
@@ -14,14 +15,12 @@ import {
   CONTACT_PHONE_HREF,
 } from "@/data/businessInfo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Celý inventár | Vevsdesign",
   description:
     "Celý inventár na jednom mieste: prenájom dekorácií, doplnky na mieru a doplnky pre hostí. Vyberte si položky a odošlite jeden dopyt. Košice a okolie.",
-  alternates: {
-    canonical: "/inventar/",
-  },
-};
+  path: "/inventar/",
+});
 
 export default function InventarPage() {
   return (

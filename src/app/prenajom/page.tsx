@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/data/pageMetadata";
 import Link from "next/link";
 import Nav from "@/components/Nav";
 import Gallery from "@/components/Gallery";
@@ -12,14 +13,12 @@ import {
   CONTACT_PHONE_HREF,
 } from "@/data/businessInfo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Prenájom dekorácií | Vevsdesign",
   description:
     "Prenájom svadobných a eventových dekorácií: kvetinová výzdoba, detský kútik, stojany, zrkadlá, vázy a svietniky. Košice a okolie.",
-  alternates: {
-    canonical: "/prenajom/",
-  },
-};
+  path: "/prenajom/",
+});
 
 export default function PrenajomPage() {
   return (
