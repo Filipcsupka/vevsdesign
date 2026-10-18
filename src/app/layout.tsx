@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Bodoni_Moda } from "next/font/google";
 import { CONTACT_EMAIL, CONTACT_PHONE_HREF } from "@/data/businessInfo";
 import AnalyticsConsent from "@/components/AnalyticsConsent";
+import { SelectionProvider } from "@/components/SelectionProvider";
 import CookieBanner from "@/components/CookieBanner";
 import "./globals.css";
 
@@ -94,7 +95,7 @@ export default function RootLayout({
         />
       </head>
       <body className={bodoniModa.variable}>
-        {children}
+        <SelectionProvider>{children}</SelectionProvider>
         <CookieBanner />
       </body>
       <AnalyticsConsent token={cloudflareAnalyticsToken} />

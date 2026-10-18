@@ -14,9 +14,8 @@ import {
   formatSelectionHiddenValue,
   formatSelectionMeta,
   formatSelectionsTotalLabel,
-  type ContactSelections,
-  type SelectionKind,
 } from "@/components/contactSelection";
+import { useSelections } from "@/components/SelectionProvider";
 import { useEffect, useRef, useState } from "react";
 
 const CONTACT_ENDPOINT = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT || "/api/contact";
@@ -42,12 +41,6 @@ declare global {
   }
 }
 
-type KontaktProps = {
-  selections: ContactSelections;
-  onRemoveSelection: (kind: SelectionKind, value: string) => void;
-  onClearSelections: () => void;
-};
-
 function buildFallbackMailtoHref(data: FormData) {
   const lines = [
     ["Meno", data.get("meno")],
@@ -66,11 +59,12 @@ function buildFallbackMailtoHref(data: FormData) {
   return `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
 }
 
-export default function Kontakt({
-  selections,
-  onRemoveSelection,
-  onClearSelections,
-}: KontaktProps) {
+export default function Kontakt() {
+  const {
+    selections,
+    removeSelection: onRemoveSelection,
+    clearSelections: onClearSelections,
+  } = useSelections();
   const [status, setStatus] = useState<{ text: string; type: "" | "success" | "error" }>({ text: "", type: "" });
   const [fallbackHref, setFallbackHref] = useState("");
   const [submitting, setSubmitting] = useState(false);

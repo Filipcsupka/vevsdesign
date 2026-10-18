@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { normalizeQuantity, type PriceKind, type SelectionItem } from "@/components/contactSelection";
+import { normalizeQuantity, type PriceKind } from "@/components/contactSelection";
+import { useSelections } from "@/components/SelectionProvider";
 import { createPortal } from "react-dom";
 import ModalImageGallery from "@/components/ModalImageGallery";
 import QuantityInput from "@/components/QuantityInput";
@@ -324,11 +325,8 @@ function getTileVariant(index: number) {
   return TILE_VARIANTS[index % TILE_VARIANTS.length];
 }
 
-type GalleryProps = {
-  onSelectRental: (selection: SelectionItem) => void;
-};
-
-export default function Gallery({ onSelectRental }: GalleryProps) {
+export default function Gallery() {
+  const { addSelection: onSelectRental } = useSelections();
   const [openKey, setOpenKey] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
   const closeButtonRef = useRef<HTMLButtonElement>(null);

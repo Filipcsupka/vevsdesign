@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { type SelectionItem } from "@/components/contactSelection";
+import { useSelections } from "@/components/SelectionProvider";
 import { createPortal } from "react-dom";
 
 type PackageId = "s" | "m" | "l";
@@ -151,11 +151,8 @@ const DETAIL_HASH_TO_ID: Record<string, PackageId> = {
   "#balik-l-detail": "l",
 };
 
-type BalikyProps = {
-  onSelectPackage: (selection: SelectionItem) => void;
-};
-
-export default function Baliky({ onSelectPackage }: BalikyProps) {
+export default function Baliky() {
+  const { addSelection: onSelectPackage } = useSelections();
   const [mounted, setMounted] = useState(false);
   const [openId, setOpenId] = useState<PackageId | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);

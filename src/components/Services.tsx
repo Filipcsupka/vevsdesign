@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { normalizeQuantity, type PriceKind, type SelectionItem } from "@/components/contactSelection";
+import { normalizeQuantity, type PriceKind } from "@/components/contactSelection";
+import { useSelections } from "@/components/SelectionProvider";
 import { createPortal } from "react-dom";
 import ModalImageGallery from "@/components/ModalImageGallery";
 import QuantityInput from "@/components/QuantityInput";
@@ -367,11 +368,8 @@ function formatModalDetail(detail: string) {
   return /[.!?]$/.test(detail) ? detail : `${detail}.`;
 }
 
-type ServicesProps = {
-  onSelectService: (selection: SelectionItem) => void;
-};
-
-export default function Services({ onSelectService }: ServicesProps) {
+export default function Services() {
+  const { addSelection: onSelectService } = useSelections();
   const [openId, setOpenId] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
