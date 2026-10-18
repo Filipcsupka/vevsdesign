@@ -268,6 +268,26 @@ export const CUSTOM_SERVICES: ServiceItem[] = [
     modalAbout: "Farebnosť a potlač náramkov prispôsobíme vašej svadbe. Cena za jeden personalizovaný náramok je 0,60 €.",
     category: "Doplnky na mieru",
   },
+  {
+    id: "zasadaci-poriadok-luxury",
+    name: "Zasadací poriadok luxury",
+    price: "Cena na dopyt",
+    unitPrice: null,
+    priceKind: "individual",
+    hideQuantityField: true,
+    description: "",
+    category: "Doplnky na mieru",
+  },
+  {
+    id: "uvitacia-latka-s-fotkami",
+    name: "Uvítacia látka s fotkami",
+    price: "Cena na dopyt",
+    unitPrice: null,
+    priceKind: "individual",
+    hideQuantityField: true,
+    description: "",
+    category: "Doplnky na mieru",
+  },
 ];
 
 export const GUEST_SERVICES: ServiceItem[] = [
