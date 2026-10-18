@@ -86,7 +86,7 @@ const SERVICE_IMAGE_COUNTS: Record<string, number> = {
 };
 
 const RENTAL_IMAGE_COUNTS: Record<string, number> = {
-  "kvetinova-vyzdoba:ikebana-na-stoly": 2,
+  "kvetinova-vyzdoba:ikebana-na-stoly": 1,
   "kvetinova-vyzdoba:ikebana-na-stoly-s-vazami-okolo": 2,
   "kvetinova-vyzdoba:mala-ikebana": 2,
   "kvetinova-vyzdoba:dlha-ikebana": 3,
