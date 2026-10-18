@@ -145,13 +145,6 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
     coverOfferId: "stojan-vlna",
     offers: [
       {
-        id: "champagne-stena",
-        title: "Champagne stena",
-        price: "80 €",
-        unitPrice: 80,
-        priceKind: "fixed",
-      },
-      {
         id: "stojan-vlna",
         title: "Stojan vlna",
         price: "170 €",
@@ -214,6 +207,13 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         description: "V cene sú zahrnuté aj balóny.",
         lead: "V cene sú zahrnuté aj balóny. Vhodné pre vstup do sály.",
         details: "Možnosť osobného odberu, zaslania alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
+      },
+      {
+        id: "champagne-stena",
+        title: "Champagne stena",
+        price: "80 €",
+        unitPrice: 80,
+        priceKind: "fixed",
       },
     ],
   },
