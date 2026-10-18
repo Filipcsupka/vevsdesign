@@ -50,8 +50,7 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
       {
         id: "ikebana-gypsomilka",
         title: "Ikebana gypsomilka",
-        description:
-          "Kvetinovú výzdobu pripravujeme tak, aby jemne doplnila štýl svadby a prirodzene nadviazala na ostatné dekorácie.",
+        description: "Ak hľadáte čistý a jemný štýl, táto ikebana zodvihne Vašu tému svadby.",
         lead: "Ak hľadáte čistý a jemný štýl, táto ikebana zodvihne Vašu tému svadby. Vhodná na stred stola, na vázu alebo len tak v priestore či na obrade.",
       },
       {
