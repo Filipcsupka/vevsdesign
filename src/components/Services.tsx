@@ -82,7 +82,7 @@ export const CUSTOM_SERVICES: ServiceItem[] = [
     },
     {
       id: "zrkadlo-s-menami-a-textom",
-      name: "Zrkadlo s menami a textom",
+      name: "Stojace zrkadlo s textom",
       price: "30 €",
       unitPrice: 30,
       priceKind: "fixed",
@@ -466,7 +466,7 @@ export default function ServiceItems({ items, eyebrow, afterSelect = "contact" }
                 ? [
                     serviceImage(service.category, "uvitacia-latka", "Uvítací banner"),
                     serviceImage(service.category, "zasadaci-poriadok-visiaci", "Zasadací poriadok visiaci"),
-                    serviceImage(service.category, "zrkadlo-s-menami-a-textom", "Zrkadlo s menami a textom"),
+                    serviceImage(service.category, "zrkadlo-s-menami-a-textom", "Stojace zrkadlo s textom"),
                   ]
                 : undefined
             }
