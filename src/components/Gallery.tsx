@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { normalizeQuantity, type PriceKind } from "@/components/contactSelection";
 import { useSelections } from "@/components/SelectionProvider";
@@ -325,7 +326,12 @@ function getTileVariant(index: number) {
   return TILE_VARIANTS[index % TILE_VARIANTS.length];
 }
 
-export default function Gallery() {
+type GalleryProps = {
+  variant?: "inventory" | "browse";
+};
+
+export default function Gallery({ variant = "inventory" }: GalleryProps = {}) {
+  const browseOnly = variant === "browse";
   const { addSelection: onSelectRental } = useSelections();
   const [openKey, setOpenKey] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
@@ -402,7 +408,7 @@ export default function Gallery() {
   }
 
   function handleCta() {
-    if (activeRental && activeRental.offer) {
+    if (!browseOnly && activeRental && activeRental.offer) {
       onSelectRental({
         kind: "rentals",
         id: isPlainOvalStand ? `${activeRental.offer.id}-bez-doplnkov` : activeRental.offer.id,
@@ -421,14 +427,18 @@ export default function Gallery() {
     <section id="galeria">
       <div className="rental-bg-lines" />
       <div className="rental-glow" />
-      <p className="sec-label reveal">Kúsky, ktoré vieme zapožičať</p>
-      <h2 className="reveal reveal-d1">Prenájom</h2>
-      <div className="rule reveal reveal-d1">
-        <div className="rule-diamond" />
-      </div>
-      <p className="sec-intro reveal reveal-d2">
-        Vyberte si kategóriu prenájmu, ktorá najlepšie doplní atmosféru vášho dňa.
-      </p>
+      {browseOnly ? null : (
+        <>
+          <p className="sec-label reveal">Kúsky, ktoré vieme zapožičať</p>
+          <h2 className="reveal reveal-d1">Prenájom</h2>
+          <div className="rule reveal reveal-d1">
+            <div className="rule-diamond" />
+          </div>
+          <p className="sec-intro reveal reveal-d2">
+            Vyberte si kategóriu prenájmu, ktorá najlepšie doplní atmosféru vášho dňa.
+          </p>
+        </>
+      )}
 
       <div className="rental-stage reveal reveal-d2">
         <div className="rental-groups">
@@ -526,32 +536,41 @@ export default function Gallery() {
               ) : null}
             </div>
 
-            <div className="rental-modal-actions">
-              <div className="modal-selection-tools">
+            {browseOnly ? (
+              <div className="rental-modal-actions">
                 <span className="rental-modal-note">
-                  Máte záujem o tento prenájom? Napíšte nám a pripravíme ho podľa vašej predstavy.
+                  Máte záujem o tento prenájom? Napíšte nám alebo zavolajte a pripravíme ho podľa vašej predstavy.
                 </span>
-                <div className="modal-selection-inline">
-                  {!activeRental.offer?.hideQuantityField ? (
-                    <QuantityInput label="Počet" value={quantity} onChange={setQuantity} />
-                  ) : null}
-                  <div className="modal-price-preview">
-                    <span>Cena</span>
-                    <strong>
-                      {activeUnitPrice == null
-                        ? activePriceLabel
-                        : `${activeRental.offer?.priceKind === "from" ? "od " : ""}${(activeUnitPrice * quantity).toLocaleString("sk-SK", {
-                            minimumFractionDigits: Number.isInteger(activeUnitPrice * quantity) ? 0 : 2,
-                            maximumFractionDigits: 2,
-                          })} €`}
-                    </strong>
+                <Link href="/kontakt/" className="btn-p">Kontaktovať</Link>
+              </div>
+            ) : (
+              <div className="rental-modal-actions">
+                <div className="modal-selection-tools">
+                  <span className="rental-modal-note">
+                    Máte záujem o tento prenájom? Napíšte nám a pripravíme ho podľa vašej predstavy.
+                  </span>
+                  <div className="modal-selection-inline">
+                    {!activeRental.offer?.hideQuantityField ? (
+                      <QuantityInput label="Počet" value={quantity} onChange={setQuantity} />
+                    ) : null}
+                    <div className="modal-price-preview">
+                      <span>Cena</span>
+                      <strong>
+                        {activeUnitPrice == null
+                          ? activePriceLabel
+                          : `${activeRental.offer?.priceKind === "from" ? "od " : ""}${(activeUnitPrice * quantity).toLocaleString("sk-SK", {
+                              minimumFractionDigits: Number.isInteger(activeUnitPrice * quantity) ? 0 : 2,
+                              maximumFractionDigits: 2,
+                            })} €`}
+                      </strong>
+                    </div>
                   </div>
                 </div>
+                <button type="button" className="btn-p" onClick={handleCta}>
+                  Vybrať
+                </button>
               </div>
-              <button type="button" className="btn-p" onClick={handleCta}>
-                Vybrať
-              </button>
-            </div>
+            )}
           </div>
         </div>,
         document.body
