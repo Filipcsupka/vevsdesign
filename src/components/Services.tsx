@@ -94,7 +94,7 @@ export const CUSTOM_SERVICES: ServiceItem[] = [
     },
     {
       id: "zasadaci-poriadok-v-obraze",
-      name: "Zasadací poriadok v obraze",
+      name: "Uvítací obraz / zasadací v obraze",
       price: "Od 15 €",
       unitPrice: 15,
       priceKind: "from",
