@@ -98,8 +98,8 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
       {
         id: "dlha-ikebana",
         title: "Dlhá ikebana",
-        price: "45 €",
-        unitPrice: 45,
+        price: "50 €",
+        unitPrice: 50,
         priceKind: "fixed",
         description: "Vhodné na hlavný stôl novomanželov.",
         lead: "Vhodné na hlavný stôl novomanželov. Obsahuje kvety ako na fotke vo Vašich požadovaných farbách, úzke svietniky a sviečky.",
