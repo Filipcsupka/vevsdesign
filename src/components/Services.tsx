@@ -281,9 +281,9 @@ export const CUSTOM_SERVICES: ServiceItem[] = [
   {
     id: "uvitacia-latka-s-fotkami",
     name: "Uvítacia látka s fotkami",
-    price: "Cena na dopyt",
-    unitPrice: null,
-    priceKind: "individual",
+    price: "55 €",
+    unitPrice: 55,
+    priceKind: "fixed",
     hideQuantityField: true,
     description: "",
     category: "Doplnky na mieru",
