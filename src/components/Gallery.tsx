@@ -138,7 +138,7 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
   },
   {
     id: "prenajom-stojany-zrkadla",
-    title: "Stojany a zrkadlá",
+    title: "Stojany",
     text: "Dekoračné stojany, zrkadlá a výrazné prvky vhodné na uvítanie hostí, fotenie aj personalizovaný program.",
     price: "Cena individuálne",
     lead: "Stojany a zrkadlá pripravíme ako výrazné dekoračné prvky, ktoré vyniknú pri vstupe, obrade aj počas fotenia.",
