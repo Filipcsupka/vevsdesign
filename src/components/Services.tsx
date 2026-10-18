@@ -493,7 +493,7 @@ export default function ServiceItems({ items, eyebrow, afterSelect = "contact" }
               &times;
             </button>
 
-            <div className="service-modal-badge">{activeService.category}</div>
+            <div className="service-modal-badge">{eyebrow}</div>
             <div className="service-modal-head">
               <div className="service-modal-name" id="service-modal-name">{activeGroup?.variants ? activeGroup.name : activeService.name}</div>
               <div className="service-modal-price">{activeService.price}</div>
