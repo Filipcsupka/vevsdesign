@@ -5,6 +5,7 @@ import Nav from "@/components/Nav";
 import NfcHeart from "@/components/NfcHeart";
 import Footer from "@/components/Footer";
 import RevealController from "@/components/RevealController";
+import BackgroundCanvas from "@/components/BackgroundCanvas";
 
 export const metadata: Metadata = pageMetadata({
   title: "NFC srdce | Vevsdesign",
@@ -17,6 +18,7 @@ export default function NfcSrdcePage() {
   return (
     <>
       <RevealController />
+      <BackgroundCanvas />
       <Nav />
       <main>
         <NfcHeart />

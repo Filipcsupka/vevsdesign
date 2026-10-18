@@ -7,6 +7,7 @@ import Services from "@/components/Services";
 import SelectionBar from "@/components/SelectionBar";
 import Footer from "@/components/Footer";
 import RevealController from "@/components/RevealController";
+import BackgroundCanvas from "@/components/BackgroundCanvas";
 import {
   CONTACT_EMAIL,
   CONTACT_INSTAGRAM_HANDLE,
@@ -26,6 +27,7 @@ export default function InventarPage() {
   return (
     <>
       <RevealController />
+      <BackgroundCanvas />
       <Nav />
       <main>
         <section className="home-intro inventar-head">

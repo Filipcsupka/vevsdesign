@@ -5,6 +5,7 @@ import News2027 from "@/components/News2027";
 import Footer from "@/components/Footer";
 import FallbackImage from "@/components/FallbackImage";
 import RevealController from "@/components/RevealController";
+import BackgroundCanvas from "@/components/BackgroundCanvas";
 import {
   CONTACT_EMAIL,
   CONTACT_INSTAGRAM_HANDLE,
@@ -34,6 +35,7 @@ export default function Page() {
   return (
     <>
       <RevealController />
+      <BackgroundCanvas />
       <Nav />
       <main>
         <Hero />

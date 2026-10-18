@@ -5,6 +5,7 @@ import Nav from "@/components/Nav";
 import Gallery from "@/components/Gallery";
 import Footer from "@/components/Footer";
 import RevealController from "@/components/RevealController";
+import BackgroundCanvas from "@/components/BackgroundCanvas";
 import {
   CONTACT_EMAIL,
   CONTACT_INSTAGRAM_HANDLE,
@@ -24,6 +25,7 @@ export default function PrenajomPage() {
   return (
     <>
       <RevealController />
+      <BackgroundCanvas />
       <Nav />
       <main>
         <section className="home-intro prenajom-head">

@@ -5,6 +5,7 @@ import Nav from "@/components/Nav";
 import Baliky from "@/components/Baliky";
 import Footer from "@/components/Footer";
 import RevealController from "@/components/RevealController";
+import BackgroundCanvas from "@/components/BackgroundCanvas";
 import {
   CONTACT_EMAIL,
   CONTACT_INSTAGRAM_HANDLE,
@@ -24,6 +25,7 @@ export default function SvadbaPage() {
   return (
     <>
       <RevealController />
+      <BackgroundCanvas />
       <Nav />
       <main>
         <section className="home-intro svadba-head">
