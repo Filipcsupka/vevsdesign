@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function News2027() {
   return (
     <section id="novinky" className="news-2027">
@@ -12,9 +14,9 @@ export default function News2027() {
           Objavte nové výrazné kúsky pre obrad, vstup do sály aj miesto za novomanželmi.
           Jemné línie a možnosť kvetinovej výzdoby vytvoria nezabudnuteľný wau efekt.
         </p>
-        <a className="news-2027-link" href="#prenajom-stojany-zrkadla">
+        <Link className="news-2027-link" href="/prenajom/">
           Pozrieť stojany a zrkadlá <span aria-hidden="true">→</span>
-        </a>
+        </Link>
       </div>
     </section>
   );
