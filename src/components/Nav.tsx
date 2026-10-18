@@ -100,7 +100,7 @@ export default function Nav() {
             <circle cx="12" cy="12" r="4" />
             <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none" />
           </svg>
-          {CONTACT_INSTAGRAM_HANDLE}
+          {CONTACT_INSTAGRAM_HANDLE.replace(/^@/, "")}
         </a>
         <a href={`tel:${CONTACT_PHONE_HREF}`}>{CONTACT_PHONE_DISPLAY}</a>
         <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
