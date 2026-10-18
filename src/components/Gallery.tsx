@@ -49,12 +49,18 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
     offers: [
       {
         id: "ikebana-gypsomilka",
+        price: "30 €",
+        unitPrice: 30,
+        priceKind: "fixed",
         title: "Ikebana gypsomilka",
         description: "Ak hľadáte čistý a jemný štýl, táto ikebana zodvihne Vašu tému svadby.",
         lead: "Ak hľadáte čistý a jemný štýl, táto ikebana zodvihne Vašu tému svadby. Vhodná na stred stola, na vázu alebo len tak v priestore či na obrade.",
       },
       {
         id: "ikebana-z-kvetov",
+        price: "35 €",
+        unitPrice: 35,
+        priceKind: "fixed",
         title: "Ikebana z kvetov",
         description: "Rôznorodá, elegantná alebo výrazná.",
         lead: "Vhodná pre stred stola, na vázu alebo len tak v priestore či na obrade. Ide o mix živých a umelých kvetov.",
