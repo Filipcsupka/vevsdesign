@@ -67,7 +67,7 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
       },
       {
         id: "ikebana-na-stoly-s-vazami-okolo",
-        title: "Ikebana na stoly s 8 vázami okolo",
+        title: "Ikebana s 8 vázami okolo",
         price: "Od 45 €",
         unitPrice: 45,
         priceKind: "from",
