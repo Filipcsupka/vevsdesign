@@ -246,8 +246,8 @@ export const CUSTOM_SERVICES: ServiceItem[] = [
   {
     id: "strom-na-platne",
     name: "Strom na plátne",
-    price: "15 €",
-    unitPrice: 15,
+    price: "20 €",
+    unitPrice: 20,
     priceKind: "fixed",
     hideQuantityField: true,
     description: "Strom na plátne je jemná a osobná pamiatka, do ktorej hostia zanechajú svoj vlastný odtlačok.",
