@@ -25,7 +25,9 @@ type InventoryCategory = {
 };
 
 const SERVICES_BY_ID = new Map(
-  [...CUSTOM_SERVICES, ...GUEST_SERVICES].map((item) => [item.id, item] as const),
+  [...CUSTOM_SERVICES, ...GUEST_SERVICES]
+    .flatMap((item) => [item, ...(item.variants ?? [])])
+    .map((item) => [item.id, item] as const),
 );
 
 function rentalBlock(id: string): Block {
@@ -75,9 +77,17 @@ function fromServices(
 const INVENTORY_CATEGORIES: InventoryCategory[] = [
   fromServices(
     "inventar-uvitacie-prvky",
-    "Uvítacie prvky a zasadací poriadok",
+    "Uvítacie prvky",
     "Uvítacia tabuľa, uvítací banner, zrkadlá a rôzne druhy zasadacieho poriadku.",
-    ["uvitacie-tabule-a-zasadaci-poriadok"],
+    [
+      "uvitacia-tabula",
+      "uvitacia-latka",
+      "uvitacie-zrkadlo",
+      "zrkadlo-s-menami-a-textom",
+      "zasadaci-poriadok-v-obraze",
+      "zasadaci-poriadok-na-tabuli",
+      "zasadaci-poriadok-visiaci",
+    ],
     ["doplnky-na-mieru"],
   ),
   fromRental("prenajom-stojany-zrkadla"),
