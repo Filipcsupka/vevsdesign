@@ -2105,3 +2105,4 @@ body:has(.cookie-banner) .selection-bar{bottom:calc(var(--cookie-banner-h,9rem) 
 .prenajom-head{padding-bottom:0}
 .prenajom-head h1{margin-bottom:0}
 .prenajom-head + #galeria{padding-top:1rem}
+.balik-modal-actions-pair{justify-content:flex-start;flex-wrap:wrap;gap:1rem}

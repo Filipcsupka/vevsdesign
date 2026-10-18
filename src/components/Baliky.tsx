@@ -192,6 +192,11 @@ export default function Baliky() {
     router.push("/kontakt/");
   }
 
+  function handleBrowseInventory() {
+    closeModal();
+    router.push("/inventar/");
+  }
+
   return (
     <section id="baliky">
       <h2 className="baliky-intro reveal reveal-d1">
@@ -284,9 +289,12 @@ export default function Baliky() {
               </p>
             </div>
 
-            <div className="balik-modal-actions">
+            <div className="balik-modal-actions balik-modal-actions-pair">
               <button type="button" className="btn-p" onClick={handleIndividualPackage}>
-                Vybrať
+                Kontaktovať
+              </button>
+              <button type="button" className="btn-p" onClick={handleBrowseInventory}>
+                Vybrať inventár
               </button>
             </div>
           </div>
