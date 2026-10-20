@@ -276,6 +276,7 @@ export const CUSTOM_SERVICES: ServiceItem[] = [
     priceKind: "fixed",
     hideQuantityField: true,
     description: "Prvok, ktorý nie je všade a pôsobí elegantne a výnimočne.",
+    modalDescription: "Cena obsahuje stojany s návlekmi a zasadacie poriadky. Cena neobsahuje kvetinové ikebany. Ikebana 25 €/1 ks.",
     category: "Doplnky na mieru",
   },
   {

@@ -75,6 +75,7 @@ const SERVICE_IMAGE_COUNTS: Record<string, number> = {
   "doplnky-na-mieru:zasadaci-poriadok-v-obraze": 2,
   "doplnky-na-mieru:zasadaci-poriadok-na-tabuli": 0,
   "doplnky-na-mieru:zasadaci-poriadok-visiaci": 1,
+  "doplnky-na-mieru:zasadaci-poriadok-luxury": 1,
   "doplnky-na-mieru:naramky": 2,
   "doplnky-pre-hosti:prstenec-diamond": 1,
   "doplnky-pre-hosti:cigar-bar": 3,
