@@ -290,6 +290,16 @@ export const CUSTOM_SERVICES: ServiceItem[] = [
     category: "Doplnky na mieru",
   },
   {
+    id: "champagne-stena",
+    name: "Champagne stena",
+    price: "70 €",
+    unitPrice: 70,
+    priceKind: "fixed",
+    hideQuantityField: true,
+    description: "Efektná stena na poháre so sektom, ktorá hostí privíta a pekne zdobí priestor.",
+    category: "Doplnky na mieru",
+  },
+  {
     id: "vyzdoba-vchodu",
     name: "Výzdoba vchodu",
     price: "50 €",

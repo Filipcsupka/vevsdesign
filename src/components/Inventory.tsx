@@ -90,6 +90,7 @@ const INVENTORY_CATEGORIES: InventoryCategory[] = [
       "zrkadlo-s-menami-a-textom",
       "zasadaci-poriadok-visiaci",
       "zasadaci-poriadok-luxury",
+      "champagne-stena",
       "vyzdoba-vchodu",
     ],
     ["doplnky-na-mieru"],
