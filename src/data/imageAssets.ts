@@ -3,7 +3,7 @@ export type ImageAsset = {
   alt: string;
 };
 
-const IMAGE_VERSION = "2026-10-20-01";
+const IMAGE_VERSION = "2026-10-20-02";
 export const FALLBACK_IMAGE = "/images/gallery/placeholder.png";
 
 export const GALLERY_IMAGES: ImageAsset[] = [
