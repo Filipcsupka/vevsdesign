@@ -154,7 +154,7 @@ export default function Inventory() {
       const category = findCategoryByHash(window.location.hash);
       if (!category) return;
       const { id } = category;
-      setOpenCats((current) => (current.includes(id) ? current : [...current, id]));
+      setOpenCats([id]);
       window.requestAnimationFrame(() => {
         document
           .getElementById(id)
@@ -173,7 +173,17 @@ export default function Inventory() {
   }, []);
 
   function toggleCategory(id: string) {
-    setOpenCats((current) => (current.includes(id) ? current.filter((item) => item !== id) : [...current, id]));
+    // Accordion: opening a category closes the previously open one.
+    const opening = !openCats.includes(id);
+    setOpenCats(opening ? [id] : []);
+    if (opening && openCats.length > 0) {
+      window.requestAnimationFrame(() => {
+        document
+          .getElementById(id)
+          ?.querySelector(".inv-cat-cover")
+          ?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
   }
 
   return (
