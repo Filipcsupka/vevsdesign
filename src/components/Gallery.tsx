@@ -208,13 +208,6 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         lead: "V cene sú zahrnuté aj balóny. Vhodné pre vstup do sály.",
         details: "Možnosť osobného odberu, zaslania alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100 € (+ príplatok PHM).",
       },
-      {
-        id: "champagne-stena",
-        title: "Champagne stena",
-        price: "80 €",
-        unitPrice: 80,
-        priceKind: "fixed",
-      },
     ],
   },
   {
