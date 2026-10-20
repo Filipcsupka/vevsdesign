@@ -112,7 +112,7 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
         priceKind: "fixed",
         title: "Padavá ikebana",
         description: "Nádherný doplnok pre zvýraznenie novomanželského stola alebo pri výzdobe fotosteny či konca dlhého stola.",
-        lead: "Nádherný doplnok pre zvýraznenie novomanželského stola alebo pri výzdobe fotosteny či konca dlhého stola. Cena závisí od hojnosti ikebany.",
+        lead: "Nádherný doplnok pre zvýraznenie novomanželského stola alebo pri výzdobe fotosteny či konca dlhého stola. Cena závisí od hojnosti ikebany. Kvety podľa želania.",
       },
     ],
   },
