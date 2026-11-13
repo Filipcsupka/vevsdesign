@@ -72,6 +72,8 @@ Ak sa robi vizualna uprava, preferuj menit existujuce komponenty a `src/app/glob
 - Email: `vevsdesignn@gmail.com`
 - Telefon: `0915 309 721`
 - Instagram: `@Vevsdesign`
+- Majitel znacky a biznisu: VevsHouse s. r. o. (ICO 57944644, DIC 2123425062), udaje v `src/data/businessInfo.ts`.
+- DevOps s. r. o. je len technicky prevadzkovatel webu (tvorba, sprava, hosting); na webe len malym pismom.
 - Web obsahuje baliky, doplnkove sluzby, galeriu a kontakt.
 - Doplnky na mieru obsahuju aj personalizovane naramky za `0,60 €/ks`.
 - `NFC srdce` je samostatna kategoria v hlavnej navigacii s vlastnou galeriou. Ide o 3D tlacene personalizovane srdce s vlastnym napisom, datumom a NFC tagom, ktory moze otvorit zvoleny osobny odkaz.

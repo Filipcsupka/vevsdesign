@@ -5,13 +5,10 @@ import {
   CONTACT_INSTAGRAM_URL,
   CONTACT_PHONE_DISPLAY,
   CONTACT_PHONE_HREF,
-  OPERATOR_DIC,
-  OPERATOR_ICO,
-  OPERATOR_IC_DPH,
-  OPERATOR_EMAIL,
-  OPERATOR_NAME,
-  OPERATOR_PHONE_DISPLAY,
-  OPERATOR_PHONE_HREF,
+  OWNER_DIC,
+  OWNER_ICO,
+  OWNER_NAME,
+  WEB_PROVIDER_NAME,
 } from "@/data/businessInfo";
 
 export default function Footer() {
@@ -26,16 +23,12 @@ export default function Footer() {
             Svadobný dizajn, výzdoba a prenájom inventáru.
           </p>
           <p className="foot-company">
-            Prevádzkovateľ webu: <strong>{OPERATOR_NAME}</strong>
+            <strong>{OWNER_NAME}</strong>
           </p>
           <p className="foot-company">
-            Kontakt: <a href={`tel:${OPERATOR_PHONE_HREF}`}>{OPERATOR_PHONE_DISPLAY}</a>
-            <span aria-hidden="true"> · </span>
-            <a href={`mailto:${OPERATOR_EMAIL}`}>{OPERATOR_EMAIL}</a>
+            IČO {OWNER_ICO} · DIČ {OWNER_DIC}
           </p>
-          <p className="foot-company">
-            IČO {OPERATOR_ICO} · DIČ {OPERATOR_DIC} · IČ DPH {OPERATOR_IC_DPH}
-          </p>
+          <p className="foot-credit">Tvorba a správa webu: {WEB_PROVIDER_NAME}</p>
         </div>
 
         <div className="footer-block">

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import LegalPage from "@/components/LegalPage";
-import { BRAND_NAME, CONTACT_EMAIL, OPERATOR_NAME } from "@/data/businessInfo";
+import { BRAND_NAME, CONTACT_EMAIL, OWNER_NAME } from "@/data/businessInfo";
 
 export const metadata: Metadata = {
   title: "Obchodné podmienky | Vevsdesign",
@@ -12,7 +12,7 @@ export default function TermsPage() {
   return (
     <LegalPage
       title="Obchodné podmienky"
-      intro={`Tieto podmienky upravujú základný rámec spolupráce medzi ${OPERATOR_NAME} pod značkou ${BRAND_NAME} a klientom pri svadobnej výzdobe, dizajne a prenájme inventáru.`}
+      intro={`Tieto podmienky upravujú základný rámec spolupráce medzi ${OWNER_NAME} pod značkou ${BRAND_NAME} a klientom pri svadobnej výzdobe, dizajne a prenájme inventáru.`}
     >
       <section className="legal-section">
         <h2>1. Dopyt a cenová ponuka</h2>

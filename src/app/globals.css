@@ -1390,6 +1390,7 @@ footer{
   letter-spacing:0.06em;
 }
 .foot-company strong{color:var(--ink);font-weight:500}
+.foot-credit{margin-top:0.9rem;font-size:0.68rem;letter-spacing:0.04em;color:rgba(var(--ink-rgb),0.42)}
 .foot-links,
 .foot-social{display:flex;flex-direction:column;gap:0.7rem;align-items:flex-start}
 .foot-links a,
@@ -1503,6 +1504,13 @@ footer{
   color:var(--ink-m);
   font-size:0.92rem;
   line-height:1.8;
+}
+
+.legal-credit{
+  margin:0.4rem 0.4rem 0;
+  font-size:0.74rem;
+  line-height:1.7;
+  color:rgba(var(--ink-rgb),0.5);
 }
 
 /* === V/F story === */

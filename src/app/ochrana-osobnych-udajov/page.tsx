@@ -4,8 +4,10 @@ import {
   CONTACT_EMAIL,
   CONTACT_PHONE_DISPLAY,
   CONTACT_PHONE_HREF,
-  OPERATOR_ADDRESS,
-  OPERATOR_NAME,
+  OWNER_ADDRESS,
+  OWNER_ICO,
+  OWNER_NAME,
+  WEB_PROVIDER_NAME,
 } from "@/data/businessInfo";
 
 export const metadata: Metadata = {
@@ -23,7 +25,7 @@ export default function PrivacyPage() {
       <section className="legal-section">
         <h2>Prevádzkovateľ</h2>
         <p>
-          Prevádzkovateľom osobných údajov je {OPERATOR_NAME}, {OPERATOR_ADDRESS}. V prípade otázok nás môžete
+          Prevádzkovateľom osobných údajov je {OWNER_NAME}, {OWNER_ADDRESS}, IČO {OWNER_ICO}. V prípade otázok nás môžete
           kontaktovať na adrese <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a> alebo telefonicky na{" "}
           <a href={`tel:${CONTACT_PHONE_HREF}`}>{CONTACT_PHONE_DISPLAY}</a>.
         </p>
@@ -58,8 +60,8 @@ export default function PrivacyPage() {
       <section className="legal-section">
         <h2>Komu môžu byť údaje sprístupnené</h2>
         <p>
-          Údaje môžu byť sprístupnené našim technickým dodávateľom len v nevyhnutnom rozsahu, najmä poskytovateľovi
-          hostingu, bezpečnostného overenia formulára a emailovej infraštruktúry. Údaje neposkytujeme tretím stranám na
+          Údaje môžu byť sprístupnené našim technickým dodávateľom len v nevyhnutnom rozsahu, najmä správcovi a
+          poskytovateľovi hostingu webu ({WEB_PROVIDER_NAME}), poskytovateľovi bezpečnostného overenia formulára a emailovej infraštruktúry. Údaje neposkytujeme tretím stranám na
           ich vlastné marketingové účely.
         </p>
       </section>
