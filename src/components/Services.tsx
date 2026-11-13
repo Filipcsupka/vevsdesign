@@ -207,8 +207,8 @@ export const CUSTOM_SERVICES: ServiceItem[] = [
   {
     id: "kniha-hosti",
     name: "Kniha hostí",
-    price: "12 €",
-    unitPrice: 12,
+    price: "15 €",
+    unitPrice: 15,
     priceKind: "fixed",
     hideQuantityField: true,
     description: "Kniha hostí vytvorí krásny priestor na odkazy, priania a spomienky od vašich blízkych.",
