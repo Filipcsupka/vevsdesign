@@ -175,11 +175,11 @@ export default function Inventory() {
     // Accordion: opening a category closes the previously open one.
     const opening = !openCats.includes(id);
     setOpenCats(opening ? [id] : []);
-    if (opening && openCats.length > 0) {
+    if (opening) {
+      // Scroll to the item list, not the cover: the cover sits above the previous panel on desktop.
       window.requestAnimationFrame(() => {
         document
-          .getElementById(id)
-          ?.querySelector(".inv-cat-cover")
+          .getElementById(`${id}-panel`)
           ?.scrollIntoView({ behavior: "smooth", block: "start" });
       });
     }

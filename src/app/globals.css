@@ -2105,7 +2105,7 @@ body:has(.cookie-banner) .selection-bar{bottom:calc(var(--cookie-banner-h,9rem) 
 @media (prefers-reduced-motion:reduce){.inv-cat-img{transition:none}}
 
 /* === inventory page: lower blocks === */
-.inv-cat-cover{scroll-margin-top:5.5rem}
+.inv-cat-cover,.inv-cat-panel{scroll-margin-top:5.5rem}
 .inv-cat-block+.inv-cat-block{margin-top:2rem}
 .inventar-packages .home-inventory-inner{
   max-width:1180px;padding:3rem 2rem;border:none;border-radius:6px;
