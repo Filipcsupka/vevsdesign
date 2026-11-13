@@ -305,11 +305,11 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
       {
         id: "behun-stola",
         title: "Behúň / štóla",
-        price: "Od 2 €",
-        unitPrice: 2,
+        price: "Od 2,50 €",
+        unitPrice: 2.5,
         priceKind: "from",
-        description: "Jemne zmäkčí prestretie a prepojí celú výzdobu do elegantného celku. Máme na výber modrú, zelenú, ružovú, béžovú, bielu, perličkovú. Cena 2€ je za dĺžku 1,8 m a 2,50€ za dĺžku 3 m.",
-        lead: "Jemne zmäkčí prestretie a prepojí celú výzdobu do elegantného celku. Máme na výber modrú, zelenú, ružovú, béžovú, bielu, perličkovú. Cena 2€ je za dĺžku 1,8 m a 2,50€ za dĺžku 3 m.",
+        description: "Jemne zmäkčí prestretie a prepojí celú výzdobu do elegantného celku. Máme na výber modrú, zelenú, ružovú, béžovú, bielu, perličkovú.",
+        lead: "Jemne zmäkčí prestretie a prepojí celú výzdobu do elegantného celku. Máme na výber modrú, zelenú, ružovú, béžovú, bielu, perličkovú.",
         details: "Možnosť osobného odberu, zaslania alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100€ (+ príplatok PHM).",
       },
       {
