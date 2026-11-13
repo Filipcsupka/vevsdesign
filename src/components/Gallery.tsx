@@ -295,11 +295,11 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
       {
         id: "champagne-tower",
         title: "Champagne tower",
-        price: "Od 1,50 €",
-        unitPrice: 1.5,
+        price: "Od 1,80 €",
+        unitPrice: 1.8,
         priceKind: "from",
         description: "Efektná champagne veža vytvorí moment, na ktorý si hostia spomenú ešte dlho.",
-        lead: "Efektná champagne veža vytvorí moment, na ktorý si hostia spomenú ešte dlho. Cena za jeden pohár je 1,50€ a najmenšia veža sa skladá zo 14 pohárov. Možnosť vyskladať do 50 pohárov.",
+        lead: "Efektná champagne veža vytvorí moment, na ktorý si hostia spomenú ešte dlho. Cena za jeden pohár je 1,80€ a najmenšia veža sa skladá zo 14 pohárov. Možnosť vyskladať do 50 pohárov.",
         details: "Možnosť osobného odberu alebo dopravy s našim aranžmánom v sále v rámci Východného Slovenska pri objednávke nad 100€ (+ príplatok PHM).",
       },
       {
