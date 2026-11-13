@@ -70,7 +70,6 @@ const SERVICE_IMAGE_COUNTS: Record<string, number> = {
   "doplnky-na-mieru:strom-na-platne": 3,
   "doplnky-na-mieru:uvitacia-tabula": 2,
   "doplnky-na-mieru:uvitacia-latka": 1,
-  "doplnky-na-mieru:uvitacie-zrkadlo": 1,
   "doplnky-na-mieru:zrkadlo-s-menami-a-textom": 2,
   "doplnky-na-mieru:zasadaci-poriadok-v-obraze": 2,
   "doplnky-na-mieru:zasadaci-poriadok-na-tabuli": 0,

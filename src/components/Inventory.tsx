@@ -86,7 +86,6 @@ const INVENTORY_CATEGORIES: InventoryCategory[] = [
       "uvitacia-tabula",
       "uvitacia-latka",
       "uvitacia-latka-s-fotkami",
-      "uvitacie-zrkadlo",
       "zrkadlo-s-menami-a-textom",
       "zasadaci-poriadok-visiaci",
       "zasadaci-poriadok-luxury",
