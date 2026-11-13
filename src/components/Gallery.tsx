@@ -315,8 +315,8 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
       {
         id: "lampase",
         title: "Lampáše",
-        price: "Od 2,50 €",
-        unitPrice: 2.5,
+        price: "Od 3 €",
+        unitPrice: 3,
         priceKind: "from",
         description: "Lampáše vytvoria teplú atmosféru a krásne vyniknú pri obrade, uvítaní alebo pri iných detailoch výzdoby.",
         lead: "Lampáše vytvoria teplú atmosféru a krásne vyniknú pri obrade, uvítaní alebo pri iných detailoch výzdoby.",
@@ -325,8 +325,8 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
       {
         id: "drevene-boxy",
         title: "Drevené boxy",
-        price: "1,50 €",
-        unitPrice: 1.5,
+        price: "2 €",
+        unitPrice: 2,
         priceKind: "fixed",
         description: "Drevené boxy dodajú aranžmánu príjemný rustikálny charakter a zároveň prakticky usporiadajú detaily. Vhodné na cigar bar, rekvizity a iné.",
         lead: "Drevené boxy dodajú aranžmánu príjemný rustikálny charakter a zároveň prakticky usporiadajú detaily. Vhodné na cigar bar, rekvizity a iné.",
