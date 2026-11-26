@@ -230,8 +230,8 @@ const RENTAL_CATEGORIES: RentalCategory[] = [
       {
         id: "uzke-metrove-svietniky",
         title: "5-ramenné svietniky",
-        price: "30 €",
-        unitPrice: 30,
+        price: "50 €",
+        unitPrice: 50,
         priceKind: "fixed",
         description: "Vytvoria výraznú líniu stola a pôsobia moderne, čisto a luxusne. Vhodné aj na obrade alebo pri uvítaní hostí.",
         lead: "Vytvoria výraznú líniu stola a pôsobia moderne, čisto a luxusne. Vhodné aj na obrade alebo pri uvítaní hostí.",
